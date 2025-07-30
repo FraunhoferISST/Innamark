@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -52,9 +52,10 @@ kotlin {
                     KotlinWebpackConfig.DevServer(
                         open = false,
                         port = 3000,
-                        static = mutableListOf(
-                            "${layout.buildDirectory.asFile.get()}/processedResources/js/main"
-                        ),
+                        static =
+                            mutableListOf(
+                                "${layout.buildDirectory.asFile.get()}/processedResources/js/main",
+                            ),
                     )
             }
             testTask {
