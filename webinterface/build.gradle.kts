@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -8,10 +8,7 @@
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 // Versions
-val kotlinVersion: String by System.getProperties()
 val kvisionVersion: String by System.getProperties()
-
-val webDir = file("src/jsMain/web")
 
 plugins {
     val kotlinVersion: String by System.getProperties()
@@ -45,31 +42,32 @@ repositories {
 kotlin {
     js(IR) {
         browser {
-            commonWebpackConfig(
-                Action {
-                    outputFileName = "main.bundle.js"
-                },
-            )
-            runTask(
-                Action {
-                    mainOutputFileName = "main.bundle.js"
-                    devServerProperty =
-                        KotlinWebpackConfig.DevServer(
-                            open = false,
-                            port = 3000,
-                            static = mutableListOf("$buildDir/processedResources/js/main"),
-                        )
-                },
-            )
-            testTask(
-                Action {
-                    useKarma {
-                        useChromeHeadless()
-                    }
-                },
-            )
+            useEsModules()
+            commonWebpackConfig {
+                outputFileName = "main.bundle.js"
+            }
+            runTask {
+                mainOutputFileName = "main.bundle.js"
+                devServerProperty =
+                    KotlinWebpackConfig.DevServer(
+                        open = false,
+                        port = 3000,
+                        static =
+                            mutableListOf(
+                                "${layout.buildDirectory.asFile.get()}/processedResources/js/main",
+                            ),
+                    )
+            }
+            testTask {
+                useKarma {
+                    useChromeHeadless()
+                }
+            }
         }
         binaries.executable()
+        compilerOptions {
+            target.set("es2015")
+        }
     }
 
     sourceSets["jsMain"].dependencies {

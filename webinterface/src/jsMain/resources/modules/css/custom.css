@@ -1,6 +1,13 @@
-/* Source: https://stackoverflow.com/a/43783066/2056125 */
+/*
+ * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ *
+ * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+ * that can be found in the LICENSE file.
+ */
+
 .selectable {
-    -webkit-touch-callout: all; /* iOS Safari */
+    /* Source: https://stackoverflow.com/a/43783066/2056125 */
+    -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: all; /* Safari */
     -khtml-user-select: all; /* Konqueror HTML */
     -moz-user-select: all; /* Firefox */

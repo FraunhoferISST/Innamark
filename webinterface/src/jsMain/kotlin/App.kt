@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -11,23 +11,31 @@ import io.kvision.BootstrapModule
 import io.kvision.BootstrapUploadModule
 import io.kvision.CoreModule
 import io.kvision.FontAwesomeModule
+import io.kvision.Hot
 import io.kvision.html.image
 import io.kvision.html.span
 import io.kvision.i18n.I18n.tr
-import io.kvision.module
 import io.kvision.panel.root
 import io.kvision.panel.tab
 import io.kvision.panel.tabPanel
 import io.kvision.panel.vPanel
-import io.kvision.require
 import io.kvision.startApplication
 import io.kvision.utils.auto
 import io.kvision.utils.em
 import io.kvision.utils.perc
+import io.kvision.utils.useModule
+
+@JsModule("/kotlin/modules/css/custom.css")
+@JsNonModule
+external val CustomCss: dynamic
+
+@JsModule("/kotlin/modules/img/trend_logo_b.svg")
+@JsNonModule
+external val TrendLogo: dynamic
 
 class App : Application() {
     init {
-        require("css/custom.css")
+        useModule(CustomCss)
     }
 
     /** Initial method to load the default watermarker form */
@@ -41,7 +49,7 @@ class App : Application() {
                 paddingTop = 1.em
 
                 // Logo + intro text
-                image(require("img/trend_logo_b.svg"), alt = "TREND logo", responsive = true) {
+                image(TrendLogo, alt = "TREND logo", responsive = true) {
                     width = 10.em
                     marginBottom = 1.em
                 }
@@ -69,7 +77,7 @@ class App : Application() {
 fun main() {
     startApplication(
         ::App,
-        module.hot,
+        js("import.meta.webpackHot").unsafeCast<Hot?>(),
         BootstrapModule,
         BootstrapCssModule,
         BootstrapUploadModule,
