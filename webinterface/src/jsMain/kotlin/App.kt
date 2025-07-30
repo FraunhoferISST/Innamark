@@ -29,9 +29,9 @@ import io.kvision.utils.useModule
 @JsNonModule
 external val CustomCss: dynamic
 
-@JsModule("/kotlin/modules/img/trend_logo_b.svg")
+@JsModule("/kotlin/modules/img/innamark_logo_b.svg")
 @JsNonModule
-external val TrendLogo: dynamic
+external val InnamarkLogo: dynamic
 
 class App : Application() {
     init {
@@ -40,7 +40,7 @@ class App : Application() {
 
     /** Initial method to load the default watermarker form */
     override fun start() {
-        root("trend") {
+        root("innamark") {
             vPanel {
                 // Styling
                 width = 90.perc
@@ -49,7 +49,7 @@ class App : Application() {
                 paddingTop = 1.em
 
                 // Logo + intro text
-                image(TrendLogo, alt = "TREND logo", responsive = true) {
+                image(InnamarkLogo, alt = "Innamark logo", responsive = true) {
                     width = 10.em
                     marginBottom = 1.em
                 }

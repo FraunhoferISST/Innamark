@@ -57,8 +57,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Innamark Logo',
-          src: 'img/branding/logo/black/trend_logo_b.svg',
-          srcDark: 'img/branding/logo/white/trend_logo_w.svg',
+          src: 'img/branding/logo/black/innamark_logo_b.svg',
+          srcDark: 'img/branding/logo/white/innamark_logo_w.svg',
         },
         items: [
           {

@@ -547,7 +547,7 @@ class InnamarkTagTest {
     }
 
     @Test
-    fun sizedCRC32Trendmark_mismatchedSizeInvalidChecksum_warning() {
+    fun sizedCRC32InnamarktTag_mismatchedSizeInvalidChecksum_warning() {
         // Arrange
         val expectedCrc32 = 0x862AB3A2u
         val invalidCrc32 = 0xFFFFFFFFu
@@ -779,7 +779,7 @@ class InnamarkTagTest {
     }
 
     @Test
-    fun sha3256Trendmark_invalidHash_warning() {
+    fun sha3256InnamarktTag_invalidHash_warning() {
         // Arrange
         val invalidHash = (0 until 32).map { it.toByte() }.toByteArray()
         val expectedHash =
@@ -996,7 +996,7 @@ class InnamarkTagTest {
     }
 
     @Test
-    fun sizedSHA3256Trendmark_mismatchedSizeInvalidHash_warning() {
+    fun sizedSHA3256InnamarktTag_mismatchedSizeInvalidHash_warning() {
         // Arrange
         val invalidSize =
             (

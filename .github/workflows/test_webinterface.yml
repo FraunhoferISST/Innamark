@@ -80,4 +80,4 @@ jobs:
           fetch-depth: 0
 
       - name: Build Docker Image
-        run: docker build -t trend-webinterface -f webinterface/Dockerfile .
+        run: docker build -t innamark-webinterface -f webinterface/Dockerfile .

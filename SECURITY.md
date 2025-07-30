@@ -1,4 +1,4 @@
 # Security Policy
 
 In case of security issues, please do not communicate them via public GitHub issues. Please report
-all vulnerabilities via email to [trend@isst.fraunhofer.de](mailto:trend@isst.fraunhofer.de). 
+all vulnerabilities via email to [innamark@isst.fraunhofer.de](mailto:innamark@isst.fraunhofer.de). 
