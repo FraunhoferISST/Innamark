@@ -1,12 +1,12 @@
-# “TREND” // Corporate Contributor License Agreement (“CLA”) // Version 1.0, February 2024
+# Innamark // Corporate Contributor License Agreement (“CLA”) // Version 1.0, February 2024
 
-The Traceability Enforcement of Datatransfers (TREND) project aims to address some of the current challenges in implementing data sovereignty solutions on a broader scale. The objective is to use state-of-the-art digital watermarking techniques to embed metadata securely in the data being exchanged, along with dedicated protocol-level checks for validation and enforcement. This enables system-independent sovereignty checks to secure the data assets of the data owner without privacy sacrifices.
+The Invisible Watermarking (Innamark) project aims to address some of the current challenges in implementing data sovereignty solutions on a broader scale. The objective is to use state-of-the-art digital watermarking techniques to embed metadata securely in the data being exchanged, along with dedicated protocol-level checks for validation and enforcement. This enables system-independent sovereignty checks to secure the data assets of the data owner without privacy sacrifices.
 
 This CLA enables the Contributor to submit Contributions to Fraunhofer, or to have them submitted, and to grant the rights stated below in such Contribution/s in their entirety. This CLA determines which of the Contributor’s rights in their Contributions to Fraunhofer will be granted by the Contributor to Fraunhofer and the conditions that must be observed in that regard.
 
 By way of conclusion of this CLA, the Contributor accepts the following conditions for their current and future Contributions to Fraunhofer under this CLA. Except for the licenses granted in this CLA to Fraunhofer and the recipients of Works containing such Contribution distributed by Fraunhofer or any third-party authorized by Fraunhofer to do so, the Contributor reserves all rights in their Contributions.
 
-Questions can be submitted to [trend@isst.fraunhofer.de](mailto:trend@isst.fraunhofer.de). The CLA is concluded when Fraunhofer expressly confirms the conclusion of the CLA or activates access to the Project Repository for the Contributor, thereby enabling the Contributor to submit Contributions.
+Questions can be submitted to [innamark@isst.fraunhofer.de](mailto:innamark@isst.fraunhofer.de). The CLA is concluded when Fraunhofer expressly confirms the conclusion of the CLA or activates access to the Project Repository for the Contributor, thereby enabling the Contributor to submit Contributions.
 
 
 ## § 1 Definitions

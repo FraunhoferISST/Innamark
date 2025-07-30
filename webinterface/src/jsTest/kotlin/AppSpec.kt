@@ -5,7 +5,7 @@
  * that can be found in the LICENSE file.
  */
 
-package test.de.fraunhofer.isst.trend.webinterface
+package test.de.fraunhofer.isst.innamark.webinterface
 
 import io.kvision.test.SimpleSpec
 import kotlin.test.Test

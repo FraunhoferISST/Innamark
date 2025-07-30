@@ -18,7 +18,7 @@ const FeatureList = [
     Svg: require('@site/static/img/library_undraw_software_engineer.svg').default,
     description: (
       <>
-        The main part of the TREND project aiming to embed watermarks inside a cover. This library
+        The main part of the Innamark project aiming to embed watermarks inside a cover. This library
         is written in Kotlin, ready to use for Kotlin, Java, and JavaScript applications.
       </>
     ),
