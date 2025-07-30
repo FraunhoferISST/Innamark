@@ -1,19 +1,19 @@
 <div align="center">
   <picture>
-    <source width="340" media="(prefers-color-scheme: dark)" srcset="docs/static/img/branding/logo-sub/white/trend_logo-sub_w.svg">
-    <source width="340" media="(prefers-color-scheme: light)" srcset="docs/static/img/branding/logo-sub/black/trend_logo-sub_b.svg">
-    <img width="340" alt="TREND (Traceability Enforcement of Datatransfers) logo" src="docs/static/img/branding/logo-sub/black/trend_logo-sub_b.svg">
+    <source width="340" media="(prefers-color-scheme: dark)" srcset="docs/static/img/branding/logo-sub/white/innamark_logo-sub_w.svg">
+    <source width="340" media="(prefers-color-scheme: light)" srcset="docs/static/img/branding/logo-sub/black/innamark_logo-sub_b.svg">
+    <img width="340" alt="Innamark (Invisible Watermarks) logo" src="docs/static/img/branding/logo-sub/black/innamark_logo-sub_b.svg">
   </picture>
   <br />
   <br />
-  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/FraunhoferISST/TREND">
-  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/FraunhoferISST/TREND">
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/FraunhoferISST/TREND">
-  <img alt="GitHub commit activity]" src="https://img.shields.io/github/commit-activity/t/FraunhoferISST/TREND">
-  <a href="https://fraunhoferisst.github.io/TREND/">
+  <img alt="GitHub Issues" src="https://img.shields.io/github/issues/FraunhoferISST/Innamark">
+  <img alt="GitHub Pull Requests" src="https://img.shields.io/github/issues-pr/FraunhoferISST/Innamark">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/FraunhoferISST/Innamark">
+  <img alt="GitHub commit activity]" src="https://img.shields.io/github/commit-activity/t/FraunhoferISST/Innamark">
+  <a href="https://fraunhoferisst.github.io/Innamark/">
     <img alt="Documentation" src="https://img.shields.io/badge/docs-online-green">
   </a>
-  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/FraunhoferISST/TREND">
+  <img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/FraunhoferISST/Innamark">
 </div>
 
 ## Table of Contents
@@ -30,7 +30,7 @@
 
 ## About
 
-The *Traceability Enforcement of Datatransfers* (TREND) project aims to address some of the current
+The *Invisible Watermarking* (Innamark) project aims to address some of the current
 challenges in implementing data sovereignty solutions on a broader scale. The objective is to use
 state-of-the-art digital watermarking techniques to embed metadata securely in the data being
 exchanged, along with dedicated protocol-level checks for validation and enforcement. This enables
@@ -45,14 +45,14 @@ inside a Lorem ipsum dummy cover text and extracts it afterward:
 
 > [!NOTE]
 > There is a pending German patent application with the application number 10 2023 125 012.4. In
-> order to use the TREND watermarker Software in the form published here, a patent license is
+> order to use the Innamark watermarker Software in the form published here, a patent license is
 > required in addition to the license for the Software. See `LICENSE` for more information. In
-> case of any questions or uncertainties, please contact us at trend@isst.fraunhofer.de.
+> case of any questions or uncertainties, please contact us at innamark@isst.fraunhofer.de.
 
 ## Documentation
 
 All information from usage until development are collected and provided in our
-[documentation](https://fraunhoferisst.github.io/TREND/).
+[documentation](https://fraunhoferisst.github.io/Innamark/).
 
 ## Structure
 
@@ -89,8 +89,8 @@ To run the webinterface, just clone the repo locally and run the `docker-compose
 root directory of the project:
 
 ```shell
-$ git clone https://github.com/FraunhoferISST/TREND.git
-$ cd TREND
+$ git clone https://github.com/FraunhoferISST/Innamark.git
+$ cd Innamark
 $ docker-compose up
 ```
 

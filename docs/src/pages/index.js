@@ -29,7 +29,7 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="https://github.com/FraunhoferISST/TREND">
+            to="https://github.com/FraunhoferISST/Innamark">
             Source Code
           </Link>
         </div>
@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title}`}
-      description="Documentation of the Traceability Enforcement of Datatransfers (TREND) project.">
+      description="Documentation of the Invisible Watermarking (Innamark) project.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
