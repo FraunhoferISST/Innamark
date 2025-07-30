@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 
 class InnamarkIntegrationTestJvm {
     @Test
-    fun InnamarktTag_tags_consistentTags() {
+    fun innamarktTag_tags_consistentTags() {
         /*
          * This test is designed to verify that all variants of InnamarktTag are using a unique tag.
          * Otherwise, it is not guaranteed that InnamarktTags can be parsed correctly.
@@ -42,8 +42,8 @@ class InnamarkIntegrationTestJvm {
                 companionObjectInstance::class.memberProperties.filter { it.name == "TYPE_TAG" }
             assertTrue(
                 tagProperty.size == 1,
-                "The companion object of the InnamarktTag class \"${c.simpleName}\" must contain a " +
-                    "\"const val TAG\".",
+                "The companion object of the InnamarktTag class \"${c.simpleName}\" must " +
+                    "\"contain a const val TAG\".",
             )
             val tag = (tagProperty.first().call(companionObjectInstance) as UByte).toInt()
 
