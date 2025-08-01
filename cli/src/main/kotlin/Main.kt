@@ -199,7 +199,7 @@ fun textAdd(
     message: String,
 ) {
     val watermarkedText =
-        watermarker.textAddWatermark(text, message.encodeToByteArray().asList()).unwrap()
+        watermarker.textAddWatermark(text, message.encodeToByteArray())
     println("-- Watermarked Text " + "-".repeat(60))
     println(watermarkedText)
     println("-".repeat(80))
@@ -254,7 +254,7 @@ fun printWatermarks(watermarks: List<Watermark>) {
     for ((index, watermark) in watermarks.withIndex()) {
         print("-- %${indexStringLen}d ".format(index + 1))
         println("-".repeat(80 - indexStringLen - 4))
-        println("'${watermark.watermarkContent.toByteArray().decodeToString()}'")
+        println("'${watermark.watermarkContent.decodeToString()}'")
     }
 
     if (watermarks.isNotEmpty()) println("-".repeat(80))
