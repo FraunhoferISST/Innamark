@@ -1,6 +1,6 @@
 # Contributing to the Project
 
-Thank you for your interest in contributing to the TREND project!
+Thank you for your interest in contributing to the Innamark project!
 
 ## Table of contents
 
