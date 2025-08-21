@@ -42,8 +42,8 @@ class InnamarkIntegrationTestJvm {
                 companionObjectInstance::class.memberProperties.filter { it.name == "TYPE_TAG" }
             assertTrue(
                 tagProperty.size == 1,
-                "The companion object of the InnamarkTag class \"${c.simpleName}\" must " +
-                    "\"contain a const val TAG\".",
+                "The companion object of the InnamarkTag class \"${c.simpleName}\" must" +
+                    "contain a \"const val TAG\".",
             )
             val tag = (tagProperty.first().call(companionObjectInstance) as UByte).toInt()
 

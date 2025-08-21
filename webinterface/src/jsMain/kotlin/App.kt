@@ -54,7 +54,7 @@ class App : Application() {
                     marginBottom = 1.em
                 }
                 span(
-                    "This tool allows you to hide or reveal a text-based watermark  " +
+                    "This tool allows to hide or reveal a text-based watermark " +
                         "(word, name, sentence, etc.) in a text of your choice.",
                 ) {
                     marginBottom = 1.em
