@@ -1,4 +1,4 @@
-# TREND: Watermarker Library
+# Innamark: Watermarker Library
 
 The watermarker library is the hearth of the project because it is the foundation for different
 other components. It can be used to embed or extract a watermark directly in or from text.
@@ -10,8 +10,8 @@ for a running application, have a look at the CLI or webinterface tool in this p
 ## Installation & Usage
 
 The installation and usage for 
-[Kotlin](https://fraunhoferisst.github.io/TREND/docs/usage/watermarker/kotlin/), 
-[Java](https://fraunhoferisst.github.io/TREND/docs/usage/watermarker/java/), and 
-[JavaScript](https://fraunhoferisst.github.io/TREND/docs/usage/watermarker/javascript/) 
+[Kotlin](https://fraunhoferisst.github.io/Innamark/docs/usage/watermarker/kotlin/), 
+[Java](https://fraunhoferisst.github.io/Innamark/docs/usage/watermarker/java/), and 
+[JavaScript](https://fraunhoferisst.github.io/Innamark/docs/usage/watermarker/javascript/) 
 are described in our documentation:
-https://fraunhoferisst.github.io/TREND/docs/usage/watermarker/installation/
+https://fraunhoferisst.github.io/Innamark/docs/usage/watermarker/installation/

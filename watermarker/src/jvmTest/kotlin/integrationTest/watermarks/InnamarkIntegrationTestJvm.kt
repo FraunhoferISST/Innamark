@@ -18,14 +18,14 @@ class InnamarkIntegrationTestJvm {
     @Test
     fun innamarktTag_tags_consistentTags() {
         /*
-         * This test is designed to verify that all variants of InnamarktTag are using a unique tag.
-         * Otherwise, it is not guaranteed that InnamarktTags can be parsed correctly.
+         * This test is designed to verify that all variants of InnamarkTag are using a unique tag.
+         * Otherwise, it is not guaranteed that InnamarkTags can be parsed correctly.
          */
         check(InnamarkTagInterface.TAG_SIZE == 1) {
             "Please update the test as the tag type has been modified."
         }
 
-        val classes = InnamarkTag::class.sealedSubclasses // get all variants of InnamarktTag
+        val classes = InnamarkTag::class.sealedSubclasses // get all variants of InnamarkTag
         val usedTags = Array<Boolean>(256) { false }
 
         // Iterate over all variants, extract the used tag and verify that it was not used before
@@ -34,7 +34,7 @@ class InnamarkIntegrationTestJvm {
             val companionObjectInstance = c.companionObjectInstance
             assertTrue(
                 companionObjectInstance != null,
-                "The InnamarktTag class \"${c.simpleName}\" must have a companion object.",
+                "The InnamarkTag class \"${c.simpleName}\" must have a companion object.",
             )
 
             // get the tag from the companion object
@@ -42,7 +42,7 @@ class InnamarkIntegrationTestJvm {
                 companionObjectInstance::class.memberProperties.filter { it.name == "TYPE_TAG" }
             assertTrue(
                 tagProperty.size == 1,
-                "The companion object of the InnamarktTag class \"${c.simpleName}\" must " +
+                "The companion object of the InnamarkTag class \"${c.simpleName}\" must " +
                     "\"contain a const val TAG\".",
             )
             val tag = (tagProperty.first().call(companionObjectInstance) as UByte).toInt()
