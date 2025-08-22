@@ -371,7 +371,7 @@ class TextWatermarker(
      * Counts the minimum number of insert positions needed in a text to insert the
      * [innamarkTagBuilder]
      */
-    @JsName("getMimimumInsertPositionsTrendmarkBuilder")
+    @JsName("getMimimumInsertPositionsInnamarkTagBuilder")
     fun getMinimumInsertPositions(innamarkTagBuilder: InnamarkTagBuilder): Int =
         getMinimumInsertPositions(innamarkTagBuilder.finish())
 

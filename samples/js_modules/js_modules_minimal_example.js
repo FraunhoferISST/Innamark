@@ -4,9 +4,9 @@
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
-import trend from "../../watermarker/build/dist/js/productionExecutable/watermarker.js";
+import innamark from "../../watermarker/build/dist/js/productionExecutable/watermarker.js";
 
-const watermarker = trend.de.fraunhofer.isst.trend.watermarker;
+const watermarker = innamark.de.fraunhofer.isst.innamark.watermarker;
 const Watermarker = new watermarker.Watermarker();
 const TextWatermark = watermarker.watermarks.TextWatermark;
 
@@ -20,7 +20,7 @@ ipsum.";
 
 let watermark = TextWatermark.Companion.new("Hello World!");
 
-let result = Watermarker.textAddTrendmarkBuilder(text, watermark);
+let result = Watermarker.textAddInnamarkTagBuilder(text, watermark);
 
 if (result.isSuccess) {
   console.log(result.value);

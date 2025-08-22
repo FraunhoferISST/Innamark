@@ -59,14 +59,14 @@ interface FileWatermarker<File : WatermarkableFile> {
     ): Result<List<Watermark>>
 
     /**
-     * Returns all watermarks in [file] as Trendmarks.
+     * Returns all watermarks in [file] as InnamarkTags.
      *
      * When [squash] is true: watermarks with the same content are merged.
      * When [singleWatermark] is true: only the most frequent watermark is returned.
-     * Returns a warning if some watermarks could not be converted to Trendmarks.
-     * Returns an error if no watermark could be converted to a Trendmark.
+     * Returns a warning if some watermarks could not be converted to InnamarkTags.
+     * Returns an error if no watermark could be converted to a InnamarkTag.
      */
-    fun getTrendmarks(
+    fun getInnamarkTags(
         file: File,
         squash: Boolean = false,
         singleWatermark: Boolean = false,
@@ -84,11 +84,11 @@ interface FileWatermarker<File : WatermarkableFile> {
      * When [errorOnInvalidUTF8] is true: invalid bytes sequences cause an error.
      *                           is false: invalid bytes sequences are replace with the char �.
      *
-     * Returns a warning if some watermarks could not be converted to Trendmarks.
-     * Returns an error if no watermark could be converted to a Trendmark.
+     * Returns a warning if some watermarks could not be converted to InnamarkTags.
+     * Returns an error if no watermark could be converted to a InnamarkTag.
      *
-     * Returns a warning if some Trendmarks could not be converted to TextWatermarks.
-     * Returns an error if no Trendmark could be converted to a TextWatermark.
+     * Returns a warning if some InnamarkTags could not be converted to TextWatermarks.
+     * Returns an error if no InnamarkTag could be converted to a TextWatermark.
      */
     fun getTextWatermarks(
         file: File,

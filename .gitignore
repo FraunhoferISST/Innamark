@@ -197,3 +197,5 @@ gradle-app.setting
 
 ### Custom ###
 **/.kotlin/
+# bin Folders
+**/bin/**

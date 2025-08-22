@@ -7,14 +7,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Trend JS Example</title>
+    <title>Innamark JS Example</title>
     <script src="../../watermarker/build/dist/js/productionExecutable/watermarker.js"></script>
   </head>
 
   <body>
-    <h1>Trend JS Example</h1>
+    <h1>Innamark JS Example</h1>
     <script>
-      watermarker = watermarker.de.fraunhofer.isst.trend.watermarker;
+      watermarker = watermarker.de.fraunhofer.isst.innamark.watermarker;
       const Watermarker = new watermarker.Watermarker();
       const TextWatermark = watermarker.watermarks.TextWatermark;
 
@@ -28,7 +28,7 @@ Lorem ipsum.";
 
       let watermark = TextWatermark.Companion.new("Hello World!");
 
-      let result = Watermarker.textAddTrendmarkBuilder(text, watermark);
+      let result = Watermarker.textAddInnamarkTagBuilder(text, watermark);
 
       if (result.isSuccess) {
         document.write(result.value);

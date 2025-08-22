@@ -74,19 +74,19 @@ class WatermarkTest {
     }
 
     @Test
-    fun mostFrequent_trendmark_success() {
+    fun mostFrequent_InnamarkTag_success() {
         // Arrange
-        val firstTrendmark = RawInnamarkTag.fromString("test")
-        val secondTrendmark = RawInnamarkTag.fromString("okay")
-        val thirdTrendmark = RawInnamarkTag.fromString("yeah")
+        val firstInnamarkTag = RawInnamarkTag.fromString("test")
+        val secondInnamarkTag = RawInnamarkTag.fromString("okay")
+        val thirdInnamarkTag = RawInnamarkTag.fromString("yeah")
         val watermarks =
             listOf(
-                firstTrendmark,
-                firstTrendmark,
-                secondTrendmark,
-                thirdTrendmark,
+                firstInnamarkTag,
+                firstInnamarkTag,
+                secondInnamarkTag,
+                thirdInnamarkTag,
             )
-        val expectedResult = listOf(firstTrendmark, firstTrendmark)
+        val expectedResult = listOf(firstInnamarkTag, firstInnamarkTag)
 
         // Act
         val result = Watermark.mostFrequent(watermarks)

@@ -1,9 +1,10 @@
 /*
- * Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
+
 package integrationTest.watermarks
 
 import de.fraunhofer.isst.innamark.watermarker.watermarks.InnamarkTag
@@ -16,16 +17,16 @@ import kotlin.test.assertTrue
 
 class InnamarkIntegrationTestJvm {
     @Test
-    fun trendmark_tags_consistentTags() {
+    fun innamarkTag_tags_consistentTags() {
         /*
-         * This test is designed to verify that all variants of Trendmark are using a unique tag.
-         * Otherwise, it is not guaranteed that Trendmarks can be parsed correctly.
+         * This test is designed to verify that all variants of InnamarkTag are using a unique tag.
+         * Otherwise, it is not guaranteed that InnamarkTags can be parsed correctly.
          */
         check(InnamarkTagInterface.TAG_SIZE == 1) {
             "Please update the test as the tag type has been modified."
         }
 
-        val classes = InnamarkTag::class.sealedSubclasses // get all variants of Trendmark
+        val classes = InnamarkTag::class.sealedSubclasses // get all variants of InnamarkTag
         val usedTags = Array<Boolean>(256) { false }
 
         // Iterate over all variants, extract the used tag and verify that it was not used before
@@ -34,7 +35,7 @@ class InnamarkIntegrationTestJvm {
             val companionObjectInstance = c.companionObjectInstance
             assertTrue(
                 companionObjectInstance != null,
-                "The Trendmark class \"${c.simpleName}\" must have a companion object.",
+                "The InnamarkTag class \"${c.simpleName}\" must have a companion object.",
             )
 
             // get the tag from the companion object
@@ -42,8 +43,8 @@ class InnamarkIntegrationTestJvm {
                 companionObjectInstance::class.memberProperties.filter { it.name == "TYPE_TAG" }
             assertTrue(
                 tagProperty.size == 1,
-                "The companion object of the Trendmark class \"${c.simpleName}\" must contain a " +
-                    "\"const val TAG\".",
+                "The companion object of the InnamarkTag class \"${c.simpleName}\" must" +
+                    "contain a \"const val TAG\".",
             )
             val tag = (tagProperty.first().call(companionObjectInstance) as UByte).toInt()
 

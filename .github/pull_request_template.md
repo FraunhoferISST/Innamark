@@ -6,4 +6,4 @@
 Fixes #
 
 ## CLA
-By submitting this pull request, I have read the [Corporate Contributor License Agreement (CLA)](https://github.com/FraunhoferISST/TREND/blob/main/CLA.md) and I hereby accept and sign the CLA.
+By submitting this pull request, I have read the [Corporate Contributor License Agreement (CLA)](https://github.com/FraunhoferISST/Innamark/blob/main/CLA.md) and I hereby accept and sign the CLA.

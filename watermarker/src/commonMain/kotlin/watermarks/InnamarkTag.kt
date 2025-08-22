@@ -88,7 +88,7 @@ sealed interface InnamarkTagInterface {
  * byte of the watermark, which allows parsing unknown types of InnamarkTags. The implemented
  * variants of InnamarkTag allow encoding additional information like the size or a hash into the
  * watermark. For detailed information about the different formats, see
- * [Innamark.md](https://github.com/FraunhoferISST/TREND/blob/main/docs/Innamark.md)
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/Innamark.md)
  *
  * The constructor expects bytes that represent the given type.
  * To create a new watermark with arbitrary content, the companion function `new` of that type must
