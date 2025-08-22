@@ -162,6 +162,18 @@ class WatermarkTextExtractTab : SimplePanel() {
                                                     rich = true,
                                                     className = "break-all",
                                                 )
+                                                br()
+                                                br()
+                                                p(
+                                                    content = "Legend: <span " +
+                                                        "class=\"separator-highlight\">Separator</span>," +
+                                                        "<span " +
+                                                        "class=\"innamarktag-highlight\">Innamark" +
+                                                        "Tag</span>, " +
+                                                        "<span " +
+                                                        "class=\"whitespace-highlight\">Watermark</span>",
+                                                    rich = true
+                                                )
                                             }
                                         }
                                     modal.add(watermarkDetailsPanel)
@@ -223,36 +235,39 @@ class WatermarkTextExtractTab : SimplePanel() {
 
     /**
      * Replaces all whitespaces of the transcoding alphabet of the watermarking library in
-     * [watermarkedText] with its Unicode representation. [html] defines if the result is a
-     * styled HTML string (true) or a plain text without formatting (false).
+     * [watermarkedText] with its Unicode representation.
      */
     private fun showWatermarkChars(
         watermarkedText: String,
-        html: Boolean = true,
     ): String {
         val alphabet = DefaultTranscoding.alphabet + DefaultTranscoding.SEPARATOR_CHAR
-        var resultText = watermarkedText
-        var className: String
+        var resultText = ""
+        var tagCounter = 0
 
-        for (char in alphabet) {
-            if (html) {
-                className =
-                    if (char == DefaultTranscoding.SEPARATOR_CHAR) {
+        watermarkedText.forEach { char ->
+            if (char in alphabet) {
+                val className: String = when (tagCounter) {
+                    0 if char == DefaultTranscoding.SEPARATOR_CHAR -> {
+                        tagCounter = 1
                         "separator-highlight"
-                    } else {
-                        "whitespace-highlight"
                     }
 
-                resultText =
-                    resultText.replace(
-                        char.toString(),
-                        "<span class=\"$className\">" +
-                            "${char.toUnicodeRepresentation()}</span>",
-                    )
+                    in 1..4 -> { //TODO: Replace constant "4" based on transcoding
+                        tagCounter++
+                        "innamarktag-highlight"
+                    }
+
+                    else -> {
+                        tagCounter = 0
+                        "whitespace-highlight"
+                    }
+                }
+                resultText += "<span class=\"$className\">${char.toUnicodeRepresentation()}</span>"
             } else {
-                resultText = resultText.replace(char.toString(), char.toUnicodeRepresentation())
+                resultText += char
             }
         }
+
         return resultText
     }
 
