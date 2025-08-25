@@ -29,6 +29,11 @@
     padding: 1px;
 }
 
+.innamarktag-highlight {
+    background-color: lightgrey;
+    padding: 1px;
+}
+
 .separator-highlight {
     background-color: black;
     color: white;

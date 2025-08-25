@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -162,6 +162,23 @@ class WatermarkTextExtractTab : SimplePanel() {
                                                     rich = true,
                                                     className = "break-all",
                                                 )
+                                                br()
+                                                br()
+                                                span("Legend: ")
+                                                span(
+                                                    content = "Separator",
+                                                    className = "separator-highlight",
+                                                )
+                                                span(", ")
+                                                span(
+                                                    content = "InnamarkTag",
+                                                    className = "innamarktag-highlight",
+                                                )
+                                                span(", ")
+                                                span(
+                                                    content = "Watermark",
+                                                    className = "whitespace-highlight",
+                                                )
                                             }
                                         }
                                     modal.add(watermarkDetailsPanel)
@@ -223,36 +240,38 @@ class WatermarkTextExtractTab : SimplePanel() {
 
     /**
      * Replaces all whitespaces of the transcoding alphabet of the watermarking library in
-     * [watermarkedText] with its Unicode representation. [html] defines if the result is a
-     * styled HTML string (true) or a plain text without formatting (false).
+     * [watermarkedText] with its Unicode representation.
      */
-    private fun showWatermarkChars(
-        watermarkedText: String,
-        html: Boolean = true,
-    ): String {
+    private fun showWatermarkChars(watermarkedText: String): String {
         val alphabet = DefaultTranscoding.alphabet + DefaultTranscoding.SEPARATOR_CHAR
-        var resultText = watermarkedText
-        var className: String
+        var resultText = ""
+        var tagCounter = 0
 
-        for (char in alphabet) {
-            if (html) {
-                className =
-                    if (char == DefaultTranscoding.SEPARATOR_CHAR) {
-                        "separator-highlight"
-                    } else {
-                        "whitespace-highlight"
+        watermarkedText.forEach { char ->
+            if (char in alphabet) {
+                val className: String =
+                    when {
+                        tagCounter == 0 && char == DefaultTranscoding.SEPARATOR_CHAR -> {
+                            tagCounter = 1
+                            "separator-highlight"
+                        }
+
+                        tagCounter in 1..4 -> { // TODO: Replace constant "4" based on transcoding
+                            tagCounter++
+                            "innamarktag-highlight"
+                        }
+
+                        else -> {
+                            tagCounter = 0
+                            "whitespace-highlight"
+                        }
                     }
-
-                resultText =
-                    resultText.replace(
-                        char.toString(),
-                        "<span class=\"$className\">" +
-                            "${char.toUnicodeRepresentation()}</span>",
-                    )
+                resultText += "<span class=\"$className\">${char.toUnicodeRepresentation()}</span>"
             } else {
-                resultText = resultText.replace(char.toString(), char.toUnicodeRepresentation())
+                resultText += char
             }
         }
+
         return resultText
     }
 
