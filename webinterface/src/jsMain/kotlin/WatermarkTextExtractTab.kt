@@ -164,15 +164,20 @@ class WatermarkTextExtractTab : SimplePanel() {
                                                 )
                                                 br()
                                                 br()
-                                                p(
-                                                    content = "Legend: <span " +
-                                                        "class=\"separator-highlight\">Separator</span>," +
-                                                        "<span " +
-                                                        "class=\"innamarktag-highlight\">Innamark" +
-                                                        "Tag</span>, " +
-                                                        "<span " +
-                                                        "class=\"whitespace-highlight\">Watermark</span>",
-                                                    rich = true
+                                                span("Legend: ")
+                                                span(
+                                                    content = "Separator",
+                                                    className = "separator-highlight",
+                                                )
+                                                span(", ")
+                                                span(
+                                                    content = "InnamarkTag",
+                                                    className = "innamarktag-highlight",
+                                                )
+                                                span(", ")
+                                                span(
+                                                    content = "Watermark",
+                                                    className = "whitespace-highlight",
                                                 )
                                             }
                                         }
@@ -237,31 +242,30 @@ class WatermarkTextExtractTab : SimplePanel() {
      * Replaces all whitespaces of the transcoding alphabet of the watermarking library in
      * [watermarkedText] with its Unicode representation.
      */
-    private fun showWatermarkChars(
-        watermarkedText: String,
-    ): String {
+    private fun showWatermarkChars(watermarkedText: String): String {
         val alphabet = DefaultTranscoding.alphabet + DefaultTranscoding.SEPARATOR_CHAR
         var resultText = ""
         var tagCounter = 0
 
         watermarkedText.forEach { char ->
             if (char in alphabet) {
-                val className: String = when (tagCounter) {
-                    0 if char == DefaultTranscoding.SEPARATOR_CHAR -> {
-                        tagCounter = 1
-                        "separator-highlight"
-                    }
+                val className: String =
+                    when {
+                        tagCounter == 0 && char == DefaultTranscoding.SEPARATOR_CHAR -> {
+                            tagCounter = 1
+                            "separator-highlight"
+                        }
 
-                    in 1..4 -> { //TODO: Replace constant "4" based on transcoding
-                        tagCounter++
-                        "innamarktag-highlight"
-                    }
+                        tagCounter in 1..4 -> { // TODO: Replace constant "4" based on transcoding
+                            tagCounter++
+                            "innamarktag-highlight"
+                        }
 
-                    else -> {
-                        tagCounter = 0
-                        "whitespace-highlight"
+                        else -> {
+                            tagCounter = 0
+                            "whitespace-highlight"
+                        }
                     }
-                }
                 resultText += "<span class=\"$className\">${char.toUnicodeRepresentation()}</span>"
             } else {
                 resultText += char
