@@ -6,19 +6,23 @@
  */
 package de.fraunhofer.isst.innamark.watermarker.binaryWatermarkers
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.ZipWatermarker
 import de.fraunhofer.isst.innamark.watermarker.files.ZipFile
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Status
+import de.fraunhofer.isst.innamark.watermarker.squashWatermarks
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark.StringDecodeWarning
+import kotlin.collections.toList
 
 /**
  * Implementation of [BinaryWatermarker] for [ZipFile] covers
  */
 class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
-    private val watermarker = ZipWatermarker
+    companion object {
+        const val SOURCE = "ZipWatermarkerImpl"
+        const val ZIP_WATERMARK_ID: UShort = 0x8777u
+    }
 
     /**
      * Adds a watermark created from [watermark] String to [cover]
@@ -28,8 +32,7 @@ class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
         cover: ZipFile,
         watermark: String,
     ): Result<ZipFile> {
-        val status = watermarker.addWatermark(cover, Watermark.fromString(watermark))
-        return status.into(cover)
+        return addWatermark(cover, watermark.encodeToByteArray())
     }
 
     /**
@@ -40,8 +43,7 @@ class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
         cover: ZipFile,
         watermark: ByteArray,
     ): Result<ZipFile> {
-        val status = watermarker.addWatermark(cover, watermark)
-        return status.into(cover)
+        return cover.header.addExtraField(ZIP_WATERMARK_ID, watermark.toList()).into(cover)
     }
 
     /**
@@ -52,13 +54,15 @@ class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
         cover: ZipFile,
         watermark: Watermark,
     ): Result<ZipFile> {
-        val status = watermarker.addWatermark(cover, watermark)
-        return status.into(cover)
+        return addWatermark(cover, watermark.watermarkContent)
     }
 
     /** Returns a [Boolean] indicating whether [cover] contains watermarks */
     override fun containsWatermark(cover: ZipFile): Boolean {
-        return watermarker.containsWatermark(cover)
+        for (extraField in cover.header.extraFields) {
+            if (extraField.id == ZIP_WATERMARK_ID) return true
+        }
+        return false
     }
 
     /**
@@ -76,7 +80,7 @@ class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
                     watermarks.value[0].watermarkContent.decodeToString(),
                 )
             if (decoded.value!!.contains('\uFFFD')) {
-                decoded.appendStatus(Status(StringDecodeWarning("ZipWatermarkerImpl")))
+                decoded.appendStatus(Status(StringDecodeWarning(SOURCE)))
             }
             return decoded
         } else {
@@ -110,12 +114,28 @@ class ZipWatermarkerImpl : BinaryWatermarker<ZipFile> {
         squash: Boolean,
         singleWatermark: Boolean,
     ): Result<List<Watermark>> {
-        return watermarker.getWatermarks(cover, squash, singleWatermark)
+        val status: Status = Status.success()
+        var watermarks = ArrayList<Watermark>()
+        for (extraField in cover.header.extraFields) {
+            if (extraField.id == ZIP_WATERMARK_ID) {
+                watermarks.add(Watermark(extraField.data.toByteArray()))
+            }
+        }
+        if (singleWatermark && watermarks.isNotEmpty()) {
+            with(Watermark.mostFrequent(watermarks)) {
+                status.appendStatus(this.status)
+                watermarks = this.value as ArrayList<Watermark>
+            }
+        }
+        if (squash && watermarks.isNotEmpty()) {
+            watermarks = ArrayList(squashWatermarks(watermarks))
+        }
+        return status.into(watermarks)
     }
 
     /** Removes all watermarks from [cover] and returns a [Result] containing the cleaned cover */
     override fun removeWatermark(cover: ZipFile): Result<ZipFile> {
-        val status = watermarker.removeWatermarks(cover).status
-        return status.into(cover)
+        cover.header.removeExtraFields(ZIP_WATERMARK_ID)
+        return Result.success(cover)
     }
 }
