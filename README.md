@@ -2,7 +2,8 @@
   <picture>
     <source width="340" media="(prefers-color-scheme: dark)" srcset="docs/static/img/branding/logo-sub/white/innamark_logo-sub_w.svg">
     <source width="340" media="(prefers-color-scheme: light)" srcset="docs/static/img/branding/logo-sub/black/innamark_logo-sub_b.svg">
-    <img width="340" alt="Innamark (Invisible Watermarks) logo" src="docs/static/img/branding/logo-sub/black/innamark_logo-sub_b.svg">
+    <img width="340" alt="Innamark (Invisible Watermarking) logo" 
+src="docs/static/img/branding/logo-sub/black/innamark_logo-sub_b.svg">
   </picture>
   <br />
   <br />
@@ -19,14 +20,15 @@
 ## Table of Contents
 
 - [About](#about)
-- [Documentation](#documentation)
-- [Structure](#structure)
+- [Documentation](#-documentation)
+- [Structure](#-structure)
 - [Getting Started](#getting-started)
     - [System Prerequisites](#system-prerequisites)
     - [Quick Start](#quick-start)
-- [Contributing](#contributing)
-- [License](#license)
-- [Developers](#developers)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Cite this Work](#-cite-this-work)
+- [Team & Developers](#-team--developers)
 
 ## About
 
@@ -37,41 +39,39 @@ exchanged, along with dedicated protocol-level checks for validation and enforce
 system-independent sovereignty checks to secure the data assets of the data owner without privacy
 sacrifices.
 
-This repository includes a generic **steganography / watermarking** library to hide any byte 
-encoded data in a cover text including two usage examples of a webinterface and command line 
-tool. The following example shows how the webinterface includes the watermark "Fraunhofer ISST" 
+This repository includes a generic **steganography / watermarking** library to hide any byte
+encoded data in a cover text including two usage examples of a webinterface and command line
+tool. The following example shows how the webinterface includes the watermark "Fraunhofer ISST"
 inside a Lorem ipsum dummy cover text and extracts it afterward:
 ![Animated example of the webinterface](docs/static/img/webinterface-demo.gif)
 
-> [!NOTE]
-> There is a pending German patent application with the application number 10 2023 125 012.4. In
-> order to use the Innamark watermarker Software in the form published here, a patent license is
-> required in addition to the license for the Software. See `LICENSE` for more information. In
-> case of any questions or uncertainties, please contact us at innamark@isst.fraunhofer.de.
-
-## Documentation
+## 📖 Documentation
 
 All information from usage until development are collected and provided in our
 [documentation](https://fraunhoferisst.github.io/Innamark/).
 
-## Structure
+## 📁 Structure
 
 This project uses a [monolithic repository approach](https://en.wikipedia.org/wiki/Monorepo) and
-consists of different parts, located in different subfolders. The hearth is a **watermarker
+consists of different parts, located in different subfolders. The heart is a **watermarker
 library**, located in the `watermarker` folder, used by other components like a CLI
 tool or a webinterface shipped with this repo. Every part has its own `README` file to get further
 information.
 
-**Subfolder overview:**
+### Subfolder Overview
 
-- **cli**: A command line tool to enable watermarking directly via a shell
-- **docs**: The documentation based on Docusaurus
-- **samples**: Different examples of watermarked and non-watermarked files
-- **watermarker**: The main part of the repository, consisting of a watermarker library to be able
-  to watermark (for example) text files
-- **webinterface**: A frontend / GUI to use the watermarking inside a browser
+- [**cli
+  **](https://github.com/FraunhoferISST/Innamark/tree/main/cli): A command line tool to enable watermarking directly via a shell
+- [**docs
+  **](https://github.com/FraunhoferISST/Innamark/tree/main/docs): The [documentation](https://fraunhoferisst.github.io/Innamark/) of all parts based on Docusaurus
+- [**samples
+  **](https://github.com/FraunhoferISST/Innamark/tree/main/samples): Different examples of watermarked and non-watermarked files, mainly used for tests
+- [**watermarker
+  **](https://github.com/FraunhoferISST/Innamark/tree/main/watermarker): The heart part of the repository: A Kotlin watermarker library for hiding text (a watermark) inside a cover text. The library works on the JVM (Java) and JavaScript (JS) platform
+- [**webinterface
+  **](https://github.com/FraunhoferISST/Innamark/tree/main/webinterface): A frontend / GUI to use the watermarking inside a browser, build with[KVision](https://github.com/rjaros/kvision)
 
-## Getting Started
+## 🚀 Getting Started
 
 Detailed getting started guides are described for every component in their dedicated `README`
 file, located in the corresponding subfolders. In the following, an easy start of the webinterface
@@ -81,7 +81,8 @@ with the watermarker library is described.
 
 The following things are needed to run this application:
 
-- docker & docker-compose
+- [Docker](https://docs.docker.com/engine/install/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Quick Start
 
@@ -91,28 +92,66 @@ root directory of the project:
 ```shell
 $ git clone https://github.com/FraunhoferISST/Innamark.git
 $ cd Innamark
-$ docker-compose up
+$ docker compose up
 ```
 
 After the startup finished, try to visit the webinterface at http://localhost:8080
 
-## Contributing
+## ✍️ Contributing
 
 Contributions to this project are greatly appreciated! Every contribution needs to accept the
 Corporate Contributor License Agreement, located in the `CLA.md` file. For more details, see the
 `CONTRIBUTING.md` file.
 
-## License
+## ⚖️ License
 
 This work is licensed under the Fraunhofer License (on the basis of the MIT license). See
 `LICENSE` file for more information.
 
+> [!NOTE]
+> There are pending German and international (PCT) patent applications with the application numbers
+> [DE102023125012.4](https://patents.google.com/patent/DE102023125012A1) and
+> [WO2025056772A1](https://patents.google.com/patent/WO2025056772A1). In order to use the Innamark
+> watermarker Software in the form published here, a patent license is required in addition to the
+> license for the Software. See `LICENSE` for more information. In case of any questions or
+> uncertainties, please contact us at innamark@isst.fraunhofer.de.
+
 The initial project version was created within the scope of
 the [Center of Excellence Logistics and It](https://ce-logit.com/).
 
-## Developers
+## 📝 Cite this Work
 
-- Malte Hellmeier ([Fraunhofer ISST](https://www.isst.fraunhofer.de/en.html))
-- Haydar Qarawlus ([Fraunhofer ISST](https://www.isst.fraunhofer.de/en.html))
-- Hendrik Norkowski ([Fraunhofer ISST](https://www.isst.fraunhofer.de/en.html))
-- Ernst-Christoph Schrewe ([Fraunhofer ISST](https://www.isst.fraunhofer.de/en.html))
+The main concepts of the core Innamark watermarking algorithm are presented and compared against
+related work in an open access _IEEE Access_ journal publication:
+
+- [Hellmeier et al., "Innamark: A Whitespace Replacement Information-Hiding Method", 2025, IEEE
+  Access, vol. 13, pp. 123120-123135, doi: 10.1109/ACCESS.2025.3583591](https://doi.org/10.1109/ACCESS.2025.3583591)
+
+To cite the journal article in LaTeX/BibTeX/BibLaTeX:
+
+```bibtex
+@article{Hellmeier.2025c,
+    author = {Hellmeier, Malte and Norkowski, Hendrik and Schrewe, Ernst-Christoph and Qarawlus, Haydar and Howar, Falk},
+    title = {{Innamark: A Whitespace Replacement Information-Hiding Method}},
+    year = {2025},
+    journal = {{IEEE Access}},
+    volume = {13},
+    pages = {123120--123135},
+    issn = {2169-3536},
+    doi = {10.1109/ACCESS.2025.3583591}
+}
+```
+
+## 👨👩 Team & Developers
+
+### Active
+
+- [Malte Hellmeier](https://github.com/mhellmeier) (Fraunhofer ISST)
+- [Haydar Qarawlus](https://github.com/hqarawlus) (Fraunhofer ISST)
+- [Joris Schiphorst](https://github.com/Schiphorst-ISST) (Fraunhofer ISST)
+- [Ernst-Christoph Schrewe](https://github.com/eschrewe) (Fraunhofer ISST)
+
+### Alumni
+
+- [Hendrik Norkowski](https://github.com/hnorkowski)
+- [David Gemen](https://github.com/gemdav)

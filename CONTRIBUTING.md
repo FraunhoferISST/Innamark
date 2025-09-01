@@ -14,7 +14,8 @@ Thank you for your interest in contributing to the Innamark project!
 * [Documentation](#documentation)
 * [IntelliJ](#intellij)
 * [Style Guide](#style-guide)
-    * [IntelliJ IDEA configuration](#intellij-idea-configuration)
+    * [Autoformatter](#autoformatter)
+        * [IntelliJ IDEA configuration](#intellij-idea-configuration)
 
 ## CLA
 
@@ -23,7 +24,7 @@ accepted. See the `CLA.md` file for more information.
 
 ## Git(Hub) Process
 
-Please carefully follow our guidelines for the process with Git and GitHub. Failure to comply 
+Please carefully follow our guidelines for the process with Git and GitHub. Failure to comply
 may result in rejection of the contribution.
 
 ### Issues
@@ -41,7 +42,7 @@ the repository (if you do not have write permission). Create a branch with a des
 ### Pull Requests
 
 Code changes are handled entirely over pull requests. When proposing a change, create a pull
-request from your working branch or fork to the upstream `main` branch, fill out the template, 
+request from your working branch or fork to the upstream `main` branch, fill out the template,
 link it to at least one issue (mandatory) and accept the CLA by keeping the text untouched.
 
 We use the
@@ -68,7 +69,7 @@ that every proposed contribution is related to a previously discussed issue. Pul
 shouldn't be too big to allow a fast integration of changes. We recommend keeping the content
 below 1000 lines of code (LOC).
 
-To keep to whole project up-to-date, please check and adjust the documentation accordingly. See 
+To keep to whole project up-to-date, please check and adjust the documentation accordingly. See
 the [documentation](#documentation) section for more information.
 
 To ensure code quality, every pull request needs at least one approved review from one of the
@@ -78,13 +79,16 @@ Committer team. Further check that all pipelines succeed before a review can be 
 
 Due to the _squash and merge_, the final squashed commit is based on the title of the pull
 request with a link to the pull request. The above example results in:
+
 ```
 feat(watermarker): add watermark compression option (#123)
 ```
-Even if all commits are squashed, we highly recommend using conventional commits to reflect all 
-changes. Tools like [commitlint](https://github.com/conventional-changelog/commitlint) are 
-suggested and can help to stay with the format. Further, we highly recommend to sign every commit 
-with a GPG signature to enable the _Verfied_ flag on [GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification/displaying-verification-statuses-for-all-of-your-commits).
+
+Even if all commits are squashed, we highly recommend using conventional commits to reflect all
+changes. Tools like [commitlint](https://github.com/conventional-changelog/commitlint) are
+suggested and can help to stay with the format. Further, we highly recommend to sign every commit
+with a GPG signature to enable the
+_Verfied_ flag on [GitHub](https://docs.github.com/en/authentication/managing-commit-signature-verification/displaying-verification-statuses-for-all-of-your-commits).
 
 ### License Header
 
@@ -102,12 +106,12 @@ Every source code file in this project must contain a license header. Example:
 ## Documentation
 
 Documentation is important for us since it is the starting point for newcomers and a reference for
-experts. We are using the [Docusaurus](https://github.com/facebook/docusaurus/) framework, 
+experts. We are using the [Docusaurus](https://github.com/facebook/docusaurus/) framework,
 located in the `docs` folder.
 
-Please always adjust and update the documentation! Extend the existing markdown files in the 
-`docs/docs` folder or create a new file according to the existing structure. Use numbers in 
-front of the file- and folder-names for sorting. Please use kebab case in the file names for a 
+Please always adjust and update the documentation! Extend the existing markdown files in the
+`docs/docs` folder or create a new file according to the existing structure. Use numbers in
+front of the file- and folder-names for sorting. Please use kebab case in the file names for a
 consistent URL-slug.
 
 In case you add a new file (like an image), remember to declare its license according to
@@ -144,9 +148,9 @@ with minor adjustments:
 - Hard wrap at: 100
 - KDoc max comment line length: 100
 
-Remember that every method must contain a comment since it is used in the automatic 
+Remember that every method must contain a comment since it is used in the automatic
 documentation generation process. Therefore, get familiar with the
-[KDoc syntax](https://kotlinlang.org/docs/kotlin-doc.html#kdoc-syntax) (similar to Javadoc) and 
+[KDoc syntax](https://kotlinlang.org/docs/kotlin-doc.html#kdoc-syntax) (similar to Javadoc) and
 use it for code comments in classes and functions.
 
 ### Autoformatter
