@@ -7,7 +7,7 @@
 
 package de.fraunhofer.isst.innamark.watermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.FileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.FileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.files.WatermarkableFile
 import de.fraunhofer.isst.innamark.watermarker.files.writeToFile
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
