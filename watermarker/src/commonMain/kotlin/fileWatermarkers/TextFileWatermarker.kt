@@ -400,15 +400,15 @@ class TextFileWatermarker(
     }
 
     companion object {
-        private const val SOURCE = "TextWatermarker"
+        private const val SOURCE = "TextFileWatermarker"
 
         /** Returns the builder for TextWatermarker */
         @JvmStatic
-        fun builder(): TextWatermarkerBuilder = TextWatermarkerBuilder()
+        fun builder(): TextFileWatermarkerBuilder = TextFileWatermarkerBuilder()
 
         /** Returns an instance of TextWatermarker in default configuration */
         @JvmStatic
-        fun default(): TextFileWatermarker = TextWatermarkerBuilder().build().value!!
+        fun default(): TextFileWatermarker = TextFileWatermarkerBuilder().build().value!!
     }
 
     override fun getSource(): String = SOURCE
@@ -460,7 +460,7 @@ class TextFileWatermarker(
 }
 
 @JsExport
-class TextWatermarkerBuilder {
+class TextFileWatermarkerBuilder {
     private var transcoding: Transcoding = DefaultTranscoding
     private var separatorStrategy: SeparatorStrategy =
         SeparatorStrategy.SingleSeparatorChar(DefaultTranscoding.SEPARATOR_CHAR)
@@ -475,19 +475,19 @@ class TextWatermarkerBuilder {
     }
 
     /** Sets a custom transcoding alphabet */
-    fun setTranscoding(transcoding: Transcoding): TextWatermarkerBuilder {
+    fun setTranscoding(transcoding: Transcoding): TextFileWatermarkerBuilder {
         this.transcoding = transcoding
         return this
     }
 
     /** Set a custom separator strategy */
-    fun setSeparatorStrategy(separatorStrategy: SeparatorStrategy): TextWatermarkerBuilder {
+    fun setSeparatorStrategy(separatorStrategy: SeparatorStrategy): TextFileWatermarkerBuilder {
         this.separatorStrategy = separatorStrategy
         return this
     }
 
     /** Sets a custom placement function used to identify insertion positions */
-    fun setPlacement(placement: (String) -> List<Int>): TextWatermarkerBuilder {
+    fun setPlacement(placement: (String) -> List<Int>): TextFileWatermarkerBuilder {
         this.placement = placement
         return this
     }
