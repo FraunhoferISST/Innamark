@@ -6,9 +6,9 @@
  */
 package de.fraunhofer.isst.innamark.watermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.FileWatermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.ZipWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.FileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.ZipFileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.files.TextFile
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Event
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
@@ -27,11 +27,11 @@ sealed class SupportedFileType {
     abstract val watermarker: FileWatermarker<*>
 
     object Text : SupportedFileType() {
-        override var watermarker: TextWatermarker = TextWatermarker.default()
+        override var watermarker: TextFileWatermarker = TextFileWatermarker.default()
     }
 
     object Zip : SupportedFileType() {
-        override var watermarker: ZipWatermarker = ZipWatermarker
+        override var watermarker: ZipFileWatermarker = ZipFileWatermarker
     }
 
     companion object {
@@ -70,13 +70,13 @@ sealed class SupportedFileType {
 
         /** Registers [watermarker] for zip files */
         @JvmStatic
-        fun registerZipWatermarker(watermarker: ZipWatermarker) {
+        fun registerZipWatermarker(watermarker: ZipFileWatermarker) {
             Zip.watermarker = watermarker
         }
 
         /** Registers [watermarker] for TextWatermarker */
         @JvmStatic
-        fun registerTextWatermarker(watermarker: TextWatermarker) {
+        fun registerTextWatermarker(watermarker: TextFileWatermarker) {
             Text.watermarker = watermarker
         }
 
@@ -100,7 +100,7 @@ open class Watermarker {
         const val SOURCE = "Watermarker"
     }
 
-    private val textWatermarker: TextWatermarker = TextWatermarker.default()
+    private val textWatermarker: TextFileWatermarker = TextFileWatermarker.default()
 
     /** Watermarks string [text] with [watermark] */
     @JsName("textAddWatermarkBytes")
@@ -141,11 +141,8 @@ open class Watermarker {
 
     /** Checks if [text] contains a watermark */
     fun textContainsWatermark(text: String): Boolean {
-        val watermarker = textWatermarker
-
         val textFile = TextFile.fromString(text)
-
-        return watermarker.containsWatermark(textFile)
+        return textWatermarker.containsWatermark(textFile)
     }
 
     /**
@@ -159,23 +156,8 @@ open class Watermarker {
         squash: Boolean = true,
         singleWatermark: Boolean = true,
     ): Result<List<Watermark>> {
-        val watermarker = textWatermarker
-
         val textFile = TextFile.fromString(text)
-        var result = watermarker.getWatermarks(textFile)
-
-        if (singleWatermark && result.hasValue) {
-            val mostFrequent = Watermark.mostFrequent(result.value!!)
-            // append Status in case of warning/error
-            result.appendStatus(mostFrequent.status)
-            // replace List in result.value
-            result = result.into(mostFrequent.value)
-        }
-        if (squash && result.hasValue) {
-            return result.into(squashWatermarks(result.value!!))
-        }
-
-        return result
+        return textWatermarker.getWatermarks(textFile, squash, singleWatermark)
     }
 
     /**
@@ -231,11 +213,9 @@ open class Watermarker {
 
     /** Returns [text] without watermarks */
     fun textRemoveWatermarks(text: String): Result<String> {
-        val watermarker = textWatermarker
-
         val textFile = TextFile.fromString(text)
 
-        val status = watermarker.removeWatermarks(textFile).status
+        val status = textWatermarker.removeWatermarks(textFile).status
 
         return status.into(textFile.content)
     }
