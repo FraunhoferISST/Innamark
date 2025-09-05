@@ -6,10 +6,10 @@
  */
 package unitTest.fileWatermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.DefaultTranscoding
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.SeparatorStrategy
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarkerBuilder
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.DefaultTranscoding
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.SeparatorStrategy
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarkerBuilder
 import de.fraunhofer.isst.innamark.watermarker.files.TextFile
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import kotlin.test.Test
@@ -59,8 +59,8 @@ class DefaultTranscodingTest {
     }
 }
 
-class TextWatermarkerTest {
-    private val textWatermarker = TextWatermarker.default()
+class TextFileWatermarkerTest {
+    private val textFileWatermarker = TextFileWatermarker.default()
     private val textFileDifferentWatermarks =
         TextFile.fromString(
             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr," +
@@ -84,7 +84,7 @@ class TextWatermarkerTest {
             ).toList()
 
         // Act
-        val result = textWatermarker.placement(text).toList()
+        val result = textFileWatermarker.placement(text).toList()
 
         // Assert
         assertEquals(expected, result)
@@ -97,7 +97,7 @@ class TextWatermarkerTest {
         val expected = sequenceOf<Int>().toList()
 
         // Act
-        val result = textWatermarker.placement(text).toList()
+        val result = textFileWatermarker.placement(text).toList()
 
         // Assert
         assertEquals(expected, result)
@@ -112,7 +112,7 @@ class TextWatermarkerTest {
         val expected = sequenceOf<Int>().toList()
 
         // Act
-        val result = textWatermarker.placement(text).toList()
+        val result = textFileWatermarker.placement(text).toList()
 
         // Assert
         assertEquals(expected, result)
@@ -121,9 +121,9 @@ class TextWatermarkerTest {
     @Test
     fun incompleteWatermarkWarning_string_success() {
         // Arrange
-        val error = TextWatermarker.IncompleteWatermarkWarning()
+        val error = TextFileWatermarker.IncompleteWatermarkWarning()
         val expected =
-            "Warning (TextWatermarker.getWatermark): Could not restore a complete watermark!"
+            "Warning (TextFileWatermarker.getWatermark): Could not restore a complete watermark!"
 
         // Act
         val result = error.toString()
@@ -135,10 +135,10 @@ class TextWatermarkerTest {
     @Test
     fun oversizedWatermarkWarning_string_success() {
         // Arrange
-        val error = TextWatermarker.OversizedWatermarkWarning(10, 20)
+        val error = TextFileWatermarker.OversizedWatermarkWarning(10, 20)
         val expected =
-            "Warning (TextWatermarker.addWatermark): Could only insert 20 of 10 bytes from the " +
-                "Watermark into the text file."
+            "Warning (TextFileWatermarker.addWatermark): Could only insert 20 of 10 bytes from " +
+                "the Watermark into the text file."
 
         // Act
         val result = error.toString()
@@ -150,12 +150,13 @@ class TextWatermarkerTest {
     @Test
     fun containsAlphabetCharsError_string_success() {
         // Arrange
-        val error = TextWatermarker.ContainsAlphabetCharsError(sequenceOf('a', 'b'))
+        val error = TextFileWatermarker.ContainsAlphabetCharsError(sequenceOf('a', 'b'))
         val expected =
-            "Error (TextWatermarker.addWatermark): The input contains characters of the watermark" +
-                " transcoding alphabet. It is only possible to add a watermark to and input that" +
-                " doesn't contain any watermark. Adding another watermark would potentially make " +
-                "the input unusable! Maybe the input already contains a watermark?\n" +
+            "Error (TextFileWatermarker.addWatermark): The input contains characters of the " +
+                "watermark transcoding alphabet. It is only possible to add a watermark to and " +
+                "input that doesn't contain any watermark. Adding another watermark would " +
+                "potentially make the input unusable! Maybe the input already contains a " +
+                "watermark?\n" +
                 "\n" +
                 "Contained Chars:\n" +
                 "['\\u0061','\\u0062']."
@@ -170,7 +171,7 @@ class TextWatermarkerTest {
     @Test
     fun success_string_success() {
         // Arrange
-        val error = TextWatermarker.Success(listOf(1, 2, 3))
+        val error = TextFileWatermarker.Success(listOf(1, 2, 3))
         val expected = "Success: Added Watermark 3 times. Positions: [1, 2, 3]."
 
         // Act
@@ -188,7 +189,7 @@ class TextWatermarkerTest {
 
         // Act
         val result =
-            textWatermarker.getWatermarks(
+            textFileWatermarker.getWatermarks(
                 textFileDifferentWatermarks,
                 squash = false,
                 singleWatermark = true,
@@ -207,7 +208,7 @@ class TextWatermarkerTest {
 
         // Act
         val result =
-            textWatermarker.getWatermarks(
+            textFileWatermarker.getWatermarks(
                 textFileDifferentWatermarks,
                 squash = true,
                 singleWatermark = true,
@@ -227,7 +228,7 @@ class TextWatermarkerTest {
 
         // Act
         val result =
-            textWatermarker.getWatermarks(
+            textFileWatermarker.getWatermarks(
                 textFileDifferentWatermarks,
                 squash = false,
                 singleWatermark = false,
@@ -247,7 +248,7 @@ class TextWatermarkerTest {
 
         // Act
         val result =
-            textWatermarker.getWatermarks(
+            textFileWatermarker.getWatermarks(
                 textFileDifferentWatermarks,
                 squash = true,
                 singleWatermark = false,
@@ -261,9 +262,9 @@ class TextWatermarkerTest {
     @Test
     fun removeWatermarksGetProblemWarning_string_success() {
         // Arrange
-        val error = TextWatermarker.RemoveWatermarksGetProblemWarning()
+        val error = TextFileWatermarker.RemoveWatermarksGetProblemWarning()
         val expected =
-            "Warning (TextWatermarker.removeWatermarks): There was a problem extracting the " +
+            "Warning (TextFileWatermarker.removeWatermarks): There was a problem extracting the " +
                 "watermarks. They got removed anyways."
 
         // Act
@@ -274,17 +275,17 @@ class TextWatermarkerTest {
     }
 }
 
-class TextWatermarkerBuilderTest {
+class TextFileWatermarkerBuilderTest {
     @Test
     fun build_alphabetContainsSeparatorChar_error() {
         // Arrange
         val alphabetChar = DefaultTranscoding.alphabet[0]
-        val error = TextWatermarkerBuilder.AlphabetContainsSeparatorError(listOf(alphabetChar))
+        val error = TextFileWatermarkerBuilder.AlphabetContainsSeparatorError(listOf(alphabetChar))
         val expected = error.getMessage()
 
         // Act
         val result =
-            TextWatermarker
+            TextFileWatermarker
                 .builder()
                 .setSeparatorStrategy(SeparatorStrategy.SingleSeparatorChar(alphabetChar))
                 .build()
@@ -302,9 +303,9 @@ class TextWatermarkerBuilderTest {
         val alphabetChar2 = DefaultTranscoding.alphabet[1]
         val validChar = '\u3164' // hangul filler, chosen at random
         val errorEither =
-            TextWatermarkerBuilder.AlphabetContainsSeparatorError(listOf(alphabetChar1))
+            TextFileWatermarkerBuilder.AlphabetContainsSeparatorError(listOf(alphabetChar1))
         val errorBoth =
-            TextWatermarkerBuilder.AlphabetContainsSeparatorError(
+            TextFileWatermarkerBuilder.AlphabetContainsSeparatorError(
                 listOf(alphabetChar1, alphabetChar2),
             )
         val expectedEither = errorEither.getMessage()
@@ -312,21 +313,21 @@ class TextWatermarkerBuilderTest {
 
         // Act
         val resultStart =
-            TextWatermarker
+            TextFileWatermarker
                 .builder()
                 .setSeparatorStrategy(
                     SeparatorStrategy.StartEndSeparatorChars(alphabetChar1, validChar),
                 )
                 .build()
         val resultEnd =
-            TextWatermarker
+            TextFileWatermarker
                 .builder()
                 .setSeparatorStrategy(
                     SeparatorStrategy.StartEndSeparatorChars(validChar, alphabetChar1),
                 )
                 .build()
         val resultBoth =
-            TextWatermarker
+            TextFileWatermarker
                 .builder()
                 .setSeparatorStrategy(
                     SeparatorStrategy.StartEndSeparatorChars(alphabetChar1, alphabetChar2),
@@ -351,7 +352,7 @@ class TextWatermarkerBuilderTest {
     @Test
     fun alphabetContainsSeparatorCharError_string_success() {
         // Arrange
-        val error = TextWatermarkerBuilder.AlphabetContainsSeparatorError(listOf('a'))
+        val error = TextFileWatermarkerBuilder.AlphabetContainsSeparatorError(listOf('a'))
         val expected =
             "Error (TextWatermarkerBuilder): The alphabet contains separator char(s): ['\\u0061']"
 

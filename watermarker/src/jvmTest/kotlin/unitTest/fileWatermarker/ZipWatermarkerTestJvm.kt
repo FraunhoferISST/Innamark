@@ -6,7 +6,7 @@
  */
 package unitTest.fileWatermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.ZipWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.ZipFileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.files.ZipFileHeader
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import openZipFile
@@ -16,7 +16,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class ZipWatermarkerTestJvm {
-    private val zipWatermarker = ZipWatermarker
+    private val zipWatermarker = ZipFileWatermarker
 
     @Test
     fun addWatermark_valid_success() {

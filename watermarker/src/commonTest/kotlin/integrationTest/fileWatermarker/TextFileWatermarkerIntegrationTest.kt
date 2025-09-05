@@ -6,15 +6,15 @@
  */
 package integrationTest.fileWatermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.files.TextFile
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-class TextWatermarkerIntegrationTest {
-    private val textWatermarker = TextWatermarker.default()
+class TextFileWatermarkerIntegrationTest {
+    private val textWatermarker = TextFileWatermarker.default()
 
     @Test
     fun watermarkInsertionExtraction_successiveSpaces_equality() {
