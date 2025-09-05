@@ -6,7 +6,9 @@
  */
 package de.fraunhofer.isst.innamark.watermarker.textWatermarkers
 
-import de.fraunhofer.isst.innamark.watermarker.helper.toIntUnsigned
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.DefaultTranscoding
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.SeparatorStrategy
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.Transcoding
 import de.fraunhofer.isst.innamark.watermarker.helper.toUnicodeRepresentation
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Event
 import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
@@ -16,110 +18,7 @@ import de.fraunhofer.isst.innamark.watermarker.watermarks.InnamarkTagBuilder
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark.StringDecodeWarning
-import kotlin.js.JsExport
 import kotlin.js.JsName
-import kotlin.math.ceil
-import kotlin.math.log
-import kotlin.math.pow
-
-/** Defines how multiple watermarks are separated */
-@JsExport
-sealed class SeparatorStrategy {
-    /** Leaves one insertable position empty to mark the end of a watermark */
-    object SkipInsertPosition : SeparatorStrategy()
-
-    /** Inserts [char] as separator between watermarks */
-    class SingleSeparatorChar(val char: Char) : SeparatorStrategy()
-
-    /** Inserts [start] before a Watermark and [end] after a Watermark as separators */
-    class StartEndSeparatorChars(val start: Char, val end: Char) : SeparatorStrategy()
-}
-
-@JsExport
-interface Transcoding {
-    val alphabet: List<Char>
-
-    /** Encodes [bytes] to chars of [alphabet] */
-    fun encode(bytes: ByteArray): Sequence<Char>
-
-    /** Decodes [chars] of [alphabet] to bytes */
-    fun decode(chars: Sequence<Char>): Result<ByteArray>
-}
-
-@JsExport
-object DefaultTranscoding : Transcoding {
-    override val alphabet =
-        listOf(
-            // Punctuation space
-            '\u2008',
-            // Thin space
-            '\u2009',
-            // Narrow-no-break space
-            '\u202F',
-            // Medium mathematical space
-            '\u205F',
-        )
-    const val SEPARATOR_CHAR = '\u2004' // Three-per-em space
-
-    private val base = alphabet.size
-    private val digitsPerByte = calculateDigitsPerByte(base)
-    private val digitToNumber = HashMap<Char, Int>()
-
-    init {
-        // Generate HashMap from Digit to numerical Value (i.e. index of the digit)
-        for ((index, char) in alphabet.withIndex()) {
-            digitToNumber[char] = index
-        }
-    }
-
-    /** Encodes [bytes] to a chars of [alphabet] */
-    override fun encode(bytes: ByteArray): Sequence<Char> =
-        sequence {
-            for (byte in bytes) {
-                var iByte = byte.toIntUnsigned()
-                repeat(digitsPerByte) {
-                    val digit = iByte % base
-                    iByte /= base
-
-                    yield(alphabet[digit])
-                }
-                check(iByte == 0)
-            }
-        }
-
-    /** Decodes [chars] of [alphabet] to bytes */
-    override fun decode(chars: Sequence<Char>): Result<ByteArray> {
-        val status = Status()
-        val dBase = base.toDouble()
-
-        val result = ArrayList<Byte>()
-        for (byte in chars.chunked(digitsPerByte)) {
-            var iByte = 0
-            for ((index, digit) in byte.withIndex()) {
-                iByte += digitToNumber[digit]!! * dBase.pow(index).toInt()
-            }
-            if (iByte in 0..255) {
-                result.add(iByte.toByte())
-            } else {
-                status.addEvent(DecodingInvalidByteError(iByte))
-            }
-        }
-
-        return status.into(result.toByteArray())
-    }
-
-    /** Calculates how many digits are required for a byte in given base ([alphabetSize]) */
-    private fun calculateDigitsPerByte(alphabetSize: Int) =
-        ceil(log(256.0, 2.0) / log(alphabetSize.toDouble(), 2.0)).toInt()
-
-    private const val SOURCE = "DefaultTranscoding"
-
-    class DecodingInvalidByteError(val invalidByte: Int) :
-        Event.Warning("$SOURCE.decode") {
-        /** Returns a String explaining the event */
-        override fun getMessage(): String = "Decoding produced an invalid byte: $invalidByte"
-    }
-}
 
 /**
  * Implementation of [TextWatermarker] for watermarking plaintext
