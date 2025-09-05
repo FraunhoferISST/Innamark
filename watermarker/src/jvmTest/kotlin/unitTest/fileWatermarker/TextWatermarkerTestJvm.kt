@@ -6,8 +6,8 @@
  */
 package unitTest.fileWatermarker
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.DefaultTranscoding
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.DefaultTranscoding
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
 import openTextFile
 import kotlin.test.Test
@@ -16,7 +16,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class TextWatermarkerTestJvm {
-    private val textWatermarker = TextWatermarker.default()
+    private val textWatermarker = TextFileWatermarker.default()
 
     @Test
     fun addWatermark_valid_success() {
@@ -24,7 +24,7 @@ class TextWatermarkerTestJvm {
         val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
         val watermark = Watermark.fromString("Hello World")
         val expected = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
-        val expectedMessage = TextWatermarker.Success(listOf(5, 273, 538)).into().toString()
+        val expectedMessage = TextFileWatermarker.Success(listOf(5, 273, 538)).into().toString()
 
         // Act
         val result = textWatermarker.addWatermark(file, watermark)
@@ -42,7 +42,7 @@ class TextWatermarkerTestJvm {
         val watermarkBytes = "Hello World".encodeToByteArray()
         val watermark = Watermark(watermarkBytes)
         val expectedMessage =
-            TextWatermarker.ContainsAlphabetCharsError(
+            TextFileWatermarker.ContainsAlphabetCharsError(
                 sequence {
                     yield(DefaultTranscoding.SEPARATOR_CHAR)
                     yieldAll(DefaultTranscoding.alphabet)
@@ -62,7 +62,9 @@ class TextWatermarkerTestJvm {
         // Arrange
         val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
         val watermark = Watermark.fromString("This is a watermark that does not fit")
-        val expectedMessage = TextWatermarker.OversizedWatermarkWarning(150, 96).into().toString()
+        val expectedMessage =
+            TextFileWatermarker.OversizedWatermarkWarning(150, 96).into()
+                .toString()
 
         // Act
         val result = textWatermarker.addWatermark(file, watermark)
@@ -131,7 +133,7 @@ class TextWatermarkerTestJvm {
     fun getWatermarks_partialWatermark_warningAndWatermark() {
         // Arrange
         val file = openTextFile("src/jvmTest/resources/lorem_ipsum_partial_watermark.txt")
-        val expectedMessage = TextWatermarker.IncompleteWatermarkWarning().into().toString()
+        val expectedMessage = TextFileWatermarker.IncompleteWatermarkWarning().into().toString()
 
         // Act
         val result = textWatermarker.getWatermarks(file)
@@ -177,8 +179,8 @@ class TextWatermarkerTestJvm {
     fun removeWatermarks_partialWatermark_warningAndWatermark() {
         // Arrange
         val file = openTextFile("src/jvmTest/resources/lorem_ipsum_partial_watermark.txt")
-        val status = TextWatermarker.IncompleteWatermarkWarning().into()
-        status.addEvent(TextWatermarker.RemoveWatermarksGetProblemWarning(), true)
+        val status = TextFileWatermarker.IncompleteWatermarkWarning().into()
+        status.addEvent(TextFileWatermarker.RemoveWatermarksGetProblemWarning(), true)
         val expectedMessage = status.toString()
 
         // Act

@@ -9,8 +9,8 @@ package unitTest
 import Platform
 import de.fraunhofer.isst.innamark.watermarker.SupportedFileType
 import de.fraunhofer.isst.innamark.watermarker.Watermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.DefaultTranscoding
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.TextFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.textWatermarkers.DefaultTranscoding
 import de.fraunhofer.isst.innamark.watermarker.watermarks.InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.watermarks.RawInnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.watermarks.SizedInnamarkTag
@@ -117,7 +117,11 @@ class WatermarkerTest {
     fun textAddWatermark_watermarkTooLong_warningAndWatermarkedString() {
         // Arrange
         val watermark = "Hello, world!".encodeToByteArray()
-        val expectedMessage = TextWatermarker.OversizedWatermarkWarning(54, 49).into().toString()
+        val expectedMessage =
+            TextFileWatermarker.OversizedWatermarkWarning(
+                54,
+                49,
+            ).into().toString()
         val expected =
             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod temp" +
                 "or invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero " +
@@ -137,7 +141,7 @@ class WatermarkerTest {
     fun textAddWatermark_textContainsAlphabetChars_error() {
         // Arrange
         val expectedMessage =
-            TextWatermarker.ContainsAlphabetCharsError(
+            TextFileWatermarker.ContainsAlphabetCharsError(
                 sequence {
                     yield(DefaultTranscoding.SEPARATOR_CHAR)
                     yieldAll(DefaultTranscoding.alphabet)
@@ -259,7 +263,7 @@ class WatermarkerTest {
                 Watermark.fromString(watermarkString),
             )
         val expectedMessage =
-            TextWatermarker.IncompleteWatermarkWarning()
+            TextFileWatermarker.IncompleteWatermarkWarning()
                 .into().toString()
 
         // Act
@@ -376,8 +380,8 @@ class WatermarkerTest {
         val expected =
             "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod " +
                 "tempor invidunt ut labore et"
-        val status = TextWatermarker.IncompleteWatermarkWarning().into()
-        status.addEvent(TextWatermarker.RemoveWatermarksGetProblemWarning(), true)
+        val status = TextFileWatermarker.IncompleteWatermarkWarning().into()
+        status.addEvent(TextFileWatermarker.RemoveWatermarksGetProblemWarning(), true)
         val expectedMessage = status.toString()
 
         // Act
