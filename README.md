@@ -60,16 +60,12 @@ information.
 
 ### Subfolder Overview
 
-- [**cli
-  **](https://github.com/FraunhoferISST/Innamark/tree/main/cli): A command line tool to enable watermarking directly via a shell
-- [**docs
-  **](https://github.com/FraunhoferISST/Innamark/tree/main/docs): The [documentation](https://fraunhoferisst.github.io/Innamark/) of all parts based on Docusaurus
-- [**samples
-  **](https://github.com/FraunhoferISST/Innamark/tree/main/samples): Different examples of watermarked and non-watermarked files, mainly used for tests
-- [**watermarker
-  **](https://github.com/FraunhoferISST/Innamark/tree/main/watermarker): The heart part of the repository: A Kotlin watermarker library for hiding text (a watermark) inside a cover text. The library works on the JVM (Java) and JavaScript (JS) platform
-- [**webinterface
-  **](https://github.com/FraunhoferISST/Innamark/tree/main/webinterface): A frontend / GUI to use the watermarking inside a browser, build with[KVision](https://github.com/rjaros/kvision)
+- **cli**: A command line tool to enable watermarking directly via a shell
+- **docs**: The [documentation](https://fraunhoferisst.github.io/Innamark/) of all parts based on Docusaurus
+- **samples**: Different examples of watermarked and non-watermarked files, mainly used for tests
+- **watermarker**: The heart part of the repository: A Kotlin watermarker library for hiding text (a watermark) inside a cover text. The library works on the JVM (Java) and JavaScript (JS) platform
+- **webinterface**: A frontend / GUI to use the watermarking inside a browser, build with
+  [KVision](https://github.com/rjaros/kvision)
 
 ## 🚀 Getting Started
 
@@ -124,8 +120,8 @@ the [Center of Excellence Logistics and It](https://ce-logit.com/).
 The main concepts of the core Innamark watermarking algorithm are presented and compared against
 related work in an open access _IEEE Access_ journal publication:
 
-- [Hellmeier et al., "Innamark: A Whitespace Replacement Information-Hiding Method", 2025, IEEE
-  Access, vol. 13, pp. 123120-123135, doi: 10.1109/ACCESS.2025.3583591](https://doi.org/10.1109/ACCESS.2025.3583591)
+- Hellmeier et al., "Innamark: A Whitespace Replacement Information-Hiding Method", 2025, IEEE
+  Access, vol. 13, pp. 123120-123135, doi: [10.1109/ACCESS.2025.3583591](https://doi.org/10.1109/ACCESS.2025.3583591)
 
 To cite the journal article in LaTeX/BibTeX/BibLaTeX:
 
