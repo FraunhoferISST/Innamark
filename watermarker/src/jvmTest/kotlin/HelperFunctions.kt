@@ -1,12 +1,13 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
-import de.fraunhofer.isst.innamark.watermarker.files.TextFile
-import de.fraunhofer.isst.innamark.watermarker.files.ZipFile
-import de.fraunhofer.isst.innamark.watermarker.files.fromFile
+
+import de.fraunhofer.isst.innamark.watermarker.types.files.TextFile
+import de.fraunhofer.isst.innamark.watermarker.types.files.ZipFile
+import de.fraunhofer.isst.innamark.watermarker.types.files.fromFile
 import java.io.File
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
