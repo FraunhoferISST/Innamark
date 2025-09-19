@@ -68,9 +68,9 @@ class InnamarkTagBuilder private constructor(
         /** Creates a TextWatermark from [text] with compression only if compression decreases the size */
         @JvmStatic
         fun small(text: String): InnamarkTagBuilder {
-            val raw = InnamarkTagBuilder.raw(text)
+            val raw = raw(text)
             val rawSize = raw.finish().watermarkContent.size
-            val compressed = InnamarkTagBuilder.compressed(text)
+            val compressed = compressed(text)
             val compressedSize = compressed.finish().watermarkContent.size
 
             return if (rawSize < compressedSize) {
