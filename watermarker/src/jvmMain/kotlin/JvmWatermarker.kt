@@ -5,22 +5,96 @@
  * that can be found in the LICENSE file.
  */
 
-package de.fraunhofer.isst.innamark.watermarker
+package de.fraunhofer.isst.innamark.watermarker.watermarkers
 
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarkers.FileWatermarker
-import de.fraunhofer.isst.innamark.watermarker.files.WatermarkableFile
-import de.fraunhofer.isst.innamark.watermarker.files.writeToFile
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Status
-import de.fraunhofer.isst.innamark.watermarker.watermarks.InnamarkTag
-import de.fraunhofer.isst.innamark.watermarker.watermarks.InnamarkTagBuilder
-import de.fraunhofer.isst.innamark.watermarker.watermarks.TextWatermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.toInnamarkTags
-import de.fraunhofer.isst.innamark.watermarker.watermarks.toTextWatermarks
+import de.fraunhofer.isst.innamark.watermarker.types.files.WatermarkableFile
+import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toInnamarkTags
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toTextWatermarks
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.FileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.TextFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.ZipFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.squashWatermarks
 import java.io.File
 import kotlin.io.path.Path
 import kotlin.io.path.extension
+
+sealed class SupportedFileType {
+    abstract val watermarker: FileWatermarker<*>
+
+    object Text : SupportedFileType() {
+        override var watermarker: TextFileWatermarker = TextFileWatermarker.default()
+    }
+
+    object Zip : SupportedFileType() {
+        override var watermarker: ZipFileWatermarker = ZipFileWatermarker
+    }
+
+    companion object {
+        private val extensionMap =
+            mutableMapOf(
+                "zip" to Zip,
+                "jar" to Zip,
+                "txt" to Text,
+                "md" to Text,
+            )
+
+        /*
+         * TODO: Write test when builder pattern is implemented for
+         *  TextWatermarker / ZipWatermarker
+         */
+
+        /** Returns a variant of SupportedFileType if [extension] is supported */
+        @JvmStatic
+        fun fromExtension(extension: String): Result<SupportedFileType> {
+            val fileType = extensionMap[extension]
+            return if (fileType == null) {
+                UnsupportedTypeError(extension).into<_>()
+            } else {
+                Result.success(fileType)
+            }
+        }
+
+        /** Registers an [extension] to a variant of SupportedFileType */
+        @JvmStatic
+        fun registerExtension(
+            extension: String,
+            fileType: SupportedFileType,
+        ) {
+            extensionMap[extension] = fileType
+        }
+
+        /** Registers [watermarker] for zip files */
+        @JvmStatic
+        fun registerZipWatermarker(watermarker: ZipFileWatermarker) {
+            Zip.watermarker = watermarker
+        }
+
+        /** Registers [watermarker] for TextWatermarker */
+        @JvmStatic
+        fun registerTextWatermarker(watermarker: TextFileWatermarker) {
+            Text.watermarker = watermarker
+        }
+
+        const val SOURCE: String = "SupportedFileType"
+    }
+
+    class NoFileTypeError(val path: String) : Event.Error(SOURCE) {
+        /** Returns a String explaining the event */
+        override fun getMessage(): String = "Could not determine file type of $path!"
+    }
+
+    class UnsupportedTypeError(val type: String) : Event.Error(SOURCE) {
+        /** Returns a String explaining the event */
+        override fun getMessage(): String = "Unsupported file type: $type!"
+    }
+}
 
 /**
  * Parses the file type from [fileType] or if it is null from [path]'s extension.
@@ -50,7 +124,7 @@ fun readFile(path: String): Result<ByteArray> {
     }
 }
 
-class JvmWatermarker : Watermarker() {
+class JvmWatermarker {
     companion object {
         const val SOURCE = "JvmWatermarker"
     }
@@ -261,7 +335,7 @@ class JvmWatermarker : Watermarker() {
         squash: Boolean = true,
         singleWatermark: Boolean = true,
         errorOnInvalidUTF8: Boolean = false,
-    ): Result<List<TextWatermark>> {
+    ): Result<List<InnamarkTagBuilder>> {
         return getWatermarks(source, fileType, squash, singleWatermark).toTextWatermarks(
             errorOnInvalidUTF8,
             SOURCE,
