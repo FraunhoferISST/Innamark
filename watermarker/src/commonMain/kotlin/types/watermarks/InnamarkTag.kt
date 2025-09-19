@@ -170,7 +170,7 @@ sealed class InnamarkTag(
     }
 
     /** Returns the tag byte from the watermark content */
-    override fun extractTag(): UByte = Companion.extractTag(watermarkContent)
+    override fun extractTag(): UByte = extractTag(watermarkContent)
 
     /** Returns the all bytes of the watermark */
     override fun getRawContent(): ByteArray = watermarkContent
