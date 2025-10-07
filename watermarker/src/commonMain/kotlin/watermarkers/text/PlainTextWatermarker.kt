@@ -311,7 +311,9 @@ class PlainTextWatermarker(
     }
 
     /**
-     * Returns a [Result] containing a list of [Watermark]s in [cover]
+     * Returns a [Result] containing a list of [Watermark]s in [cover]. Attempts to parse
+     * Watermarks found into [InnamarkTag]s and returns them instead if [InnamarkTag.validate]
+     * returns [Event.Success] on all Watermarks.
      *
      * When [squash] is true: watermarks with the same content are merged.
      * When [singleWatermark] is true: only the most frequent watermark is returned.
@@ -427,7 +429,21 @@ class PlainTextWatermarker(
             watermarks = ArrayList(squashWatermarks(watermarks))
         }
 
-        return status.into(watermarks)
+        val innamarkTags: ArrayList<InnamarkTag> = ArrayList()
+        if (watermarks.isNotEmpty()) {
+            for (watermark in watermarks) {
+                val parsed = InnamarkTag.fromWatermark(watermark)
+                if (parsed.status.isSuccess) {
+                    status.appendStatus(parsed.status)
+                    if (parsed.hasValue) innamarkTags.add(parsed.value!!)
+                }
+            }
+        }
+        return if (innamarkTags.isNotEmpty()) {
+            status.into(innamarkTags)
+        } else {
+            status.into(watermarks)
+        }
     }
 
     /** Removes all watermarks from [cover] and returns a [Result] containing the cleaned cover */
