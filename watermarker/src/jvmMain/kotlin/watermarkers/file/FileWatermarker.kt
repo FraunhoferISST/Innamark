@@ -9,7 +9,6 @@ package de.fraunhofer.isst.innamark.watermarker.watermarkers.file
 
 import de.fraunhofer.isst.innamark.watermarker.types.files.WatermarkableFile
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
-import de.fraunhofer.isst.innamark.watermarker.types.responses.Event.Success
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
@@ -17,9 +16,6 @@ import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuild
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
-import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toInnamarkTags
-import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toTextWatermarks
-import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker.AlphabetContainsSeparatorError
 
 interface FileWatermarker<File : WatermarkableFile> {
     /**

@@ -10,12 +10,10 @@ package de.fraunhofer.isst.innamark.watermarker.watermarkers.file
 import de.fraunhofer.isst.innamark.watermarker.types.files.TextFile
 import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
-import de.fraunhofer.isst.innamark.watermarker.types.responses.Event.Success
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
-import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagInterface
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
@@ -24,7 +22,6 @@ import de.fraunhofer.isst.innamark.watermarker.utils.SupportedFileType
 import de.fraunhofer.isst.innamark.watermarker.utils.getFileType
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.DefaultTranscoding
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker.AlphabetContainsSeparatorError
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.SeparatorStrategy
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.Transcoding
 
