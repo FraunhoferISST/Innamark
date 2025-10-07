@@ -8,185 +8,268 @@
 package de.fraunhofer.isst.innamark.watermarker.watermarkers.file
 
 import de.fraunhofer.isst.innamark.watermarker.types.files.TextFile
+import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event.Success
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagInterface
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
+import de.fraunhofer.isst.innamark.watermarker.utils.FileHandling.Companion.readFile
+import de.fraunhofer.isst.innamark.watermarker.utils.SupportedFileType
+import de.fraunhofer.isst.innamark.watermarker.utils.getFileType
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.DefaultTranscoding
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker.AlphabetContainsSeparatorError
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.SeparatorStrategy
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.Transcoding
-import kotlin.jvm.JvmStatic
 
 class TextFileWatermarker(
-    private val transcoding: Transcoding,
-    private val separatorStrategy: SeparatorStrategy,
-    val placement: (String) -> List<Int>,
+    private val transcoding: Transcoding = DefaultTranscoding,
+    private val separatorStrategy: SeparatorStrategy =
+        SeparatorStrategy.SingleSeparatorChar(
+            DefaultTranscoding.SEPARATOR_CHAR,
+        ),
+    val placement: (String) -> List<Int> = { string ->
+        sequence {
+            for ((index, char) in string.withIndex()) {
+                if (char == ' ') yield(index)
+            }
+        }.toMutableList() // mutable for JS compatibility on empty lists
+    },
 ) : FileWatermarker<TextFile> {
-    // Build a list of all chars that are contained in a watermark
-    private val textWatermarker = PlainTextWatermarker()
-    private val fullAlphabet: List<Char> =
-        when (separatorStrategy) {
-            is SeparatorStrategy.SkipInsertPosition -> transcoding.alphabet
-            is SeparatorStrategy.SingleSeparatorChar ->
-                listOf(separatorStrategy.char) + transcoding.alphabet
+    private val watermarker = PlainTextWatermarker(transcoding, separatorStrategy, placement)
 
-            is SeparatorStrategy.StartEndSeparatorChars ->
-                listOf(separatorStrategy.start, separatorStrategy.end) + transcoding.alphabet
+    /**
+     * Adds a watermark created from [watermark] ByteArray to the file content at [source]
+     * and writes it to [target].
+     *
+     * Returns a warning if the watermark does not fit at least a single time into the file.
+     * Returns an error if the text file contains a character from the transcoding alphabet.
+     */
+    override fun addWatermark(
+        source: String,
+        target: String,
+        watermark: ByteArray,
+        fileType: String?,
+    ): Status {
+        val supportedFileType =
+            with(SupportedFileType.getFileType(source, fileType)) {
+                value ?: return into()
+            }
+        if (supportedFileType != SupportedFileType.Text) {
+            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString()))
         }
 
+        val (status, bytes) =
+            with(readFile(source)) {
+                status to (value ?: return into())
+            }
+
+        val file =
+            with(parseBytes(bytes)) {
+                status.appendStatus(this.status)
+                value ?: return status
+            }
+
+        val result = watermarker.addWatermark(file.content, watermark)
+        status.appendStatus(result.status)
+        if (result.hasValue) file.content = result.value!!
+
+        if (!status.isError) {
+            status.appendStatus(file.writeToFile(target))
+        }
+        return status
+    }
+
     /**
-     * Adds a watermark created from [watermark] to [file].
+     * Adds a watermark created from [watermark] String to the file content at [source]
+     * and writes it to [target].
      *
      * Returns a warning if the watermark does not fit at least a single time into the file.
      * Returns an error if the text file contains a character from the transcoding alphabet.
      */
     override fun addWatermark(
-        file: TextFile,
-        watermark: ByteArray,
-    ): Status {
-        val text = file.content
-        val result = textWatermarker.addWatermark(text, watermark)
-        if (result.hasValue) file.content = result.value!!
-        return result.status
-    }
-
-    /**
-     * Adds a watermark created from [watermark] to [file].
-     *
-     * Returns a warning if the watermark does not fit at least a single time into the file.
-     * Returns an error if the text file contains a character from the transcoding alphabet.
-     */
-    fun addWatermark(
-        file: TextFile,
+        source: String,
+        target: String,
         watermark: String,
+        fileType: String?,
     ): Status {
-        val text = file.content
-        val result = textWatermarker.addWatermark(text, watermark)
-        if (result.hasValue) file.content = result.value!!
-        return result.status
+        return addWatermark(source, target, watermark.encodeToByteArray(), fileType)
     }
 
     /**
-     * Adds a [watermark] to [file].
+     * Adds a [watermark] object to the file content at [source] and writes it to [target].
      *
      * Returns a warning if the watermark does not fit at least a single time into the file.
      * Returns an error if the text file contains a character from the transcoding alphabet.
      */
     override fun addWatermark(
-        file: TextFile,
+        source: String,
+        target: String,
         watermark: Watermark,
+        fileType: String?,
     ): Status {
-        val text = file.content
-        val result = textWatermarker.addWatermark(text, watermark)
-        if (result.hasValue) file.content = result.value!!
-        return result.status
+        return addWatermark(source, target, watermark.watermarkContent, fileType)
     }
 
     /**
-     * Adds a watermark created from [innamarkTagBuilder] to [file].
+     * Adds a watermark created from [innamarkTagBuilder] to the file content at [source]
+     * and writes it to [target].
      *
      * Returns a warning if the watermark does not fit at least a single time into the file.
      * Returns an error if the text file contains a character from the transcoding alphabet.
      */
     override fun addWatermark(
-        file: TextFile,
+        source: String,
+        target: String,
         innamarkTagBuilder: InnamarkTagBuilder,
+        fileType: String?,
     ): Status {
-        val text = file.content
-        val result = textWatermarker.addWatermark(text, innamarkTagBuilder.finish())
-        if (result.hasValue) file.content = result.value!!
-        return result.status
+        return addWatermark(source, target, innamarkTagBuilder.finish(), fileType)
     }
 
-    /** Checks if [file] contains any [Char] from full watermarking alphabet */
-    override fun containsWatermark(file: TextFile): Boolean =
-        textWatermarker.containsWatermark(file.content)
+    /** Checks if the file at [source] contains a watermark */
+    override fun containsWatermark(
+        source: String,
+        fileType: String?,
+    ): Result<Boolean> {
+        val supportedFileType =
+            with(SupportedFileType.getFileType(source, fileType)) {
+                value ?: return into<_>()
+            }
+        if (supportedFileType != SupportedFileType.Text) {
+            return SupportedFileType.WrongTypeError(supportedFileType.toString()).into(false)
+        }
+
+        val (status, bytes) =
+            with(readFile(source)) {
+                status to (value ?: return into<_>())
+            }
+
+        val file =
+            with(parseBytes(bytes)) {
+                status.appendStatus(this.status)
+                value ?: return status.into()
+            }
+
+        val contains = watermarker.containsWatermark(file.content)
+        return status.into(contains)
+    }
 
     /**
-     * Returns all watermarks in [file]
-     * When [squash] is true: watermarks with the same content are merged.
-     * When [singleWatermark] is true: only the most frequent watermark is returned.
-     * */
-    override fun getWatermarks(
-        file: TextFile,
-        squash: Boolean,
-        singleWatermark: Boolean,
-    ): Result<List<Watermark>> =
-        textWatermarker.getWatermarks(file.content, squash, singleWatermark)
-
-    /**
-     * Removes all watermarks in [file] and returns them.
+     * Returns a [Result] containing a list of [Watermark]s in the file at [source]. Attempts
+     * to parse Watermarks found into [InnamarkTag]s and returns them instead if
+     * [InnamarkTag.validate] returns [Event.Success] on all Watermarks.
      *
      * When [squash] is true: watermarks with the same content are merged.
      * When [singleWatermark] is true: only the most frequent watermark is returned.
-     * Returns a warning if getWatermarks() returns a warning or error.
      */
-    override fun removeWatermarks(
-        file: TextFile,
+    override fun getWatermarks(
+        source: String,
+        fileType: String?,
         squash: Boolean,
         singleWatermark: Boolean,
     ): Result<List<Watermark>> {
-        val text = file.content
-        // get Watermarks
-        val (status, watermarks) =
-            with(textWatermarker.getWatermarks(text, squash, singleWatermark)) {
-                status to (value ?: listOf())
+        val supportedFileType =
+            with(SupportedFileType.getFileType(source, fileType)) {
+                value ?: return into<_>()
             }
-
-        // Replace all chars from the file that are in the transcoding alphabet with a whitespace
-        val result = textWatermarker.removeWatermarks(text)
-        if (result.hasValue) file.content = result.value!!
-
-        if (!status.isSuccess) {
-            status.addEvent(PlainTextWatermarker.RemoveWatermarksGetProblemWarning(), true)
+        if (supportedFileType != SupportedFileType.Text) {
+            return SupportedFileType.WrongTypeError(supportedFileType.toString()).into(listOf())
         }
 
+        val (status, bytes) =
+            with(readFile(source)) {
+                status to (value ?: return into<_>())
+            }
+
+        val file =
+            with(parseBytes(bytes)) {
+                status.appendStatus(this.status)
+                value ?: return status.into()
+            }
+
+        val watermarks =
+            with(watermarker.getWatermarks(file.content, squash, singleWatermark)) {
+                status.appendStatus(this.status)
+                value
+            }
+
         return status.into(watermarks)
+    }
+
+    /**
+     * Returns a [Result] containing the most frequent Watermark in the file at [source] as a String.
+     *
+     * Result contains an empty String if no Watermarks were found.
+     * Result contains a [MultipleMostFrequentWarning] in cases where an unambiguous Watermark could not be extracted.
+     * Result contains a [StringDecodeWarning] in cases where a byte cannot be read as UTF-8.
+     */
+    override fun getWatermarkAsString(
+        source: String,
+        fileType: String?,
+    ): Result<String> {
+        val watermarks = getWatermarks(source, fileType, squash = false, singleWatermark = true)
+        if (watermarks.value?.isNotEmpty() ?: return Result.success("")) {
+            val decoded =
+                watermarks.status.into(
+                    watermarks.value[0].watermarkContent
+                        .decodeToString(),
+                )
+            if (decoded.value!!.contains('\uFFFD')) {
+                decoded.appendStatus(Status(StringDecodeWarning("TextFileWatermarker")))
+            }
+            return decoded
+        } else {
+            return Result.success("")
+        }
+    }
+
+    /**
+     * Removes all watermarks in the file at [source] and writes the result to [target].
+     */
+    override fun removeWatermarks(
+        source: String,
+        target: String,
+        fileType: String?,
+    ): Status {
+        val supportedFileType =
+            with(SupportedFileType.getFileType(source, fileType)) {
+                value ?: return into()
+            }
+        if (supportedFileType != SupportedFileType.Text) {
+            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString()))
+        }
+
+        val (status, bytes) =
+            with(readFile(source)) {
+                status to (value ?: return into())
+            }
+
+        val file =
+            with(parseBytes(bytes)) {
+                status.appendStatus(this.status)
+                value ?: return status
+            }
+
+        val result = watermarker.removeWatermarks(file.content)
+        status.appendStatus(result.status)
+        if (result.hasValue) file.content = result.value!!
+
+        if (!status.isError) {
+            status.appendStatus(file.writeToFile(target))
+        }
+        return status
     }
 
     /** Parses [bytes] as text and returns it as TextFile */
     override fun parseBytes(bytes: ByteArray): Result<TextFile> {
         return TextFile.fromBytes(bytes)
-    }
-
-    /** Counts the minimum number of insert positions needed in a text to insert the [watermark] */
-    fun getMinimumInsertPositions(watermark: ByteArray): Int =
-        textWatermarker.getMinimumInsertPositions(watermark)
-
-    /** Counts the minimum number of insert positions needed in a text to insert the [watermark] */
-    fun getMinimumInsertPositions(watermark: Watermark): Int =
-        getMinimumInsertPositions(watermark.watermarkContent)
-
-    /**
-     * Counts the minimum number of insert positions needed in a text to insert the
-     * [innamarkTagBuilder]
-     */
-    fun getMinimumInsertPositions(innamarkTagBuilder: InnamarkTagBuilder): Int =
-        getMinimumInsertPositions(innamarkTagBuilder.finish())
-
-    /** Transforms a [watermark] into a separated watermark */
-    private fun getSeparatedWatermark(watermark: ByteArray): Sequence<Char> {
-        val encodedWatermark = transcoding.encode(watermark)
-
-        val separatedWatermark =
-            when (separatorStrategy) {
-                is SeparatorStrategy.SkipInsertPosition -> encodedWatermark
-                is SeparatorStrategy.SingleSeparatorChar ->
-                    sequence {
-                        yield(separatorStrategy.char)
-                        yieldAll(encodedWatermark)
-                    }
-
-                is SeparatorStrategy.StartEndSeparatorChars ->
-                    sequence {
-                        yield(separatorStrategy.start)
-                        yieldAll(encodedWatermark)
-                        yield(separatorStrategy.end)
-                    }
-            }
-
-        return separatedWatermark
     }
 
     companion object {

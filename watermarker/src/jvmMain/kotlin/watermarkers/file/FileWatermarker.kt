@@ -8,104 +8,110 @@
 package de.fraunhofer.isst.innamark.watermarker.watermarkers.file
 
 import de.fraunhofer.isst.innamark.watermarker.types.files.WatermarkableFile
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event.Success
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toInnamarkTags
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toTextWatermarks
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker.AlphabetContainsSeparatorError
 
 interface FileWatermarker<File : WatermarkableFile> {
+    /**
+     * Adds a watermark created from [watermark] ByteArray to file content at [source] and writes
+     * it to [target].
+     */
     fun addWatermark(
-        file: File,
+        source: String,
+        target: String = source,
         watermark: ByteArray,
+        fileType: String? = null,
     ): Status
 
-    /** Adds a [watermark] to [file] */
+    /**
+     * Adds a watermark created from [watermark] String to file content at [source] and writes
+     * it to [target].
+     */
     fun addWatermark(
-        file: File,
-        watermark: Watermark,
+        source: String,
+        target: String = source,
+        watermark: String,
+        fileType: String? = null,
     ): Status {
-        return addWatermark(file, watermark.watermarkContent)
+        return addWatermark(source, target, watermark.encodeToByteArray())
     }
-
-    /** Adds a [innamarkTagBuilder] to [file] */
-    fun addWatermark(
-        file: File,
-        innamarkTagBuilder: InnamarkTagBuilder,
-    ): Status {
-        return addWatermark(file, innamarkTagBuilder.finish())
-    }
-
-    /** Checks if [file] contains watermarks */
-    fun containsWatermark(file: File): Boolean
 
     /**
-     * Returns all watermarks in [file]
+     * Adds a watermark object to file content at [source] and writes it to [target].
+     */
+    fun addWatermark(
+        source: String,
+        target: String = source,
+        watermark: Watermark,
+        fileType: String? = null,
+    ): Status {
+        return addWatermark(source, target, watermark.watermarkContent)
+    }
+
+    /**
+     * Adds a watermark created from [innamarkTagBuilder] to file content at [source] and writes
+     * it to [target].
+     */
+    fun addWatermark(
+        source: String,
+        target: String = source,
+        innamarkTagBuilder: InnamarkTagBuilder,
+        fileType: String? = null,
+    ): Status {
+        return addWatermark(source, target, innamarkTagBuilder.finish())
+    }
+
+    /** Checks if the file at [source] contains a watermark */
+    fun containsWatermark(
+        source: String,
+        fileType: String? = null,
+    ): Result<Boolean>
+
+    /**
+     * Returns a [Result] containing a list of [Watermark]s in the file at [source]. Attempts
+     * to parse Watermarks found into [InnamarkTag]s and returns them instead if
+     * [InnamarkTag.validate] returns [Event.Success] on all Watermarks.
+     *
      * When [squash] is true: watermarks with the same content are merged.
      * When [singleWatermark] is true: only the most frequent watermark is returned.
      */
     fun getWatermarks(
-        file: File,
+        source: String,
+        fileType: String? = null,
         squash: Boolean = false,
         singleWatermark: Boolean = false,
     ): Result<List<Watermark>>
 
     /**
-     * Returns all watermarks in [file] as InnamarkTags.
+     * Returns a [Result] containing the most frequent Watermark in the file at [source] as a String.
      *
-     * When [squash] is true: watermarks with the same content are merged.
-     * When [singleWatermark] is true: only the most frequent watermark is returned.
-     * Returns a warning if some watermarks could not be converted to InnamarkTags.
-     * Returns an error if no watermark could be converted to a InnamarkTag.
+     * Result contains an empty String if no Watermarks were found.
+     * Result contains a [MultipleMostFrequentWarning] in cases where an unambiguous Watermark could not be extracted.
+     * Result contains a [StringDecodeWarning] in cases where a byte cannot be read as UTF-8.
      */
-    fun getInnamarkTags(
-        file: File,
-        squash: Boolean = false,
-        singleWatermark: Boolean = false,
-    ): Result<List<InnamarkTag>> =
-        getWatermarks(file, squash, singleWatermark).toInnamarkTags(
-            "${getSource()}" +
-                ".getInnamarks",
-        )
+    fun getWatermarkAsString(
+        source: String,
+        fileType: String? = null,
+    ): Result<String>
 
     /**
-     * Returns all watermarks in [file] as TextWatermarks.
-     *
-     * When [squash] is true: watermarks with the same content are merged.
-     * When [singleWatermark] is true: only the most frequent watermark is returned.
-     * When [errorOnInvalidUTF8] is true: invalid bytes sequences cause an error.
-     *                           is false: invalid bytes sequences are replace with the char �.
-     *
-     * Returns a warning if some watermarks could not be converted to InnamarkTags.
-     * Returns an error if no watermark could be converted to a InnamarkTag.
-     *
-     * Returns a warning if some InnamarkTags could not be converted to TextWatermarks.
-     * Returns an error if no InnamarkTag could be converted to a TextWatermark.
-     */
-    fun getTextWatermarks(
-        file: File,
-        squash: Boolean = false,
-        singleWatermark: Boolean = false,
-        errorOnInvalidUTF8: Boolean = false,
-    ): Result<List<InnamarkTagBuilder>> =
-        getWatermarks(file, squash, singleWatermark).toTextWatermarks(
-            errorOnInvalidUTF8,
-            "${getSource()}" +
-                ".getTextWatermarks",
-        )
-
-    /**
-     * Removes all watermarks in [file] and returns them
-     * When [squash] is true: watermarks with the same content are merged.
-     * When [singleWatermark] is true: only the most frequent watermark is returned.
+     * Removes all watermarks in the file at [source] and writes the result to [target].
      */
     fun removeWatermarks(
-        file: File,
-        squash: Boolean = false,
-        singleWatermark: Boolean = false,
-    ): Result<List<Watermark>>
+        source: String,
+        target: String = source,
+        fileType: String? = null,
+    ): Status
 
     /** Parses [bytes] as File */
     fun parseBytes(bytes: ByteArray): Result<File>
