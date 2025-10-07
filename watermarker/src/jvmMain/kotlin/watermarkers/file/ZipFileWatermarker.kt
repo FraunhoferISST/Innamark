@@ -10,7 +10,6 @@ package de.fraunhofer.isst.innamark.watermarker.watermarkers.file
 import de.fraunhofer.isst.innamark.watermarker.types.files.ZipFile
 import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
-import de.fraunhofer.isst.innamark.watermarker.types.responses.Event.Success
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
@@ -21,9 +20,7 @@ import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.String
 import de.fraunhofer.isst.innamark.watermarker.utils.FileHandling.Companion.readFile
 import de.fraunhofer.isst.innamark.watermarker.utils.SupportedFileType
 import de.fraunhofer.isst.innamark.watermarker.utils.getFileType
-import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker.AlphabetContainsSeparatorError
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.squashWatermarks
-import kotlin.collections.ArrayList
 
 const val ZIP_WATERMARK_ID: UShort = 0x8777u
 
