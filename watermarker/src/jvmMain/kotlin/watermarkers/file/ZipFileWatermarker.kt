@@ -24,6 +24,9 @@ import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.squashWatermark
 
 const val ZIP_WATERMARK_ID: UShort = 0x8777u
 
+/**
+ * Implementation of [FileWatermarker] for watermarking Zip files.
+ */
 object ZipFileWatermarker : FileWatermarker<ZipFile> {
     const val SOURCE = "ZipFileWatermarker"
 

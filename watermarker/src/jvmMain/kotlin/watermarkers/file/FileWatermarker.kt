@@ -17,6 +17,9 @@ import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
 
+/**
+ * Interface for implementations facilitating watermarking of file covers.
+ */
 interface FileWatermarker<File : WatermarkableFile> {
     /**
      * Adds a watermark created from [watermark] ByteArray to file content at [source] and writes

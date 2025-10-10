@@ -25,6 +25,14 @@ import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWaterm
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.SeparatorStrategy
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.Transcoding
 
+/**
+ * Implementation of [FileWatermarker] for watermarking Text files.
+ *
+ * Takes optional arguments to customize behavior:
+ * - [transcoding]: for defining the watermarking alphabet, encoding, and decoding.
+ * - [separatorStrategy]: for defining how multiple watermarks are separated.
+ * - [placement]: function for finding positions where transcoding alphabet characters are inserted.
+ */
 class TextFileWatermarker(
     private val transcoding: Transcoding = DefaultTranscoding,
     private val separatorStrategy: SeparatorStrategy =
