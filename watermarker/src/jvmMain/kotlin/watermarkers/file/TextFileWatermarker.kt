@@ -67,7 +67,7 @@ class TextFileWatermarker(
                 value ?: return into()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString()))
+            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString(), SOURCE))
         }
 
         val (status, bytes) =
@@ -148,7 +148,10 @@ class TextFileWatermarker(
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return SupportedFileType.WrongTypeError(supportedFileType.toString()).into(false)
+            return SupportedFileType.WrongTypeError(
+                supportedFileType.toString(),
+                SOURCE,
+            ).into(false)
         }
 
         val (status, bytes) =
@@ -185,7 +188,10 @@ class TextFileWatermarker(
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return SupportedFileType.WrongTypeError(supportedFileType.toString()).into(listOf())
+            return SupportedFileType.WrongTypeError(
+                supportedFileType.toString(),
+                SOURCE,
+            ).into(listOf())
         }
 
         val (status, bytes) =
@@ -244,7 +250,7 @@ class TextFileWatermarker(
      */
     override fun getWatermarkAsByteArray(
         source: String,
-        fileType: String?
+        fileType: String?,
     ): Result<ByteArray> {
         val watermarks = getWatermarks(source, fileType, squash = false, singleWatermark = true)
         if (watermarks.value?.isNotEmpty() ?: return Result.success(ByteArray(0))) {
@@ -267,7 +273,7 @@ class TextFileWatermarker(
                 value ?: return into()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString()))
+            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString(), SOURCE))
         }
 
         val (status, bytes) =
