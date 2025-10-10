@@ -231,6 +231,25 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
     }
 
     /**
+     * Returns a [Result] containing the most frequent Watermark in the file at [source] as a
+     * ByteArray.
+     *
+     * Result contains an empty ByteArray if no Watermarks were found.
+     * Result contains a [MultipleMostFrequentWarning] in cases where an unambiguous Watermark could not be extracted.
+     */
+    override fun getWatermarkAsByteArray(
+        source: String,
+        fileType: String?
+    ): Result<ByteArray> {
+        val watermarks = getWatermarks(source, fileType, squash = false, singleWatermark = true)
+        if (watermarks.value?.isNotEmpty() ?: return Result.success(ByteArray(0))) {
+            return watermarks.status.into(watermarks.value[0].watermarkContent)
+        } else {
+            return Result.success(ByteArray(0))
+        }
+    }
+
+    /**
      * Removes all watermarks in the file at [source] and writes the result to [target].
      */
     override fun removeWatermarks(

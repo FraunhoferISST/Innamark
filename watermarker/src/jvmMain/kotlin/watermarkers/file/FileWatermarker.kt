@@ -101,6 +101,18 @@ interface FileWatermarker<File : WatermarkableFile> {
     ): Result<String>
 
     /**
+     * Returns a [Result] containing the most frequent Watermark in the file at [source] as a
+     * ByteArray.
+     *
+     * Result contains an empty ByteArray if no Watermarks were found.
+     * Result contains a [MultipleMostFrequentWarning] in cases where an unambiguous Watermark could not be extracted.
+     */
+    fun getWatermarkAsByteArray(
+        source: String,
+        fileType: String? = null,
+    ): Result<ByteArray>
+
+    /**
      * Removes all watermarks in the file at [source] and writes the result to [target].
      */
     fun removeWatermarks(
