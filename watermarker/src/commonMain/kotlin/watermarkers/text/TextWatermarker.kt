@@ -26,6 +26,7 @@ interface TextWatermarker {
     fun addWatermark(
         cover: String,
         watermark: ByteArray,
+        wrap: Boolean = true,
     ): Result<String>
 
     /** Adds watermark object [watermark] to [cover] */
