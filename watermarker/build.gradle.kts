@@ -11,7 +11,7 @@ plugins {
     id("maven-publish")
     id("org.jetbrains.dokka") version "2.0.0"
     id("org.jlleitschuh.gradle.ktlint") version "12.2.0"
-    id("org.jetbrains.kotlinx.kover") version "0.9.1"
+    id("org.jetbrains.kotlinx.kover") version "0.9.3"
 }
 
 group = "de.fraunhofer.isst.innamark"
