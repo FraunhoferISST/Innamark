@@ -33,7 +33,7 @@ sealed class SupportedFileType {
     abstract val watermarker: FileWatermarker<*>
 
     object Text : SupportedFileType() {
-        override var watermarker: TextFileWatermarker = TextFileWatermarker.default()
+        override var watermarker: TextFileWatermarker = TextFileWatermarker()
     }
 
     object Zip : SupportedFileType() {
