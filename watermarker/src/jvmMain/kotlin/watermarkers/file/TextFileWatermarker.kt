@@ -307,20 +307,24 @@ class TextFileWatermarker(
         source: String,
         target: String,
         fileType: String?,
-        ): Status {
+    ): Status {
         val supportedSourceFileType =
             with(SupportedFileType.getFileType(source, fileType)) {
                 value ?: return into()
             }
         if (supportedSourceFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedSourceFileType.toString(), SOURCE))
+            return Status(
+                SupportedFileType.WrongTypeError(supportedSourceFileType.toString(), SOURCE),
+            )
         }
         val supportedTargetFileType =
             with(SupportedFileType.getFileType(target, fileType)) {
                 value ?: return into()
             }
         if (supportedTargetFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedTargetFileType.toString(), SOURCE))
+            return Status(
+                SupportedFileType.WrongTypeError(supportedTargetFileType.toString(), SOURCE),
+            )
         }
         return Status.success()
     }

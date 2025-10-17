@@ -198,11 +198,12 @@ class PlainTextWatermarker(
         }
 
         val insertPositions = placement(cover)
-        val actualWatermark = if (wrap) {
-            RawInnamarkTag.new(watermark).watermarkContent
-        } else {
-            watermark
-        }
+        val actualWatermark =
+            if (wrap) {
+                RawInnamarkTag.new(watermark).watermarkContent
+            } else {
+                watermark
+            }
         val separatedWatermark = getSeparatedWatermark(actualWatermark)
 
         // Insert watermark
@@ -290,12 +291,12 @@ class PlainTextWatermarker(
                 if (InnamarkTag.parse(watermarks.value[0].watermarkContent).isError) {
                     watermarks.status.into(
                         watermarks.value[0].watermarkContent
-                            .decodeToString()
+                            .decodeToString(),
                     )
                 } else {
                     watermarks.status.into(
                         watermarks.value[0].watermarkContent.drop(1).toByteArray()
-                            .decodeToString()
+                            .decodeToString(),
                     )
                 }
             if (decoded.value!!.contains('\uFFFD')) {

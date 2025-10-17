@@ -46,11 +46,12 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
         wrap: Boolean,
         fileType: String?,
     ): Status {
-        val actualWatermark = if (wrap) {
-            RawInnamarkTag.new(watermark).watermarkContent
-        } else {
-            watermark
-        }
+        val actualWatermark =
+            if (wrap) {
+                RawInnamarkTag.new(watermark).watermarkContent
+            } else {
+                watermark
+            }
         checkFileType(source, target, fileType)
 
         val (status, bytes) =
@@ -310,18 +311,24 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
                 value ?: return into()
             }
         if (supportedSourceFileType != SupportedFileType.Zip) {
-            return Status(SupportedFileType.WrongTypeError(supportedSourceFileType.toString(),
-                SOURCE
-            ))
+            return Status(
+                SupportedFileType.WrongTypeError(
+                    supportedSourceFileType.toString(),
+                    SOURCE,
+                ),
+            )
         }
         val supportedTargetFileType =
             with(SupportedFileType.getFileType(target, fileType)) {
                 value ?: return into()
             }
         if (supportedTargetFileType != SupportedFileType.Zip) {
-            return Status(SupportedFileType.WrongTypeError(supportedTargetFileType.toString(),
-                SOURCE
-            ))
+            return Status(
+                SupportedFileType.WrongTypeError(
+                    supportedTargetFileType.toString(),
+                    SOURCE,
+                ),
+            )
         }
         return Status.success()
     }
