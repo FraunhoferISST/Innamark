@@ -49,11 +49,6 @@ sealed class SupportedFileType {
                 "md" to Text,
             )
 
-        /*
-         * TODO: Write test when builder pattern is implemented for
-         *  TextWatermarker / ZipWatermarker
-         */
-
         /** Returns a variant of SupportedFileType if [extension] is supported */
         @JvmStatic
         fun fromExtension(extension: String): Result<SupportedFileType> {
