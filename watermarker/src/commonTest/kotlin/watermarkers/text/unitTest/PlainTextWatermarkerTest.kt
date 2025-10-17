@@ -89,6 +89,15 @@ class PlainTextWatermarkerTest {
             " sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labor" +
             "e et dolore magna aliquyam erat, sed diam voluptua. At vero eos et" +
             " accusam et justo duo dolores et ea rebum. "
+    val emptyInnamarkedText =
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonu" +
+            "my eirmod tempor invidunt ut labore et dolore magna aliquyam erat," +
+            " sed diam voluptua. At vero eos et accusam et justo duo dolores et" +
+            " ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est " +
+            "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" +
+            " sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labor" +
+            "e et dolore magna aliquyam erat, sed diam voluptua. At vero eos et" +
+            " accusam et justo duo dolores et ea rebum. "
     val watermarkedText =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonu" +
             "my eirmod tempor invidunt ut labore et dolore magna aliquyam erat," +
@@ -98,6 +107,15 @@ class PlainTextWatermarkerTest {
             " sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labor" +
             "e et dolore magna aliquyam erat, sed diam voluptua. At vero eos et" +
             " accusam et justo duo dolores et ea rebum. "
+    val innamarkedText =
+        "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonu" +
+            "my eirmod tempor invidunt ut labore et dolore magna aliquyam erat," +
+            " sed diam voluptua. At vero eos et accusam et justo duo dolores et" +
+            " ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est " +
+            "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur" +
+            " sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labor" +
+            "e et dolore magna aliquyam erat, sed diam voluptua. At vero eos et" +
+            " accusam et justo duo dolores et ea rebum. "
     val watermarkedText2 =
         "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonu" +
             "my eirmod tempor invidunt ut labore et dolore magna aliquyam erat," +
@@ -116,9 +134,57 @@ class PlainTextWatermarkerTest {
     val malformedBytes = byteArrayOf(0x54.toByte(), 0x65.toByte(), 0x73.toByte(), 0xFF.toByte())
 
     @Test
+    fun placement_loremIpsum_success() {
+        // Arrange
+        val text =
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor " +
+                "incididunt ut labore et dolore magna aliqua. Blandit volutpat maecenas " +
+                "volutpat blandit aliquam etiam erat velit."
+        val expected =
+            sequenceOf(
+                5, 11, 17, 21, 27, 39, 50, 56, 60, 63, 71, 78, 89, 92, 99, 102, 109, 115, 123, 131,
+                140, 149, 158, 166, 174, 180, 185,
+            ).toList()
+
+        // Act
+        val result = watermarker.placement(text).toList()
+
+        // Assert
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun placement_empty_success() {
+        // Arrange
+        val text = ""
+        val expected = sequenceOf<Int>().toList()
+
+        // Act
+        val result = watermarker.placement(text).toList()
+
+        // Assert
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun placement_noSpace_success() {
+        // Arrange
+        val text =
+            "Loremdipsumdolorsitamet,consecteturadipiscingelit,seddoeiusmodtemporincididuntutlabo" +
+                "reetdoloremagnaaliqua.Blanditvolutpatmaecenasvolutpatblanditaliquametiameratvelit."
+        val expected = sequenceOf<Int>().toList()
+
+        // Act
+        val result = watermarker.placement(text).toList()
+
+        // Assert
+        assertEquals(expected, result)
+    }
+
+    @Test
     fun addWatermark_string_success() {
         // Arrange
-        val expected = watermarkedText
+        val expected = innamarkedText
 
         // Act
         val result = watermarker.addWatermark(loremIpsum, watermark)
@@ -129,12 +195,25 @@ class PlainTextWatermarkerTest {
     }
 
     @Test
-    fun addWatermark_byteArray_success() {
+    fun addWatermark_byteArray_successAndWrap() {
+        // Arrange
+        val expected = innamarkedText
+
+        // Act
+        val result = watermarker.addWatermark(loremIpsum, watermarkBytes, true)
+
+        // Assert
+        assertTrue(result.isSuccess)
+        assertEquals(expected, result.value)
+    }
+
+    @Test
+    fun addWatermark_byteArray_successNoWrap() {
         // Arrange
         val expected = watermarkedText
 
         // Act
-        val result = watermarker.addWatermark(loremIpsum, watermarkBytes)
+        val result = watermarker.addWatermark(loremIpsum, watermarkBytes, false)
 
         // Assert
         assertTrue(result.isSuccess)
@@ -157,7 +236,7 @@ class PlainTextWatermarkerTest {
     @Test
     fun addWatermark_emptyString_success() {
         // Arrange
-        val expected = emptyWatermarkedText
+        val expected = emptyInnamarkedText
 
         // Act
         val result = watermarker.addWatermark(loremIpsum, "")
@@ -171,7 +250,7 @@ class PlainTextWatermarkerTest {
     fun addWatermark_emptyCoverAndString_oversizeWarning() {
         // Arrange
         val expected = ""
-        val expectedWarning = OversizedWatermarkWarning(2, 0)
+        val expectedWarning = OversizedWatermarkWarning(6, 0)
 
         // Act
         val result = watermarker.addWatermark("", "")
@@ -186,8 +265,8 @@ class PlainTextWatermarkerTest {
     fun addWatermark_oversized_oversizeWarning() {
         // Arrange
         val shortText = "Lorem ipsum dolor sit amet"
-        val expected = "Lorem ipsum dolor sit amet"
-        val expectedWarning = OversizedWatermarkWarning(18, 4)
+        val expected = "Lorem ipsum dolor sit amet"
+        val expectedWarning = OversizedWatermarkWarning(22, 4)
 
         // Act
         val result = watermarker.addWatermark(shortText, watermark)

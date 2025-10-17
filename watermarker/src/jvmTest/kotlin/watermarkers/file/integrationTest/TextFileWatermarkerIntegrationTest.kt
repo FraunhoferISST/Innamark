@@ -8,14 +8,34 @@
 package de.fraunhofer.isst.innamark.watermarker.watermarkers.file.integrationTest
 
 import de.fraunhofer.isst.innamark.watermarker.types.files.TextFile
+import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.TextFileWatermarker
+import java.nio.file.Path
+import kotlin.io.path.createTempFile
+import kotlin.io.path.exists
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class TextFileWatermarkerIntegrationTest {
-    private val textWatermarker = TextFileWatermarker.default()
+    private val textWatermarker = TextFileWatermarker()
+    private lateinit var tempFile: Path
+
+    @BeforeTest
+    fun setup() {
+        tempFile = createTempFile(prefix = "temp", suffix = ".txt")
+        assertTrue(tempFile.exists())
+    }
+
+    @AfterTest
+    fun teardown() {
+        tempFile.toFile().delete()
+        assertFalse(tempFile.exists())
+    }
 
     @Test
     fun watermarkInsertionExtraction_successiveSpaces_equality() {
@@ -28,23 +48,29 @@ class TextFileWatermarkerIntegrationTest {
                 "Urna neque viverra justo"
         val watermark = "Hello World"
         val textFile = TextFile.fromString(text)
+        textFile.writeToFile(tempFile.toString())
         val parsedWatermark = Watermark.fromString(watermark)
 
         // Add watermark
         // Act
-        val status = textWatermarker.addWatermark(textFile, parsedWatermark)
+        val status =
+            textWatermarker.addWatermark(
+                source = tempFile.toString(),
+                target = tempFile.toString(),
+                watermark = parsedWatermark,
+            )
 
         // Assert
         assertTrue(status.isSuccess)
 
         // Extract Watermark
         // Act
-        val watermarks = textWatermarker.getWatermarks(textFile)
+        val watermarks = textWatermarker.getWatermarks(tempFile.toString())
 
         // Assert
         assertTrue(watermarks.isSuccess)
         assertEquals(watermarks.value!!.size, 1)
-        val firstWatermark = watermarks.value!![0].watermarkContent.decodeToString()
+        val firstWatermark = watermarks.value[0].watermarkContent.decodeToString()
         assertEquals(watermark, firstWatermark)
     }
 
@@ -60,23 +86,29 @@ class TextFileWatermarkerIntegrationTest {
                 "culpa qui officia deserunt mollit anim id est laborum."
         val watermark = "Hello World"
         val textFile = TextFile.fromString(text)
+        textFile.writeToFile(tempFile.toString())
         val parsedWatermark = Watermark.fromString(watermark)
 
         // Add watermark
         // Act
-        val status = textWatermarker.addWatermark(textFile, parsedWatermark)
+        val status =
+            textWatermarker.addWatermark(
+                source = tempFile.toString(),
+                target = tempFile.toString(),
+                watermark = parsedWatermark,
+            )
 
         // Assert
         assertTrue(status.isSuccess)
 
         // Extract Watermark
         // Act
-        val watermarks = textWatermarker.getWatermarks(textFile)
+        val watermarks = textWatermarker.getWatermarks(tempFile.toString())
 
         // Assert
         assertTrue(watermarks.isSuccess)
         assertEquals(watermarks.value!!.size, 1)
-        val firstWatermark = watermarks.value!![0].watermarkContent.decodeToString()
+        val firstWatermark = watermarks.value[0].watermarkContent.decodeToString()
         assertEquals(watermark, firstWatermark)
     }
 }

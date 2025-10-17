@@ -7,40 +7,76 @@
 
 package de.fraunhofer.isst.innamark.watermarker.watermarkers.file.unitTest
 
+import de.fraunhofer.isst.innamark.watermarker.types.files.writeToFile
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.TextFileWatermarker
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.DefaultTranscoding
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
 import openTextFile
+import java.nio.file.Path
+import kotlin.io.path.createTempFile
+import kotlin.io.path.exists
+import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class TextFileWatermarkerTestJvm {
-    private val textWatermarker = TextFileWatermarker.default()
+    private val textWatermarker = TextFileWatermarker()
+    private lateinit var tempFile: Path
+
+    @BeforeTest
+    fun setup() {
+        tempFile = createTempFile(prefix = "temp", suffix = ".txt")
+        assertTrue(tempFile.exists())
+    }
+
+    @AfterTest
+    fun teardown() {
+        tempFile.toFile().delete()
+        assertFalse(tempFile.exists())
+    }
 
     @Test
     fun addWatermark_valid_success() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
         val watermark = Watermark.fromString("Hello World")
         val expected = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
         val expectedMessage = PlainTextWatermarker.Success(listOf(5, 273, 538)).into().toString()
 
         // Act
-        val result = textWatermarker.addWatermark(file, watermark)
+        val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expected.content, file.content)
+        assertEquals(expected.content, openTextFile(tempFile.toString()).content)
+        assertEquals(expectedMessage, result.toString())
+    }
+
+    @Test
+    fun addWatermarkString_valid_success() {
+        // Arrange
+        val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
+        val watermark = "Hello World"
+        val expected = openTextFile("src/jvmTest/resources/lorem_ipsum_innamarked.txt")
+        val expectedMessage = PlainTextWatermarker.Success(listOf(5, 295)).into().toString()
+
+        // Act
+        val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
+
+        // Assert
+        assertTrue(result.isSuccess)
+        assertEquals(expected.content, openTextFile(tempFile.toString()).content)
         assertEquals(expectedMessage, result.toString())
     }
 
     @Test
     fun addWatermark_containsAlphabetChars_error() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum_watermarked.txt"
         val watermarkBytes = "Hello World".encodeToByteArray()
         val watermark = Watermark(watermarkBytes)
         val expectedMessage =
@@ -52,7 +88,7 @@ class TextFileWatermarkerTestJvm {
             ).into().toString()
 
         // Act
-        val result = textWatermarker.addWatermark(file, watermark)
+        val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
 
         // Assert
         assertTrue(result.isError)
@@ -62,14 +98,14 @@ class TextFileWatermarkerTestJvm {
     @Test
     fun addWatermark_oversizedWatermark_warning() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
         val watermark = Watermark.fromString("This is a watermark that does not fit")
         val expectedMessage =
             PlainTextWatermarker.OversizedWatermarkWarning(150, 96).into()
                 .toString()
 
         // Act
-        val result = textWatermarker.addWatermark(file, watermark)
+        val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
 
         // Assert
         assertTrue(result.isWarning)
@@ -79,31 +115,33 @@ class TextFileWatermarkerTestJvm {
     @Test
     fun containsWatermark_watermark_true() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum_watermarked.txt"
 
         // Act
-        val result = textWatermarker.containsWatermark(file)
+        val result = textWatermarker.containsWatermark(filePath)
 
         // Assert
-        assertTrue(result)
+        assertTrue(result.hasValue)
+        assertTrue(result.value!!)
     }
 
     @Test
     fun containsWatermark_noWatermark_false() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
 
         // Act
-        val result = textWatermarker.containsWatermark(file)
+        val result = textWatermarker.containsWatermark(filePath)
 
         // Assert
-        assertTrue(!result)
+        assertTrue(result.hasValue)
+        assertTrue(!result.value!!)
     }
 
     @Test
     fun getWatermarks_watermarks_successAndWatermarks() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum_watermarked.txt"
         val expected =
             listOf(
                 Watermark.fromString("Hello World"),
@@ -111,7 +149,7 @@ class TextFileWatermarkerTestJvm {
             )
 
         // Act
-        val result = textWatermarker.getWatermarks(file)
+        val result = textWatermarker.getWatermarks(filePath)
 
         // Assert
         assertTrue(result.isSuccess)
@@ -121,10 +159,10 @@ class TextFileWatermarkerTestJvm {
     @Test
     fun getWatermarks_noWatermark_successAndEmptyList() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
 
         // Act
-        val result = textWatermarker.getWatermarks(file)
+        val result = textWatermarker.getWatermarks(filePath)
 
         // Assert
         assertTrue(result.isSuccess)
@@ -134,11 +172,11 @@ class TextFileWatermarkerTestJvm {
     @Test
     fun getWatermarks_partialWatermark_warningAndWatermark() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_partial_watermark.txt")
+        val filePath = "src/jvmTest/resources/lorem_ipsum_partial_watermark.txt"
         val expectedMessage = PlainTextWatermarker.IncompleteWatermarkWarning().into().toString()
 
         // Act
-        val result = textWatermarker.getWatermarks(file)
+        val result = textWatermarker.getWatermarks(filePath)
 
         // Assert
         assertTrue(result.isWarning)
@@ -147,50 +185,51 @@ class TextFileWatermarkerTestJvm {
     }
 
     @Test
-    fun removeWatermarks_watermarks_successAndWatermarks() {
+    fun removeWatermarks_watermarks_successAndCleaned() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
-        val expected =
-            listOf(
-                Watermark.fromString("Hello World"),
-                Watermark.fromString("Hello World"),
-            )
+        val sourcePath = "src/jvmTest/resources/lorem_ipsum_watermarked.txt"
+        val sourceFile = openTextFile(sourcePath)
+        val expectedPath = "src/jvmTest/resources/lorem_ipsum.txt"
+        val expectedFile = openTextFile(expectedPath)
 
         // Act
-        val result = textWatermarker.removeWatermarks(file)
+        sourceFile.writeToFile(tempFile.toString())
+        val result = textWatermarker.removeWatermarks(tempFile.toString())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expected, result.value)
+        assertEquals(expectedFile, openTextFile(tempFile.toString()))
     }
 
     @Test
-    fun removeWatermarks_noWatermark_successAndEmptyList() {
+    fun removeWatermarks_noWatermark_successAndCleaned() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum.txt")
+        val sourcePath = "src/jvmTest/resources/lorem_ipsum.txt"
+        val sourceFile = openTextFile(sourcePath)
 
         // Act
-        val result = textWatermarker.removeWatermarks(file)
+        sourceFile.writeToFile(tempFile.toString())
+        val result = textWatermarker.removeWatermarks(tempFile.toString())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertTrue(result.value?.isEmpty() == true)
+        assertEquals(sourceFile, openTextFile(tempFile.toString()))
     }
 
     @Test
-    fun removeWatermarks_partialWatermark_warningAndWatermark() {
+    fun removeWatermarks_partialWatermark_successAndCleaned() {
         // Arrange
-        val file = openTextFile("src/jvmTest/resources/lorem_ipsum_partial_watermark.txt")
-        val status = PlainTextWatermarker.IncompleteWatermarkWarning().into()
-        status.addEvent(PlainTextWatermarker.RemoveWatermarksGetProblemWarning(), true)
-        val expectedMessage = status.toString()
+        val sourcePath = "src/jvmTest/resources/lorem_ipsum_partial_watermark.txt"
+        val sourceFile = openTextFile(sourcePath)
+        val expectedPath = "src/jvmTest/resources/lorem_ipsum.txt"
+        val expectedFile = openTextFile(expectedPath)
 
         // Act
-        val result = textWatermarker.removeWatermarks(file)
+        sourceFile.writeToFile(tempFile.toString())
+        val result = textWatermarker.removeWatermarks(tempFile.toString())
 
         // Assert
-        assertTrue(result.isWarning)
-        assertFalse(result.value?.isEmpty() != false)
-        assertEquals(expectedMessage, result.toString())
+        assertTrue(result.isSuccess)
+        assertEquals(expectedFile, openTextFile(tempFile.toString()))
     }
 }
