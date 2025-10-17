@@ -60,14 +60,12 @@ class TextFileWatermarker(
         source: String,
         target: String,
         watermark: ByteArray,
+        wrap: Boolean,
         fileType: String?,
     ): Status {
-        val supportedFileType =
-            with(SupportedFileType.getFileType(source, fileType)) {
-                value ?: return into()
-            }
-        if (supportedFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString(), SOURCE))
+        val fileStatus = checkFileType(source, target, fileType)
+        if (!fileStatus.isSuccess) {
+            return fileStatus
         }
 
         val (status, bytes) =
@@ -81,7 +79,7 @@ class TextFileWatermarker(
                 value ?: return status
             }
 
-        val result = watermarker.addWatermark(file.content, watermark)
+        val result = watermarker.addWatermark(file.content, watermark, wrap = wrap)
         status.appendStatus(result.status)
         if (result.hasValue) file.content = result.value!!
 
@@ -104,7 +102,7 @@ class TextFileWatermarker(
         watermark: String,
         fileType: String?,
     ): Status {
-        return addWatermark(source, target, watermark.encodeToByteArray(), fileType)
+        return addWatermark(source, target, watermark.encodeToByteArray(), true, fileType)
     }
 
     /**
@@ -119,7 +117,7 @@ class TextFileWatermarker(
         watermark: Watermark,
         fileType: String?,
     ): Status {
-        return addWatermark(source, target, watermark.watermarkContent, fileType)
+        return addWatermark(source, target, watermark.watermarkContent, false, fileType)
     }
 
     /**
@@ -268,14 +266,10 @@ class TextFileWatermarker(
         target: String,
         fileType: String?,
     ): Status {
-        val supportedFileType =
-            with(SupportedFileType.getFileType(source, fileType)) {
-                value ?: return into()
-            }
-        if (supportedFileType != SupportedFileType.Text) {
-            return Status(SupportedFileType.WrongTypeError(supportedFileType.toString(), SOURCE))
+        val fileStatus = checkFileType(source, target, fileType)
+        if (!fileStatus.isSuccess) {
+            return fileStatus
         }
-
         val (status, bytes) =
             with(readFile(source)) {
                 status to (value ?: return into())
@@ -304,99 +298,30 @@ class TextFileWatermarker(
 
     companion object {
         private const val SOURCE = "TextFileWatermarker"
-
-        /** Returns the builder for TextWatermarker */
-        @JvmStatic
-        fun builder(): TextFileWatermarkerBuilder = TextFileWatermarkerBuilder()
-
-        /** Returns an instance of TextWatermarker in default configuration */
-        @JvmStatic
-        fun default(): TextFileWatermarker = TextFileWatermarkerBuilder().build().value!!
     }
 
+    /** Returns the name of the FileWatermarker. Used in Event messages. */
     override fun getSource(): String = SOURCE
-}
 
-class TextFileWatermarkerBuilder {
-    private var transcoding: Transcoding = DefaultTranscoding
-    private var separatorStrategy: SeparatorStrategy =
-        SeparatorStrategy.SingleSeparatorChar(DefaultTranscoding.SEPARATOR_CHAR)
-
-    /** Yields all positions where a Char of the watermark can be inserted */
-    private var placement: (string: String) -> List<Int> = { string ->
-        sequence {
-            for ((index, char) in string.withIndex()) {
-                if (char == ' ') yield(index)
+    private fun checkFileType(
+        source: String,
+        target: String,
+        fileType: String?,
+        ): Status {
+        val supportedSourceFileType =
+            with(SupportedFileType.getFileType(source, fileType)) {
+                value ?: return into()
             }
-        }.toMutableList() // mutable for JS compatibility on empty lists
-    }
-
-    /** Sets a custom transcoding alphabet */
-    fun setTranscoding(transcoding: Transcoding): TextFileWatermarkerBuilder {
-        this.transcoding = transcoding
-        return this
-    }
-
-    /** Set a custom separator strategy */
-    fun setSeparatorStrategy(separatorStrategy: SeparatorStrategy): TextFileWatermarkerBuilder {
-        this.separatorStrategy = separatorStrategy
-        return this
-    }
-
-    /** Sets a custom placement function used to identify insertion positions */
-    fun setPlacement(placement: (String) -> List<Int>): TextFileWatermarkerBuilder {
-        this.placement = placement
-        return this
-    }
-
-    /** Validates the TextWatermarker configuration */
-    private fun validate(): Status {
-        val status = Status.success()
-
-        when (val separatorStrategy = separatorStrategy) {
-            is SeparatorStrategy.SkipInsertPosition -> {}
-            is SeparatorStrategy.SingleSeparatorChar -> {
-                if (separatorStrategy.char in transcoding.alphabet) {
-                    status.addEvent(
-                        PlainTextWatermarker.AlphabetContainsSeparatorError(
-                            listOf(separatorStrategy.char),
-                        ),
-                    )
-                }
-            }
-
-            is SeparatorStrategy.StartEndSeparatorChars -> {
-                val list = ArrayList<Char>()
-                if (separatorStrategy.start in transcoding.alphabet) {
-                    list.add(separatorStrategy.start)
-                }
-                if (separatorStrategy.end in transcoding.alphabet) {
-                    list.add(separatorStrategy.end)
-                }
-                if (!list.isEmpty()) {
-                    status.addEvent(PlainTextWatermarker.AlphabetContainsSeparatorError(list))
-                }
-            }
+        if (supportedSourceFileType != SupportedFileType.Text) {
+            return Status(SupportedFileType.WrongTypeError(supportedSourceFileType.toString(), SOURCE))
         }
-
-        return status
-    }
-
-    /**
-     * Creates a TextWatermarker.
-     *
-     * Fails if transcoding alphabet contains separator chars.
-     */
-    fun build(): Result<TextFileWatermarker> {
-        val status = validate()
-        return if (status.isError) {
-            return status.into()
-        } else {
-            status.into(TextFileWatermarker(transcoding, separatorStrategy, placement))
+        val supportedTargetFileType =
+            with(SupportedFileType.getFileType(target, fileType)) {
+                value ?: return into()
+            }
+        if (supportedTargetFileType != SupportedFileType.Text) {
+            return Status(SupportedFileType.WrongTypeError(supportedTargetFileType.toString(), SOURCE))
         }
-    }
-
-    companion object {
-        private const val SOURCE = "TextWatermarkerBuilder"
+        return Status.success()
     }
 }

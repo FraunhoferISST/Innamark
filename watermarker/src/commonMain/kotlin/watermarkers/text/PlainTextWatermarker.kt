@@ -12,6 +12,7 @@ import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.RawInnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
@@ -130,7 +131,7 @@ class PlainTextWatermarker(
     private val transcoding: Transcoding = DefaultTranscoding,
     private val separatorStrategy: SeparatorStrategy =
         SeparatorStrategy.SingleSeparatorChar(DefaultTranscoding.SEPARATOR_CHAR),
-    private val placement: (String) -> List<Int> = { string ->
+    val placement: (String) -> List<Int> = { string ->
         sequence {
             for ((index, char) in string.withIndex()) {
                 if (char == ' ') yield(index)
@@ -188,6 +189,7 @@ class PlainTextWatermarker(
     override fun addWatermark(
         cover: String,
         watermark: ByteArray,
+        wrap: Boolean,
     ): Result<String> {
         if (validationStatus.isError) return validationStatus.into(cover)
         if (cover.any { char -> char in fullAlphabet }) {
@@ -196,7 +198,12 @@ class PlainTextWatermarker(
         }
 
         val insertPositions = placement(cover)
-        val separatedWatermark = getSeparatedWatermark(watermark)
+        val actualWatermark = if (wrap) {
+            RawInnamarkTag.new(watermark).watermarkContent
+        } else {
+            watermark
+        }
+        val separatedWatermark = getSeparatedWatermark(actualWatermark)
 
         // Insert watermark
         val positionChunks =
@@ -221,9 +228,9 @@ class PlainTextWatermarker(
         result.append(cover.substring(lastPosition, cover.length))
 
         // Check if watermark fits at least one time into the cover with given positioning
-        if (insertPositions.count() < getMinimumInsertPositions(watermark)) {
+        if (insertPositions.count() < getMinimumInsertPositions(actualWatermark)) {
             return OversizedWatermarkWarning(
-                getMinimumInsertPositions(watermark),
+                getMinimumInsertPositions(actualWatermark),
                 insertPositions.count(),
             ).into(result.toString())
         }
@@ -258,7 +265,7 @@ class PlainTextWatermarker(
         watermark: Watermark,
     ): Result<String> {
         if (validationStatus.isError) return validationStatus.into(cover)
-        val result = addWatermark(cover, watermark.watermarkContent)
+        val result = addWatermark(cover, watermark.watermarkContent, wrap = false)
         return result
     }
 
@@ -280,10 +287,17 @@ class PlainTextWatermarker(
         val watermarks = getWatermarks(cover, false, true)
         if (watermarks.value?.isNotEmpty() ?: return Result.success("")) {
             val decoded =
-                watermarks.status.into(
-                    watermarks.value[0].watermarkContent
-                        .decodeToString(),
-                )
+                if (InnamarkTag.parse(watermarks.value[0].watermarkContent).isError) {
+                    watermarks.status.into(
+                        watermarks.value[0].watermarkContent
+                            .decodeToString()
+                    )
+                } else {
+                    watermarks.status.into(
+                        watermarks.value[0].watermarkContent.drop(1).toByteArray()
+                            .decodeToString()
+                    )
+                }
             if (decoded.value!!.contains('\uFFFD')) {
                 decoded.appendStatus(Status(StringDecodeWarning("PlainTextWatermarker")))
             }
@@ -544,12 +558,6 @@ class PlainTextWatermarker(
         /** Returns a String explaining the event */
         override fun getMessage(): String =
             "Added Watermark ${startPositions.size} times. Positions: $startPositions."
-    }
-
-    class RemoveWatermarksGetProblemWarning : Event.Warning("$SOURCE.removeWatermarks") {
-        /** Returns a String explaining the event */
-        override fun getMessage(): String =
-            "There was a problem extracting the watermarks. They got removed anyways."
     }
 
     class AlphabetContainsSeparatorError(val chars: List<Char>) : Event.Error(SOURCE) {

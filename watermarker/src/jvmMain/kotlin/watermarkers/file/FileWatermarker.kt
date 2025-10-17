@@ -29,6 +29,7 @@ interface FileWatermarker<File : WatermarkableFile> {
         source: String,
         target: String = source,
         watermark: ByteArray,
+        wrap: Boolean = true,
         fileType: String? = null,
     ): Status
 
@@ -127,6 +128,6 @@ interface FileWatermarker<File : WatermarkableFile> {
     /** Parses [bytes] as File */
     fun parseBytes(bytes: ByteArray): Result<File>
 
-    /** Returns the name of the FileWatermark. Used in Event messages. */
+    /** Returns the name of the FileWatermarker. Used in Event messages. */
     fun getSource(): String
 }
