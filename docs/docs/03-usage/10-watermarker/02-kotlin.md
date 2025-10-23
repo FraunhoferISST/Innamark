@@ -57,10 +57,11 @@ for more details).*
 (see [Watermarker](../#extraction-customization) for more details)*
 
 ```kt title="src/main/kotlin/Main.kt" showLineNumbers
-import de.fraunhofer.isst.innamark.watermarker.textWatermarkers.TextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.textWatermarkers.PlainTextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Status
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.TextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
 import kotlin.system.exitProcess
 import kotlin.text.decodeToString
 
@@ -116,6 +117,7 @@ fun main() {
     val secondWatermarkedText = watermarker.addWatermark(coverText, secondWatermarkText).unwrap()
 
     // combining the watermarked texts to get two different watermarks in one Text
+    // note that a corrupt Watermark can be present at the "stitch line" of the input cover texts
     val combinedText = watermarkedText + secondWatermarkedText
 
     // extract the watermarks from the watermarked text
@@ -124,7 +126,13 @@ fun main() {
 
     // print the watermarks found
     for (extracted in extractedMultipleWatermarks) {
-        println("Found watermark: ${extracted.watermarkContent.decodeToString()}")
+        // strip the first (TAG) byte from the extracted Watermarks if they are valid InnamarkTags
+        if (InnamarkTag.parse(extracted.watermarkContent).isSuccess) {
+            println("Found InnamarkTag: ${extracted.watermarkContent.drop(1).toByteArray().
+            decodeToString()}")
+        } else {
+            println("Found watermark: ${extracted.watermarkContent.decodeToString()}")
+        }
     }
 
 }
