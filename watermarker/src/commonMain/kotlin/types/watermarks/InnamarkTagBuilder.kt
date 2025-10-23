@@ -14,27 +14,27 @@ import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
 /**
- * The TextWatermark class provides convenient functions to create and read InnamarkTags with UTF-8
+ * The InnamarkTagBuilder class provides convenient functions to create and read InnamarkTags with UTF-8
  * text as content.
  *
- * TextWatermark can be instantiated using the companion functions. The functions `new`, `raw`,
+ * InnamarkTagBuilder can be instantiated using the companion functions. The functions `new`, `raw`,
  * `compressed`, `sized`, `CRC32`, `SHA3256`, `compressedSized`, `compressedCRC32`,
  * `compressedSHA3256`, `sizedCRC32`, `sizedSHA3256`, `compressedSizedCRC32` and
- * `compressedSizedSHA3256` allows creation of a new TextWatermark from a String and specifying
+ * `compressedSizedSHA3256` allows creation of a new InnamarkTagBuilder from a String and specifying
  * the format of the produced InnamarkTag.
  *
- * The function `fromInnamarkTag` allows parsing a supported InnamarkTag into a TextWatermark,
+ * The function `fromInnamarkTag` allows parsing a supported InnamarkTag into a InnamarkTagBuilder,
  * giving direct access to the contained text without having to consider the format of the
  * InnamarkTag.
  *
- * Sized TextWatermarks will create InnamarkTags that encode the size of the InnamarkTag into the
+ * Sized InnamarkTagBuilders will create InnamarkTags that encode the size of the InnamarkTag into the
  * watermark.
  *
- * CRC32 TextWatermarks will create InnamarkTags that encode a CRC32 checksum into the watermark.
+ * CRC32 InnamarkTagBuilders will create InnamarkTags that encode a CRC32 checksum into the watermark.
  *
- * SHA3256 TextWatermarks will create InnamarkTags that encode a SHA3256 hash into the watermark.
+ * SHA3256 InnamarkTagBuilders will create InnamarkTags that encode a SHA3256 hash into the watermark.
  *
- * Compressed TextWatermarks will compress the Text using a compression algorithm. This can be
+ * Compressed InnamarkTagBuilders will compress the Text using a compression algorithm. This can be
  * useful when the watermark text is very long, but it might reduce the watermark robustness.
  *
  */
@@ -48,7 +48,7 @@ class InnamarkTagBuilder private constructor(
 ) {
     companion object {
         /**
-         * Creates a TextWatermark in default configuration.
+         * Creates a InnamarkTagBuilder in default configuration.
          *
          * The default configuration is: no compression, no size information, no checksum, no hash.
          */
@@ -56,16 +56,16 @@ class InnamarkTagBuilder private constructor(
         @JvmStatic
         fun new(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text)
 
-        /** Creates a TextWatermark from [text] without additional information */
+        /** Creates a InnamarkTagBuilder from [text] without additional information */
         @JvmStatic
         fun raw(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text)
 
-        /** Creates a TextWatermark from [text] with compression */
+        /** Creates a InnamarkTagBuilder from [text] with compression */
         @JvmStatic
         fun compressed(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true)
 
-        /** Creates a TextWatermark from [text] with compression only if compression decreases the size */
+        /** Creates a InnamarkTagBuilder from [text] with compression only if compression decreases the size */
         @JvmStatic
         fun small(text: String): InnamarkTagBuilder {
             val raw = raw(text)
@@ -80,57 +80,57 @@ class InnamarkTagBuilder private constructor(
             }
         }
 
-        /** Creates a TextWatermark from [text] with size information */
+        /** Creates a InnamarkTagBuilder from [text] with size information */
         @JvmStatic
         fun sized(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, sized = true)
 
-        /** Creates a TextWatermark from [text] with CRC32 checksum */
+        /** Creates a InnamarkTagBuilder from [text] with CRC32 checksum */
         @Suppress("ktlint:standard:function-naming")
         @JvmStatic
         fun CRC32(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, CRC32 = true)
 
-        /** Creates a TextWatermark from [text] with SHA3256 hash */
+        /** Creates a InnamarkTagBuilder from [text] with SHA3256 hash */
         @Suppress("ktlint:standard:function-naming")
         @JvmStatic
         fun SHA3256(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, SHA3256 = true)
 
-        /** Creates a TextWatermark from [text] with size information and compression */
+        /** Creates a InnamarkTagBuilder from [text] with size information and compression */
         @JvmStatic
         fun compressedSized(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true, sized = true)
 
-        /** Creates a TextWatermark from [text] with compression and CRC32 checksum */
+        /** Creates a InnamarkTagBuilder from [text] with compression and CRC32 checksum */
         @JvmStatic
         fun compressedCRC32(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true, CRC32 = true)
 
-        /** Creates a TextWatermark from [text] with compression and SHA3256 hash */
+        /** Creates a InnamarkTagBuilder from [text] with compression and SHA3256 hash */
         @JvmStatic
         fun compressedSHA3256(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true, SHA3256 = true)
 
-        /** Creates a TextWatermark from [text] with size information and CRC32 checksum */
+        /** Creates a InnamarkTagBuilder from [text] with size information and CRC32 checksum */
         @JvmStatic
         fun sizedCRC32(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, sized = true, CRC32 = true)
 
-        /** Creates a TextWatermark from [text] with size information and SHA3256 hash */
+        /** Creates a InnamarkTagBuilder from [text] with size information and SHA3256 hash */
         @JvmStatic
         fun sizedSHA3256(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, sized = true, SHA3256 = true)
 
-        /** Creates a TextWatermark from [text] with compression, size information and CRC32 checksum */
+        /** Creates a InnamarkTagBuilder from [text] with compression, size information and CRC32 checksum */
         @JvmStatic
         fun compressedSizedCRC32(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true, sized = true, CRC32 = true)
 
-        /** Creates a TextWatermark from [text] with compression, size information and SHA3256 hash */
+        /** Creates a InnamarkTagBuilder from [text] with compression, size information and SHA3256 hash */
         @JvmStatic
         fun compressedSizedSHA3256(text: String): InnamarkTagBuilder =
             InnamarkTagBuilder(text, compressed = true, sized = true, SHA3256 = true)
 
         /**
-         * Creates a TextWatermark from [innamarkTag].
+         * Creates a InnamarkTagBuilder from [innamarkTag].
          * Sets sized, compressed, CRC32 and SHA3256 depending on the variant of [innamarkTag].
          *
          * When [errorOnInvalidUTF8] is true: invalid bytes sequences cause an error.
@@ -267,29 +267,29 @@ class InnamarkTagBuilder private constructor(
     /** Contains the used InnamarkTag variant followed by [text] */
     override fun toString(): String {
         return if (compressed && sized && SHA3256) {
-            "CompressedSizedSHA3256TextWatermark: '$text'"
+            "CompressedSizedSHA3256InnamarkTagBuilder: '$text'"
         } else if (compressed && SHA3256) {
-            "CompressedSHA3256TextWatermark: '$text'"
+            "CompressedSHA3256InnamarkTagBuilder: '$text'"
         } else if (sized && SHA3256) {
-            "SizedSHA3256TextWatermark: '$text'"
+            "SizedSHA3256InnamarkTagBuilder: '$text'"
         } else if (SHA3256) {
-            "SHA3256TextWatermark: '$text'"
+            "SHA3256InnamarkTagBuilder: '$text'"
         } else if (compressed && sized && CRC32) {
-            "CompressedSizedCRC32TextWatermark: '$text'"
+            "CompressedSizedCRC32InnamarkTagBuilder: '$text'"
         } else if (compressed && CRC32) {
-            "CompressedCRC32TextWatermark: '$text'"
+            "CompressedCRC32InnamarkTagBuilder: '$text'"
         } else if (sized && CRC32) {
-            "SizedCRC32TextWatermark: '$text'"
+            "SizedCRC32InnamarkTagBuilder: '$text'"
         } else if (CRC32) {
-            "CRC32TextWatermark: '$text'"
+            "CRC32InnamarkTagBuilder: '$text'"
         } else if (compressed && sized) {
-            "CompressedSizedTextWatermark: '$text'"
+            "CompressedSizedInnamarkTagBuilder: '$text'"
         } else if (compressed) {
-            "CompressedTextWatermark: '$text'"
+            "CompressedInnamarkTagBuilder: '$text'"
         } else if (sized) {
-            "SizedTextWatermark: '$text'"
+            "SizedInnamarkTagBuilder: '$text'"
         } else {
-            "TextWatermark: '$text'"
+            "InnamarkTagBuilder: '$text'"
         }
     }
 
@@ -300,29 +300,31 @@ class InnamarkTagBuilder private constructor(
             CRC32 == other.CRC32 && SHA3256 == other.SHA3256
     }
 
-    class DecodeToStringError(val reason: String) : Event.Error("TextWatermark.fromInnamarkTag") {
+    class DecodeToStringError(val reason: String) : Event.Error(
+        "InnamarkTagBuilder.fromInnamarkTag",
+    ) {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Failed to decode bytes to string: $reason."
     }
 
     class UnsupportedInnamarkError(val innamarkTag: String) :
-        Event.Error("TextWatermark.fromInnamarkTag") {
+        Event.Error("InnamarkTagBuilder.fromInnamarkTag") {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
-            "The InnamarkTag type $innamarkTag is not supported by TextWatermark."
+            "The InnamarkTag type $innamarkTag is not supported by InnamarkTagBuilder."
     }
 
-    class FailedTextWatermarkExtractionsWarning(source: String) : Event.Warning(source) {
+    class FailedInnamarkTagBuilderExtractionsWarning(source: String) : Event.Warning(source) {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
-            "Could not extract and convert all watermarks to TextWatermarks"
+            "Could not extract and convert all watermarks to InnamarkTagBuilders"
     }
 }
 
-@JvmName("intoTextWatermarks")
-fun Result<List<InnamarkTag>>.toTextWatermarks(
+@JvmName("intoInnamarkTagBuilders")
+fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
-    source: String = "toTextWatermarks",
+    source: String = "toInnamarkTagBuilders",
 ): Result<List<InnamarkTagBuilder>> {
     val (Innamarks, status) =
         with(this) {
@@ -332,7 +334,7 @@ fun Result<List<InnamarkTag>>.toTextWatermarks(
             value to status
         }
 
-    val textWatermarks =
+    val innamarkTagBuilders =
         Innamarks.mapNotNull { innamarkTag ->
             val innamarkTagBuilder =
                 InnamarkTagBuilder.fromInnamarkTag(
@@ -343,9 +345,9 @@ fun Result<List<InnamarkTag>>.toTextWatermarks(
             innamarkTagBuilder.value
         }
 
-    if (status.isError && textWatermarks.isNotEmpty()) {
+    if (status.isError && innamarkTagBuilders.isNotEmpty()) {
         status.addEvent(
-            InnamarkTagBuilder.FailedTextWatermarkExtractionsWarning(source),
+            InnamarkTagBuilder.FailedInnamarkTagBuilderExtractionsWarning(source),
             overrideSeverity = true,
         )
     }
@@ -353,13 +355,13 @@ fun Result<List<InnamarkTag>>.toTextWatermarks(
     return if (status.isError) {
         status.into()
     } else {
-        status.into(textWatermarks)
+        status.into(innamarkTagBuilders)
     }
 }
 
-fun Result<List<Watermark>>.toTextWatermarks(
+fun Result<List<Watermark>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
-    source: String = "toTextWatermarks",
+    source: String = "toInnamarkTagBuilders",
 ): Result<List<InnamarkTagBuilder>> {
-    return this.toInnamarkTags(source).toTextWatermarks(errorOnInvalidUTF8, source)
+    return this.toInnamarkTags(source).toInnamarkTagBuilders(errorOnInvalidUTF8, source)
 }

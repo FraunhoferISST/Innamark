@@ -27,7 +27,7 @@ import kotlin.test.assertFalse
 import kotlin.test.assertNotNull
 import kotlin.test.assertTrue
 
-class TextWatermarkTest {
+class InnamarkTagBuilderTest {
     private val text = "Lorem Ipsum"
     private val textBytes = text.encodeToByteArray()
 
@@ -363,12 +363,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertFalse(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertFalse(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -384,12 +384,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -405,12 +405,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertTrue(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertTrue(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -426,12 +426,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertFalse(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertTrue(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertFalse(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertTrue(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -447,12 +447,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertTrue(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertTrue(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -468,12 +468,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertFalse(textWatermark.isSized())
-        assertTrue(textWatermark.isCompressed())
-        assertTrue(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertFalse(innamarkTagBuilder.isSized())
+        assertTrue(innamarkTagBuilder.isCompressed())
+        assertTrue(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -489,12 +489,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertTrue(textWatermark.isCompressed())
-        assertTrue(textWatermark.isCRC32())
-        assertFalse(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertTrue(innamarkTagBuilder.isCompressed())
+        assertTrue(innamarkTagBuilder.isCRC32())
+        assertFalse(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -510,12 +510,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertFalse(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertTrue(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertFalse(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertTrue(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -531,12 +531,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertFalse(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertTrue(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertFalse(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertTrue(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -552,12 +552,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertFalse(textWatermark.isSized())
-        assertTrue(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertTrue(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertFalse(innamarkTagBuilder.isSized())
+        assertTrue(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertTrue(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
@@ -573,12 +573,12 @@ class TextWatermarkTest {
 
         // Assert
         assertTrue(innamarkTagBuilderResult.isSuccess)
-        val textWatermark = innamarkTagBuilderResult.value!!
-        assertEquals(text, textWatermark.text)
-        assertTrue(textWatermark.isSized())
-        assertTrue(textWatermark.isCompressed())
-        assertFalse(textWatermark.isCRC32())
-        assertTrue(textWatermark.isSHA3256())
+        val innamarkTagBuilder = innamarkTagBuilderResult.value!!
+        assertEquals(text, innamarkTagBuilder.text)
+        assertTrue(innamarkTagBuilder.isSized())
+        assertTrue(innamarkTagBuilder.isCompressed())
+        assertFalse(innamarkTagBuilder.isCRC32())
+        assertTrue(innamarkTagBuilder.isSHA3256())
         assertNotNull(innamarkTag)
         assertEquals(initialInnamarkTag, innamarkTag)
     }
