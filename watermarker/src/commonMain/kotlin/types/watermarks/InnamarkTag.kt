@@ -89,7 +89,7 @@ sealed interface InnamarkTagInterface {
  * byte of the watermark, which allows parsing unknown types of InnamarkTags. The implemented
  * variants of InnamarkTag allow encoding additional information like the size or a hash into the
  * watermark. For detailed information about the different formats, see
- * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/Innamark.md)
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
  *
  * The constructor expects bytes that represent the given type.
  * To create a new watermark with arbitrary content, the companion function `new` of that type must
@@ -620,6 +620,19 @@ fun Result<List<Watermark>>.toInnamarkTags(
     }
 }
 
+/**
+ * [RawInnamarkTag] represents a watermark with a [TYPE_TAG] of '00000000' and the following
+ * properties:
+ * - none
+ *
+ * The constructor expects bytes that represent a [RawInnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [RawInnamarkTag].
+ */
 @JsExport
 class RawInnamarkTag(content: ByteArray) : InnamarkTag(content) {
     companion object {
@@ -650,6 +663,19 @@ class RawInnamarkTag(content: ByteArray) : InnamarkTag(content) {
     override fun getContent() = Result.success(watermarkContent.drop(TAG_SIZE).toByteArray())
 }
 
+/**
+ * [SizedInnamarkTag] represents a watermark with a [TYPE_TAG] of '00100000' and the following
+ * properties:
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ *
+ * The constructor expects bytes that represent a [SizedInnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [SizedInnamarkTag].
+ */
 @JsExport
 class SizedInnamarkTag(content: ByteArray) : InnamarkTag(content), InnamarkTag.Sized {
     companion object {
@@ -707,6 +733,19 @@ class SizedInnamarkTag(content: ByteArray) : InnamarkTag(content), InnamarkTag.S
     override fun getSizeRange(): IntRange = SIZE_START_INDEX..SIZE_END_INDEX
 }
 
+/**
+ * [CRC32InnamarkTag] represents a watermark with a [TYPE_TAG] of '00010000' and the following
+ * properties:
+ * - 4 byte CRC32 Checksum
+ *
+ * The constructor expects bytes that represent a [CRC32InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CRC32InnamarkTag].
+ */
 @JsExport
 class CRC32InnamarkTag(
     content: ByteArray,
@@ -783,6 +822,20 @@ class CRC32InnamarkTag(
     }
 }
 
+/**
+ * [SizedCRC32InnamarkTag] represents a watermark with a [TYPE_TAG] of '00110000' and the following
+ * properties:
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ * - 4 byte CRC32 Checksum
+ *
+ * The constructor expects bytes that represent a [SizedCRC32InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [SizedCRC32InnamarkTag].
+ */
 @JsExport
 class SizedCRC32InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Checksum {
@@ -860,6 +913,19 @@ class SizedCRC32InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [SHA3256InnamarkTag] represents a watermark with a [TYPE_TAG] of '00001000' and the following
+ * properties:
+ * - 32 byte SHA3-256 Hash
+ *
+ * The constructor expects bytes that represent a [SHA3256InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [SHA3256InnamarkTag].
+ */
 @JsExport
 class SHA3256InnamarkTag(
     content: ByteArray,
@@ -939,6 +1005,20 @@ class SHA3256InnamarkTag(
     }
 }
 
+/**
+ * [SizedSHA3256InnamarkTag] represents a watermark with a [TYPE_TAG] of '00101000' and the
+ * following properties:
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ * - 32 byte SHA3-256 Hash
+ *
+ * The constructor expects bytes that represent a [SizedSHA3256InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [SizedSHA3256InnamarkTag].
+ */
 @JsExport
 class SizedSHA3256InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Hash {
@@ -1018,6 +1098,19 @@ class SizedSHA3256InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [CompressedRawInnamarkTag] represents a watermark with a [TYPE_TAG] of '01000000' and the
+ * following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ *
+ * The constructor expects bytes that represent a [CompressedRawInnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedRawInnamarkTag].
+ */
 @JsExport
 class CompressedRawInnamarkTag(
     content: ByteArray,
@@ -1051,6 +1144,20 @@ class CompressedRawInnamarkTag(
     }
 }
 
+/**
+ * [CompressedSizedInnamarkTag] represents a watermark with a [TYPE_TAG] of '01100000' and the
+ * following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ *
+ * The constructor expects bytes that represent a [CompressedSizedInnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedSizedInnamarkTag].
+ */
 @JsExport
 class CompressedSizedInnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Compressed {
@@ -1095,6 +1202,20 @@ class CompressedSizedInnamarkTag(content: ByteArray) :
         SizedInnamarkTag.SIZE_START_INDEX..SizedInnamarkTag.SIZE_END_INDEX
 }
 
+/**
+ * [CompressedCRC32InnamarkTag] represents a watermark with a [TYPE_TAG] of '01010000' and the
+ * following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ * - 4 byte CRC32 Checksum
+ *
+ * The constructor expects bytes that represent a [CompressedCRC32InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedCRC32InnamarkTag].
+ */
 @JsExport
 class CompressedCRC32InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Checksum {
@@ -1152,6 +1273,21 @@ class CompressedCRC32InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [CompressedSizedCRC32InnamarkTag] represents a watermark with a [TYPE_TAG] of '01110000' and the
+ * following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ * - 4 byte CRC32 Checksum
+ *
+ * The constructor expects bytes that represent a [CompressedSizedCRC32InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedSizedCRC32InnamarkTag].
+ */
 @JsExport
 class CompressedSizedCRC32InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Checksum, InnamarkTag.Compressed {
@@ -1216,6 +1352,20 @@ class CompressedSizedCRC32InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [CompressedSHA3256InnamarkTag] represents a watermark with a [TYPE_TAG] of '01001000' and the
+ * following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ * - 32 byte SHA3-256 Hash
+ *
+ * The constructor expects bytes that represent a [CompressedSHA3256InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedSHA3256InnamarkTag].
+ */
 @JsExport
 class CompressedSHA3256InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Hash {
@@ -1273,6 +1423,21 @@ class CompressedSHA3256InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [CompressedSizedSHA3256InnamarkTag] represents a watermark with a [TYPE_TAG] of '01101000' and
+ * the following properties:
+ * - Compressed content using Deflate (see RFC 1951)
+ * - 4 size bytes (i.e. 32-bit unsigned integer)
+ * - 32 byte SHA3-256 Hash
+ *
+ * The constructor expects bytes that represent a [CompressedSizedSHA3256InnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CompressedSizedSHA3256InnamarkTag].
+ */
 @JsExport
 class CompressedSizedSHA3256InnamarkTag(content: ByteArray) :
     InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Sized, InnamarkTag.Hash {
@@ -1335,6 +1500,19 @@ class CompressedSizedSHA3256InnamarkTag(content: ByteArray) :
     }
 }
 
+/**
+ * [CustomInnamarkTag] represents a watermark with a [TYPE_TAG] of '10000000' and the following
+ * properties:
+ * - Reserved for custom Implementation with features as needed
+ *
+ * The constructor expects bytes that represent a [CustomInnamarkTag].
+ * To create a new watermark with arbitrary content, the companion function `new` must be used.
+ *
+ * for more information on [InnamarkTag] variants, see
+ * [Innamark.md](https://github.com/FraunhoferISST/Innamark/blob/main/docs/docs/04-development/10-watermarker/InnamarkTag.md)
+ *
+ * @param content: expects bytes that represent a [CustomInnamarkTag].
+ */
 @JsExport
 class CustomInnamarkTag(content: ByteArray) : InnamarkTag(content) {
     companion object {
