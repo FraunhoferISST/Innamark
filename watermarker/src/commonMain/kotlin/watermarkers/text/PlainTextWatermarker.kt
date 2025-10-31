@@ -180,7 +180,7 @@ class PlainTextWatermarker(
         }
 
     /**
-     * Adds a watermark created from [watermark] String to [cover]
+     * Adds a watermark created from [watermark] ByteArray to [cover]
      *
      * Returns a [OversizedWatermarkWarning] if the watermark does not fit at least a single time into the cover.
      * Returns a [ContainsAlphabetCharsError] if the cover contains a character from the transcoding alphabet.
@@ -240,7 +240,7 @@ class PlainTextWatermarker(
     }
 
     /**
-     * Adds a watermark created from [watermark] ByteArray to [cover]
+     * Adds a watermark created from [watermark] String to [cover]
      *
      * Returns a [OversizedWatermarkWarning] if the watermark does not fit at least a single time into the cover.
      * Returns a [ContainsAlphabetCharsError] if the cover contains a character from the transcoding alphabet.
