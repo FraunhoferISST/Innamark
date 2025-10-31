@@ -62,13 +62,15 @@ for more details).*
 (see [Watermarker](../#extraction-customization) for more details)*
 
 ```java title="src/main/java/Main.java" showLineNumbers
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result;
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Status;
-import de.fraunhofer.isst.innamark.watermarker.textWatermarkers.PlainTextWatermarker;
-import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark;
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result;
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Status;
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag;
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker;
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -123,6 +125,7 @@ public class Main {
         String secondWatermarkedText = unwrap(watermarker.addWatermark(coverText, secondWatermarkText));
 
         // combining the watermarked texts to get two different watermarks in one Text
+        // note that a corrupt Watermark can be present at the "stitch line" of the input cover texts
         String combinedText = watermarkedText + secondWatermarkedText;
 
         // extract the watermarks from the watermarked text
@@ -132,13 +135,31 @@ public class Main {
 
         // convert Watermark Bytes to Strings
         List<String> extractedMultipleText = new ArrayList<>();
-        extractedMultipleWatermarks.forEach(
-                watermark -> extractedMultipleText.add(
-                        new String(watermark.getWatermarkContent(), StandardCharsets.UTF_8)));
+        for (Watermark extracted : extractedMultipleWatermarks) {
+            // strip the first (TAG) byte from the extracted Watermarks if they are valid InnamarkTags
+            if (InnamarkTag.parse(extracted.getWatermarkContent()).isSuccess()) {
+                byte[] watermarkBytes = extracted.getWatermarkContent();
+                extractedMultipleText.add(
+                        "InnamarkTag found: "+
+                                new String(
+                                        Arrays.copyOfRange(watermarkBytes, 1, watermarkBytes.length),
+                                        StandardCharsets.UTF_8
+                                )
+                );
+            } else {
+                extractedMultipleText.add(
+                        "Watermark found: "+
+                                new String(
+                                        extracted.getWatermarkContent(),
+                                        StandardCharsets.UTF_8
+                                )
+                );
+            }
+        }
 
         // print the watermarks found
         for (String content : extractedMultipleText) {
-            System.out.println("Watermark found: " + content);
+            System.out.println(content);
         }
 
     }

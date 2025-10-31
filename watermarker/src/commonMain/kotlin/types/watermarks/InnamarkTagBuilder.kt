@@ -1,0 +1,367 @@
+/*
+ * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ *
+ * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+ * that can be found in the LICENSE file.
+ */
+
+package de.fraunhofer.isst.innamark.watermarker.types.watermarks
+
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import kotlin.js.JsExport
+import kotlin.jvm.JvmName
+import kotlin.jvm.JvmStatic
+
+/**
+ * The InnamarkTagBuilder class provides convenient functions to create and read InnamarkTags with UTF-8
+ * text as content.
+ *
+ * InnamarkTagBuilder can be instantiated using the companion functions. The functions `new`, `raw`,
+ * `compressed`, `sized`, `CRC32`, `SHA3256`, `compressedSized`, `compressedCRC32`,
+ * `compressedSHA3256`, `sizedCRC32`, `sizedSHA3256`, `compressedSizedCRC32` and
+ * `compressedSizedSHA3256` allows creation of a new InnamarkTagBuilder from a String and specifying
+ * the format of the produced InnamarkTag.
+ *
+ * The function `fromInnamarkTag` allows parsing a supported InnamarkTag into a InnamarkTagBuilder,
+ * giving direct access to the contained text without having to consider the format of the
+ * InnamarkTag.
+ *
+ * Sized InnamarkTagBuilders will create InnamarkTags that encode the size of the InnamarkTag into the
+ * watermark.
+ *
+ * CRC32 InnamarkTagBuilders will create InnamarkTags that encode a CRC32 checksum into the watermark.
+ *
+ * SHA3256 InnamarkTagBuilders will create InnamarkTags that encode a SHA3256 hash into the watermark.
+ *
+ * Compressed InnamarkTagBuilders will compress the Text using a compression algorithm. This can be
+ * useful when the watermark text is very long, but it might reduce the watermark robustness.
+ *
+ */
+@JsExport
+class InnamarkTagBuilder private constructor(
+    var text: String,
+    private var compressed: Boolean = false,
+    private var sized: Boolean = false,
+    private var CRC32: Boolean = false,
+    private var SHA3256: Boolean = false,
+) {
+    companion object {
+        /**
+         * Creates a InnamarkTagBuilder in default configuration.
+         *
+         * The default configuration is: no compression, no size information, no checksum, no hash.
+         */
+        @JvmName("create")
+        @JvmStatic
+        fun new(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text)
+
+        /** Creates a InnamarkTagBuilder from [text] without additional information */
+        @JvmStatic
+        fun raw(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression */
+        @JvmStatic
+        fun compressed(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression only if compression decreases the size */
+        @JvmStatic
+        fun small(text: String): InnamarkTagBuilder {
+            val raw = raw(text)
+            val rawSize = raw.finish().watermarkContent.size
+            val compressed = compressed(text)
+            val compressedSize = compressed.finish().watermarkContent.size
+
+            return if (rawSize < compressedSize) {
+                raw
+            } else {
+                compressed
+            }
+        }
+
+        /** Creates a InnamarkTagBuilder from [text] with size information */
+        @JvmStatic
+        fun sized(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, sized = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with CRC32 checksum */
+        @Suppress("ktlint:standard:function-naming")
+        @JvmStatic
+        fun CRC32(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, CRC32 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with SHA3256 hash */
+        @Suppress("ktlint:standard:function-naming")
+        @JvmStatic
+        fun SHA3256(text: String): InnamarkTagBuilder = InnamarkTagBuilder(text, SHA3256 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with size information and compression */
+        @JvmStatic
+        fun compressedSized(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true, sized = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression and CRC32 checksum */
+        @JvmStatic
+        fun compressedCRC32(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true, CRC32 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression and SHA3256 hash */
+        @JvmStatic
+        fun compressedSHA3256(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true, SHA3256 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with size information and CRC32 checksum */
+        @JvmStatic
+        fun sizedCRC32(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, sized = true, CRC32 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with size information and SHA3256 hash */
+        @JvmStatic
+        fun sizedSHA3256(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, sized = true, SHA3256 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression, size information and CRC32 checksum */
+        @JvmStatic
+        fun compressedSizedCRC32(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true, sized = true, CRC32 = true)
+
+        /** Creates a InnamarkTagBuilder from [text] with compression, size information and SHA3256 hash */
+        @JvmStatic
+        fun compressedSizedSHA3256(text: String): InnamarkTagBuilder =
+            InnamarkTagBuilder(text, compressed = true, sized = true, SHA3256 = true)
+
+        /**
+         * Creates a InnamarkTagBuilder from [innamarkTag].
+         * Sets sized, compressed, CRC32 and SHA3256 depending on the variant of [innamarkTag].
+         *
+         * When [errorOnInvalidUTF8] is true: invalid bytes sequences cause an error.
+         *                           is false: invalid bytes sequences are replace with the char �.
+         * Returns an error when [innamarkTag] contains an unsupported variant.
+         */
+        @JvmStatic
+        fun fromInnamarkTag(
+            innamarkTag: InnamarkTag,
+            errorOnInvalidUTF8: Boolean = false,
+        ): Result<InnamarkTagBuilder> {
+            val (content, status) =
+                with(innamarkTag.getContent()) {
+                    if (!hasValue) return status.into<_>()
+                    value!! to status
+                }
+            val text =
+                try {
+                    content
+                        .decodeToString(throwOnInvalidSequence = errorOnInvalidUTF8)
+                } catch (e: Exception) {
+                    status.addEvent(DecodeToStringError(e.message ?: e.stackTraceToString()))
+                    return status.into()
+                }
+
+            val innamarkTagBuilder =
+                when (innamarkTag) {
+                    is RawInnamarkTag -> InnamarkTagBuilder(text)
+                    is SizedInnamarkTag -> InnamarkTagBuilder(text, sized = true)
+                    is CompressedRawInnamarkTag -> InnamarkTagBuilder(text, compressed = true)
+                    is CompressedSizedInnamarkTag ->
+                        InnamarkTagBuilder(text, compressed = true, sized = true)
+
+                    is CRC32InnamarkTag -> InnamarkTagBuilder(text, CRC32 = true)
+                    is SizedCRC32InnamarkTag -> InnamarkTagBuilder(text, sized = true, CRC32 = true)
+                    is CompressedCRC32InnamarkTag ->
+                        InnamarkTagBuilder(text, compressed = true, CRC32 = true)
+                    is CompressedSizedCRC32InnamarkTag ->
+                        InnamarkTagBuilder(text, compressed = true, sized = true, CRC32 = true)
+                    is SHA3256InnamarkTag -> InnamarkTagBuilder(text, SHA3256 = true)
+                    is SizedSHA3256InnamarkTag ->
+                        InnamarkTagBuilder(
+                            text,
+                            sized = true,
+                            SHA3256 = true,
+                        )
+                    is CompressedSHA3256InnamarkTag ->
+                        InnamarkTagBuilder(text, compressed = true, SHA3256 = true)
+                    is CompressedSizedSHA3256InnamarkTag ->
+                        InnamarkTagBuilder(text, compressed = true, sized = true, SHA3256 = true)
+                    else -> {
+                        status.addEvent(UnsupportedInnamarkError(innamarkTag.getSource()))
+                        return status.into<_>()
+                    }
+                }
+
+            return status.into(innamarkTagBuilder)
+        }
+    }
+
+    /** sets compressed to [active] */
+    fun compressed(active: Boolean = true) {
+        compressed = active
+    }
+
+    /** true if compression is activated */
+    fun isCompressed(): Boolean = compressed
+
+    /** sets sized to [active] */
+    fun sized(active: Boolean = true) {
+        sized = active
+    }
+
+    /** true if size information is added to the InnamarkTag */
+    fun isSized(): Boolean = sized
+
+    /** sets CRC32 to [active] */
+    @Suppress("ktlint:standard:function-naming")
+    fun CRC32(active: Boolean = true) {
+        CRC32 = active
+    }
+
+    /** true if checksum information is added to the InnamarkTag */
+    fun isCRC32(): Boolean = CRC32
+
+    /** sets SHA3256 to [active] */
+    @Suppress("ktlint:standard:function-naming")
+    fun SHA3256(active: Boolean = true) {
+        SHA3256 = active
+    }
+
+    /** true if hash information is added to the InnamarkTag */
+    fun isSHA3256(): Boolean = SHA3256
+
+    /**
+     * Generates a InnamarkTag with [text] as content.
+     *
+     * The used variant of InnamarkTag depends on:
+     *  - [compressed]
+     *  - [sized]
+     *  - [CRC32]
+     *  - [SHA3256].
+     */
+    fun finish(): InnamarkTag {
+        val content = text.encodeToByteArray()
+
+        return if (compressed && sized && SHA3256) {
+            CompressedSizedSHA3256InnamarkTag.new(content)
+        } else if (compressed && SHA3256) {
+            CompressedSHA3256InnamarkTag.new(content)
+        } else if (sized && SHA3256) {
+            SizedSHA3256InnamarkTag.new(content)
+        } else if (SHA3256) {
+            SHA3256InnamarkTag.new(content)
+        } else if (compressed && sized && CRC32) {
+            CompressedSizedCRC32InnamarkTag.new(content)
+        } else if (compressed && CRC32) {
+            CompressedCRC32InnamarkTag.new(content)
+        } else if (sized && CRC32) {
+            SizedCRC32InnamarkTag.new(content)
+        } else if (CRC32) {
+            CRC32InnamarkTag.new(content)
+        } else if (compressed && sized) {
+            CompressedSizedInnamarkTag.new(content)
+        } else if (compressed) {
+            CompressedRawInnamarkTag.new(content)
+        } else if (sized) {
+            SizedInnamarkTag.new(content)
+        } else {
+            RawInnamarkTag.new(content)
+        }
+    }
+
+    /** Contains the used InnamarkTag variant followed by [text] */
+    override fun toString(): String {
+        return if (compressed && sized && SHA3256) {
+            "CompressedSizedSHA3256InnamarkTagBuilder: '$text'"
+        } else if (compressed && SHA3256) {
+            "CompressedSHA3256InnamarkTagBuilder: '$text'"
+        } else if (sized && SHA3256) {
+            "SizedSHA3256InnamarkTagBuilder: '$text'"
+        } else if (SHA3256) {
+            "SHA3256InnamarkTagBuilder: '$text'"
+        } else if (compressed && sized && CRC32) {
+            "CompressedSizedCRC32InnamarkTagBuilder: '$text'"
+        } else if (compressed && CRC32) {
+            "CompressedCRC32InnamarkTagBuilder: '$text'"
+        } else if (sized && CRC32) {
+            "SizedCRC32InnamarkTagBuilder: '$text'"
+        } else if (CRC32) {
+            "CRC32InnamarkTagBuilder: '$text'"
+        } else if (compressed && sized) {
+            "CompressedSizedInnamarkTagBuilder: '$text'"
+        } else if (compressed) {
+            "CompressedInnamarkTagBuilder: '$text'"
+        } else if (sized) {
+            "SizedInnamarkTagBuilder: '$text'"
+        } else {
+            "InnamarkTagBuilder: '$text'"
+        }
+    }
+
+    /** Returns true if [this].finish() and [other].finish() produce an equal InnamarkTag */
+    override fun equals(other: Any?): Boolean {
+        if (other !is InnamarkTagBuilder) return false
+        return text == other.text && compressed == other.compressed && sized == other.sized &&
+            CRC32 == other.CRC32 && SHA3256 == other.SHA3256
+    }
+
+    class DecodeToStringError(val reason: String) : Event.Error(
+        "InnamarkTagBuilder.fromInnamarkTag",
+    ) {
+        /** Returns a String explaining the event */
+        override fun getMessage(): String = "Failed to decode bytes to string: $reason."
+    }
+
+    class UnsupportedInnamarkError(val innamarkTag: String) :
+        Event.Error("InnamarkTagBuilder.fromInnamarkTag") {
+        /** Returns a String explaining the event */
+        override fun getMessage(): String =
+            "The InnamarkTag type $innamarkTag is not supported by InnamarkTagBuilder."
+    }
+
+    class FailedInnamarkTagBuilderExtractionsWarning(source: String) : Event.Warning(source) {
+        /** Returns a String explaining the event */
+        override fun getMessage(): String =
+            "Could not extract and convert all watermarks to InnamarkTagBuilders"
+    }
+}
+
+@JvmName("intoInnamarkTagBuilders")
+fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
+    errorOnInvalidUTF8: Boolean = false,
+    source: String = "toInnamarkTagBuilders",
+): Result<List<InnamarkTagBuilder>> {
+    val (Innamarks, status) =
+        with(this) {
+            if (value == null) {
+                return status.into()
+            }
+            value to status
+        }
+
+    val innamarkTagBuilders =
+        Innamarks.mapNotNull { innamarkTag ->
+            val innamarkTagBuilder =
+                InnamarkTagBuilder.fromInnamarkTag(
+                    innamarkTag,
+                    errorOnInvalidUTF8,
+                )
+            status.appendStatus(innamarkTagBuilder.status)
+            innamarkTagBuilder.value
+        }
+
+    if (status.isError && innamarkTagBuilders.isNotEmpty()) {
+        status.addEvent(
+            InnamarkTagBuilder.FailedInnamarkTagBuilderExtractionsWarning(source),
+            overrideSeverity = true,
+        )
+    }
+
+    return if (status.isError) {
+        status.into()
+    } else {
+        status.into(innamarkTagBuilders)
+    }
+}
+
+fun Result<List<Watermark>>.toInnamarkTagBuilders(
+    errorOnInvalidUTF8: Boolean = false,
+    source: String = "toInnamarkTagBuilders",
+): Result<List<InnamarkTagBuilder>> {
+    return this.toInnamarkTags(source).toInnamarkTagBuilders(errorOnInvalidUTF8, source)
+}
