@@ -157,9 +157,17 @@ fun add(
     val status = Status.success()
 
     if (sourceType.equals("text", ignoreCase = true)) {
-        status.appendStatus(textFileWatermarker.addWatermark(source, realTarget, watermark))
+        status.appendStatus(textFileWatermarker.addWatermark(
+            source,
+            realTarget,
+            watermark,
+            fileType = "txt"))
     } else if (sourceType.equals("zip", ignoreCase = true)) {
-        status.appendStatus(zipFileWatermarker.addWatermark(source, realTarget, watermark))
+        status.appendStatus(zipFileWatermarker.addWatermark(
+            source,
+            realTarget,
+            watermark,
+            fileType = "zip"))
     } else {
         status.appendStatus(SupportedFileType.NoFileTypeError(source).into())
     }
@@ -186,14 +194,14 @@ fun list(
         if (sourceType.equals("text", ignoreCase = true)) {
             textFileWatermarker.getWatermarks(
                 source,
-                fileType,
+                fileType = "txt",
                 squash = !verbose,
                 singleWatermark = false,
             )
         } else if (sourceType.equals("zip", ignoreCase = true)) {
             zipFileWatermarker.getWatermarks(
                 source,
-                fileType,
+                fileType = "zip",
                 squash = !verbose,
                 singleWatermark = false,
             )
@@ -227,9 +235,9 @@ fun remove(
 
     val status =
         if (sourceType.equals("text", ignoreCase = true)) {
-            textFileWatermarker.removeWatermarks(source, realTarget)
+            textFileWatermarker.removeWatermarks(source, realTarget, fileType = "txt")
         } else if (sourceType.equals("zip", ignoreCase = true)) {
-            zipFileWatermarker.removeWatermarks(source, realTarget)
+            zipFileWatermarker.removeWatermarks(source, realTarget, fileType = "zip")
         } else {
             SupportedFileType.NoFileTypeError(source).into()
         }
