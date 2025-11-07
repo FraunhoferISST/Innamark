@@ -574,12 +574,12 @@ class PlainTextWatermarker(
     ) : Event.Success() {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
-            "Added complete Watermark ${if (incomplete) {
-                startPositions.size - 1
+            if (incomplete) {
+                "Added complete Watermark ${startPositions.size - 1} times and incomplete " +
+                    "Watermark once. Positions: $startPositions."
             } else {
-                startPositions.size
+                "Added Watermark ${startPositions.size} times. Positions: $startPositions."
             }
-            } times. Starting positions: $startPositions."
     }
 
     class AlphabetContainsSeparatorError(val chars: List<Char>) : Event.Error(SOURCE) {
