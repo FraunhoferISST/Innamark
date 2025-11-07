@@ -180,7 +180,7 @@ class PlainTextWatermarker(
         }
 
     /**
-     * Adds a watermark created from [watermark] String to [cover]
+     * Adds a watermark created from [watermark] ByteArray to [cover]
      *
      * Returns a [OversizedWatermarkWarning] if the watermark does not fit at least a single time into the cover.
      * Returns a [ContainsAlphabetCharsError] if the cover contains a character from the transcoding alphabet.
@@ -217,8 +217,21 @@ class PlainTextWatermarker(
         val startPositions = ArrayList<Int>()
 
         val result = StringBuilder()
+        var incomplete = false
         var lastPosition = 0
         for (positions in positionChunks) {
+            when (separatorStrategy) {
+                is SeparatorStrategy.SkipInsertPosition -> {
+                    if (positions.size != separatedWatermark.count() + 1) {
+                        incomplete = true
+                    }
+                }
+                else -> {
+                    if (positions.size != separatedWatermark.count()) {
+                        incomplete = true
+                    }
+                }
+            }
             startPositions.add(positions.first())
             for ((position, char) in positions.asSequence().zip(separatedWatermark)) {
                 result.append(cover.substring(lastPosition, position))
@@ -236,11 +249,11 @@ class PlainTextWatermarker(
             ).into(result.toString())
         }
 
-        return Success(startPositions).into(result.toString())
+        return Success(startPositions, incomplete).into(result.toString())
     }
 
     /**
-     * Adds a watermark created from [watermark] ByteArray to [cover]
+     * Adds a watermark created from [watermark] String to [cover]
      *
      * Returns a [OversizedWatermarkWarning] if the watermark does not fit at least a single time into the cover.
      * Returns a [ContainsAlphabetCharsError] if the cover contains a character from the transcoding alphabet.
@@ -555,10 +568,18 @@ class PlainTextWatermarker(
         }
     }
 
-    class Success(val startPositions: List<Int>) : Event.Success() {
+    class Success(
+        val startPositions: List<Int>,
+        val incomplete: Boolean = false,
+    ) : Event.Success() {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
-            "Added Watermark ${startPositions.size} times. Positions: $startPositions."
+            if (incomplete) {
+                "Added complete Watermark ${startPositions.size - 1} times and incomplete " +
+                    "Watermark once. Positions: $startPositions."
+            } else {
+                "Added Watermark ${startPositions.size} times. Positions: $startPositions."
+            }
     }
 
     class AlphabetContainsSeparatorError(val chars: List<Char>) : Event.Error(SOURCE) {

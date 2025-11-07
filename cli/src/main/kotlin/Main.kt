@@ -1,15 +1,20 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
 
-import de.fraunhofer.isst.innamark.watermarker.JvmWatermarker
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Event
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Status
-import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.RawInnamarkTag
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.utils.SupportedFileType
+import de.fraunhofer.isst.innamark.watermarker.utils.getFileType
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.TextFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.file.ZipFileWatermarker
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
 import kotlinx.cli.ArgParser
 import kotlinx.cli.ArgType
 import kotlinx.cli.ExperimentalCli
@@ -19,7 +24,9 @@ import kotlinx.cli.optional
 import kotlin.math.min
 import kotlin.system.exitProcess
 
-val watermarker = JvmWatermarker()
+val watermarker = PlainTextWatermarker()
+val textFileWatermarker = TextFileWatermarker()
+val zipFileWatermarker = ZipFileWatermarker
 
 fun main(args: Array<String>) {
     if (args.isEmpty()) {
@@ -30,8 +37,8 @@ fun main(args: Array<String>) {
 }
 
 /**
- * Parses the CLI arguments and calls the corresponding functions
- * Prints usage information if the CLI arguments cannot be parsed
+ * Parses the CLI arguments and calls the corresponding functions.
+ * Prints usage information if the CLI arguments cannot be parsed.
  */
 @OptIn(ExperimentalCli::class)
 fun cli(args: Array<String>) {
@@ -135,8 +142,8 @@ fun cli(args: Array<String>) {
 }
 
 /**
- * Adds a watermark containing [message] to file [source]
- * Changes are written to [target] or [source] if target is null
+ * Adds a watermark containing [message] to file at [source] by wrapping it in a [RawInnamarkTag].
+ * Changes are written to [target] or [source] if target is null.
  */
 fun add(
     message: String,
@@ -145,39 +152,84 @@ fun add(
     fileType: String?,
 ) {
     val realTarget = target ?: source
+    val sourceType = determineType(source, fileType)
+    val watermark = RawInnamarkTag.fromString(message)
+    val status = Status.success()
 
-    val watermark = Watermark.fromString(message)
+    if (sourceType.equals("text", ignoreCase = true)) {
+        status.appendStatus(
+            textFileWatermarker.addWatermark(
+                source,
+                realTarget,
+                watermark,
+                fileType = "txt",
+            ),
+        )
+    } else if (sourceType.equals("zip", ignoreCase = true)) {
+        status.appendStatus(
+            zipFileWatermarker.addWatermark(
+                source,
+                realTarget,
+                watermark,
+                fileType = "zip",
+            ),
+        )
+    } else {
+        status.appendStatus(SupportedFileType.NoFileTypeError(source).into())
+    }
 
-    watermarker
-        .addWatermark(source, realTarget, watermark, fileType)
-        .handle()
+    status.handle()
 
     println()
     println("Added watermark to ${getTargetHint(source, target)}")
 }
 
 /**
- * Prints a list of all watermarks in [source]
+ * Prints a list of all watermarks in the file at [source].
  *
- * Uses watermark squashing when [verbose] is true
+ * Uses watermark squashing when [verbose] is false.
  */
 fun list(
     source: String,
     fileType: String?,
     verbose: Boolean,
 ) {
-    val watermarks = watermarker.getWatermarks(source, fileType, !verbose).unwrap()
+    val sourceType = determineType(source, fileType)
+
+    val watermarks: Result<List<Watermark>> =
+        if (sourceType.equals("text", ignoreCase = true)) {
+            textFileWatermarker.getWatermarks(
+                source,
+                fileType = "txt",
+                squash = !verbose,
+                singleWatermark = false,
+            )
+        } else if (sourceType.equals("zip", ignoreCase = true)) {
+            zipFileWatermarker.getWatermarks(
+                source,
+                fileType = "zip",
+                squash = !verbose,
+                singleWatermark = false,
+            )
+        } else {
+            Result(
+                SupportedFileType.NoFileTypeError(source).into(),
+                listOf(Watermark.fromString("placeholder")),
+            )
+        }
+
+    val realWatermarks = watermarks.unwrap()
 
     println()
-    println("Found ${watermarks.size} watermark(s) in '$source':")
-    printWatermarks(watermarks)
+    println("Found ${realWatermarks.size} watermark(s) in '$source':")
+    printWatermarks(realWatermarks)
 }
 
 /**
- * Removes all watermarks from [source] and prints them
- * Changes are written to [target] or [source] if target is null
+ * Removes all watermarks from [source].
+ * Changes are written to [target] or [source] if target is null.
  *
- * Handles the Results of parsing, removing and writing
+ * Handles the Results of parsing, removing and writing.
  */
 fun remove(
     source: String,
@@ -185,45 +237,53 @@ fun remove(
     fileType: String?,
 ) {
     val realTarget = target ?: source
+    val sourceType = determineType(source, fileType)
 
-    val removedWatermarks = watermarker.removeWatermarks(source, realTarget, fileType).unwrap()
+    val status =
+        if (sourceType.equals("text", ignoreCase = true)) {
+            textFileWatermarker.removeWatermarks(source, realTarget, fileType = "txt")
+        } else if (sourceType.equals("zip", ignoreCase = true)) {
+            zipFileWatermarker.removeWatermarks(source, realTarget, fileType = "zip")
+        } else {
+            SupportedFileType.NoFileTypeError(source).into()
+        }
+
+    status.handle()
 
     println()
-    println("Removed ${removedWatermarks.size} watermark(s) from ${getTargetHint(source, target)}:")
-    printWatermarks(removedWatermarks)
+    println("Removed all watermarks from ${getTargetHint(source, target)}:")
 }
 
-/** Adds a watermark containing [message] to [text] and prints the resulting string */
+/** Adds a watermark containing [message] to [text] and prints the resulting string. */
 fun textAdd(
     text: String,
     message: String,
 ) {
-    val watermarkedText =
-        watermarker.textAddWatermark(text, message.encodeToByteArray())
+    val watermarkedText = watermarker.addWatermark(text, message).unwrap()
     println("-- Watermarked Text " + "-".repeat(60))
     println(watermarkedText)
     println("-".repeat(80))
 }
 
 /**
- * Prints a list of all watermarks in [text]
+ * Prints a list of all watermarks in [text].
  *
- * Uses watermark squashing when [verbose] is true
+ * Uses watermark squashing when [verbose] is false.
  */
 fun textList(
     text: String,
     verbose: Boolean,
 ) {
-    val watermarks = watermarker.textGetWatermarks(text, !verbose).unwrap()
+    val watermarks = watermarker.getWatermarks(text, !verbose, false).unwrap()
     println()
     println("Found ${watermarks.size} watermark(s):")
     printWatermarks(watermarks)
 }
 
-/** Removes all watermarks from [text] and prints the resulting string */
+/** Removes all watermarks from [text] and prints the resulting string. */
 fun textRemove(text: String) {
-    if (watermarker.textContainsWatermark(text)) {
-        val cleaned = watermarker.textRemoveWatermarks(text).unwrap()
+    if (watermarker.containsWatermark(text)) {
+        val cleaned = watermarker.removeWatermarks(text).unwrap()
         println("-- Cleaned Text " + "-".repeat(60))
         println(cleaned)
         println("-".repeat(80))
@@ -247,7 +307,7 @@ fun getTargetHint(
         source
     }
 
-/** Prints each watermark in [watermarks] with a separator between each one */
+/** Prints each watermark in [watermarks] with a separator between each one. */
 fun printWatermarks(watermarks: List<Watermark>) {
     val indexStringLen = min(watermarks.size.toString().length, 70)
 
@@ -260,7 +320,7 @@ fun printWatermarks(watermarks: List<Watermark>) {
     if (watermarks.isNotEmpty()) println("-".repeat(80))
 }
 
-/** Prints each event to STDOUT or STDERR using the toString Method if type is not SUCCESS */
+/** Prints each event to STDOUT or STDERR using the toString Method if type is not SUCCESS. */
 fun Status.print() {
     if (this.getEvents().isEmpty()) {
         when {
@@ -280,10 +340,13 @@ fun Status.print() {
 
 /**
  * Handles a status depending on its variant:
+ *
  * Variant Error:
  *  - print error and exit with code -1
+ *
  * Variant Warning:
  *  - print warning
+ *
  * Variant Success:
  *  - nop
  */
@@ -301,11 +364,14 @@ fun Status.handle() {
 
 /**
  * Unwraps a Result depending on its variant:
+ *
  * Variant Error:
  *  - print error and exit with code -1
+ *
  * Variant Warning:
  *  - print warning
  *  - return non-null value
+ *
  * Variant Success:
  *  - return non-null value
  */
@@ -316,4 +382,23 @@ fun <T> Result<T>.unwrap(): T {
     }
 
     return value!!
+}
+
+/**
+ * Determines the file Type (as a String) from [fileType] if not null, else from the [source] path.
+ */
+private fun determineType(
+    source: String,
+    fileType: String?,
+): String {
+    return if (fileType != null) {
+        fileType
+    } else {
+        val type = SupportedFileType.getFileType(source, null)
+        when (type.value) {
+            SupportedFileType.Text -> "Text"
+            SupportedFileType.Zip -> "Zip"
+            else -> "Unknown"
+        }
+    }
 }
