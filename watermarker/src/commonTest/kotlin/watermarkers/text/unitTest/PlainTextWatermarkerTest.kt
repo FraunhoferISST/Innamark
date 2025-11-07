@@ -736,10 +736,23 @@ class PlainTextWatermarkerTest {
     }
 
     @Test
-    fun success_string_success() {
+    fun success_stringComplete_success() {
         // Arrange
-        val error = PlainTextWatermarker.Success(listOf(1, 2, 3))
-        val expected = "Success: Added Watermark 3 times. Positions: [1, 2, 3]."
+        val error = PlainTextWatermarker.Success(listOf(1, 2, 3), incomplete = false)
+        val expected = "Success: Added complete Watermark 3 times. Starting positions: [1, 2, 3]."
+
+        // Act
+        val result = error.toString()
+
+        // Assert
+        assertEquals(expected, result)
+    }
+
+    @Test
+    fun success_stringIncomplete_success() {
+        // Arrange
+        val error = PlainTextWatermarker.Success(listOf(1, 2, 3), incomplete = true)
+        val expected = "Success: Added complete Watermark 2 times. Starting positions: [1, 2, 3]."
 
         // Act
         val result = error.toString()

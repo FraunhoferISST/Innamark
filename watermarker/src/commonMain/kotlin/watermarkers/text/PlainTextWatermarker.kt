@@ -217,8 +217,21 @@ class PlainTextWatermarker(
         val startPositions = ArrayList<Int>()
 
         val result = StringBuilder()
+        var incomplete = false
         var lastPosition = 0
         for (positions in positionChunks) {
+            when (separatorStrategy) {
+                is SeparatorStrategy.SkipInsertPosition -> {
+                    if (positions.size != separatedWatermark.count() + 1) {
+                        incomplete = true
+                    }
+                }
+                else -> {
+                    if (positions.size != separatedWatermark.count()) {
+                        incomplete = true
+                    }
+                }
+            }
             startPositions.add(positions.first())
             for ((position, char) in positions.asSequence().zip(separatedWatermark)) {
                 result.append(cover.substring(lastPosition, position))
@@ -236,7 +249,7 @@ class PlainTextWatermarker(
             ).into(result.toString())
         }
 
-        return Success(startPositions).into(result.toString())
+        return Success(startPositions, incomplete).into(result.toString())
     }
 
     /**
@@ -555,10 +568,18 @@ class PlainTextWatermarker(
         }
     }
 
-    class Success(val startPositions: List<Int>) : Event.Success() {
+    class Success(
+        val startPositions: List<Int>,
+        val incomplete: Boolean = false,
+    ) : Event.Success() {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
-            "Added Watermark ${startPositions.size} times. Positions: $startPositions."
+            "Added complete Watermark ${if (incomplete) {
+                startPositions.size - 1
+            } else {
+                startPositions.size
+            }
+            } times. Starting positions: $startPositions."
     }
 
     class AlphabetContainsSeparatorError(val chars: List<Char>) : Event.Error(SOURCE) {
