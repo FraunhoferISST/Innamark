@@ -157,17 +157,23 @@ fun add(
     val status = Status.success()
 
     if (sourceType.equals("text", ignoreCase = true)) {
-        status.appendStatus(textFileWatermarker.addWatermark(
-            source,
-            realTarget,
-            watermark,
-            fileType = "txt"))
+        status.appendStatus(
+            textFileWatermarker.addWatermark(
+                source,
+                realTarget,
+                watermark,
+                fileType = "txt",
+            ),
+        )
     } else if (sourceType.equals("zip", ignoreCase = true)) {
-        status.appendStatus(zipFileWatermarker.addWatermark(
-            source,
-            realTarget,
-            watermark,
-            fileType = "zip"))
+        status.appendStatus(
+            zipFileWatermarker.addWatermark(
+                source,
+                realTarget,
+                watermark,
+                fileType = "zip",
+            ),
+        )
     } else {
         status.appendStatus(SupportedFileType.NoFileTypeError(source).into())
     }
