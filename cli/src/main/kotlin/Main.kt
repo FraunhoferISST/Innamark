@@ -37,8 +37,8 @@ fun main(args: Array<String>) {
 }
 
 /**
- * Parses the CLI arguments and calls the corresponding functions
- * Prints usage information if the CLI arguments cannot be parsed
+ * Parses the CLI arguments and calls the corresponding functions.
+ * Prints usage information if the CLI arguments cannot be parsed.
  */
 @OptIn(ExperimentalCli::class)
 fun cli(args: Array<String>) {
@@ -142,8 +142,8 @@ fun cli(args: Array<String>) {
 }
 
 /**
- * Adds a watermark containing [message] to file [source]
- * Changes are written to [target] or [source] if target is null
+ * Adds a watermark containing [message] to file at [source] by wrapping it in a [RawInnamarkTag].
+ * Changes are written to [target] or [source] if target is null.
  */
 fun add(
     message: String,
@@ -171,9 +171,9 @@ fun add(
 }
 
 /**
- * Prints a list of all watermarks in [source]
+ * Prints a list of all watermarks in the file at [source].
  *
- * Uses watermark squashing when [verbose] is false
+ * Uses watermark squashing when [verbose] is false.
  */
 fun list(
     source: String,
@@ -212,10 +212,10 @@ fun list(
 }
 
 /**
- * Removes all watermarks from [source] and prints them
- * Changes are written to [target] or [source] if target is null
+ * Removes all watermarks from [source].
+ * Changes are written to [target] or [source] if target is null.
  *
- * Handles the Results of parsing, removing and writing
+ * Handles the Results of parsing, removing and writing.
  */
 fun remove(
     source: String,
@@ -240,7 +240,7 @@ fun remove(
     println("Removed all watermarks from ${getTargetHint(source, target)}:")
 }
 
-/** Adds a watermark containing [message] to [text] and prints the resulting string */
+/** Adds a watermark containing [message] to [text] and prints the resulting string. */
 fun textAdd(
     text: String,
     message: String,
@@ -252,9 +252,9 @@ fun textAdd(
 }
 
 /**
- * Prints a list of all watermarks in [text]
+ * Prints a list of all watermarks in [text].
  *
- * Uses watermark squashing when [verbose] is false
+ * Uses watermark squashing when [verbose] is false.
  */
 fun textList(
     text: String,
@@ -266,7 +266,7 @@ fun textList(
     printWatermarks(watermarks)
 }
 
-/** Removes all watermarks from [text] and prints the resulting string */
+/** Removes all watermarks from [text] and prints the resulting string. */
 fun textRemove(text: String) {
     if (watermarker.containsWatermark(text)) {
         val cleaned = watermarker.removeWatermarks(text).unwrap()
@@ -293,7 +293,7 @@ fun getTargetHint(
         source
     }
 
-/** Prints each watermark in [watermarks] with a separator between each one */
+/** Prints each watermark in [watermarks] with a separator between each one. */
 fun printWatermarks(watermarks: List<Watermark>) {
     val indexStringLen = min(watermarks.size.toString().length, 70)
 
@@ -306,7 +306,7 @@ fun printWatermarks(watermarks: List<Watermark>) {
     if (watermarks.isNotEmpty()) println("-".repeat(80))
 }
 
-/** Prints each event to STDOUT or STDERR using the toString Method if type is not SUCCESS */
+/** Prints each event to STDOUT or STDERR using the toString Method if type is not SUCCESS. */
 fun Status.print() {
     if (this.getEvents().isEmpty()) {
         when {
