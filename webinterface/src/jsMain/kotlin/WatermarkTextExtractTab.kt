@@ -5,13 +5,13 @@
  * that can be found in the LICENSE file.
  */
 
-import de.fraunhofer.isst.innamark.watermarker.Watermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.DefaultTranscoding
-import de.fraunhofer.isst.innamark.watermarker.helper.toUnicodeRepresentation
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.watermarks.TextWatermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.toTextWatermarks
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.toInnamarkTagBuilders
+import de.fraunhofer.isst.innamark.watermarker.utils.toUnicodeRepresentation
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.DefaultTranscoding
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
 import io.kvision.collapse.collapse
 import io.kvision.collapse.forCollapse
 import io.kvision.core.Placement
@@ -85,7 +85,7 @@ class WatermarkTextExtractTab : SimplePanel() {
                             val watermarkedResult =
                                 extractWatermark(
                                     extractTextFormPanel.getData().text,
-                                ).toTextWatermarks()
+                                ).toInnamarkTagBuilders()
 
                             val modal = Modal("Result")
 
@@ -234,8 +234,8 @@ class WatermarkTextExtractTab : SimplePanel() {
 
     /** Extracts a watermark from a [text] and returns it */
     private fun extractWatermark(text: String): Result<List<Watermark>> {
-        val watermarker = Watermarker()
-        return watermarker.textGetWatermarks(text, squash = false)
+        val watermarker = PlainTextWatermarker()
+        return watermarker.getWatermarks(text, squash = false, singleWatermark = false)
     }
 
     /**
@@ -276,7 +276,7 @@ class WatermarkTextExtractTab : SimplePanel() {
     }
 
     /** Creates a list of Strings based on a [watermarkedResult] */
-    private fun getWatermarkStringList(watermarkedResult: Result<List<TextWatermark>>) =
+    private fun getWatermarkStringList(watermarkedResult: Result<List<InnamarkTagBuilder>>) =
         watermarkedResult.value!!.map { watermark ->
             watermark.text
         }
