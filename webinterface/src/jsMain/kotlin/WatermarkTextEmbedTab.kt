@@ -1,14 +1,13 @@
 /*
- * Copyright (c) 2023-2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
 
-import de.fraunhofer.isst.innamark.watermarker.Watermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.TextWatermarker
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.watermarks.TextWatermark
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
 import io.kvision.core.FontWeight
 import io.kvision.core.Placement
 import io.kvision.core.TooltipOptions
@@ -41,7 +40,7 @@ import io.kvision.utils.em
 import io.kvision.utils.px
 import kotlinx.browser.window
 import kotlinx.serialization.Serializable
-import kotlin.math.round
+import kotlin.math.floor
 
 @Serializable
 data class WatermarkerTextForm(
@@ -54,7 +53,7 @@ data class WatermarkerTextForm(
 )
 
 class WatermarkTextEmbedTab : SimplePanel() {
-    private val textWatermarker = TextWatermarker.default()
+    private val textWatermarker = PlainTextWatermarker()
 
     // Input fields
     private val watermarkerInput =
@@ -137,10 +136,10 @@ class WatermarkTextEmbedTab : SimplePanel() {
         }
 
     // Progress bar
-    private var min: Int = -1
+    private var min: Int = -100
     private val capacityObservable = ObservableValue(-1)
     private val progressBar =
-        Progress(-1, 0) {
+        Progress(-100, 0) {
             marginBottom = 0.px
             width = 300.px
             progressNumeric(this.bounds.value.min) {
@@ -242,7 +241,7 @@ class WatermarkTextEmbedTab : SimplePanel() {
                 add(progressBar)
                 span().bind(capacityObservable) {
                     val percentage =
-                        round(progressBar.getFirstProgressBar()?.width?.first?.toDouble() ?: 0.0)
+                        floor(progressBar.getFirstProgressBar()?.width?.first?.toDouble() ?: 0.0)
 
                     +"$percentage %"
                 }
@@ -290,6 +289,7 @@ class WatermarkTextEmbedTab : SimplePanel() {
                             modal.addButton(
                                 Button("Copy to Clipboard") {
                                     onClick {
+                                        // TODO: Clipboard API is only available in secure contexts!
                                         window.navigator.clipboard.writeText(watermarkedText)
                                         Toast.success("Successfully copied to clipboard!")
                                     }
@@ -328,7 +328,7 @@ class WatermarkTextEmbedTab : SimplePanel() {
                     ) {
                         textFormPanel.clearData()
                         capacityObservable.value = -1
-                        min = -1
+                        min = -100
                         progressBar.getFirstProgressBar()?.value = -1
                         progressBar.setBounds(-1, 0)
                     }
@@ -381,24 +381,26 @@ class WatermarkTextEmbedTab : SimplePanel() {
         innamarkTagCRC32: Boolean = false,
         innamarkTagSHA3256: Boolean = false,
     ): Result<String> {
-        val watermarker = Watermarker()
+        val watermarker = textWatermarker
         val watermark =
-            TextWatermark.raw(watermarkString).apply {
+            InnamarkTagBuilder.new(watermarkString).apply {
                 if (innamarkTagCompressed) compressed()
                 if (innamarkTagSized) sized()
                 if (innamarkTagCRC32) CRC32()
                 if (innamarkTagSHA3256) SHA3256()
             }
-        return watermarker.textAddWatermark(text, watermark)
+        return watermarker.addWatermark(text, watermark.finish())
     }
 
     /**
      * Calculates if the [watermark] fits into the [text]
      *
      * Returns:
-     *  - a negative value with the number of missing insert positions ([watermark] doesn't fit)
-     *  - a zero if the [watermark] perfectly fits in the [text] one time
-     *  - a positive value with the number of remaining insert positions ([watermark] fits)
+     *  - a negative value, with the absolute value being the percentage of the [watermark] that
+     *  doesn't fit.
+     *  - a zero if the [watermark] perfectly fits in the [text] one time.
+     *  - a positive value, being the percentage of how many additional [watermark]s fit in the
+     *  [text].
      */
     private fun watermarkFitsInText(
         watermark: String,
@@ -409,16 +411,35 @@ class WatermarkTextEmbedTab : SimplePanel() {
         innamarkTagSHA3256: Boolean,
     ): Int {
         val parsedWatermark =
-            TextWatermark.raw(watermark).apply {
+            InnamarkTagBuilder.new(watermark).apply {
                 if (innamarkTagCompressed) compressed()
                 if (innamarkTagSized) sized()
                 if (innamarkTagCRC32) CRC32()
                 if (innamarkTagSHA3256) SHA3256()
             }
 
+        // positions available
         val numberOfInsertPositions = textWatermarker.placement(text).count()
-        val numberOfNeededPositions = textWatermarker.getMinimumInsertPositions(parsedWatermark)
 
-        return numberOfInsertPositions - numberOfNeededPositions
+        // minimum for one watermark
+        val minimumInsertPositions =
+            textWatermarker.getMinimumInsertPositions(parsedWatermark.finish())
+
+        // spaces per watermark if more than one fits
+        val numberOfNeededPositions = minimumInsertPositions - 1
+
+        // not enough spaces since extraction needs trailing separator
+        if (numberOfInsertPositions < minimumInsertPositions) {
+            return floor(
+                100 * ((numberOfInsertPositions.toDouble() / minimumInsertPositions) - 1),
+            ).toInt()
+        }
+
+        // exactly enough spaces to fit once plus one extra space for the trailing separator
+        if (numberOfInsertPositions == minimumInsertPositions) return 0
+
+        // fits multiple times (here X00% means X-1 complete Watermarks, trailing separator missing)
+        val fitCount = numberOfInsertPositions.toDouble() / numberOfNeededPositions.toDouble()
+        return floor(100 * (fitCount - 1)).toInt()
     }
 }

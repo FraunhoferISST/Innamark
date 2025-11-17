@@ -5,13 +5,13 @@
  * that can be found in the LICENSE file.
  */
 
-import de.fraunhofer.isst.innamark.watermarker.Watermarker
-import de.fraunhofer.isst.innamark.watermarker.fileWatermarker.DefaultTranscoding
-import de.fraunhofer.isst.innamark.watermarker.helper.toUnicodeRepresentation
-import de.fraunhofer.isst.innamark.watermarker.returnTypes.Result
-import de.fraunhofer.isst.innamark.watermarker.watermarks.TextWatermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.Watermark
-import de.fraunhofer.isst.innamark.watermarker.watermarks.toTextWatermarks
+import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTag
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
+import de.fraunhofer.isst.innamark.watermarker.utils.toUnicodeRepresentation
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.DefaultTranscoding
+import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.PlainTextWatermarker
 import io.kvision.collapse.collapse
 import io.kvision.collapse.forCollapse
 import io.kvision.core.Placement
@@ -85,7 +85,7 @@ class WatermarkTextExtractTab : SimplePanel() {
                             val watermarkedResult =
                                 extractWatermark(
                                     extractTextFormPanel.getData().text,
-                                ).toTextWatermarks()
+                                )
 
                             val modal = Modal("Result")
 
@@ -145,9 +145,7 @@ class WatermarkTextExtractTab : SimplePanel() {
                                                 // Show watermarking type
                                                 strong("Watermarking type(s): ")
                                                 p(
-                                                    watermarkedResult.value!!.map { watermark ->
-                                                        watermark.finish().getSource()
-                                                    }.toSet().toString(),
+                                                    getWatermarkingTypes(watermarkedResult),
                                                 )
 
                                                 // Show input text with hidden chars
@@ -158,6 +156,7 @@ class WatermarkTextExtractTab : SimplePanel() {
                                                 span(
                                                     showWatermarkChars(
                                                         extractTextFormPanel.getData().text,
+                                                        watermarkedResult,
                                                     ),
                                                     rich = true,
                                                     className = "break-all",
@@ -234,18 +233,22 @@ class WatermarkTextExtractTab : SimplePanel() {
 
     /** Extracts a watermark from a [text] and returns it */
     private fun extractWatermark(text: String): Result<List<Watermark>> {
-        val watermarker = Watermarker()
-        return watermarker.textGetWatermarks(text, squash = false)
+        val watermarker = PlainTextWatermarker()
+        return watermarker.getWatermarks(text, squash = false, singleWatermark = false)
     }
 
     /**
      * Replaces all whitespaces of the transcoding alphabet of the watermarking library in
      * [watermarkedText] with its Unicode representation.
      */
-    private fun showWatermarkChars(watermarkedText: String): String {
+    private fun showWatermarkChars(
+        watermarkedText: String,
+        watermarkedResult: Result<List<Watermark>>,
+    ): String {
         val alphabet = DefaultTranscoding.alphabet + DefaultTranscoding.SEPARATOR_CHAR
         var resultText = ""
         var tagCounter = 0
+        val transcodingFactor = if (validateInnamarkTags(watermarkedResult)) 4 else 0
 
         watermarkedText.forEach { char ->
             if (char in alphabet) {
@@ -256,7 +259,7 @@ class WatermarkTextExtractTab : SimplePanel() {
                             "separator-highlight"
                         }
 
-                        tagCounter in 1..4 -> { // TODO: Replace constant "4" based on transcoding
+                        tagCounter in 1..transcodingFactor -> {
                             tagCounter++
                             "innamarktag-highlight"
                         }
@@ -276,8 +279,47 @@ class WatermarkTextExtractTab : SimplePanel() {
     }
 
     /** Creates a list of Strings based on a [watermarkedResult] */
-    private fun getWatermarkStringList(watermarkedResult: Result<List<TextWatermark>>) =
-        watermarkedResult.value!!.map { watermark ->
-            watermark.text
+    private fun getWatermarkStringList(watermarkedResult: Result<List<Watermark>>): List<String> {
+        val watermarks = watermarkedResult.value ?: emptyList()
+
+        if (validateInnamarkTags(watermarkedResult)) {
+            val innamarkTagBuilders =
+                watermarks.map { watermark ->
+                    InnamarkTagBuilder.fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
+                        .value ?: InnamarkTagBuilder.new("")
+                }
+            return innamarkTagBuilders.map { watermark -> watermark.text }
+        } else {
+            return watermarks.map { watermark -> watermark.watermarkContent.decodeToString() }
         }
+    }
+
+    /** Creates a String containing the Watermark/InnamarkTag types found in [watermarkedResult] */
+    private fun getWatermarkingTypes(watermarkedResult: Result<List<Watermark>>): String {
+        val watermarks = watermarkedResult.value ?: emptyList()
+
+        if (validateInnamarkTags(watermarkedResult)) {
+            val innamarkTagBuilders =
+                watermarks.map { watermark ->
+                    InnamarkTagBuilder.fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
+                        .value ?: InnamarkTagBuilder.new("")
+                }
+            return innamarkTagBuilders.map { builder -> builder.finish().getSource() }.toSet()
+                .toString()
+        } else {
+            return "[Watermark]"
+        }
+    }
+
+    /** Returns a Boolean indicating if [watermarkedResult] contains valid InnamarkTags */
+    private fun validateInnamarkTags(watermarkedResult: Result<List<Watermark>>): Boolean {
+        var validate = true
+        val watermarks = watermarkedResult.value ?: emptyList()
+        for (watermark in watermarks) {
+            if (InnamarkTag.fromWatermark(watermark).isError) {
+                validate = false
+            }
+        }
+        return validate
+    }
 }
