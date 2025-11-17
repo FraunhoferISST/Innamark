@@ -45,7 +45,8 @@ class TextFileWatermarkerTestJvm {
         val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
         val watermark = Watermark.fromString("Hello World")
         val expected = openTextFile("src/jvmTest/resources/lorem_ipsum_watermarked.txt")
-        val expectedMessage = PlainTextWatermarker.Success(listOf(5, 273, 538)).into().toString()
+        val expectedMessage =
+            PlainTextWatermarker.Success(listOf(5, 273, 538), true).into().toString()
 
         // Act
         val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
@@ -62,7 +63,7 @@ class TextFileWatermarkerTestJvm {
         val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
         val watermark = "Hello World"
         val expected = openTextFile("src/jvmTest/resources/lorem_ipsum_innamarked.txt")
-        val expectedMessage = PlainTextWatermarker.Success(listOf(5, 295)).into().toString()
+        val expectedMessage = PlainTextWatermarker.Success(listOf(5, 295), true).into().toString()
 
         // Act
         val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
