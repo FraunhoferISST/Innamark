@@ -241,7 +241,13 @@ class WatermarkTextEmbedTab : SimplePanel() {
                 add(progressBar)
                 span().bind(capacityObservable) {
                     val percentage =
-                        floor(progressBar.getFirstProgressBar()?.width?.first?.toDouble() ?: 0.0)
+                        floor(
+                            progressBar
+                                .getFirstProgressBar()
+                                ?.width
+                                ?.first
+                                ?.toDouble() ?: 0.0,
+                        )
 
                     +"$percentage %"
                 }
