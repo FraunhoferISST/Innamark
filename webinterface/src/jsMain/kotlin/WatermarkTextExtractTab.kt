@@ -117,9 +117,10 @@ class WatermarkTextExtractTab : SimplePanel() {
                                         span(
                                             "<strong>Most frequent " +
                                                 "watermark: </strong>" +
-                                                countedWatermarkList.maxByOrNull {
-                                                    it.value
-                                                }?.key + "<br /><br />",
+                                                countedWatermarkList
+                                                    .maxByOrNull {
+                                                        it.value
+                                                    }?.key + "<br /><br />",
                                             rich = true,
                                         ),
                                     )
@@ -285,7 +286,8 @@ class WatermarkTextExtractTab : SimplePanel() {
         if (validateInnamarkTags(watermarkedResult)) {
             val innamarkTagBuilders =
                 watermarks.map { watermark ->
-                    InnamarkTagBuilder.fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
+                    InnamarkTagBuilder
+                        .fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
                         .value ?: InnamarkTagBuilder.new("")
                 }
             return innamarkTagBuilders.map { watermark -> watermark.text }
@@ -301,10 +303,13 @@ class WatermarkTextExtractTab : SimplePanel() {
         if (validateInnamarkTags(watermarkedResult)) {
             val innamarkTagBuilders =
                 watermarks.map { watermark ->
-                    InnamarkTagBuilder.fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
+                    InnamarkTagBuilder
+                        .fromInnamarkTag(InnamarkTag.fromWatermark(watermark).value!!)
                         .value ?: InnamarkTagBuilder.new("")
                 }
-            return innamarkTagBuilders.map { builder -> builder.finish().getSource() }.toSet()
+            return innamarkTagBuilders
+                .map { builder -> builder.finish().getSource() }
+                .toSet()
                 .toString()
         } else {
             return "[Watermark]"
