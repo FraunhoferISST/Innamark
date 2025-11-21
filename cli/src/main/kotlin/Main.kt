@@ -390,8 +390,8 @@ fun <T> Result<T>.unwrap(): T {
 private fun determineType(
     source: String,
     fileType: String?,
-): String {
-    return if (fileType != null) {
+): String =
+    if (fileType != null) {
         fileType
     } else {
         val type = SupportedFileType.getFileType(source, null)
@@ -401,4 +401,3 @@ private fun determineType(
             else -> "Unknown"
         }
     }
-}
