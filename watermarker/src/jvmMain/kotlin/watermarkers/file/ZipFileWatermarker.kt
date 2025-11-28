@@ -83,9 +83,7 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
         target: String,
         watermark: String,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, watermark.encodeToByteArray(), true, fileType)
-    }
+    ): Status = addWatermark(source, target, watermark.encodeToByteArray(), true, fileType)
 
     /**
      * Adds a watermark object to file content at [source] and writes it to [target].
@@ -96,9 +94,7 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
         target: String,
         watermark: Watermark,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, watermark.watermarkContent, false, fileType)
-    }
+    ): Status = addWatermark(source, target, watermark.watermarkContent, false, fileType)
 
     /**
      * Adds a watermark created from [innamarkTagBuilder] to file content at [source] and writes
@@ -110,9 +106,7 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
         target: String,
         innamarkTagBuilder: InnamarkTagBuilder,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, innamarkTagBuilder.finish(), fileType)
-    }
+    ): Status = addWatermark(source, target, innamarkTagBuilder.finish(), fileType)
 
     /** Checks if the file at [source] contains a watermark */
     override fun containsWatermark(
@@ -124,10 +118,11 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Zip) {
-            return SupportedFileType.WrongTypeError(
-                supportedFileType.toString(),
-                SOURCE,
-            ).into(false)
+            return SupportedFileType
+                .WrongTypeError(
+                    supportedFileType.toString(),
+                    SOURCE,
+                ).into(false)
         }
         val (status, bytes) =
             with(readFile(source)) {
@@ -165,10 +160,11 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Zip) {
-            return SupportedFileType.WrongTypeError(
-                supportedFileType.toString(),
-                SOURCE,
-            ).into(listOf())
+            return SupportedFileType
+                .WrongTypeError(
+                    supportedFileType.toString(),
+                    SOURCE,
+                ).into(listOf())
         }
 
         val (status, bytes) =
@@ -229,7 +225,8 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
         if (watermarks.value?.isNotEmpty() ?: return Result.success("")) {
             val decoded =
                 watermarks.status.into(
-                    watermarks.value[0].watermarkContent
+                    watermarks.value[0]
+                        .watermarkContent
                         .decodeToString(),
                 )
             if (decoded.value!!.contains('\uFFFD')) {
@@ -297,9 +294,7 @@ object ZipFileWatermarker : FileWatermarker<ZipFile> {
      * Returns errors if it cannot parse [bytes] as zip file.
      * Returns warnings if the parser finds unexpected structures but is still able to parse it
      */
-    override fun parseBytes(bytes: ByteArray): Result<ZipFile> {
-        return ZipFile.fromBytes(bytes)
-    }
+    override fun parseBytes(bytes: ByteArray): Result<ZipFile> = ZipFile.fromBytes(bytes)
 
     private fun checkFileType(
         source: String,

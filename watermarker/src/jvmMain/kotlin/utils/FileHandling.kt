@@ -19,13 +19,12 @@ import kotlin.io.path.extension
 
 class FileHandling {
     companion object {
-        fun readFile(path: String): Result<ByteArray> {
-            return try {
+        fun readFile(path: String): Result<ByteArray> =
+            try {
                 Result.success(File(path).readBytes())
             } catch (e: Exception) {
                 WatermarkableFile.ReadError(path, e.message ?: e.stackTraceToString()).into<_>()
             }
-        }
     }
 }
 
@@ -84,17 +83,24 @@ sealed class SupportedFileType {
         const val SOURCE: String = "SupportedFileType"
     }
 
-    class NoFileTypeError(val path: String) : Event.Error(SOURCE) {
+    class NoFileTypeError(
+        val path: String,
+    ) : Event.Error(SOURCE) {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Could not determine file type of $path!"
     }
 
-    class UnsupportedTypeError(val type: String) : Event.Error(SOURCE) {
+    class UnsupportedTypeError(
+        val type: String,
+    ) : Event.Error(SOURCE) {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Unsupported file type: $type!"
     }
 
-    class WrongTypeError(val type: String, val errorSource: String) : Event.Error(errorSource) {
+    class WrongTypeError(
+        val type: String,
+        val errorSource: String,
+    ) : Event.Error(errorSource) {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Unsupported file type for chosen Watermarker: $type!"
     }

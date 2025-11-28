@@ -22,7 +22,9 @@ expect object Compression {
 }
 
 @JsExport
-class InflationError(val reason: String) : Event.Error("Compression.inflate") {
+class InflationError(
+    val reason: String,
+) : Event.Error("Compression.inflate") {
     /** Returns a String explaining the event */
     override fun getMessage() = "Error inflating bytes: $reason."
 }

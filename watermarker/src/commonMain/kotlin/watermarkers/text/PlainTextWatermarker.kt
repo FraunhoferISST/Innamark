@@ -29,10 +29,15 @@ sealed class SeparatorStrategy {
     object SkipInsertPosition : SeparatorStrategy()
 
     /** Inserts [char] as separator between watermarks */
-    class SingleSeparatorChar(val char: Char) : SeparatorStrategy()
+    class SingleSeparatorChar(
+        val char: Char,
+    ) : SeparatorStrategy()
 
     /** Inserts [start] before a Watermark and [end] after a Watermark as separators */
-    class StartEndSeparatorChars(val start: Char, val end: Char) : SeparatorStrategy()
+    class StartEndSeparatorChars(
+        val start: Char,
+        val end: Char,
+    ) : SeparatorStrategy()
 }
 
 interface Transcoding {
@@ -112,8 +117,9 @@ object DefaultTranscoding : Transcoding {
 
     private const val SOURCE = "DefaultTranscoding"
 
-    class DecodingInvalidByteError(val invalidByte: Int) :
-        Event.Warning("$SOURCE.decode") {
+    class DecodingInvalidByteError(
+        val invalidByte: Int,
+    ) : Event.Warning("$SOURCE.decode") {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Decoding produced an invalid byte: $invalidByte"
     }
@@ -284,9 +290,8 @@ class PlainTextWatermarker(
     }
 
     /** Returns a [Boolean] indicating whether [cover] contains watermarks */
-    override fun containsWatermark(cover: String): Boolean {
-        return cover.any { char -> char in fullAlphabet }
-    }
+    override fun containsWatermark(cover: String): Boolean =
+        cover.any { char -> char in fullAlphabet }
 
     /**
      * Returns a [Result] containing the most frequent Watermark in [cover] as a String
@@ -303,12 +308,16 @@ class PlainTextWatermarker(
             val decoded =
                 if (InnamarkTag.parse(watermarks.value[0].watermarkContent).isError) {
                     watermarks.status.into(
-                        watermarks.value[0].watermarkContent
+                        watermarks.value[0]
+                            .watermarkContent
                             .decodeToString(),
                     )
                 } else {
                     watermarks.status.into(
-                        watermarks.value[0].watermarkContent.drop(1).toByteArray()
+                        watermarks.value[0]
+                            .watermarkContent
+                            .drop(1)
+                            .toByteArray()
                             .decodeToString(),
                     )
                 }
@@ -373,10 +382,12 @@ class PlainTextWatermarker(
 
                 is SeparatorStrategy.SingleSeparatorChar -> {
                     val separatorPositions =
-                        cover.asSequence().withIndex().filter { (_, char) ->
-                            char == separatorStrategy.char
-                        }
-                            .map { (position, _) -> position }
+                        cover
+                            .asSequence()
+                            .withIndex()
+                            .filter { (_, char) ->
+                                char == separatorStrategy.char
+                            }.map { (position, _) -> position }
 
                     sequence {
                         if (separatorPositions.count() > 1) {
@@ -550,8 +561,9 @@ class PlainTextWatermarker(
                 "the cover."
     }
 
-    class ContainsAlphabetCharsError(val chars: Sequence<Char>) :
-        Event.Error("$SOURCE.addWatermark") {
+    class ContainsAlphabetCharsError(
+        val chars: Sequence<Char>,
+    ) : Event.Error("$SOURCE.addWatermark") {
         /** Returns a String explaining the event */
         override fun getMessage(): String {
             val containedChars =
@@ -582,7 +594,9 @@ class PlainTextWatermarker(
             }
     }
 
-    class AlphabetContainsSeparatorError(val chars: List<Char>) : Event.Error(SOURCE) {
+    class AlphabetContainsSeparatorError(
+        val chars: List<Char>,
+    ) : Event.Error(SOURCE) {
         override fun getMessage(): String {
             val containedChars =
                 chars.joinToString(prefix = "[", separator = ",", postfix = "]") { char ->
@@ -594,6 +608,4 @@ class PlainTextWatermarker(
 }
 
 /** Returns [watermarks] without duplicates */
-fun <T : Watermark> squashWatermarks(watermarks: List<T>): List<T> {
-    return watermarks.toSet().toList()
-}
+fun <T : Watermark> squashWatermarks(watermarks: List<T>): List<T> = watermarks.toSet().toList()

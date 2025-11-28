@@ -53,8 +53,10 @@ class TextFileTestJvm {
         // Arrange
         val source = ""
         val expectedMessage =
-            WatermarkableFile.ReadError(source, " (No such file or directory)")
-                .into().toString()
+            WatermarkableFile
+                .ReadError(source, " (No such file or directory)")
+                .into()
+                .toString()
 
         // Act
         val result = TextFile.fromFile(source)

@@ -81,12 +81,14 @@ class TextFileWatermarkerTestJvm {
         val watermarkBytes = "Hello World".encodeToByteArray()
         val watermark = Watermark(watermarkBytes)
         val expectedMessage =
-            PlainTextWatermarker.ContainsAlphabetCharsError(
-                sequence {
-                    yield(DefaultTranscoding.SEPARATOR_CHAR)
-                    yieldAll(DefaultTranscoding.alphabet)
-                },
-            ).into().toString()
+            PlainTextWatermarker
+                .ContainsAlphabetCharsError(
+                    sequence {
+                        yield(DefaultTranscoding.SEPARATOR_CHAR)
+                        yieldAll(DefaultTranscoding.alphabet)
+                    },
+                ).into()
+                .toString()
 
         // Act
         val result = textWatermarker.addWatermark(filePath, tempFile.toString(), watermark)
@@ -102,7 +104,9 @@ class TextFileWatermarkerTestJvm {
         val filePath = "src/jvmTest/resources/lorem_ipsum.txt"
         val watermark = Watermark.fromString("This is a watermark that does not fit")
         val expectedMessage =
-            PlainTextWatermarker.OversizedWatermarkWarning(150, 96).into()
+            PlainTextWatermarker
+                .OversizedWatermarkWarning(150, 96)
+                .into()
                 .toString()
 
         // Act

@@ -101,9 +101,7 @@ class TextFileWatermarker(
         target: String,
         watermark: String,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, watermark.encodeToByteArray(), true, fileType)
-    }
+    ): Status = addWatermark(source, target, watermark.encodeToByteArray(), true, fileType)
 
     /**
      * Adds a [watermark] object to the file content at [source] and writes it to [target].
@@ -116,9 +114,7 @@ class TextFileWatermarker(
         target: String,
         watermark: Watermark,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, watermark.watermarkContent, false, fileType)
-    }
+    ): Status = addWatermark(source, target, watermark.watermarkContent, false, fileType)
 
     /**
      * Adds a watermark created from [innamarkTagBuilder] to the file content at [source]
@@ -132,9 +128,7 @@ class TextFileWatermarker(
         target: String,
         innamarkTagBuilder: InnamarkTagBuilder,
         fileType: String?,
-    ): Status {
-        return addWatermark(source, target, innamarkTagBuilder.finish(), fileType)
-    }
+    ): Status = addWatermark(source, target, innamarkTagBuilder.finish(), fileType)
 
     /** Checks if the file at [source] contains a watermark */
     override fun containsWatermark(
@@ -146,10 +140,11 @@ class TextFileWatermarker(
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return SupportedFileType.WrongTypeError(
-                supportedFileType.toString(),
-                SOURCE,
-            ).into(false)
+            return SupportedFileType
+                .WrongTypeError(
+                    supportedFileType.toString(),
+                    SOURCE,
+                ).into(false)
         }
 
         val (status, bytes) =
@@ -186,10 +181,11 @@ class TextFileWatermarker(
                 value ?: return into<_>()
             }
         if (supportedFileType != SupportedFileType.Text) {
-            return SupportedFileType.WrongTypeError(
-                supportedFileType.toString(),
-                SOURCE,
-            ).into(listOf())
+            return SupportedFileType
+                .WrongTypeError(
+                    supportedFileType.toString(),
+                    SOURCE,
+                ).into(listOf())
         }
 
         val (status, bytes) =
@@ -227,7 +223,8 @@ class TextFileWatermarker(
         if (watermarks.value?.isNotEmpty() ?: return Result.success("")) {
             val decoded =
                 watermarks.status.into(
-                    watermarks.value[0].watermarkContent
+                    watermarks.value[0]
+                        .watermarkContent
                         .decodeToString(),
                 )
             if (decoded.value!!.contains('\uFFFD')) {
@@ -292,9 +289,7 @@ class TextFileWatermarker(
     }
 
     /** Parses [bytes] as text and returns it as TextFile */
-    override fun parseBytes(bytes: ByteArray): Result<TextFile> {
-        return TextFile.fromBytes(bytes)
-    }
+    override fun parseBytes(bytes: ByteArray): Result<TextFile> = TextFile.fromBytes(bytes)
 
     companion object {
         private const val SOURCE = "TextFileWatermarker"

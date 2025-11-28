@@ -54,7 +54,11 @@ fun Byte.toIntUnsigned(): Int = this.toInt() and 0xff
 
 /** Returns the Unicode representation of the character */
 fun Char.toUnicodeRepresentation(): String =
-    "\\u" + this.code.toString(16).uppercase().padStart(4, '0')
+    "\\u" +
+        this.code
+            .toString(16)
+            .uppercase()
+            .padStart(4, '0')
 
 /**
  * Represents a ByteArray in hex
@@ -63,6 +67,10 @@ fun Char.toUnicodeRepresentation(): String =
 fun ByteArray.toHexString(): String =
     "[" +
         joinToString(separator = ", ") { eachByte ->
-            eachByte.toIntUnsigned().toString(16).uppercase().padStart(2, '0')
+            eachByte
+                .toIntUnsigned()
+                .toString(16)
+                .uppercase()
+                .padStart(2, '0')
         } +
         "]"

@@ -12,18 +12,19 @@ package de.fraunhofer.isst.innamark.watermarker.utils
 
 actual object CRC32 {
     private val table =
-        (0u..255u).map { n ->
-            var c = n
-            repeat(8) {
-                c =
-                    if (c and 1u != 0u) {
-                        0xedb88320u xor (c shr 1)
-                    } else {
-                        c shr 1
-                    }
-            }
-            c
-        }.toList()
+        (0u..255u)
+            .map { n ->
+                var c = n
+                repeat(8) {
+                    c =
+                        if (c and 1u != 0u) {
+                            0xedb88320u xor (c shr 1)
+                        } else {
+                            c shr 1
+                        }
+                }
+                c
+            }.toList()
 
     /** Calculates the CRC32 checksum of [bytes] */
     actual fun checksum(bytes: ByteArray): UInt {
