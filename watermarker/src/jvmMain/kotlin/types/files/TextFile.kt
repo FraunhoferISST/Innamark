@@ -11,11 +11,12 @@ import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import java.io.File
 
-class TextFile private constructor(path: String?, var content: String) : WatermarkableFile(path) {
+class TextFile private constructor(
+    path: String?,
+    var content: String,
+) : WatermarkableFile(path) {
     /** Converts the TextFile into raw bytes */
-    override fun toBytes(): List<Byte> {
-        return this.content.encodeToByteArray().asList()
-    }
+    override fun toBytes(): List<Byte> = this.content.encodeToByteArray().asList()
 
     companion object {
         internal val source = TextFile::class.simpleName!!
@@ -40,22 +41,17 @@ class TextFile private constructor(path: String?, var content: String) : Waterma
 
         /** Creates a TextFile with text [text] */
         @JvmStatic
-        fun fromString(text: String): TextFile {
-            return TextFile(null, text)
-        }
+        fun fromString(text: String): TextFile = TextFile(null, text)
     }
 
     /** Checks if [this] and [other] are equal */
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
+    override fun equals(other: Any?): Boolean =
+        when (other) {
             is TextFile -> this.content == other.content
             else -> false
         }
-    }
 
-    override fun hashCode(): Int {
-        return content.hashCode()
-    }
+    override fun hashCode(): Int = content.hashCode()
 
     class InvalidByteError : Event.Error(source) {
         /** Returns a String explaining the event */

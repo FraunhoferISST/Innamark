@@ -15,9 +15,25 @@ import kotlin.test.assertTrue
 class DefaultTranscodingIntegrationTest {
     private val loremIpsum =
         byteArrayOf(
-            0x00, 0x01, 0x0F, 0x41, 0x62, 0xAA.toByte(), 0xF0.toByte(), 0xFE.toByte(),
-            0xFF.toByte(), 0x42, 0xef.toByte(), 0xfc.toByte(), 0x2d, 0xe3.toByte(), 0xc9.toByte(),
-            0xfa.toByte(), 0x08, 0x87.toByte(), 0x2d,
+            0x00,
+            0x01,
+            0x0F,
+            0x41,
+            0x62,
+            0xAA.toByte(),
+            0xF0.toByte(),
+            0xFE.toByte(),
+            0xFF.toByte(),
+            0x42,
+            0xef.toByte(),
+            0xfc.toByte(),
+            0x2d,
+            0xe3.toByte(),
+            0xc9.toByte(),
+            0xfa.toByte(),
+            0x08,
+            0x87.toByte(),
+            0x2d,
         )
 
     @Test

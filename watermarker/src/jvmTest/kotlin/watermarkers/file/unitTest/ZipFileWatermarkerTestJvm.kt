@@ -80,7 +80,11 @@ class ZipFileWatermarkerTestJvm {
         val sourcePath = "src/jvmTest/resources/multiple_files.zip"
         val sourceFile = openZipFile(sourcePath)
         val watermark = Watermark(ByteArray(UShort.MAX_VALUE.toInt()) { 0 })
-        val expectedMessage = ZipFileHeader.ExtraField.OversizedHeaderError(65567).into().toString()
+        val expectedMessage =
+            ZipFileHeader.ExtraField
+                .OversizedHeaderError(65567)
+                .into()
+                .toString()
 
         // Act
         sourceFile.writeToFile(tempFile.toString())

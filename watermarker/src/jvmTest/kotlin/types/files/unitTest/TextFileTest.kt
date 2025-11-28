@@ -35,7 +35,17 @@ class TextFileTest {
         // Arrange
         val bytes =
             byteArrayOf(
-                0x4c, 0x6f, 0x72, 0x65, 0x6d, 0x20, 0x69, 0x70, 0x73, 0x75, 0x6d,
+                0x4c,
+                0x6f,
+                0x72,
+                0x65,
+                0x6d,
+                0x20,
+                0x69,
+                0x70,
+                0x73,
+                0x75,
+                0x6d,
                 0xff.toByte(),
             )
         val expectedMessage = TextFile.InvalidByteError().into().toString()
