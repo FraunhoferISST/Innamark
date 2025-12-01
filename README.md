@@ -51,13 +51,13 @@ The following example uses our webinterface and Kotlin library to hide the "Inna
 inside a text, send it via email, and verify and extract the watermark afterward on the 
 recipient side:
 
-![Animated example of the webinterface](https://www.isst.fraunhofer.de/content/dam/isst/video/technologie/innamark/innamark-demo.gif)
+![Animated example of the webinterface](docs/static/img/webinterface-demo.gif)
 
 The core Innamark watermarking algorithm is developed by German researchers from the [Fraunhofer 
 Institute for Software and Systems Engineering](https://www.isst.fraunhofer.de/en.html), 
 published as a [scientific journal paper](https://doi.org/10.1109/ACCESS.2025.3583591), and 
-applied for a [German](https://patents.google.com/patent/DE102023125012A1) and [International 
-patent](https://patents.google.com/patent/WO2025056772A1).
+applied for a [German](https://patents.google.com/patent/DE102023125012A1) and [international 
+patent](https://patents.google.com/patent/WO2025056772A1/en).
 
 ## 📖 Documentation
 
@@ -125,12 +125,12 @@ This work is licensed under the Fraunhofer License (on the basis of the MIT lice
 `LICENSE` file for more information.
 
 > [!CAUTION]
-> There are pending German and international (PCT) patent applications with the application numbers
-> [DE102023125012.4](https://patents.google.com/patent/DE102023125012A1) and
-> [WO2025056772A1](https://patents.google.com/patent/WO2025056772A1). In order to use the Innamark
-> watermarker software in the form published here, a patent license is required in addition to the
-> license for the Software. See `LICENSE` for more information. In case of any questions or
-> uncertainties, please contact us at innamark@isst.fraunhofer.de.
+> There are pending German and international (PCT) patent applications with the publication numbers
+> [DE102023125012A1](https://patents.google.com/patent/DE102023125012A1) and
+> [WO2025056772A1](https://patents.google.com/patent/WO2025056772A1/en). In order to use the 
+> Innamark watermarker software in the form published here, a patent license is required in 
+> addition to the license for the software. See `LICENSE` for more information. In case of any 
+> questions or uncertainties, please contact us at innamark@isst.fraunhofer.de.
 
 ## 📝 Cite this Work
 
