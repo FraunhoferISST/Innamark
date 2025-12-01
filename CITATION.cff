@@ -1,0 +1,33 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+    - family-names: "Fraunhofer ISST"
+      given-names: ""
+title: "Innamark"
+url: "https://github.com/FraunhoferISST/Innamark"
+preferred-citation:
+    type: article
+    title: "Innamark: A Whitespace Replacement Information-Hiding Method"
+    authors:
+      - family-names: "Hellmeier"
+        given-names: "Malte"
+        orcid: "https://orcid.org/0000-0002-2095-662X"
+      - family-names: "Norkowski"
+        given-names: "Hendrik"
+        orcid: "https://orcid.org/0009-0005-0972-1925"
+      - family-names: "Schrewe"
+        given-names: "Ernst-Christoph"
+        orcid: "https://orcid.org/0009-0007-9582-713X"
+      - family-names: "Qarawlus"
+        given-names: "Haydar"
+        orcid: "https://orcid.org/0000-0003-3248-1163"
+      - family-names: "Howar"
+        given-names: "Falk"
+        orcid: "https://orcid.org/0000-0002-9524-4459"
+    journal: "IEEE Access"
+    year: 2025
+    volume: 13
+    start: 123120
+    end: 123135
+    doi: "10.1109/ACCESS.2025.3583591"
+    issn: "2169-3536"
