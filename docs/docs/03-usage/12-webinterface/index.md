@@ -11,9 +11,8 @@ title: Webinterface
 
 # Webinterface
 
-The following example shows how the webinterface includes the watermark "Fraunhofer ISST"
-inside a _Lorem ipsum_ dummy cover text. Afterward, the watermarked text is copied into a public
-contact form and then copied back into the webinterface. As can be seen, the webinterface is able
-to extract the hidden watermark from the cover text:
+The following example uses our webinterface and Kotlin library to hide the "Innamark" watermark
+inside a text, send it via email, and verify and extract the watermark afterward on the recipient
+side:
 
-![Animated example of the webinterface](../../../static/img/webinterface-demo.gif)
+![Animated example of the webinterface](https://www.isst.fraunhofer.de/content/dam/isst/video/technologie/innamark/innamark-demo.gif)
