@@ -61,16 +61,16 @@ patent](https://patents.google.com/patent/WO2025056772A1/en).
 
 ## 📖 Documentation
 
-All information from usage until development are collected and provided in our
+All information from usage to development are collected and provided in our
 [documentation](https://fraunhoferisst.github.io/Innamark/).
 
 ## 📁 Structure
 
 This project uses a [monolithic repository approach](https://en.wikipedia.org/wiki/Monorepo) and
 consists of different parts, located in different subfolders. The heart is a **watermarker
-library**, located in the `watermarker` folder, used by other components like a CLI
-tool or a webinterface shipped with this repo. Every part has its own `README` file to get further
-information.
+library**, located in the `watermarker` folder, used by other components like the CLI
+tool or the webinterface shipped with this repo. Every part has its own `README` file to get 
+further information.
 
 ### Subfolder Overview
 
@@ -173,4 +173,4 @@ To cite the journal article in LaTeX/BibTeX/BibLaTeX:
 The initial project version was created within the scope of
 the [Center of Excellence Logistics and It](https://ce-logit.com/), also supported by the
 [Fraunhofer Cluster of Excellence Cognitive Internet Technologies CCIT](https://www.cit.fraunhofer.de/en.html)
-and [AHEAD as Fraunhofer's Depptech Incubator](https://www.ahead.fraunhofer.de/en.html).
+and [AHEAD as Fraunhofer's Deeptech Incubator](https://www.ahead.fraunhofer.de/en.html).
