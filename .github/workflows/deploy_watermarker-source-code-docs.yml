@@ -36,7 +36,7 @@ jobs:
       - name: Generate API documentation
         working-directory: watermarker
         if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
-        run: ./gradlew dokkaHtml
+        run: ./gradlew :dokkaGenerate
 
       - name: Deploy API documentation to Github Pages
         if: ${{ github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
