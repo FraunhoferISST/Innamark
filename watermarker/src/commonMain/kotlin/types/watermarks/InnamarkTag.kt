@@ -100,7 +100,8 @@ sealed interface InnamarkTagInterface {
 @JsExport
 sealed class InnamarkTag(
     content: ByteArray,
-) : Watermark(content), InnamarkTagInterface {
+) : Watermark(content),
+    InnamarkTagInterface {
     companion object {
         const val SOURCE = "InnamarkTag"
 
@@ -204,9 +205,7 @@ sealed class InnamarkTag(
     }
 
     /** Represents the InnamarkTag in a human-readable form */
-    override fun toString(): String {
-        return "${getSource()}(${super.getContentAsText()})"
-    }
+    override fun toString(): String = "${getSource()}(${super.getContentAsText()})"
 
     sealed interface Sized : InnamarkTagInterface {
         /**
@@ -538,21 +537,32 @@ sealed class InnamarkTag(
             "Cannot validate a watermark without a complete tag ($TAG_SIZE byte(s))."
     }
 
-    class NotEnoughDataError(source: String, val minimumBytesRequired: Int) : Event.Error(source) {
+    class NotEnoughDataError(
+        source: String,
+        val minimumBytesRequired: Int,
+    ) : Event.Error(source) {
         override fun getMessage(): String = "At least $minimumBytesRequired bytes are required."
     }
 
-    class UnknownTagError(val tag: UByte) : Event.Error(SOURCE) {
+    class UnknownTagError(
+        val tag: UByte,
+    ) : Event.Error(SOURCE) {
         override fun getMessage(): String = "Unknown watermark tag: $tag."
     }
 
-    class InvalidTagError(source: String, val expectedTag: UByte, val actualTag: UByte) :
-        Event.Error(source) {
+    class InvalidTagError(
+        source: String,
+        val expectedTag: UByte,
+        val actualTag: UByte,
+    ) : Event.Error(source) {
         override fun getMessage(): String = "Expected tag: $expectedTag, but was: $actualTag."
     }
 
-    class MismatchedSizeWarning(source: String, val expectedSize: Int, val actualSize: Int) :
-        Event.Warning(source) {
+    class MismatchedSizeWarning(
+        source: String,
+        val expectedSize: Int,
+        val actualSize: Int,
+    ) : Event.Warning(source) {
         override fun getMessage(): String =
             "Expected $expectedSize bytes, but extracted $actualSize bytes."
     }
@@ -582,7 +592,9 @@ sealed class InnamarkTag(
         }
     }
 
-    class FailedInnamarkExtractionsWarning(source: String) : Event.Warning(source) {
+    class FailedInnamarkExtractionsWarning(
+        source: String,
+    ) : Event.Warning(source) {
         override fun getMessage(): String =
             "Could not extract and convert all watermarks to InnamarkTags"
     }
@@ -634,7 +646,9 @@ fun Result<List<Watermark>>.toInnamarkTags(
  * @param content: expects bytes that represent a [RawInnamarkTag].
  */
 @JsExport
-class RawInnamarkTag(content: ByteArray) : InnamarkTag(content) {
+class RawInnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content) {
     companion object {
         const val SOURCE = "InnamarkTag.RawInnamarkTag"
         const val TYPE_TAG: UByte = 0u // "00000000"
@@ -677,7 +691,10 @@ class RawInnamarkTag(content: ByteArray) : InnamarkTag(content) {
  * @param content: expects bytes that represent a [SizedInnamarkTag].
  */
 @JsExport
-class SizedInnamarkTag(content: ByteArray) : InnamarkTag(content), InnamarkTag.Sized {
+class SizedInnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Sized {
     companion object {
         const val SOURCE = "InnamarkTag.SizedInnamarkTag"
         const val TYPE_TAG: UByte = 32u // "00100000"
@@ -693,9 +710,8 @@ class SizedInnamarkTag(content: ByteArray) : InnamarkTag(content), InnamarkTag.S
 
         /** Creates a new `SizedInnamarkTag` containing [content] */
         @JvmStatic
-        fun new(content: ByteArray): SizedInnamarkTag {
-            return SizedInnamarkTag(createRaw(TYPE_TAG, content))
-        }
+        fun new(content: ByteArray): SizedInnamarkTag =
+            SizedInnamarkTag(createRaw(TYPE_TAG, content))
 
         /** Creates a new `SizedInnamark` with [text] as content */
         @JvmStatic
@@ -749,7 +765,8 @@ class SizedInnamarkTag(content: ByteArray) : InnamarkTag(content), InnamarkTag.S
 @JsExport
 class CRC32InnamarkTag(
     content: ByteArray,
-) : InnamarkTag(content), InnamarkTag.Checksum {
+) : InnamarkTag(content),
+    InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.CRC32InnamarkTag"
         const val TYPE_TAG: UByte = 16u // "00010000"
@@ -837,8 +854,11 @@ class CRC32InnamarkTag(
  * @param content: expects bytes that represent a [SizedCRC32InnamarkTag].
  */
 @JsExport
-class SizedCRC32InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Checksum {
+class SizedCRC32InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Sized,
+    InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.SizedCRC32InnamarkTag"
         const val TYPE_TAG: UByte = 48u // "00110000"
@@ -929,7 +949,8 @@ class SizedCRC32InnamarkTag(content: ByteArray) :
 @JsExport
 class SHA3256InnamarkTag(
     content: ByteArray,
-) : InnamarkTag(content), InnamarkTag.Hash {
+) : InnamarkTag(content),
+    InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.SHA3256InnamarkTag"
         const val TYPE_TAG: UByte = 8u // "00001000"
@@ -1020,8 +1041,11 @@ class SHA3256InnamarkTag(
  * @param content: expects bytes that represent a [SizedSHA3256InnamarkTag].
  */
 @JsExport
-class SizedSHA3256InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Hash {
+class SizedSHA3256InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Sized,
+    InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.SizedSHA3256InnamarkTag"
         const val TYPE_TAG: UByte = 40u // "00101000"
@@ -1114,7 +1138,8 @@ class SizedSHA3256InnamarkTag(content: ByteArray) :
 @JsExport
 class CompressedRawInnamarkTag(
     content: ByteArray,
-) : InnamarkTag(content), InnamarkTag.Compressed {
+) : InnamarkTag(content),
+    InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedRawInnamarkTag"
         const val TYPE_TAG: UByte = 64u // "01000000"
@@ -1159,8 +1184,11 @@ class CompressedRawInnamarkTag(
  * @param content: expects bytes that represent a [CompressedSizedInnamarkTag].
  */
 @JsExport
-class CompressedSizedInnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Compressed {
+class CompressedSizedInnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Sized,
+    InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedInnamarkTag"
         const val TYPE_TAG: UByte = 96u // 01100000
@@ -1191,9 +1219,10 @@ class CompressedSizedInnamarkTag(content: ByteArray) :
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent(): Result<ByteArray> {
         val compressedContent =
-            watermarkContent.drop(
-                TAG_SIZE + SizedInnamarkTag.SIZE_SIZE,
-            ).toByteArray()
+            watermarkContent
+                .drop(
+                    TAG_SIZE + SizedInnamarkTag.SIZE_SIZE,
+                ).toByteArray()
         return Compression.inflate(compressedContent)
     }
 
@@ -1217,8 +1246,11 @@ class CompressedSizedInnamarkTag(content: ByteArray) :
  * @param content: expects bytes that represent a [CompressedCRC32InnamarkTag].
  */
 @JsExport
-class CompressedCRC32InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Checksum {
+class CompressedCRC32InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Compressed,
+    InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedCRC32InnamarkTag"
         const val TYPE_TAG: UByte = 80u // "01010000"
@@ -1253,9 +1285,10 @@ class CompressedCRC32InnamarkTag(content: ByteArray) :
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent(): Result<ByteArray> {
         val compressedContent =
-            watermarkContent.drop(
-                TAG_SIZE + CRC32InnamarkTag.CHECKSUM_SIZE,
-            ).toByteArray()
+            watermarkContent
+                .drop(
+                    TAG_SIZE + CRC32InnamarkTag.CHECKSUM_SIZE,
+                ).toByteArray()
         return Compression.inflate(compressedContent)
     }
 
@@ -1289,8 +1322,12 @@ class CompressedCRC32InnamarkTag(content: ByteArray) :
  * @param content: expects bytes that represent a [CompressedSizedCRC32InnamarkTag].
  */
 @JsExport
-class CompressedSizedCRC32InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Sized, InnamarkTag.Checksum, InnamarkTag.Compressed {
+class CompressedSizedCRC32InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Sized,
+    InnamarkTag.Checksum,
+    InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedCRC32InnamarkTag"
         const val TYPE_TAG: UByte = 112u // "01110000"
@@ -1367,8 +1404,11 @@ class CompressedSizedCRC32InnamarkTag(content: ByteArray) :
  * @param content: expects bytes that represent a [CompressedSHA3256InnamarkTag].
  */
 @JsExport
-class CompressedSHA3256InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Hash {
+class CompressedSHA3256InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Compressed,
+    InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSHA3256InnamarkTag"
         const val TYPE_TAG: UByte = 72u // "01001000"
@@ -1439,8 +1479,12 @@ class CompressedSHA3256InnamarkTag(content: ByteArray) :
  * @param content: expects bytes that represent a [CompressedSizedSHA3256InnamarkTag].
  */
 @JsExport
-class CompressedSizedSHA3256InnamarkTag(content: ByteArray) :
-    InnamarkTag(content), InnamarkTag.Compressed, InnamarkTag.Sized, InnamarkTag.Hash {
+class CompressedSizedSHA3256InnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content),
+    InnamarkTag.Compressed,
+    InnamarkTag.Sized,
+    InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedSHA3256InnamarkTag"
         const val TYPE_TAG: UByte = 104u // "01101000"
@@ -1514,7 +1558,9 @@ class CompressedSizedSHA3256InnamarkTag(content: ByteArray) :
  * @param content: expects bytes that represent a [CustomInnamarkTag].
  */
 @JsExport
-class CustomInnamarkTag(content: ByteArray) : InnamarkTag(content) {
+class CustomInnamarkTag(
+    content: ByteArray,
+) : InnamarkTag(content) {
     companion object {
         const val SOURCE = "InnamarkTag.CustomInnamarkTag"
         const val TYPE_TAG: UByte = 128u // "10000000"

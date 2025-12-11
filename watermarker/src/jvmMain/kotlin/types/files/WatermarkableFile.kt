@@ -11,7 +11,9 @@ import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import java.io.File
 
-abstract class WatermarkableFile(internal val path: String?) {
+abstract class WatermarkableFile(
+    internal val path: String?,
+) {
     /** Converts the WatermarkableFile into raw bytes */
     abstract fun toBytes(): List<Byte>
 
@@ -22,14 +24,18 @@ abstract class WatermarkableFile(internal val path: String?) {
         internal const val SOURCE = "File"
     }
 
-    class ReadError(val path: String, val reason: String) :
-        Event.Error("$SOURCE.read") {
+    class ReadError(
+        val path: String,
+        val reason: String,
+    ) : Event.Error("$SOURCE.read") {
         /** Returns a String explaining the event */
         override fun getMessage() = reason
     }
 
-    class WriteError(val path: String, val reason: String) :
-        Event.Error("$SOURCE.write") {
+    class WriteError(
+        val path: String,
+        val reason: String,
+    ) : Event.Error("$SOURCE.write") {
         /** Returns a String explaining the event */
         override fun getMessage() = reason
     }

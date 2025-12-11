@@ -42,9 +42,7 @@ interface FileWatermarker<File : WatermarkableFile> {
         target: String = source,
         watermark: String,
         fileType: String? = null,
-    ): Status {
-        return addWatermark(source, target, watermark.encodeToByteArray())
-    }
+    ): Status = addWatermark(source, target, watermark.encodeToByteArray())
 
     /**
      * Adds a watermark object to file content at [source] and writes it to [target].
@@ -54,9 +52,7 @@ interface FileWatermarker<File : WatermarkableFile> {
         target: String = source,
         watermark: Watermark,
         fileType: String? = null,
-    ): Status {
-        return addWatermark(source, target, watermark.watermarkContent)
-    }
+    ): Status = addWatermark(source, target, watermark.watermarkContent)
 
     /**
      * Adds a watermark created from [innamarkTagBuilder] to file content at [source] and writes
@@ -67,9 +63,7 @@ interface FileWatermarker<File : WatermarkableFile> {
         target: String = source,
         innamarkTagBuilder: InnamarkTagBuilder,
         fileType: String? = null,
-    ): Status {
-        return addWatermark(source, target, innamarkTagBuilder.finish())
-    }
+    ): Status = addWatermark(source, target, innamarkTagBuilder.finish())
 
     /** Checks if the file at [source] contains a watermark */
     fun containsWatermark(

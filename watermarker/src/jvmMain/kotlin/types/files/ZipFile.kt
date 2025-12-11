@@ -58,12 +58,11 @@ class ZipFile internal constructor(
     }
 
     /** Checks if [this] and [other] are equal */
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
+    override fun equals(other: Any?): Boolean =
+        when (other) {
             is ZipFile -> this.toBytes() == other.toBytes()
             else -> false
         }
-    }
 
     override fun hashCode(): Int {
         var result = header.hashCode()
@@ -145,7 +144,9 @@ class ZipFileHeader internal constructor(
             }
 
             val fileName =
-                bytes.slice(30 until extraFieldOffset.toInt()).toByteArray()
+                bytes
+                    .slice(30 until extraFieldOffset.toInt())
+                    .toByteArray()
                     .decodeToString()
 
             val (status, extraFields) =
@@ -204,7 +205,10 @@ class ZipFileHeader internal constructor(
         }
     }
 
-    data class ExtraField(val id: UShort, val data: List<Byte>) {
+    data class ExtraField(
+        val id: UShort,
+        val data: List<Byte>,
+    ) {
         // Debug helper - TODO: remove later
         override fun toString(): String {
             var rep = "Id: 0x${id.toInt().toString(16).padStart(4, '0')}, "
@@ -222,7 +226,11 @@ class ZipFileHeader internal constructor(
             val bytes = ArrayList<Byte>()
 
             bytes.addAll(this.id.toBytesLittleEndian())
-            bytes.addAll(this.data.size.toUShort().toBytesLittleEndian())
+            bytes.addAll(
+                this.data.size
+                    .toUShort()
+                    .toBytesLittleEndian(),
+            )
             bytes.addAll(this.data)
 
             return bytes
@@ -237,7 +245,9 @@ class ZipFileHeader internal constructor(
             override fun getMessage(): String = "Ran out of data trying to parse extra fields."
         }
 
-        class OversizedHeaderError(val size: Int) : Event.Error("$SOURCE.addExtraField") {
+        class OversizedHeaderError(
+            val size: Int,
+        ) : Event.Error("$SOURCE.addExtraField") {
             /** Returns a String explaining the event */
             override fun getMessage(): String =
                 "The new header size ($size Bytes) would exceed the maximum header size " +

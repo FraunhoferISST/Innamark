@@ -14,7 +14,9 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmStatic
 
 @JsExport
-open class Watermark(var watermarkContent: ByteArray) {
+open class Watermark(
+    var watermarkContent: ByteArray,
+) {
     companion object {
         const val SOURCE = "Watermark"
 
@@ -71,20 +73,17 @@ open class Watermark(var watermarkContent: ByteArray) {
     fun getContentAsText(): String = watermarkContent.toHexString()
 
     /** Represents the Watermark in a human-readable form */
-    override fun toString(): String {
-        return "Watermark(${this.getContentAsText()})"
-    }
+    override fun toString(): String = "Watermark(${this.getContentAsText()})"
 
     /** Returns true if other is a watermark and contains the same bytes */
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
+    override fun equals(other: Any?): Boolean =
+        when (other) {
             is Watermark -> {
                 this.watermarkContent.contentEquals(other.watermarkContent)
             }
 
             else -> false
         }
-    }
 
     /** Exposes content.hashCode() */
     override fun hashCode(): Int = watermarkContent.contentHashCode()

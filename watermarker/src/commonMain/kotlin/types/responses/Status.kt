@@ -52,7 +52,9 @@ sealed class Event(
      * Variant Success can be used directly if no custom message is needed.
      * Otherwise, a new class has to be created that inherits from Success.
      */
-    open class Success(source: String? = null) : Event(source, 0, SUCCESS) {
+    open class Success(
+        source: String? = null,
+    ) : Event(source, 0, SUCCESS) {
         /** Returns a String explaining the event */
         override fun getMessage(): String? = null
     }
@@ -61,13 +63,17 @@ sealed class Event(
      * Variant Warning must contain a custom message and therefore a new class has to be created
      * that inherits from Warning.
      */
-    abstract class Warning(source: String) : Event(source, 1, WARNING)
+    abstract class Warning(
+        source: String,
+    ) : Event(source, 1, WARNING)
 
     /**
      * Variant Error must contain a custom message and therefore a new class has to be created
      * that inherits from Error.
      */
-    abstract class Error(source: String) : Event(source, 2, ERROR)
+    abstract class Error(
+        source: String,
+    ) : Event(source, 2, ERROR)
 
     /** Creates a Status containing [this] event */
     @JsName("intoStatus")
@@ -90,12 +96,17 @@ sealed class Event(
  * number of events.
  */
 @JsExport
-class Status(event: Event? = null) {
+class Status(
+    event: Event? = null,
+) {
     /**
      * Represents the severity of the Status. Used to be able to override the severity given by
      * the events.
      */
-    internal enum class Type(val representation: String, val severity: Int) {
+    internal enum class Type(
+        val representation: String,
+        val severity: Int,
+    ) {
         SUCCESS(Event.SUCCESS, 0),
         WARNING(Event.WARNING, 1),
         ERROR(Event.ERROR, 2),

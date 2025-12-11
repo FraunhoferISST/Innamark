@@ -265,8 +265,8 @@ class InnamarkTagBuilder private constructor(
     }
 
     /** Contains the used InnamarkTag variant followed by [text] */
-    override fun toString(): String {
-        return if (compressed && sized && SHA3256) {
+    override fun toString(): String =
+        if (compressed && sized && SHA3256) {
             "CompressedSizedSHA3256InnamarkTagBuilder: '$text'"
         } else if (compressed && SHA3256) {
             "CompressedSHA3256InnamarkTagBuilder: '$text'"
@@ -291,30 +291,37 @@ class InnamarkTagBuilder private constructor(
         } else {
             "InnamarkTagBuilder: '$text'"
         }
-    }
 
     /** Returns true if [this].finish() and [other].finish() produce an equal InnamarkTag */
     override fun equals(other: Any?): Boolean {
         if (other !is InnamarkTagBuilder) return false
-        return text == other.text && compressed == other.compressed && sized == other.sized &&
-            CRC32 == other.CRC32 && SHA3256 == other.SHA3256
+        return text == other.text &&
+            compressed == other.compressed &&
+            sized == other.sized &&
+            CRC32 == other.CRC32 &&
+            SHA3256 == other.SHA3256
     }
 
-    class DecodeToStringError(val reason: String) : Event.Error(
-        "InnamarkTagBuilder.fromInnamarkTag",
-    ) {
+    class DecodeToStringError(
+        val reason: String,
+    ) : Event.Error(
+            "InnamarkTagBuilder.fromInnamarkTag",
+        ) {
         /** Returns a String explaining the event */
         override fun getMessage(): String = "Failed to decode bytes to string: $reason."
     }
 
-    class UnsupportedInnamarkError(val innamarkTag: String) :
-        Event.Error("InnamarkTagBuilder.fromInnamarkTag") {
+    class UnsupportedInnamarkError(
+        val innamarkTag: String,
+    ) : Event.Error("InnamarkTagBuilder.fromInnamarkTag") {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
             "The InnamarkTag type $innamarkTag is not supported by InnamarkTagBuilder."
     }
 
-    class FailedInnamarkTagBuilderExtractionsWarning(source: String) : Event.Warning(source) {
+    class FailedInnamarkTagBuilderExtractionsWarning(
+        source: String,
+    ) : Event.Warning(source) {
         /** Returns a String explaining the event */
         override fun getMessage(): String =
             "Could not extract and convert all watermarks to InnamarkTagBuilders"
@@ -362,6 +369,5 @@ fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
 fun Result<List<Watermark>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
     source: String = "toInnamarkTagBuilders",
-): Result<List<InnamarkTagBuilder>> {
-    return this.toInnamarkTags(source).toInnamarkTagBuilders(errorOnInvalidUTF8, source)
-}
+): Result<List<InnamarkTagBuilder>> =
+    this.toInnamarkTags(source).toInnamarkTagBuilders(errorOnInvalidUTF8, source)
