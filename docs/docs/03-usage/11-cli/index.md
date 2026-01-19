@@ -22,5 +22,5 @@ The CLI tool will only insert `RawInnamarkTags`  to avoid overly long and comple
 info on InnamarkTags in the corresponding
 [Development Documentation](../../04-development/10-watermarker/InnamarkTag.md)). For full 
 customization check out the other methods of [Usage](../), namely 
-[Watermarker](../10-watermarker) for direct library usage and 
-[Webinterface](../12-webinterface) for deploying a watermarking Webinterface.
+[Watermarker](../watermarker) for direct library usage and 
+[Webinterface](../webinterface) for deploying a watermarking Webinterface.
