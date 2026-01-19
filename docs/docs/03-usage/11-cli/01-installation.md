@@ -3,7 +3,7 @@ title: Installation
 ---
 
 <!--
- Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 
  This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  that can be found in the LICENSE file.
@@ -41,21 +41,6 @@ Use Gradle to build the CLI tool:
         - *Note:* You must replace `<path/to/cli>` and `<version` in the following commands
         - add the following line to your `~/.zshrc` or `~/.bashrc`:\
           `alias Innamark='java -jar <path/to/cli>/build/libs/cli-<version>-all.jar'`
-
-## Usage Example
-
-- List all watermarks contained in a file:\
-  `Innamark list example.watermarked.txt`
-- *Create a new file from the source file:*
-    - Add a watermark to a text file:\
-      `Innamark add "<watermark>" example.txt example.watermarked.txt`
-    - Remove all watermarks contained in a file:\
-      `Innamark remove example.watermarked.txt example.txt`
-- *Modify the source file:*
-    - Add a watermark to a text file:\
-      `Innamark add "<watermark>" example.txt`
-    - Remove all watermarks contained in a file:\
-      `Innamark remove example.watermarked.txt`
 
 ## Development Build
 
