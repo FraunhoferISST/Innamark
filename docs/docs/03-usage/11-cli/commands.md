@@ -13,7 +13,7 @@ title: Commands
 
 The following page gives an overview of possible commands that can be used.
 All commands assume the `Innamark` alias has been set according to the 
-[Installation](../installation) instructions. If you did not set an alias you will need to 
+[Installation](01-installation.md) instructions. If you did not set an alias you will need to 
 replace `Innamark` with `java -jar build/libs/cli-<version>-all.jar` in all commands, inserting 
 the appropriate value for `<version>` (e.g. `0.1.0-SNAPSHOT`) and executing within the `cli` 
 Innamark project folder. Similarly, if you set an alias different from `Innamark` you will need 
