@@ -55,39 +55,39 @@ should not throw any exceptions, instead functions which can fail should return 
 The code in the package `de.fraunhofer.isst.innamark.watermarker.types.files` is responsible to parse and
 generate supported file types in memory:
  - all classes adding support for a file type must implement the interface
- [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)
+ [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)
  - the classes should offer functions to modify the contents of the file when possible
     - *Example*:
-    [`ZipFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/ZipFile.kt#L247)
+    [`ZipFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/ZipFile.kt#L258)
     offers functions to add/remove extra fields into the header section of zip files
 
 The code in the package `de.fraunhofer.isst.innamark.watermarker.watermarkers.file` is responsible for
 inserting and extracting watermarks into
-[`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)s:
+[`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)s:
  - for each instance of
- [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt),
+ [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt),
  a class implementing
- [`FileWatermarker`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/watermarkers/file/FileWatermarker.kt)
+ [`FileWatermarker`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/watermarkers/file/FileWatermarker.kt)
  for that specific
  instance should exist (e.g.,
- [`ZipFileWatermarker`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/watermarkers/file/ZipFileWatermarker.kt)
+ [`ZipFileWatermarker`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/watermarkers/file/ZipFileWatermarker.kt)
  for
- [`ZipFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/ZipFile.kt)
+ [`ZipFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/ZipFile.kt)
  which is responsible for inserting,
  extracting and removing watermarks into/from that
- [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)
+ [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)
  while maintaining a valid file.
 
 ## Generate and Parse Watermarks
 The code in the package `de.fraunhofer.isst.innamark.watermarker.types.watermarks` is responsible for
 generating watermarks and parsing extracted watermarks:
  - The class 
- [`Watermark`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/watermarks/Watermark.kt)
+ [`Watermark`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/Watermark.kt)
  is the most basic watermark that offers very limited functionality but is used as a base class for
  many functions that expect a watermark as parameter as well as for more sophisticated watermarks. All
  watermarks should directly or indirectly inherit from this class.
  - The class
- [`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt)
+ [`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt)
  implements a watermark scheme that uses the first byte of the watermark as a
  tag to identify the format of the watermark. The format defines if additional information about the
  watermark (e.g., size, checksums, or hashes) is included in the watermark. The format of the
@@ -97,17 +97,17 @@ generating watermarks and parsing extracted watermarks:
 This implies that a user extracting an `InnamarkTag`  must know the type of content but not the format
 used to store the content.
     - To offer convenient functions to generate, modify, and parse
- [`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt)s
+ [`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt)s
  with specific content (e.g., text, certificate, ...) the interface
- [`InnamarkTagBuilder`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTagBuilder.kt)
+ [`InnamarkTagBuilder`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTagBuilder.kt)
  can be used to implement a class with a builder-like pattern.
 
 ## Error Handling
 We handle errors (and warnings) as values, not as exceptions. Our library
 should not throw any exceptions, instead functions which can fail should return a
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 or a
-[`Result`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Result.kt)
+[`Result`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Result.kt)
 if they return a value. This allows us to provide detailed reports about what happened during the
 execution of a function, including warnings and custom success messages holding additional
 information, like the exact source of the message. Furthermore, this approach enforces explicit
@@ -116,54 +116,55 @@ function (because the type is different). To see an example how you can handle s
 see the
 [`CLI`](https://github.com/FraunhoferISST/Innamark/blob/main/cli/src/main/kotlin/Main.kt#L281) tool.
 For more advanced usages see
-[`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L585).
+[`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L585).
 
 
 ### Status
 A
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 represents the outcome of a function, **without** a return value, that is **not guaranteed to
 succeed**. To be able to report any issues (or just additional information) that occurred during the
 execution of a function, the class
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
-contains a list of [`Event`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14)s that occurred during the execution. A
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+contains a list of [`Event`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14)s that occurred during the execution. A
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 that represents a success might not contain an
-[`Event`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14).
-Multiple [`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt) objects can be combined using [`appendStatus`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L158) and
-[`prependStatus`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L174) to propagate the reports.
+[`Event`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14).
+Multiple [`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt) objects can be combined using
+[`appendStatus`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L169) and
+[`prependStatus`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L185) to propagate the reports.
 
 #### Event
 An
-[`Event`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14)
+[`Event`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L14)
 represents different kinds of events that can occur during the execution of a function. There are 3
 base variants:
- - [`Success`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
- - [`Warning`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L60)
- - [`Error`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L66)
+ - [`Success`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
+ - [`Warning`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L62)
+ - [`Error`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L70)
  
 The variants
-[`Warning`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L60)
+[`Warning`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L62)
 and
-[`Error`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L66)
+[`Error`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L70)
 are abstract: For each event that can occur, a unique class must be created that overrides the
 function `getMessage(): String` to explain the event. If a success message with additional
 information is required, a new class inheriting from
-[`Success`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
+[`Success`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
 can be created. All variants, but the default
-[`Success`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
+[`Success`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt#L51)
 variant, require a `source` string which should explain the origin of the event (e.g.,
 `className.functionName`).
 
 ### Result
 A
-[`Result`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Result.kt)
+[`Result`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Result.kt)
 represents the outcome of a function, **with** a return value, that is **not guaranteed to
 succeed**. It functions like a
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 (it uses a
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 internally) but also has a generic member `value` that **can** contain the return value. When the
-[`Status`](https://github.com/FraunhoferISST/Innamark/blob/92e8ba4334681b76f6df4f6e9b4f5ff41911c5af/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
+[`Status`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/responses/Status.kt)
 is in **success** or **warning** state it **must contain a value**, otherwise it **should not**
 contain a value.
