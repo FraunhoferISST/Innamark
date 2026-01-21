@@ -41,10 +41,7 @@ being squashed unless using the verbose option `--verbose / -v`.
 All watermarks found in the `<watermarked String>` are printed to the console, with duplicates 
 being squashed unless using the verbose option `--verbose / -v`.
 
-## General
-- `Innamark`
-
-The empty command is equivalent to using the help option `--help / -h`.
+## Removing Watermarks
 - `Innamark [-t <file type>] remove <source path> [<target path>] `
 
 Cleans the file at `<source path>` of any watermark characters and writes the result to the file at 
@@ -66,7 +63,8 @@ For turning off squashing on the `list` commands, watermarks with the same conte
 individually instead.
 - `--help / -h`
 
-For displaying usage information.
+For displaying usage information. This option is automatically applied on the `Innamark` command 
+without arguments.
 
 ## Usage Example
 
