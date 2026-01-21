@@ -68,20 +68,22 @@ without arguments.
 
 ## Usage Example
 
-- List all watermarks contained in a file:\
-  `Innamark list example.watermarked.txt`
 - *Create a new file from the source file:*
-    - Add a watermark to a text file:\
-      `Innamark add "<watermark>" example.txt example.watermarked.txt`
-    - Remove all watermarks contained in a file:\
-      `Innamark remove example.watermarked.txt example.txt`
+  - Add a watermark to a text file:\
+    `Innamark add "<watermark>" example.txt example.watermarked.txt`
+  - Remove all watermarks contained in a file:\
+    `Innamark remove example.watermarked.txt example.txt`
 - *Modify the source file:*
-    - Add a watermark to a text file:\
-      `Innamark add "<watermark>" example.txt`
-    - Remove all watermarks contained in a file:\
-      `Innamark remove example.watermarked.txt`
+  - Add a watermark to a text file:\
+    `Innamark add "<watermark>" example.txt`
+  - Remove all watermarks contained in a file:\
+    `Innamark remove example.watermarked.txt`
+- List all unique watermarks contained in a file:\
+  `Innamark list example.watermarked.txt`
 - *Work on Strings directly:*
-    - Add a watermark to a cover String:\
-      `Innamark text add "<cover>" "<watermark>"`
-    - Remove all watermarks contained in a String:\
-      `Innamark text remove "<watermarked String>"`
+  - Add a watermark to a cover String:\
+    `Innamark text add "<cover>" "<watermark>"`
+  - List all unique watermarks contained in a String:\
+    `Innamark text list "<watermarked String>"`
+  - Remove all watermarks contained in a String:\
+    `Innamark text remove "<watermarked String>"`
