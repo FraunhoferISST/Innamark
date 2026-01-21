@@ -3,7 +3,7 @@ title: Java
 ---
 
 <!--
- Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 
  This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  that can be found in the LICENSE file.
@@ -59,7 +59,7 @@ custom return types (see [Concepts](../../../development/watermarker/concepts/#e
 for more details).*
 
 *Watermark extraction can be customized for different use cases using optional Boolean parameters
-(see [Watermarker](../#extraction-customization) for more details)*
+(see [Watermarker](index.mdx#extraction-customizations) for more details)*
 
 ```java title="src/main/java/Main.java" showLineNumbers
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result;
