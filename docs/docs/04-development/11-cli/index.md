@@ -16,7 +16,7 @@ description: Command Line Interface build with Kotlin on Java build target.
 The CLI tool uses the `kotlinx.cli` package for parsing arguments and calling the appropriate 
 functions or printing usage information if parsing fails. Additionally, functions are included for 
 unwrapping and handling Innamark's custom error handling classes 
-(see [Concepts](../../10-watermarker/concepts.mdx/#error-handling-1) for more information on error handling).
+(see [Concepts](../10-watermarker/concepts.mdx/#error-handling) for more information on error handling).
 
 ## Expansion
 To Expand upon the CLI tool's current functionality you will have to:
