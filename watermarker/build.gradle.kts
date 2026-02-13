@@ -30,7 +30,6 @@ kotlin {
 
     jvmToolchain(21)
     jvm {
-        withJava()
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -44,7 +43,7 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation("org.kotlincrypto.hash:sha3:0.8.0")
+                implementation("org.kotlincrypto.hash:sha3:0.7.1")
             }
         }
         val commonTest by getting {
