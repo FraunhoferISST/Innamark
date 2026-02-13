@@ -65,4 +65,4 @@ jobs:
       - name: Run tests
         id: test
         working-directory: watermarker
-        run: ./gradlew test
+        run: ./gradlew allTests
