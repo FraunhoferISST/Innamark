@@ -7,7 +7,7 @@
 plugins {
     kotlin("jvm") version "2.3.10"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    id("org.jlleitschuh.gradle.ktlint") version "14.0.1"
+    id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     application
 }
 
