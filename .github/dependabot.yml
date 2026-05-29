@@ -29,6 +29,10 @@ updates:
     commit-message:
       prefix: "build"
       include: "scope"
+    groups:
+      docusaurus:
+        patterns:
+          - "@docusaurus/*"
 
   - package-ecosystem: "gradle"
     directory: "/webinterface"

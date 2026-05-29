@@ -28,7 +28,7 @@ Repository-wide guidance for all coding agents in this monorepo.
 ## Tooling baseline
 - Kotlin subprojects (`watermarker/`, `cli/`, `webinterface/`): JDK 21, Gradle wrapper from the
   subproject folder.
-- `docs/`: Node 18 with yarn.
+- `docs/`: Node 24 (LTS) with yarn.
 - Always run commands from the relevant subproject directory.
 
 ## Global invariants
