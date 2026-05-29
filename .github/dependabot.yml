@@ -33,6 +33,10 @@ updates:
       docusaurus:
         patterns:
           - "@docusaurus/*"
+      react:
+        patterns:
+          - "react"
+          - "react-dom"
 
   - package-ecosystem: "gradle"
     directory: "/webinterface"
