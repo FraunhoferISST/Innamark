@@ -1,24 +1,24 @@
 <!--
- Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
 
  This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  that can be found in the LICENSE file.
 -->
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="en">
+<head>
     <title>Innamark JS Example</title>
     <script src="../../watermarker/build/dist/js/productionExecutable/watermarker.js"></script>
-  </head>
+</head>
 
-  <body>
-    <h1>Innamark JS Example</h1>
-    <script>
-      watermarker = watermarker.de.fraunhofer.isst.innamark.watermarker;
-      const Watermarker = new watermarker.Watermarker();
-      const TextWatermark = watermarker.watermarks.TextWatermark;
+<body>
+<h1>Innamark JS Example</h1>
+<script>
+    watermarker = watermarker.de.fraunhofer.isst.innamark.watermarker;
+    const Watermarker = new watermarker.Watermarker();
+    const TextWatermark = watermarker.watermarks.TextWatermark;
 
-      let text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod \
+    let text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod \
 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam \
 et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem \
 ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy \
@@ -26,15 +26,15 @@ eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptu
 accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est \
 Lorem ipsum.";
 
-      let watermark = TextWatermark.Companion.new("Hello World!");
+    let watermark = TextWatermark.Companion.new("Hello World!");
 
-      let result = Watermarker.textAddInnamarkTagBuilder(text, watermark);
+    let result = Watermarker.textAddInnamarkTagBuilder(text, watermark);
 
-      if (result.isSuccess) {
+    if (result.isSuccess) {
         document.write(result.value);
-      } else {
+    } else {
         document.write(result);
-      }
-    </script>
-  </body>
+    }
+</script>
+</body>
 </html>

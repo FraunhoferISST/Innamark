@@ -30,9 +30,10 @@ Concrete file paths that improve completion quality:
 - `docs/docs/03-usage/` and `docs/docs/04-development/`
 
 ## 3. Copilot-specific reminders
-- When generating or significantly modifying a Kotlin file, add the AI-assistance marker exactly
-  as defined in the root `AGENTS.md` (top-level `//` line after the license header, before
-  `package`). Do not place it inside KDoc.
+- When generating or significantly modifying any file, add the AI-assistance
+  marker exactly as defined in the root `AGENTS.md`, using the file's native comment syntax
+  (`//`, `#`, or `<!-- -->`). Place it as a top-level line after any license header (for Kotlin,
+  before `package`); never inside KDoc. Pure-formatting edits do not need it.
 - Mirror the matching workflow in `.github/workflows/` for touched paths when validating changes
   locally (`test_watermarker.yml`, `test_cli.yml`, `test_webinterface.yml`, `test_docusaurus.yml`).
 - For algorithm constraints, deprecated APIs (`ZipFileWatermarker`), preferred builders
