@@ -7,7 +7,7 @@ This file applies to `docs/`. Also read the repository-level `../AGENTS.md` for 
 - This is not a Gradle project.
 
 ## Dev environment and commands
-- Use Node 18 and yarn.
+- Use Node 24 (LTS) and yarn.
 - Run from `docs/`:
   - `yarn install --frozen-lockfile`
   - `yarn start`
