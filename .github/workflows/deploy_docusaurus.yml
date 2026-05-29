@@ -13,6 +13,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-docusaurus:
     name: Build Docusaurus

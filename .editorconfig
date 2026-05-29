@@ -1,2 +1,32 @@
-[*.kt]
+# This file was developed with AI assistance.
+# EditorConfig is the single source of truth for editor + ktlint formatting.
+# Docs: https://editorconfig.org
+root = true
+
+# Sensible defaults for all text files (YAML, JSON, JS, CSS, ... use 2 spaces).
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Kotlin sources and Gradle Kotlin scripts are linted by ktlint
+# (see */build.gradle.kts: org.jlleitschuh.gradle.ktlint -> ./gradlew ktlintCheck).
+# ktlint 1.x (plugin 14.2.0) already defaults to the `ktlint_official` code style.
+[*.{kt,kts}]
+indent_size = 4
 max_line_length = 100
+
+# Markdown: trailing whitespace is significant (two spaces = hard line break).
+[*.{md,mdx}]
+trim_trailing_whitespace = false
+
+# HTML files use 4-space indentation.
+[*.html]
+indent_size = 4
+
+# Windows batch files must stay CRLF (mirrors `.gitattributes`: `*.bat -text`).
+[*.bat]
+end_of_line = crlf

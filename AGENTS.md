@@ -75,16 +75,19 @@ Repository-wide guidance for all coding agents in this monorepo.
 - Every Kotlin file should keep the Fraunhofer license header and a copyright year range from the
   original creation year to the latest modification year. On any change to a file, bump the end of
   the range to the current year.
-- If an AI assistant makes a non-trivial logic change to a Kotlin file (i.e. anything beyond pure
-  formatting, renames, or comment-only edits), add the AI-assistance marker:
+- If an AI assistant makes a non-trivial change to any file (i.e. anything beyond pure
+  formatting, renames, or comment-only edits), add the AI-assistance marker using the file's
+  native single-line comment syntax. The marker text is always:
 
-  ```kotlin
-  // This file was developed with AI assistance.
+  ```text
+  This file was developed with AI assistance.
   ```
 
-  Place it as a single top-level line directly after the license header block and
-  before the `package` statement. This keeps the marker file-level, greppable, and out of
-  generated KDoc.
+  Place it as a single top-level line near the top of the file: for Kotlin, directly after the
+  license header block and before the `package` statement; for other files, directly after any
+  license header, or at the very top when there is none. This keeps the marker file-level,
+  greppable, and out of generated KDoc/docs. Pure-formatting edits (e.g. reindentation) do not
+  require the marker.
 - PR titles should follow conventional commits with component scope (e.g. `fix(cli): ...`); see
   `CONTRIBUTING.md` for the full format.
 
