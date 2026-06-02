@@ -1,0 +1,81 @@
+#
+# Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+#
+# This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+# that can be found in the LICENSE file.
+#
+# This file was developed with AI assistance.
+
+name: "SBOM: Watermarker"
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ "watermarker/**", ".github/workflows/sbom_watermarker.yml" ]
+  pull_request:
+    branches: [ main ]
+    paths: [ "watermarker/**", ".github/workflows/sbom_watermarker.yml" ]
+  release:
+    types: [ published ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: >-
+    ${{ github.workflow }} @
+    ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sbom:
+    name: License Gate & CycloneDX SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Run ORT (Analyzer -> Evaluator -> Reporter); upstream ort-config policy with
+      # fail-on: violations fails the build on copyleft licenses
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          project-path: ${{ github.workspace }}/watermarker
+          allow-dynamic-versions: 'true'
+          fail-on: 'violations'
+          report-formats: 'CycloneDx'
+          run: >
+            analyzer,
+            evaluator,
+            reporter
+
+      # Publish the ORT-generated bom.cyclonedx.json for review
+      - name: Upload CycloneDX SBOM artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: watermarker-sbom-cyclonedx
+          path: ${{ steps.ort.outputs.results-sbom-cyclonedx-json-path }}
+          if-no-files-found: error
+
+
+  attach-to-release:
+    name: Attach SBOM to Release
+    needs: sbom
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download CycloneDX SBOM artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: watermarker-sbom-cyclonedx
+          path: sbom
+
+      - name: Attach SBOM to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: sbom/bom.cyclonedx.json
