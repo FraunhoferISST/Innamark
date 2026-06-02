@@ -1,0 +1,49 @@
+#
+# Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+#
+# This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+# that can be found in the LICENSE file.
+#
+# This file was developed with AI assistance.
+
+name: "SBOM Release: Watermarker"
+
+on:
+  release:
+    types: [ published ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  attach-sbom:
+    name: CycloneDX SBOM & Release Asset
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Build the SBOM only (no license gate); enforcement lives in sbom_watermarker.yml
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          project-path: ${{ github.workspace }}/watermarker
+          allow-dynamic-versions: 'true'
+          report-formats: 'CycloneDx'
+          run: >
+            analyzer,
+            reporter
+
+      # Attach the ORT-generated bom.cyclonedx.json to the published release
+      - name: Attach SBOM to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.ort.outputs.results-sbom-cyclonedx-json-path }}

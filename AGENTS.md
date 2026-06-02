@@ -97,8 +97,10 @@ Repository-wide guidance for all coding agents in this monorepo.
   `oss-review-toolkit/ort-ci-github-action`; license policy comes from upstream `ort-config`
   (no in-repo ORT config).
 - License policy is simple: copyleft fails the build (`fail-on: violations`).
-- The SBOM (`bom.cyclonedx.json`) is never committed; it is a CI artifact and a GitHub Release asset.
-- Workflows: `.github/workflows/sbom_watermarker.yml` (license gate + SBOM) and
+- The SBOM (`bom.cyclonedx.json`) is never committed; it is a CI artifact and a GitHub Release
+  asset.
+- Workflows: `.github/workflows/sbom_watermarker.yml` (PR/push license gate + SBOM),
+  `sbom_release_watermarker.yml` (attaches the SBOM to the GitHub Release) and
   `sbom_scan_watermarker.yml` (weekly OSV scan); replicate for `cli/`/`webinterface/`, not `docs/`.
 
 ## Related instructions
