@@ -1,0 +1,80 @@
+---
+title: SBOM
+---
+
+<!--
+ Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+
+ This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+ that can be found in the LICENSE file.
+-->
+
+<!-- This file was developed with AI assistance. -->
+
+
+import PatentHint from './../../patent-hint.mdx'
+
+<PatentHint components={props.components}/>
+
+# Software Bill of Materials (SBOM)
+
+Innamark uses a Software Bill of Materials (SBOM) to track the components and dependencies used
+in the project. This includes dependencies directly used by Innamark and also tools and libraries
+used in the development process (e.g., linter). This SBOM is generated using the [OSS Review
+Toolkit (ORT)]((https://oss-review-toolkit.org/)) in the common
+[CycloneDX format](https://cyclonedx.org/). The SBOM is generated and analyzed as part of the
+GitHub CI pipeline and can be created locally as described on this page.
+
+## GitHub Workflows
+
+We currently use three GitHub workflows related to the SBOM:
+- **SBOM: Watermarker** (`sbom_watermarker.yml`) — Runs the license gate and uploads the CycloneDX
+SBOM artifact
+- **SBOM Release: Watermarker** (`sbom_release_watermarker.yml`) — Builds the SBOM and attaches it
+to the GitHub Release
+- **SBOM Scan: Watermarker** (`sbom_scan_watermarker.yml`) — Runs the OSV vulnerability scan and
+uploads the report
+
+## Manual Generation
+
+To generate the SBOM locally, you can use the following command in the root of the repository. It
+uses the [ORT](https://oss-review-toolkit.org/) Docker image, while the results land in
+`ort-results/`.
+
+:::note Prerequisite: Clean Tree
+
+Run these commands on a clean tree. If you have previously built the library, generated Kotlin/JS
+artifacts under `watermarker/build/`, clean them first:
+
+```bash
+cd watermarker && ./gradlew clean && cd ..
+```
+
+:::
+
+To generate the SBOM with its dependencies and optional vulnerability information, execute the
+following commands from the project root:
+
+**1. Analyzer: Extract Dependencies**
+```bash
+docker run --rm -v "$PWD:/project" ghcr.io/oss-review-toolkit/ort:latest \
+  -P ort.analyzer.allowDynamicVersions=true \
+  -P ort.analyzer.enabledPackageManagers=GradleInspector \
+  analyze -i /project/watermarker -o /project/ort-results -f JSON
+```
+
+**2. (Optional) Advisor: Check Vulnerabilities**
+```bash
+docker run --rm -v "$PWD:/project" ghcr.io/oss-review-toolkit/ort:latest \
+  advise -i /project/ort-results/analyzer-result.json -o /project/ort-results -a OSV -f JSON
+```
+
+**3. Reporter: Generate SBOM and WebApp Report**
+```bash
+docker run --rm -v "$PWD:/project" ghcr.io/oss-review-toolkit/ort:latest \
+  report -i /project/ort-results/analyzer-result.json -o /project/ort-results \
+  -f CycloneDx,WebApp -O CycloneDX=output.file.formats=json
+```
+
+Output: `ort-results/bom.cyclonedx.json` and `ort-results/scan-report-web-app.html`
+(open in a browser to view vulnerabilities).
