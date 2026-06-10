@@ -70,6 +70,7 @@ Repository-wide guidance for all coding agents in this monorepo.
   and maintainability.
 - Inline comments should stay light; prefer short one-sentence comments only for long or difficult
   code blocks.
+- Do not end single-line comments with a trailing period.
 - Tests do not need extra explanatory comments unless a case is genuinely non-obvious.
 - Watermarker library: value-based error handling (`Status`/`Result<T>`), avoid exceptions in core.
 - Every Kotlin file should keep the Fraunhofer license header and a copyright year range from the
@@ -90,6 +91,17 @@ Repository-wide guidance for all coding agents in this monorepo.
   require the marker.
 - PR titles should follow conventional commits with component scope (e.g. `fix(cli): ...`); see
   `CONTRIBUTING.md` for the full format.
+
+## Supply chain and SBOM (ORT)
+- Dependencies, the CycloneDX SBOM, the license gate, and the OSV scan run via
+  `oss-review-toolkit/ort-ci-github-action`; license policy comes from upstream `ort-config`
+  (no in-repo ORT config).
+- License policy is simple: copyleft fails the build (`fail-on: violations`).
+- The SBOM (`bom.cyclonedx.json`) is never committed; it is a CI artifact and a GitHub Release
+  asset.
+- Workflows: `.github/workflows/sbom_watermarker.yml` (PR/push license gate + SBOM),
+  `sbom_release_watermarker.yml` (attaches the SBOM to the GitHub Release) and
+  `sbom_scan_watermarker.yml` (weekly OSV scan); replicate for `cli/`/`webinterface/`, not `docs/`.
 
 ## Related instructions
 - Copilot-focused instructions: `.github/copilot-instructions.md`

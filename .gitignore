@@ -113,6 +113,10 @@ gradle-app.setting
 # bin Folders
 **/bin/**
 
+# ORT / SBOM build artifacts: the SBOM is a release asset, never committed
+ort-results/
+*.cyclonedx.json
+
 # Ignore all of .idea, then share only curated files
 /.idea/*
 !/.idea/.name

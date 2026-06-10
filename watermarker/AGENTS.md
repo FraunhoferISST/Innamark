@@ -78,3 +78,7 @@ This file applies to `watermarker/`. Also read the repository-level `../AGENTS.m
 - The `samples/` directory contains important text and zip examples for file-oriented watermarking
   cases; prefer reusing those scenarios over inventing new binary fixtures.
 - Do not regenerate or modify existing binary fixtures unintentionally.
+
+## Supply chain and SBOM
+- This subproject's SBOM, license gate, and OSV scan run via `.github/workflows/sbom_watermarker.yml`
+  and `sbom_scan_watermarker.yml`; see `../AGENTS.md` → "Supply chain and SBOM (ORT)" for details.

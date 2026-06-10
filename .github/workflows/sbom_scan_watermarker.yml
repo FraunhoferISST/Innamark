@@ -1,0 +1,56 @@
+#
+# Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+#
+# This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+# that can be found in the LICENSE file.
+#
+# This file was developed with AI assistance.
+
+name: "SBOM Scan: Watermarker"
+
+on:
+  schedule:
+    # Weekly, every Monday at 06:00 UTC
+    - cron: '0 6 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  vulnerability-scan:
+    name: OSV Vulnerability Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      # Run ORT (Analyzer -> Advisor -> Reporter) with OSV as the only advisor (keyless).
+      # `fail-on` is intentionally empty: this is a reporting-only scan, it must not fail
+      - name: Run ORT
+        id: ort
+        uses: oss-review-toolkit/ort-ci-github-action@v1
+        with:
+          project-path: ${{ github.workspace }}/watermarker
+          allow-dynamic-versions: 'true'
+          advisors: 'OSV'
+          fail-on: ''
+          report-formats: 'WebApp,CycloneDx'
+          run: >
+            analyzer,
+            advisor,
+            reporter
+
+      # Report only as a workflow artifact
+      - name: Upload vulnerability scan report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: watermarker-vulnerability-scan
+          path: ${{ steps.ort.outputs.results-path }}
+          if-no-files-found: error

@@ -21,6 +21,8 @@ This file applies to `docs/`. Also read the repository-level `../AGENTS.md` for 
   - `docs/docs/03-usage/`
   - `docs/docs/04-development/`
 - Add new docs with the next sequential number; do not renumber existing files unless required.
+- Always write Markdown headings/titles in title case (e.g. `This Can Be an Example for a Title`),
+  not sentence case. This also applies to admonition titles (e.g. `:::note ...`).
 
 ## Update policy
 - Any user-facing behavior change in `watermarker/`, `cli/`, or `webinterface/` should be reflected here.
@@ -29,6 +31,9 @@ This file applies to `docs/`. Also read the repository-level `../AGENTS.md` for 
 ## Assets and licensing
 - New non-source assets (images and other binary files) require a sibling `<name>.license` file
   per REUSE (e.g. `my-figure.jpg.license` for `my-figure.jpg`).
+- The AI-assistance marker (see `../AGENTS.md`) applies to docs too: in Markdown/MDX place it inside
+  an HTML/MDX comment (`<!-- This file was developed with AI assistance. -->`) right after the
+  license header, so it stays in source but is not rendered in the built Docusaurus site.
 
 ## Quality
 - Prefer small, focused docs diffs.
