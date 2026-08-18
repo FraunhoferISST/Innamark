@@ -1,0 +1,32 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+hide stereotypes
+
+' == SYSTEMS ==
+rectangle "Customer Environmnt" as company {
+    component "Customer Application" as app
+
+    component "**Innamark**" as innamark <<Innamark>>
+}
+
+rectangle "Fraunhofer ISST" as isst {
+    component "License Server" as parent_api
+}
+
+' == ACTORS ==
+actor "End User" as user
+actor "Developer" as dev
+
+' == CONNECTIONS ==
+user .down.> app : uses
+app -> innamark : "uses    "
+innamark <--> parent_api : communicates (HTTPS)
+
+dev ..> app : develops
+dev ..> innamark : integrates
+@enduml

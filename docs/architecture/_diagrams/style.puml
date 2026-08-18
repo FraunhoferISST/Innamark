@@ -1,0 +1,26 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+' This file was developed with AI assistance.
+
+' Shared PlantUML style for all arc42 architecture diagrams.
+' Include this fragment inside each diagram's @startuml block with:  !include style.puml
+' It must NOT contain @startuml/@enduml so the renderer skips it as a standalone file.
+' The include must be inside @startuml so the skinparam directives take effect.
+
+skinparam backgroundColor #FFFFFF
+skinparam defaultFontName "DejaVu Sans"
+skinparam roundCorner 10
+skinparam shadowing false
+
+<style>
+.Innamark {
+  BackgroundColor #DDEBFF
+  BorderColor #07184E
+  FontColor #07184E
+}
+</style>
+
+left to right direction

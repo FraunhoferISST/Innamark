@@ -12,16 +12,4 @@ sidebar_position: 3
 
 # Context and Scope
 
-## Business Context
-
-**\<Diagram or Table\>**
-
-**\<optionally: Explanation of external domain interfaces\>**
-
-## Technical Context
-
-**\<Diagram or Table\>**
-
-**\<optionally: Explanation of technical interfaces\>**
-
-**\<Mapping Input/Output to Channels\>**
+![Context and Scope UML diagram](images/03_context.svg)

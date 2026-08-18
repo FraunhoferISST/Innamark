@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -8,6 +8,8 @@
  * the MIT license.
  * See https://github.com/facebook/docusaurus/blob/main/LICENSE for more information.
  */
+
+/* This file was developed with AI assistance. */
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -33,4 +35,16 @@
 
 .hidden {
   display: none !important;
+}
+
+/* Full-width PlantUML diagrams in the architecture docs.
+   Docusaurus inlines small SVGs as data URIs, so match both the inlined form
+   (src starts with "data:image/svg+xml") and the file form (src ends with .svg). */
+.plugin-id-architecture .markdown img[src$=".svg"],
+.plugin-id-architecture .markdown img[src^="data:image/svg+xml"] {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin-inline: auto;
 }

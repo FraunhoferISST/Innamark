@@ -12,7 +12,9 @@ sidebar_position: 12
 
 # Glossary
 
-| Term         | Definition         |
-|--------------|--------------------|
-| *\<Term-1\>* | *\<definition-1\>* |
-| *\<Term-2\>* | *\<definition-2\>* |
+| Term           | Definition                                                                                                                                                             |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Innamark**   | Name of the project as a short form of "Invisible Watermarking".                                                                                                       |
+| **Cover Text** | A text that should be enhanced/secured by a watermark.                                                                                                                 | 
+| **Watermark**  | Will be embedded by Innamark inside the cover text. This can be a text (e.g., "Copyright X"), key, encoded-data (including image), or any other byte-encoded sequence. |
+| **CLI**        | Command-line Interface. A tool that brings watermarking functioanlities in the terminal.                                                                               |

@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION"
+     height="230px" preserveAspectRatio="none" style="width:788px;height:230px;background:#FFFFFF;"
+     version="1.1" viewBox="0 0 788 230" width="788px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
+  <defs/>
+  <g><!--cluster company-->
+    <g class="cluster" data-qualified-name="company" data-source-line="10" id="ent0001">
+      <rect fill="none" height="195" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+            width="222.68" x="192" y="7"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="171.9375" x="217.3713" y="21.9951">Customer
+        Environmnt
+      </text>
+    </g><!--cluster isst-->
+    <g class="cluster" data-qualified-name="isst" data-source-line="16" id="ent0004">
+      <rect fill="none" height="97" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+            width="175.14" x="599.68" y="7"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="127.7227" x="623.3887" y="21.9951">Fraunhofer ISST
+      </text>
+    </g><!--entity app-->
+    <g class="entity" data-qualified-name="company.app" data-source-line="11" id="ent0002">
+      <rect fill="#F1F1F1" height="46.2969" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="190.6777" x="208" y="139.85"/>
+      <rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="378.6777" y="144.85"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="376.6777" y="146.85"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="376.6777" y="150.85"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="150.6777" x="223" y="172.8451">Customer Application
+      </text>
+    </g><!--entity innamark-->
+    <g class="entity" data-qualified-name="company.innamark" data-source-line="13" id="ent0003">
+      <rect fill="#DDEBFF" height="46.2969" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="114.8398" x="245.92" y="41.85"/>
+      <rect fill="#DDEBFF" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="340.7598" y="46.85"/>
+      <rect fill="#DDEBFF" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="338.7598" y="48.85"/>
+      <rect fill="#DDEBFF" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="338.7598" y="52.85"/>
+      <text fill="#07184E" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="74.8398" x="260.92" y="74.8451">Innamark
+      </text>
+    </g><!--entity parent_api-->
+    <g class="entity" data-qualified-name="isst.parent_api" data-source-line="17" id="ent0005">
+      <rect fill="#F1F1F1" height="46.2969" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="143.1406" x="615.68" y="41.85"/>
+      <rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="738.8206" y="46.85"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="736.8206" y="48.85"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="736.8206" y="52.85"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="103.1406" x="630.68" y="74.8451">License Server
+      </text>
+    </g><!--entity user-->
+    <g class="entity" data-qualified-name="user" data-source-line="21" id="ent0006">
+      <ellipse cx="42.0029" cy="149.35" fill="#F1F1F1" rx="8" ry="8"
+               style="stroke:#181818;stroke-width:0.5;"/>
+      <path
+        d="M42.0029,157.35 L42.0029,184.35 M29.0029,165.35 L55.0029,165.35 M42.0029,184.35 L29.0029,199.35 M42.0029,184.35 L55.0029,199.35"
+        fill="none" style="stroke:#181818;stroke-width:0.5;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="62.9658" x="10.52" y="213.8451">End User
+      </text>
+    </g><!--entity dev-->
+    <g class="entity" data-qualified-name="dev" data-source-line="22" id="ent0007">
+      <ellipse cx="42.0015" cy="37.35" fill="#F1F1F1" rx="8" ry="8"
+               style="stroke:#181818;stroke-width:0.5;"/>
+      <path
+        d="M42.0015,45.35 L42.0015,72.35 M29.0015,53.35 L55.0015,53.35 M42.0015,72.35 L29.0015,87.35 M42.0015,72.35 L55.0015,87.35"
+        fill="none" style="stroke:#181818;stroke-width:0.5;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="72.0029" x="6" y="101.8451">Developer
+      </text>
+    </g><!--link user to app-->
+    <g class="link" data-entity-1="ent0006" data-entity-2="ent0002" data-link-type="dependency"
+       data-source-line="25" id="lnk8">
+      <path
+        d="M73.74,180.71 C84.57,181.24 96.82,181.74 108,182 C138.22,182.7 145.86,184.25 176,182 C186.29,181.23 192.0474,180.7204 202.6974,179.4104"
+        fill="none" id="user-to-app" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
+      <polygon fill="#181818"
+               points="207.66,178.8,198.239,175.9287,202.6974,179.4104,199.2157,183.8688,207.66,178.8"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="29.7832" x="127.5" y="178.0669">uses
+      </text>
+    </g><!--link app to innamark-->
+    <g class="link" data-entity-1="ent0002" data-entity-2="ent0003" data-link-type="dependency"
+       data-source-line="26" id="lnk9">
+      <path d="M303.34,139.78 C303.34,124.27 303.34,108.94 303.34,93.4" fill="none"
+            id="app-to-innamark" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="303.34,88.4,299.34,97.4,303.34,93.4,307.34,97.4,303.34,88.4"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="29.7832" x="268.84" y="118.5669">uses
+      </text>
+    </g><!--link innamark to parent_api-->
+    <g class="link" data-entity-1="ent0003" data-entity-2="ent0005" data-link-type="dependency"
+       data-source-line="27" id="lnk10">
+      <path d="M366.11,65 C433.84,65 537.14,65 610.52,65" fill="none" id="innamark-parent_api"
+            style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="361.11,65,370.11,69,366.11,65,370.11,61,361.11,65"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <polygon fill="#181818" points="615.52,65,606.52,61,610.52,65,606.52,69,615.52,65"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="151.5249" x="431.68" y="61.0669">communicates (HTTPS)
+      </text>
+    </g><!--link dev to app-->
+    <g class="link" data-entity-1="ent0007" data-entity-2="ent0002" data-link-type="dependency"
+       data-source-line="29" id="lnk11">
+      <path d="M78.25,80.05 C119.31,95.25 183.2809,118.9243 233.8009,137.6243" fill="none"
+            id="dev-to-app" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
+      <polygon fill="#181818"
+               points="238.49,139.36,231.4382,132.4845,233.8009,137.6243,228.6611,139.9871,238.49,139.36"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="58.5317" x="113" y="88.8169">develops
+      </text>
+    </g><!--link dev to innamark-->
+    <g class="link" data-entity-1="ent0007" data-entity-2="ent0003" data-link-type="dependency"
+       data-source-line="30" id="lnk12">
+      <path d="M78.25,66.73 C121.32,66.4 189.7501,65.8682 240.7601,65.4782" fill="none"
+            id="dev-to-innamark" style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
+      <polygon fill="#181818"
+               points="245.76,65.44,236.7297,61.5089,240.7601,65.4782,236.7908,69.5087,245.76,65.44"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="66.3774" x="109" y="62.0669">integrates
+      </text>
+    </g>
+    <?plantuml-src PL3BJiCm4BpxAvPSW4ZD1rHjf2e4KGbQXCE14xAIfRL8rfRj14M8VyTsquV0fttCpCxuIbBTzWs2TMEBcUwxbkrbxD6WSgD6ozWrB9V0ttXLFd5VCeEr4xHh4PAYjqvrQA2aGHf57Ra4X8LQTLhG2DyC_0kT8YHtGLXftSfQEAaeCeJMx2yuJTT4eXFcCqqZI4ujB1R7JPwp7tPfwTw8dlRgmzzOSruTUDQw_ruUPOra4JYQ0Kq4Qc7ywbre6LHZy5LHRLzYRb4xPI0fgO5NEn5wNnmNTpXWg_IqQN2O58hjPbCMrNgxYJA10bcZlYZBGsoO1nNBGZdBpndda8HvC9smS_APnvnjUfHFrFKK_jA3RnwgwfdVCkRFGtOwq1oisTFuueeaXpiJsBy0?>
+  </g>
+</svg>
