@@ -1,0 +1,30 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+
+
+' === System Boundary ===
+rectangle "Innamark" as system {
+
+    ' --- Core Library ---
+    component "**Watermarker Library**" as lib
+
+    ' --- Public Tools ---
+    component "**CLI**" as cli
+    component "**Web Interface**" as webinterface
+
+    ' --- Internal / Commercial ---
+    component "<<Closed Source>>\n**REST API**" as child_api
+}
+
+
+' === Internal: all components build on library ===
+cli --> lib : JVM target
+webinterface --> lib : JS target
+child_api --> lib : JVM target
+
+@enduml

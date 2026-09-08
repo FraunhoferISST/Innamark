@@ -12,73 +12,82 @@ sidebar_position: 5
 
 # Building Block View
 
-## Whitebox Overall System
+## Level 1: Innamark
 
-***\<Overview Diagram\>***
+Innamark is not one single component or application. It is a full ecosystem of various building blocks,
+offering different functionalities.
 
-Motivation  
-*\<text explanation\>*
+![Level 1: Innamark](images/05_level-1.svg)
 
-Contained Building Blocks  
-*\<Description of contained building block (black boxes)\>*
+### Contained Building Blocks
 
-Important Interfaces  
-*\<Description of important interfaces\>*
+| Building Block                                          | Description                                                                                         |
+|---------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| [**Watermarker Library**](#level-2-watermarker-library) | A Kotlin multiplatform libray, offering watermark embedding and extraction functionalities.         |
+| [**CLI**](#level-2-cli)                                 | A command line interface (CLI) as a terminal solution for watermark embedding and extraction.       |
+| [**Web Interface**](#level-2-web-interface)             | A graphical user interface (GUI) to embed and extract watermarks.                                   |
+| [**REST API**](#level-2-rest-api-blackbox) (closed source)                        | A closed-source implementation of an API, offering watermarking embedding and extraction endpoints. |
 
-### \<Name black box 1\>
 
-*\<Purpose/Responsibility\>*
+## Level 2: Watermarker Library
 
-*\<Interface(s)\>*
+![Level 2: Watermarker Library](images/05_level-2-watermarker.svg)
 
-*\<(Optional) Quality/Performance Characteristics\>*
+### Purpose / Responsibility
 
-*\<(Optional) Directory/File Location\>*
+The watermarker library is the hearth of Innamark, containing the main watermark logic and
+functionalities. It is written as a [Kotlin multiplatform](https://kotlinlang.org/multiplatform/)
+library and thus able to be built for Java (JVM) and JavaScript (JS) applications to integrate 
+watermarking into backend and frontend applications. The library is highly flexible and 
+extensible and comes with various utilities, interfaces, and builders. It aims to increase the 
+developer experience to easily integrate Innamarks watermarking mechanisms into other applications.
 
-*\<(Optional) Fulfilled Requirements\>*
+### Interfaces
 
-*\<(optional) Open Issues/Problems/Risks\>*
+_Follows soon._
 
-### \<Name black box 2\>
 
-*\<black box template\>*
+## Level 2: CLI
 
-### \<Name black box n\>
+![Level 2: CLI](images/05_level-2-cli.svg)
 
-*\<black box template\>*
+### Purpose / Responsibility
 
-### \<Name interface 1\>
+The command line interface (CLI) is based on 
+the [Kotlin CLI parser kotlinx-cli](https://github.com/Kotlin/kotlinx-cli), aiming to bring 
+watermarking functionalities into the terminal. It is able to embed and extract watermarks from 
+Strings directly in the terminal and files. The CLI tool is easy to extand with custom 
+commands and arguments. Under the hood, it uses 
+the [Innamark watermark library](#level-2-watermarker-library) with the Java build target.
 
-…​
+### Interfaces
 
-### \<Name interface m\>
+_Follows soon._
 
-## Level 2
 
-### White Box *\<building block 1\>*
+## Level 2: Web Interface
 
-*\<white box template\>*
+![Level 2: Web Interface](images/05_level-2-webinterface.svg)
 
-### White Box *\<building block 2\>*
+### Purpose / Responsibility
 
-*\<white box template\>*
+The Web Interface is based on the [KVision web framework for Kotlin/JS](https://kvision.io/), 
+aiming to create a GUI running in the browser to easily embed and extract watermarks. It 
+consists of a single-page design with two tabs: One for watermark embeeding and one for 
+watermark extraction. It is only able to embed text-watermarks into existing cover texts and 
+offers configuration possibilities for different watermark types (e.g., compress the watermark, 
+add a hash to verify the watermark, etc.). Under the hood, it uses the [Innamark watermark 
+library](#level-2-watermarker-library) with the JavaScript (JS) build target and can be seen as a 
+frontend for it.
 
-…​
+### Interfaces
 
-### White Box *\<building block m\>*
+_Follows soon._
 
-*\<white box template\>*
 
-## Level 3
+## Level 2: REST API (Blackbox)
 
-### White Box \<\_building block x.1\_\>
+### Purpose / Responsibility
 
-*\<white box template\>*
-
-### White Box \<\_building block x.2\_\>
-
-*\<white box template\>*
-
-### White Box \<\_building block y.1\_\>
-
-*\<white box template\>*
+The REST API is a closed source implementation, offering various API endpoints to watermark existing
+text and files and thus not further described in this documentation.
