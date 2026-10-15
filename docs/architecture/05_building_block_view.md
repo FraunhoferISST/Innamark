@@ -58,7 +58,8 @@ the [Kotlin CLI parser kotlinx-cli](https://github.com/Kotlin/kotlinx-cli), aimi
 watermarking functionalities into the terminal. It is able to embed and extract watermarks from 
 Strings directly in the terminal and files. The CLI tool is easy to extand with custom 
 commands and arguments. Under the hood, it uses 
-the [Innamark watermark library](#level-2-watermarker-library) with the Java build target.
+the [Innamark watermark library](#level-2-watermarker-library) with the Java build target as 
+Gradle dependency.
 
 ### Interfaces
 
@@ -77,7 +78,8 @@ consists of a single-page design with two tabs: One for watermark embeeding and 
 watermark extraction. It is only able to embed text-watermarks into existing cover texts and 
 offers configuration possibilities for different watermark types (e.g., compress the watermark, 
 add a hash to verify the watermark, etc.). Under the hood, it uses the [Innamark watermark 
-library](#level-2-watermarker-library) with the JavaScript (JS) build target and can be seen as a 
+library](#level-2-watermarker-library) with the JavaScript (JS) build target as
+Gradle dependency and can be seen as a 
 frontend for it.
 
 ### Interfaces

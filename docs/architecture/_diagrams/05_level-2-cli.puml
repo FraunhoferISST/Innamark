@@ -7,8 +7,15 @@
 !include style.puml
 
 ' === System Boundary ===
-rectangle "CLI" as system {
-    component "Follows soon"
+rectangle "**CLI**" <<Application>> as system {
+    component "**Main**" <<Component>> as app
 }
+
+component "**Watermarker Library**" <<Library>> as watermarkerlib
+component "**kotlinx-cli**" <<Library>> as clilib
+
+' External
+app -(0- watermarkerlib : JVM target
+app -(0- clilib
 
 @enduml

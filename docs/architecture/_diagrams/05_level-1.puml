@@ -11,20 +11,19 @@
 rectangle "Innamark" as system {
 
     ' --- Core Library ---
-    component "**Watermarker Library**" as lib
+    component "**Watermarker Library**" <<Library>> as lib
 
     ' --- Public Tools ---
-    component "**CLI**" as cli
-    component "**Web Interface**" as webinterface
+    component "**CLI**" <<Application>> as cli
+    component "**Web Interface**" <<Application>> as webinterface
 
     ' --- Internal / Commercial ---
-    component "<<Closed Source>>\n**REST API**" as child_api
+    component "**REST API**" <<Closed Source>> as child_api
 }
 
-
 ' === Internal: all components build on library ===
-cli --> lib : JVM target
-webinterface --> lib : JS target
-child_api --> lib : JVM target
+cli -0)- lib : JVM target
+webinterface -0)- lib : JS target
+child_api -0)- lib : JVM target
 
 @enduml

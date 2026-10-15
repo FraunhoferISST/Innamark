@@ -21,6 +21,15 @@ skinparam shadowing false
   BorderColor #07184E
   FontColor #07184E
 }
+
+.deprecated {
+  BackgroundColor #FAFAFA
+  BorderColor     #BFBFBF
+  FontColor       #8C8C8C
+  FontStyle       italic
+  LineStyle       2-3
+  LineThickness   1
+}
 </style>
 
 left to right direction

@@ -7,21 +7,17 @@
 !include style.puml
 
 ' === System Boundary ===
-rectangle "Web Interface" as system {
-    component "**App**" as app
-
-    component "**Embed Tab**" as embedTab
-    component "**Extract Tab**" as extractTab
+rectangle "**Web Interface**" <<Application>> as system {
+    component "**App**" <<Container>> as app {
+        component "**Embed Tab**" <<UI Component>> as embedTab
+        component "**Extract Tab**" <<UI Component>> as extractTab
+    }
 }
 
-component "**Watermarker Library**" as lib
-
-' Internal
-app --> embedTab
-app --> extractTab
+component "**Watermarker Library**" <<Library>> as lib
 
 ' External
-embedTab --> lib : uses
-extractTab --> lib : uses
+embedTab -(0- lib : JS target
+extractTab -(0- lib : JS target
 
 @enduml

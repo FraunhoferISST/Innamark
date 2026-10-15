@@ -6,9 +6,57 @@
 @startuml
 !include style.puml
 
+top to bottom direction
+skinparam linetype ortho
+
 ' === System Boundary ===
-rectangle "Watermarker Library" as system {
-    component "Follows soon"
+rectangle "**Watermarker Library**" <<Library>> as system {
+    package "**watermarks**" as watermarks {
+        component "**Watermark**" <<Component>> as watermark
+        component "**InnamarkTag**" <<Component>> as innamarkTag
+    }
+
+    package "**watermarkers**" as watermarkers {
+        package "**text**" as textWM {
+            component "**PlainTextWatermarker**" <<Component>> as plainTextWM
+        }
+
+        package "**file**\n<<JVM only>>" as fileWM {
+            component "**TextFileWatermarker**" <<Component>> as textFileWM
+            component "**ZipFileWatermarker**" <<Deprecated>> as zipFileWM
+        }
+    }
+
+    package "**utils**" as utils {
+        component "**Compression**" <<Component>> as compression
+        component "**CRC32**" <<Component>> as crc32
+    }
+
+    package "**responses**\n<<cross-cutting>>" as responses {
+        component "**Status**" <<Component>> as status
+        component "**Result**" <<Component>> as result
+    }
 }
+
+
+' === External Libraries (Blackbox) ===
+component "**sha3**" <<Library>> as sha3
+component "**pako**" <<Library>> as pako
+
+' === Internal Relations ===
+innamarkTag ..> compression
+innamarkTag ..> crc32
+
+watermark <|-- innamarkTag
+
+watermarkers .> watermarks: uses
+textFileWM ..> plainTextWM : "delegates to "
+
+' === External Dependencies ===
+innamarkTag -(0- sha3 : SHA3-256
+compression -(0- pako : deflate\n (JS only)
+
+' === Hidden Layout ===
+utils -[hidden]left- responses
 
 @enduml
