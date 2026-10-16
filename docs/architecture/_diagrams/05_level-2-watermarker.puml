@@ -7,7 +7,6 @@
 !include style.puml
 
 top to bottom direction
-skinparam linetype ortho
 
 ' === System Boundary ===
 rectangle "**Watermarker Library**" <<Library>> as system {
@@ -49,8 +48,8 @@ innamarkTag ..> crc32
 
 watermark <|-- innamarkTag
 
-watermarkers .> watermarks: uses
-textFileWM ..> plainTextWM : "delegates to "
+watermarkers ..> watermarks: uses
+textFileWM ..> plainTextWM : "  delegates to"
 
 ' === External Dependencies ===
 innamarkTag -(0- sha3 : SHA3-256
