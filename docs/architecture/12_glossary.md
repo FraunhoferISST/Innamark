@@ -1,6 +1,7 @@
 ---
 title: Glossary
 sidebar_position: 12
+description: Definitions of most important terms
 ---
 
 <!--

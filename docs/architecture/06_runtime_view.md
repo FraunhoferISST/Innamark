@@ -1,6 +1,7 @@
 ---
 title: Runtime View
 sidebar_position: 6
+description: Interactions between building blocks
 ---
 
 <!--

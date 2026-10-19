@@ -1,6 +1,7 @@
 ---
 title: Deployment View
 sidebar_position: 7
+description: Deployment and infrastructure information
 ---
 
 <!--

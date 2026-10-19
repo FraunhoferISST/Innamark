@@ -1,6 +1,7 @@
 ---
 title: Context and Scope
 sidebar_position: 3
+description: Most important components and actors
 ---
 
 <!--

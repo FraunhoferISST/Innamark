@@ -12,16 +12,11 @@ sidebar_position: 8
 
 # Cross-cutting Concepts
 
-## *\<Concept 1\>*
+This section describes various concepts related to multiple building blocks, each described on a 
+dedicated page.
 
-*\<explanation\>*
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
 
-## *\<Concept 2\>*
-
-*\<explanation\>*
-
-…​
-
-## *\<Concept n\>*
-
-*\<explanation\>*
+<DocCardList />
+```

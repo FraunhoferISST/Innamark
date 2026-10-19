@@ -1,6 +1,7 @@
 ---
 title: Quality Requirements
 sidebar_position: 10
+description: Detailed quality requirements based on quality goals 
 ---
 
 <!--

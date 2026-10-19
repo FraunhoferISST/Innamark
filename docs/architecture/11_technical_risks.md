@@ -1,6 +1,7 @@
 ---
 title: Risks and Technical Debts
 sidebar_position: 11
+description: List of identified risks and technical debts
 ---
 
 <!--

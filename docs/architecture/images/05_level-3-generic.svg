@@ -1,4 +1,702 @@
 <svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="CLASS"
      height="1250px" preserveAspectRatio="none"
      style="width:1083px;height:1250px;background:#FFFFFF;" version="1.1" viewBox="0 0 1083 1250"
-     width="1083px" zoomAndPan="magnify"><?plantuml 1.2026.6?><defs/><g><!--cluster utils--><g class="cluster" data-qualified-name="utils" data-source-line="13" id="ent0001"><path d="M11,79.2 L41.5898,79.2 A7.5,7.5 0 0 1 46.5898,84.2 L53.5898,101.4969 L547,101.4969 A5,5 0 0 1 552,106.4969 L552,1230.05 A5,5 0 0 1 547,1235.05 L11,1235.05 A5,5 0 0 1 6,1230.05 L6,84.2 A5,5 0 0 1 11,79.2" fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="53.5898" y1="101.4969" y2="101.4969"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="34.5898" x="10" y="94.1951">utils</text></g><!--cluster responses--><g class="cluster" data-qualified-name="responses" data-source-line="43" id="ent0008"><path d="M581,6 L657.5,6 A7.5,7.5 0 0 1 662.5,11 L669.5,28.2969 L1063,28.2969 A5,5 0 0 1 1068,33.2969 L1068,1230.48 A5,5 0 0 1 1063,1235.48 L581,1235.48 A5,5 0 0 1 576,1230.48 L576,11 A5,5 0 0 1 581,6" fill="none" style="stroke:#000000;stroke-width:1.5;"/><line style="stroke:#000000;stroke-width:1.5;" x1="576" x2="669.5" y1="28.2969" y2="28.2969"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="80.5" x="580" y="20.9951">responses</text></g><!--class Compression--><g class="entity" data-qualified-name="utils.Compression" data-source-line="15" id="ent0002"><rect fill="#F1F1F1" height="105.1563" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="284.2344" x="136.88" y="896.28"/><ellipse cx="228.5509" cy="916.4128" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M231.5196,922.0534 Q230.9415,922.3503 230.3009,922.4909 Q229.6603,922.6472 228.9571,922.6472 Q226.4571,922.6472 225.129,921.0066 Q223.8165,919.3503 223.8165,916.2253 Q223.8165,913.1003 225.129,911.4441 Q226.4571,909.7878 228.9571,909.7878 Q229.6603,909.7878 230.3009,909.9441 Q230.9571,910.1003 231.5196,910.3972 L231.5196,913.1159 Q230.8946,912.5378 230.3009,912.2722 Q229.7071,911.9909 229.0821,911.9909 Q227.7384,911.9909 227.0509,913.0691 Q226.3634,914.1316 226.3634,916.2253 Q226.3634,918.3191 227.0509,919.3972 Q227.7384,920.4597 229.0821,920.4597 Q229.7071,920.4597 230.3009,920.1941 Q230.8946,919.9128 231.5196,919.3347 L231.5196,922.0534 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="96.3926" x="247.0509" y="912.4187">&#171;expect object&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="91.1504" x="249.672" y="928.2439">Compression</text><line style="stroke:#181818;stroke-width:0.5;" x1="137.88" x2="420.1144" y1="936.5456" y2="936.5456"/><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="147.88" cy="950.1941" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="210.3486" x="156.88" y="953.5407">COMPRESSION_LEVEL: Int = 9</text><line style="stroke:#181818;stroke-width:1;" x1="137.88" x2="420.1144" y1="960.8425" y2="960.8425"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="147.88" cy="974.4909" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="195.624" x="156.88" y="977.8376">deflate(data: Byte[]): Byte[]</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="147.88" cy="990.7878" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="258.2344" x="156.88" y="994.1345">inflate(data: Byte[]): Result&lt;Byte[]&gt;</text></g><g class="entity" data-qualified-name="utils.GMN3" data-source-line="23" id="ent0004"><path d="M154.32,1168.65 L154.32,1214.0484 A5,5 0 0 0 159.32,1219.0484 L398.6833,1219.0484 A5,5 0 0 0 403.6833,1214.0484 L403.6833,1173.65 L393.6833,1163.65 L283,1163.65 L279,1001.77 L275,1163.65 L159.32,1163.65 A5,5 0 0 0 154.32,1168.65" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><path d="M393.6833,1163.65 L393.6833,1171.15 A2.5,2.5 0 0 0 396.1833,1173.65 L403.6833,1173.65 L393.6833,1163.65" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="228.3633" x="160.32" y="1180.7169">COMPRESSION_LEVEL is a file-level</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="198.377" x="160.32" y="1195.8497">const in Compression.kt, not a</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="145.374" x="160.32" y="1210.9825">member of the object.</text></g><!--class CRC32--><g class="entity" data-qualified-name="utils.CRC32" data-source-line="28" id="ent0006"><rect fill="#F1F1F1" height="72.5625" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="236.2734" x="160.86" y="539.84"/><ellipse cx="228.5504" cy="559.9728" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M231.5192,565.6134 Q230.9411,565.9103 230.3004,566.0509 Q229.6598,566.2072 228.9567,566.2072 Q226.4567,566.2072 225.1286,564.5666 Q223.8161,562.9103 223.8161,559.7853 Q223.8161,556.6603 225.1286,555.0041 Q226.4567,553.3478 228.9567,553.3478 Q229.6598,553.3478 230.3004,553.5041 Q230.9567,553.6603 231.5192,553.9572 L231.5192,556.6759 Q230.8942,556.0978 230.3004,555.8322 Q229.7067,555.5509 229.0817,555.5509 Q227.7379,555.5509 227.0504,556.6291 Q226.3629,557.6916 226.3629,559.7853 Q226.3629,561.8791 227.0504,562.9572 Q227.7379,564.0197 229.0817,564.0197 Q229.7067,564.0197 230.3004,563.7541 Q230.8942,563.4728 231.5192,562.8947 L231.5192,565.6134 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="96.3926" x="247.0504" y="555.9787">&#171;expect object&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="47.0928" x="271.7003" y="571.8039">CRC32</text><line style="stroke:#181818;stroke-width:0.5;" x1="161.86" x2="396.1334" y1="580.1056" y2="580.1056"/><line style="stroke:#181818;stroke-width:0.5;" x1="161.86" x2="396.1334" y1="588.1056" y2="588.1056"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="171.86" cy="601.7541" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="210.2734" x="180.86" y="605.1007">checksum(bytes: Byte[]): UInt</text></g><!--class ExtensionFunctions--><g class="entity" data-qualified-name="utils.ExtensionFunctions" data-source-line="32" id="ent0007"><rect fill="#F1F1F1" height="170.3438" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="513.2246" x="22.39" y="114.2"/><ellipse cx="206.5843" cy="134.3328" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M209.5531,139.9734 Q208.975,140.2703 208.3343,140.4109 Q207.6937,140.5672 206.9906,140.5672 Q204.4906,140.5672 203.1625,138.9266 Q201.85,137.2703 201.85,134.1453 Q201.85,131.0203 203.1625,129.3641 Q204.4906,127.7078 206.9906,127.7078 Q207.6937,127.7078 208.3343,127.8641 Q208.9906,128.0203 209.5531,128.3172 L209.5531,131.0359 Q208.9281,130.4578 208.3343,130.1922 Q207.7406,129.9109 207.1156,129.9109 Q205.7718,129.9109 205.0843,130.9891 Q204.3968,132.0516 204.3968,134.1453 Q204.3968,136.2391 205.0843,137.3172 Q205.7718,138.3797 207.1156,138.3797 Q207.7406,138.3797 208.3343,138.1141 Q208.9281,137.8328 209.5531,137.2547 L209.5531,139.9734 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65.9531" x="262.2757" y="130.3387">&#171;file-level&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="136.3359" x="227.0843" y="146.1639">ExtensionFunctions</text><line style="stroke:#181818;stroke-width:0.5;" x1="23.39" x2="534.6146" y1="154.4656" y2="154.4656"/><line style="stroke:#181818;stroke-width:0.5;" x1="23.39" x2="534.6146" y1="162.4656" y2="162.4656"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="176.1141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="449.0664" x="42.39" y="179.4607">UInt.Companion.fromBytesLittleEndian(bytes: List&lt;Byte&gt;): UInt</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="192.4109" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="487.2246" x="42.39" y="195.7576">UShort.Companion.fromBytesLittleEndian(bytes: List&lt;Byte&gt;): UShort</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="208.7078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="269.6641" x="42.39" y="212.0545">UInt.toBytesLittleEndian(): List&lt;Byte&gt;</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="225.0047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="288.7432" x="42.39" y="228.3514">UShort.toBytesLittleEndian(): List&lt;Byte&gt;</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="241.3016" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="173.1338" x="42.39" y="244.6482">Byte.toIntUnsigned(): Int</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="257.5984" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="277.3955" x="42.39" y="260.9451">Char.toUnicodeRepresentation(): String</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="33.39" cy="273.8953" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="219.5293" x="42.39" y="277.242">ByteArray.toHexString(): String</text></g><!--class Result--><g class="entity" data-qualified-name="responses.Result" data-source-line="45" id="ent0009"><rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="274.5137" x="684.74" y="41"/><ellipse cx="790.1384" cy="57" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M793.1072,62.6406 Q792.5291,62.9375 791.8884,63.0781 Q791.2478,63.2344 790.5447,63.2344 Q788.0447,63.2344 786.7166,61.5938 Q785.4041,59.9375 785.4041,56.8125 Q785.4041,53.6875 786.7166,52.0313 Q788.0447,50.375 790.5447,50.375 Q791.2478,50.375 791.8884,50.5313 Q792.5447,50.6875 793.1072,50.9844 L793.1072,53.7031 Q792.4822,53.125 791.8884,52.8594 Q791.2947,52.5781 790.6697,52.5781 Q789.3259,52.5781 788.6384,53.6563 Q787.9509,54.7188 787.9509,56.8125 Q787.9509,58.9063 788.6384,59.9844 Q789.3259,61.0469 790.6697,61.0469 Q791.2947,61.0469 791.8884,60.7813 Q792.4822,60.5 793.1072,59.9219 L793.1072,62.6406 Z " fill="#000000"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="43.8867" x="810.6384" y="61.8467">Result</text><rect fill="#FFFFFF" height="15.9688" style="stroke:#181818;stroke-width:1;stroke-dasharray:2,2;" width="9.3301" x="952.9236" y="38"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="7.3301" x="953.9236" y="50.1387">T</text><line style="stroke:#181818;stroke-width:0.5;" x1="685.74" x2="958.2537" y1="73" y2="73"/><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="86.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="96.7969" x="704.74" y="89.9951">status: Status</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="102.9453" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="63.3896" x="704.74" y="106.292">value: T?</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="119.2422" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="130.1357" x="704.74" y="122.5889">hasValue: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="135.5391" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="133.3965" x="704.74" y="138.8857">isSuccess: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="151.8359" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="135.7412" x="704.74" y="155.1826">isWarning: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="695.74" cy="168.1328" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="111.7197" x="704.74" y="171.4795">isError: Boolean</text><line style="stroke:#181818;stroke-width:1;" x1="685.74" x2="958.2537" y1="178.7813" y2="178.7813"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="192.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="117.7559" x="704.74" y="195.7764">&#171;Create&#187; Result(</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="101.2471" x="749.242" y="212.0732">status: Status,</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="63.3896" x="749.242" y="228.3701">value: T?</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="5.4619" x="704.74" y="244.667">)</text><line style="stroke:#181818;stroke-width:1;" x1="685.74" x2="958.2537" y1="251.9688" y2="251.9688"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="265.6172" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="186.1973" x="704.74" y="268.9639">into(value: T?): Result&lt;T&gt;</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="281.9141" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="91.5195" x="704.74" y="285.2607">into(): Status</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="298.2109" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="242.7236" x="704.74" y="301.5576">appendStatus(status: Status): Unit</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="314.5078" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="248.5137" x="704.74" y="317.8545">prependStatus(status: Status): Unit</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="330.8047" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="146.2207" x="704.74" y="334.1514">getMessage(): String</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="695.74" cy="347.1016" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="206.7119" x="704.74" y="350.4482">success(value: T): Result&lt;T&gt;</text></g><!--class Status--><g class="entity" data-qualified-name="responses.Status" data-source-line="66" id="ent0010"><rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="459.9727" x="592.01" y="417.75"/><ellipse cx="795.4407" cy="433.75" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M798.4094,439.3906 Q797.8313,439.6875 797.1907,439.8281 Q796.55,439.9844 795.8469,439.9844 Q793.3469,439.9844 792.0188,438.3438 Q790.7063,436.6875 790.7063,433.5625 Q790.7063,430.4375 792.0188,428.7813 Q793.3469,427.125 795.8469,427.125 Q796.55,427.125 797.1907,427.2813 Q797.8469,427.4375 798.4094,427.7344 L798.4094,430.4531 Q797.7844,429.875 797.1907,429.6094 Q796.5969,429.3281 795.9719,429.3281 Q794.6282,429.3281 793.9407,430.4063 Q793.2532,431.4688 793.2532,433.5625 Q793.2532,435.6563 793.9407,436.7344 Q794.6282,437.7969 795.9719,437.7969 Q796.5969,437.7969 797.1907,437.5313 Q797.7844,437.25 798.4094,436.6719 L798.4094,439.3906 Z " fill="#000000"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="44.6113" x="815.9407" y="438.5967">Status</text><line style="stroke:#181818;stroke-width:0.5;" x1="593.01" x2="1050.9827" y1="449.75" y2="449.75"/><g data-visibility-modifier="PRIVATE_FIELD"><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1;" width="6" x="600.01" y="460.3984"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="161.5537" x="612.01" y="466.7451">eventList: List&lt;Event&gt;</text><g data-visibility-modifier="PRIVATE_FIELD"><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1;" width="6" x="600.01" y="476.6953"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="74.7783" x="612.01" y="483.042">type: Type</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="603.01" cy="495.9922" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="133.3965" x="612.01" y="499.3389">isSuccess: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="603.01" cy="512.2891" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="135.7412" x="612.01" y="515.6357">isWarning: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="603.01" cy="528.5859" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="111.7197" x="612.01" y="531.9326">isError: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="603.01" cy="544.8828" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="205.5977" x="612.01" y="548.2295">hasCustomMessage: Boolean</text><line style="stroke:#181818;stroke-width:1;" x1="593.01" x2="1050.9827" y1="555.5313" y2="555.5313"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="569.1797" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="118.4805" x="612.01" y="572.5264">&#171;Create&#187; Status(</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="96.5781" x="656.512" y="588.8232">event: Event?</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="5.4619" x="612.01" y="605.1201">)</text><line style="stroke:#181818;stroke-width:1;" x1="593.01" x2="1050.9827" y1="612.4219" y2="612.4219"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="626.0703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="395.377" x="612.01" y="629.417">addEvent(event: Event, overrideSeverity: Boolean): UInt</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="642.3672" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="178.5205" x="612.01" y="645.7139">getEvents(): List&lt;Event&gt;</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="658.6641" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="428.1826" x="612.01" y="662.0107">appendStatus(other: Status, overrideSeverity: Boolean): UInt</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="674.9609" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="433.9727" x="612.01" y="678.3076">prependStatus(other: Status, overrideSeverity: Boolean): UInt</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="691.2578" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="146.2207" x="612.01" y="694.6045">getMessage(): String</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="707.5547" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="186.1973" x="612.01" y="710.9014">into(value: T?): Result&lt;T&gt;</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="603.01" cy="723.8516" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="119.4648" x="612.01" y="727.1982">success(): Status</text></g><!--class Type--><g class="entity" data-qualified-name="responses.Type" data-source-line="87" id="ent0011"><rect fill="#F1F1F1" height="137.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="180.2393" x="591.88" y="879.98"/><ellipse cx="636.0584" cy="900.1128" fill="#EB937F" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M640.1677,906.1128 L632.449,906.1128 L632.449,893.7222 L640.1677,893.7222 L640.1677,895.8784 L634.9021,895.8784 L634.9021,898.5503 L639.6677,898.5503 L639.6677,900.7066 L634.9021,900.7066 L634.9021,903.9566 L640.1677,903.9566 L640.1677,906.1128 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="49.0957" x="673.6938" y="896.1187">&#171;enum&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="83.3984" x="656.5425" y="911.9439">Status.Type</text><line style="stroke:#181818;stroke-width:0.5;" x1="592.88" x2="771.1193" y1="920.2456" y2="920.2456"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="65.3037" x="597.88" y="937.2407">SUCCESS</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="69.0703" x="597.88" y="953.5376">WARNING</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="49.0479" x="597.88" y="969.8345">ERROR</text><line style="stroke:#181818;stroke-width:1;" x1="592.88" x2="771.1193" y1="977.1363" y2="977.1363"/><g data-visibility-modifier="PACKAGE_PRIVATE_FIELD"><polygon fill="none" points="602.88,986.7847,598.88,992.7847,606.88,992.7847" style="stroke:#1963A0;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="154.2393" x="611.88" y="994.1314">representation: String</text><g data-visibility-modifier="PACKAGE_PRIVATE_FIELD"><polygon fill="none" points="602.88,1003.0816,598.88,1009.0816,606.88,1009.0816" style="stroke:#1963A0;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="83.8838" x="611.88" y="1010.4282">severity: Int</text></g><!--class Event--><g class="entity" data-qualified-name="responses.Event" data-source-line="96" id="ent0012"><rect fill="#F1F1F1" height="308.7188" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="231.5977" x="807.2" y="794.5"/><ellipse cx="893.6814" cy="814.6328" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M893.7908,809.9766 L892.6346,815.0547 L894.9627,815.0547 L893.7908,809.9766 Z M892.3064,807.7422 L895.2908,807.7422 L898.6502,820.1328 L896.1971,820.1328 L895.4314,817.0703 L892.1502,817.0703 L891.4002,820.1328 L888.9627,820.1328 L892.3064,807.7422 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="54.1348" x="912.1814" y="810.6387">&#171;sealed&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="40.1064" x="919.1956" y="826.4639">Event</text><line style="stroke:#181818;stroke-width:0.5;" x1="808.2" x2="1037.7977" y1="834.7656" y2="834.7656"/><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="848.4141" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="105.1777" x="827.2" y="851.7607">source: String?</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="864.7109" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="83.8838" x="827.2" y="868.0576">severity: Int</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="881.0078" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="154.2393" x="827.2" y="884.3545">representation: String</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="897.3047" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="205.5977" x="827.2" y="900.6514">hasCustomMessage: Boolean</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="913.6016" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="116.252" x="827.2" y="916.9482">SUCCESS: String</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="929.8984" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="120.0186" x="827.2" y="933.2451">WARNING: String</text><g data-visibility-modifier="PUBLIC_FIELD"><ellipse cx="818.2" cy="946.1953" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" text-decoration="underline" textLength="99.9961" x="827.2" y="949.542">ERROR: String</text><line style="stroke:#181818;stroke-width:1;" x1="808.2" x2="1037.7977" y1="956.8438" y2="956.8438"/><g data-visibility-modifier="PROTECTED_METHOD"><polygon fill="#FFFF44" points="818.2,965.4922,822.2,969.4922,818.2,973.4922,814.2,969.4922" style="stroke:#B38D22;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="113.9756" x="827.2" y="973.8389">&#171;Create&#187; Event(</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="109.6279" x="871.702" y="990.1357">source: String?,</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="88.334" x="871.702" y="1006.4326">severity: Int,</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="154.2393" x="871.702" y="1022.7295">representation: String</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="5.4619" x="827.2" y="1039.0264">)</text><line style="stroke:#181818;stroke-width:1;" x1="808.2" x2="1037.7977" y1="1046.3281" y2="1046.3281"/><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="818.2" cy="1059.9766" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="153.6514" x="827.2" y="1063.3232">getMessage(): String?</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="818.2" cy="1076.2734" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="91.5195" x="827.2" y="1079.6201">into(): Status</text><g data-visibility-modifier="PUBLIC_METHOD"><ellipse cx="818.2" cy="1092.5703" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1;"/></g><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="186.1973" x="827.2" y="1095.917">into(value: T?): Result&lt;T&gt;</text></g><!--class Success--><g class="entity" data-qualified-name="responses.Success" data-source-line="116" id="ent0013"><rect fill="#F1F1F1" height="56.2656" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="132.9121" x="602.54" y="1163.21"/><ellipse cx="617.54" cy="1183.3428" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M620.5088,1188.9834 Q619.9306,1189.2803 619.29,1189.4209 Q618.6494,1189.5772 617.9463,1189.5772 Q615.4463,1189.5772 614.1181,1187.9366 Q612.8056,1186.2803 612.8056,1183.1553 Q612.8056,1180.0303 614.1181,1178.3741 Q615.4463,1176.7178 617.9463,1176.7178 Q618.6494,1176.7178 619.29,1176.8741 Q619.9463,1177.0303 620.5088,1177.3272 L620.5088,1180.0459 Q619.8838,1179.4678 619.29,1179.2022 Q618.6963,1178.9209 618.0713,1178.9209 Q616.7275,1178.9209 616.04,1179.9991 Q615.3525,1181.0616 615.3525,1183.1553 Q615.3525,1185.2491 616.04,1186.3272 Q616.7275,1187.3897 618.0713,1187.3897 Q618.6963,1187.3897 619.29,1187.1241 Q619.8838,1186.8428 620.5088,1186.2647 L620.5088,1188.9834 Z " fill="#000000"/><text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="44.7598" x="659.6162" y="1179.3487">&#171;open&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing" textLength="100.9121" x="631.54" y="1195.1739">Event.Success</text><line style="stroke:#181818;stroke-width:0.5;" x1="603.54" x2="734.4521" y1="1203.4756" y2="1203.4756"/><line style="stroke:#181818;stroke-width:0.5;" x1="603.54" x2="734.4521" y1="1211.4756" y2="1211.4756"/></g><!--class Warning--><g class="entity" data-qualified-name="responses.Warning" data-source-line="119" id="ent0014"><rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="135.2568" x="770.37" y="1167.35"/><ellipse cx="785.37" cy="1183.35" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M785.4794,1178.6938 L784.3231,1183.7719 L786.6513,1183.7719 L785.4794,1178.6938 Z M783.995,1176.4594 L786.9794,1176.4594 L790.3388,1188.85 L787.8856,1188.85 L787.12,1185.7875 L783.8388,1185.7875 L783.0888,1188.85 L780.6513,1188.85 L783.995,1176.4594 Z " fill="#000000"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="103.2568" x="799.37" y="1188.1967">Event.Warning</text><line style="stroke:#181818;stroke-width:0.5;" x1="771.37" x2="904.6268" y1="1199.35" y2="1199.35"/><line style="stroke:#181818;stroke-width:0.5;" x1="771.37" x2="904.6268" y1="1207.35" y2="1207.35"/></g><!--class Error--><g class="entity" data-qualified-name="responses.Error" data-source-line="122" id="ent0015"><rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="111.2354" x="940.38" y="1167.35"/><ellipse cx="955.38" cy="1183.35" fill="#A9DCDF" rx="11" ry="11" style="stroke:#181818;stroke-width:1;"/><path d="M955.4894,1178.6938 L954.3331,1183.7719 L956.6613,1183.7719 L955.4894,1178.6938 Z M954.005,1176.4594 L956.9894,1176.4594 L960.3488,1188.85 L957.8956,1188.85 L957.13,1185.7875 L953.8488,1185.7875 L953.0988,1188.85 L950.6613,1188.85 L954.005,1176.4594 Z " fill="#000000"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="79.2354" x="969.38" y="1188.1967">Event.Error</text><line style="stroke:#181818;stroke-width:0.5;" x1="941.38" x2="1050.6154" y1="1199.35" y2="1199.35"/><line style="stroke:#181818;stroke-width:0.5;" x1="941.38" x2="1050.6154" y1="1207.35" y2="1207.35"/></g><!--reverse link Event to Success--><g class="link" data-entity-1="ent0012" data-entity-2="ent0013" data-link-type="extension" data-source-line="125" id="lnk16"><path codeLine="125" d="M788.78,1060.48 C721.9,1060.48 669,1060.48 669,1060.48 C669,1060.48 669,1124.46 669,1162.95" fill="none" id="Event-backto-Success" style="stroke:#181818;stroke-width:1;"/><polygon fill="none" points="806.78,1060.48,788.78,1054.48,788.78,1066.48,806.78,1060.48" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--reverse link Event to Warning--><g class="link" data-entity-1="ent0012" data-entity-2="ent0014" data-link-type="extension" data-source-line="126" id="lnk17"><path codeLine="126" d="M856.41,1121.46 C856.41,1146.23 856.41,1150.98 856.41,1167.13" fill="none" id="Event-backto-Warning" style="stroke:#181818;stroke-width:1;"/><polygon fill="none" points="856.41,1103.46,850.41,1121.46,862.41,1121.46,856.41,1103.46" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--reverse link Event to Error--><g class="link" data-entity-1="ent0012" data-entity-2="ent0015" data-link-type="extension" data-source-line="127" id="lnk18"><path codeLine="127" d="M989.59,1121.46 C989.59,1146.23 989.59,1150.98 989.59,1167.13" fill="none" id="Event-backto-Error" style="stroke:#181818;stroke-width:1;"/><polygon fill="none" points="989.59,1103.46,983.59,1121.46,995.59,1121.46,989.59,1103.46" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/></g><!--link Result to Status--><g class="link" data-entity-1="ent0009" data-entity-2="ent0010" data-link-type="dependency" data-source-line="129" id="lnk19"><path codeLine="129" d="M822,358.05 C822,377.66 822,392.71 822,412.32" fill="none" id="Result-to-Status" style="stroke:#181818;stroke-width:1;"/><polygon fill="#181818" points="822,417.32,826,408.32,822,412.32,818,408.32,822,417.32" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="22.9785" x="794" y="383.7569">has</text></g><!--link Status to Event--><g class="link" data-entity-1="ent0010" data-entity-2="ent0012" data-link-type="dependency" data-source-line="130" id="lnk20"><path codeLine="130" d="M923,734.73 C923,754.45 923,769.59 923,789.24" fill="none" id="Status-to-Event" style="stroke:#181818;stroke-width:1;"/><polygon fill="#181818" points="923,794.24,927,785.24,923,789.24,919,785.24,923,794.24" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="55.0278" x="863" y="760.5569">contains</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="23.0356" x="899.4439" y="783.4575">0..*</text></g><!--link Status to Type--><g class="link" data-entity-1="ent0010" data-entity-2="ent0011" data-link-type="dependency" data-source-line="131" id="lnk21"><path codeLine="131" d="M682.07,734.73 C682.07,785.46 682.07,833.99 682.07,874.84" fill="none" id="Status-to-Type" style="stroke:#181818;stroke-width:1;"/><polygon fill="#181818" points="682.07,879.84,686.07,870.84,682.07,874.84,678.07,870.84,682.07,879.84" style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="22.9785" x="654.07" y="803.3569">has</text></g><!--link ExtensionFunctions to CRC32--><!--link CRC32 to Compression--><?plantuml-src hLRTRzCm47_FNt6K1pfOAmHFL5qHL0KcbGsr6pm0GcvoMyqIExATQTKeVpjdnqcTDjq6OW-hSzyVlplx4HTnMYG8sgnIxET5baQHaJaO2GjfZCmWuGfZmwM8z1KNELCiWvGBDAiSGIgpb56Ki_YANI9q2iDJtG6cmPtWDee0ufHf3MEPvGgr9aim7E9DJbP1BdxIpsX4Wa1_p-1M6sPul8RnwSTFiybyVdnwycCw-JoP3k1O63Y2LqworzjMIF0YPGQx2JDi06zN1hz-FwWEsy9Sj0hFK1Uf6PRV8r9Qs_Y5D5XLGrw4YJYpEv42ry3WWgVOI_4QKoSLIw4D-GtL-rVcq5e7vaGop1Qeh0kpH5-QFd5G92w6e9QpySiN3wbYlCJuIXTPTq4fwI3JSofcbLzfSt9ZKDYetXN2zLkJWqqIRTQjaRxDXmcRpOMIcNMWfzoO52SYuKnKdgTSbuKTRRmtZSsNXAP_C-TKMwCpSjV4GQY-9uo_rhD4qYAVvrJ5Iu69bM_9SxnaYWJF1OzbWZEqO41XcTAvc1l5nMMR-JTAiHMfVi2RKgWXlexMcq4acpbr4BKTnSr7C8uUwcURjbfNXROMxQydNhEqm06SlVRVIwO_bwItKgR8XATpFI_Yc62zo_Z2bA0GTnaJfQHgakkn7Wx72cb22NPbf5t70FXcO2lImu3J31VWe6cL2oExjSncuCz6eS31LWrOdjC8bgHkqxS5d-1LZwcL3vIyHFEHYaMjscfvtN3gHrdGEjwjS8FHBJtuHlQ0nbKOYrIFrudz7dccNTjaZFx_tyuvQ8mBJKlIPtP_PtsXWlwvq0VW8jxJGvOaZjqDPGz1NgDIFC4vaHKtgzfxSzrGuPs2hgSvgCvMgoMjOLMZxA4UcY3uDnjxuN4lX5lm4yBPWGP5aK6dfFKj4jo5RG_sIY5clUldv-CntMpk_ENDxEJuvBqxJsQpqrdObj-qPC95rWZwD-WwtU3QOGjj5AFhozy_jWyKW4QMOX9SDreMAiRAOhM8jarQsXqnt0VFe6u-wNrZwUkmZ-rAqs3w4ZqEaLyYE5nfpIJ3dTR8D6JSaUxErDnMrLwtWklrNVllJiW5QwZZikhxTU90vS-KkgIXy4rjwxxNzHl7wVhpVIfk5pa5Tzg8Uq3zwlMgC9f4Rxz9T3QiTfaZ5R1QKp203c48EiJq5CliFE_tdtQy2HAXTvvXNEp8kV6gJL20J-3ew0W-y2H10LEsaeMnbAZb7TRxkdHYttlbooygttyXENYJ_W40?></g></svg>
+     width="1083px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
+  <defs/>
+  <g><!--cluster utils-->
+    <g class="cluster" data-qualified-name="utils" data-source-line="13" id="ent0001">
+      <path
+        d="M11,79.2 L41.5898,79.2 A7.5,7.5 0 0 1 46.5898,84.2 L53.5898,101.4969 L547,101.4969 A5,5 0 0 1 552,106.4969 L552,1230.05 A5,5 0 0 1 547,1235.05 L11,1235.05 A5,5 0 0 1 6,1230.05 L6,84.2 A5,5 0 0 1 11,79.2"
+        fill="none" style="stroke:#000000;stroke-width:1.5;"/>
+      <line style="stroke:#000000;stroke-width:1.5;" x1="6" x2="53.5898" y1="101.4969"
+            y2="101.4969"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="34.5898" x="10" y="94.1951">utils
+      </text>
+    </g><!--cluster responses-->
+    <g class="cluster" data-qualified-name="responses" data-source-line="43" id="ent0008">
+      <path
+        d="M581,6 L657.5,6 A7.5,7.5 0 0 1 662.5,11 L669.5,28.2969 L1063,28.2969 A5,5 0 0 1 1068,33.2969 L1068,1230.48 A5,5 0 0 1 1063,1235.48 L581,1235.48 A5,5 0 0 1 576,1230.48 L576,11 A5,5 0 0 1 581,6"
+        fill="none" style="stroke:#000000;stroke-width:1.5;"/>
+      <line style="stroke:#000000;stroke-width:1.5;" x1="576" x2="669.5" y1="28.2969" y2="28.2969"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="80.5" x="580" y="20.9951">responses
+      </text>
+    </g><!--class Compression-->
+    <g class="entity" data-qualified-name="utils.Compression" data-source-line="15" id="ent0002">
+      <rect fill="#F1F1F1" height="105.1563" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="284.2344" x="136.88" y="896.28"/>
+      <ellipse cx="228.5509" cy="916.4128" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M231.5196,922.0534 Q230.9415,922.3503 230.3009,922.4909 Q229.6603,922.6472 228.9571,922.6472 Q226.4571,922.6472 225.129,921.0066 Q223.8165,919.3503 223.8165,916.2253 Q223.8165,913.1003 225.129,911.4441 Q226.4571,909.7878 228.9571,909.7878 Q229.6603,909.7878 230.3009,909.9441 Q230.9571,910.1003 231.5196,910.3972 L231.5196,913.1159 Q230.8946,912.5378 230.3009,912.2722 Q229.7071,911.9909 229.0821,911.9909 Q227.7384,911.9909 227.0509,913.0691 Q226.3634,914.1316 226.3634,916.2253 Q226.3634,918.3191 227.0509,919.3972 Q227.7384,920.4597 229.0821,920.4597 Q229.7071,920.4597 230.3009,920.1941 Q230.8946,919.9128 231.5196,919.3347 L231.5196,922.0534 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="96.3926" x="247.0509" y="912.4187">&#171;expect
+        object&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="91.1504" x="249.672" y="928.2439">Compression
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="137.88" x2="420.1144" y1="936.5456"
+            y2="936.5456"/>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="147.88" cy="950.1941" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="210.3486" x="156.88" y="953.5407">
+        COMPRESSION_LEVEL: Int = 9
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="137.88" x2="420.1144" y1="960.8425"
+            y2="960.8425"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="147.88" cy="974.4909" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="195.624" x="156.88" y="977.8376">deflate(data:
+        Byte[]): Byte[]
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="147.88" cy="990.7878" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="258.2344" x="156.88" y="994.1345">inflate(data:
+        Byte[]): Result&lt;Byte[]&gt;
+      </text>
+    </g>
+    <g class="entity" data-qualified-name="utils.GMN3" data-source-line="23" id="ent0004">
+      <path
+        d="M154.32,1168.65 L154.32,1214.0484 A5,5 0 0 0 159.32,1219.0484 L398.6833,1219.0484 A5,5 0 0 0 403.6833,1214.0484 L403.6833,1173.65 L393.6833,1163.65 L283,1163.65 L279,1001.77 L275,1163.65 L159.32,1163.65 A5,5 0 0 0 154.32,1168.65"
+        fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/>
+      <path
+        d="M393.6833,1163.65 L393.6833,1171.15 A2.5,2.5 0 0 0 396.1833,1173.65 L403.6833,1173.65 L393.6833,1163.65"
+        fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="228.3633" x="160.32" y="1180.7169">COMPRESSION_LEVEL is a file-level
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="198.377" x="160.32" y="1195.8497">const in Compression.kt, not a
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="145.374" x="160.32" y="1210.9825">member of the object.
+      </text>
+    </g><!--class CRC32-->
+    <g class="entity" data-qualified-name="utils.CRC32" data-source-line="28" id="ent0006">
+      <rect fill="#F1F1F1" height="72.5625" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="236.2734" x="160.86" y="539.84"/>
+      <ellipse cx="228.5504" cy="559.9728" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M231.5192,565.6134 Q230.9411,565.9103 230.3004,566.0509 Q229.6598,566.2072 228.9567,566.2072 Q226.4567,566.2072 225.1286,564.5666 Q223.8161,562.9103 223.8161,559.7853 Q223.8161,556.6603 225.1286,555.0041 Q226.4567,553.3478 228.9567,553.3478 Q229.6598,553.3478 230.3004,553.5041 Q230.9567,553.6603 231.5192,553.9572 L231.5192,556.6759 Q230.8942,556.0978 230.3004,555.8322 Q229.7067,555.5509 229.0817,555.5509 Q227.7379,555.5509 227.0504,556.6291 Q226.3629,557.6916 226.3629,559.7853 Q226.3629,561.8791 227.0504,562.9572 Q227.7379,564.0197 229.0817,564.0197 Q229.7067,564.0197 230.3004,563.7541 Q230.8942,563.4728 231.5192,562.8947 L231.5192,565.6134 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="96.3926" x="247.0504" y="555.9787">&#171;expect
+        object&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="47.0928" x="271.7003" y="571.8039">CRC32
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="161.86" x2="396.1334" y1="580.1056"
+            y2="580.1056"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="161.86" x2="396.1334" y1="588.1056"
+            y2="588.1056"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="171.86" cy="601.7541" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="210.2734" x="180.86" y="605.1007">
+        checksum(bytes: Byte[]): UInt
+      </text>
+    </g><!--class ExtensionFunctions-->
+    <g class="entity" data-qualified-name="utils.ExtensionFunctions" data-source-line="32"
+       id="ent0007">
+      <rect fill="#F1F1F1" height="170.3438" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="513.2246" x="22.39" y="114.2"/>
+      <ellipse cx="206.5843" cy="134.3328" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M209.5531,139.9734 Q208.975,140.2703 208.3343,140.4109 Q207.6937,140.5672 206.9906,140.5672 Q204.4906,140.5672 203.1625,138.9266 Q201.85,137.2703 201.85,134.1453 Q201.85,131.0203 203.1625,129.3641 Q204.4906,127.7078 206.9906,127.7078 Q207.6937,127.7078 208.3343,127.8641 Q208.9906,128.0203 209.5531,128.3172 L209.5531,131.0359 Q208.9281,130.4578 208.3343,130.1922 Q207.7406,129.9109 207.1156,129.9109 Q205.7718,129.9109 205.0843,130.9891 Q204.3968,132.0516 204.3968,134.1453 Q204.3968,136.2391 205.0843,137.3172 Q205.7718,138.3797 207.1156,138.3797 Q207.7406,138.3797 208.3343,138.1141 Q208.9281,137.8328 209.5531,137.2547 L209.5531,139.9734 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="65.9531" x="262.2757" y="130.3387">&#171;file-level&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="136.3359" x="227.0843" y="146.1639">ExtensionFunctions
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="23.39" x2="534.6146" y1="154.4656"
+            y2="154.4656"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="23.39" x2="534.6146" y1="162.4656"
+            y2="162.4656"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="176.1141" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="449.0664" x="42.39" y="179.4607">
+        UInt.Companion.fromBytesLittleEndian(bytes: List&lt;Byte&gt;): UInt
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="192.4109" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="487.2246" x="42.39" y="195.7576">
+        UShort.Companion.fromBytesLittleEndian(bytes: List&lt;Byte&gt;): UShort
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="208.7078" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="269.6641" x="42.39" y="212.0545">
+        UInt.toBytesLittleEndian(): List&lt;Byte&gt;
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="225.0047" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="288.7432" x="42.39" y="228.3514">
+        UShort.toBytesLittleEndian(): List&lt;Byte&gt;
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="241.3016" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="173.1338" x="42.39" y="244.6482">
+        Byte.toIntUnsigned(): Int
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="257.5984" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="277.3955" x="42.39" y="260.9451">
+        Char.toUnicodeRepresentation(): String
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="33.39" cy="273.8953" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="219.5293" x="42.39" y="277.242">
+        ByteArray.toHexString(): String
+      </text>
+    </g><!--class Result-->
+    <g class="entity" data-qualified-name="responses.Result" data-source-line="45" id="ent0009">
+      <rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="274.5137" x="684.74" y="41"/>
+      <ellipse cx="790.1384" cy="57" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M793.1072,62.6406 Q792.5291,62.9375 791.8884,63.0781 Q791.2478,63.2344 790.5447,63.2344 Q788.0447,63.2344 786.7166,61.5938 Q785.4041,59.9375 785.4041,56.8125 Q785.4041,53.6875 786.7166,52.0313 Q788.0447,50.375 790.5447,50.375 Q791.2478,50.375 791.8884,50.5313 Q792.5447,50.6875 793.1072,50.9844 L793.1072,53.7031 Q792.4822,53.125 791.8884,52.8594 Q791.2947,52.5781 790.6697,52.5781 Q789.3259,52.5781 788.6384,53.6563 Q787.9509,54.7188 787.9509,56.8125 Q787.9509,58.9063 788.6384,59.9844 Q789.3259,61.0469 790.6697,61.0469 Q791.2947,61.0469 791.8884,60.7813 Q792.4822,60.5 793.1072,59.9219 L793.1072,62.6406 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="43.8867" x="810.6384" y="61.8467">Result
+      </text>
+      <rect fill="#FFFFFF" height="15.9688"
+            style="stroke:#181818;stroke-width:1;stroke-dasharray:2,2;" width="9.3301" x="952.9236"
+            y="38"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="7.3301" x="953.9236" y="50.1387">T
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="685.74" x2="958.2537" y1="73" y2="73"/>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="86.6484" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="96.7969" x="704.74" y="89.9951">status: Status
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="102.9453" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="63.3896" x="704.74" y="106.292">value: T?
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="119.2422" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="130.1357" x="704.74" y="122.5889">hasValue: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="135.5391" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="133.3965" x="704.74" y="138.8857">isSuccess: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="151.8359" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="135.7412" x="704.74" y="155.1826">isWarning: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="695.74" cy="168.1328" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="111.7197" x="704.74" y="171.4795">isError: Boolean
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="685.74" x2="958.2537" y1="178.7813"
+            y2="178.7813"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="192.4297" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="117.7559" x="704.74" y="195.7764">&#171;Create&#187; Result(
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="101.2471" x="749.242" y="212.0732">status: Status,
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="63.3896" x="749.242" y="228.3701">value: T?
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="5.4619" x="704.74" y="244.667">)
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="685.74" x2="958.2537" y1="251.9688"
+            y2="251.9688"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="265.6172" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="186.1973" x="704.74" y="268.9639">into(value: T?): Result&lt;T&gt;
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="281.9141" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="91.5195" x="704.74" y="285.2607">into(): Status
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="298.2109" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="242.7236" x="704.74" y="301.5576">appendStatus(status: Status): Unit
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="314.5078" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="248.5137" x="704.74" y="317.8545">prependStatus(status: Status): Unit
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="330.8047" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="146.2207" x="704.74" y="334.1514">getMessage(): String
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="695.74" cy="347.1016" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="206.7119" x="704.74" y="350.4482">success(value:
+        T): Result&lt;T&gt;
+      </text>
+    </g><!--class Status-->
+    <g class="entity" data-qualified-name="responses.Status" data-source-line="66" id="ent0010">
+      <rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="459.9727" x="592.01" y="417.75"/>
+      <ellipse cx="795.4407" cy="433.75" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M798.4094,439.3906 Q797.8313,439.6875 797.1907,439.8281 Q796.55,439.9844 795.8469,439.9844 Q793.3469,439.9844 792.0188,438.3438 Q790.7063,436.6875 790.7063,433.5625 Q790.7063,430.4375 792.0188,428.7813 Q793.3469,427.125 795.8469,427.125 Q796.55,427.125 797.1907,427.2813 Q797.8469,427.4375 798.4094,427.7344 L798.4094,430.4531 Q797.7844,429.875 797.1907,429.6094 Q796.5969,429.3281 795.9719,429.3281 Q794.6282,429.3281 793.9407,430.4063 Q793.2532,431.4688 793.2532,433.5625 Q793.2532,435.6563 793.9407,436.7344 Q794.6282,437.7969 795.9719,437.7969 Q796.5969,437.7969 797.1907,437.5313 Q797.7844,437.25 798.4094,436.6719 L798.4094,439.3906 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="44.6113" x="815.9407" y="438.5967">Status
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="593.01" x2="1050.9827" y1="449.75"
+            y2="449.75"/>
+      <g data-visibility-modifier="PRIVATE_FIELD">
+        <rect fill="none" height="6" style="stroke:#C82930;stroke-width:1;" width="6" x="600.01"
+              y="460.3984"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="161.5537" x="612.01" y="466.7451">eventList: List&lt;Event&gt;
+      </text>
+      <g data-visibility-modifier="PRIVATE_FIELD">
+        <rect fill="none" height="6" style="stroke:#C82930;stroke-width:1;" width="6" x="600.01"
+              y="476.6953"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="74.7783" x="612.01" y="483.042">type: Type
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="603.01" cy="495.9922" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="133.3965" x="612.01" y="499.3389">isSuccess: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="603.01" cy="512.2891" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="135.7412" x="612.01" y="515.6357">isWarning: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="603.01" cy="528.5859" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="111.7197" x="612.01" y="531.9326">isError: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="603.01" cy="544.8828" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="205.5977" x="612.01" y="548.2295">hasCustomMessage: Boolean
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="593.01" x2="1050.9827" y1="555.5313"
+            y2="555.5313"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="569.1797" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="118.4805" x="612.01" y="572.5264">&#171;Create&#187; Status(
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="96.5781" x="656.512" y="588.8232">event: Event?
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="5.4619" x="612.01" y="605.1201">)
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="593.01" x2="1050.9827" y1="612.4219"
+            y2="612.4219"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="626.0703" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="395.377" x="612.01" y="629.417">addEvent(event: Event, overrideSeverity:
+        Boolean): UInt
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="642.3672" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="178.5205" x="612.01" y="645.7139">getEvents(): List&lt;Event&gt;
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="658.6641" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="428.1826" x="612.01" y="662.0107">appendStatus(other: Status,
+        overrideSeverity: Boolean): UInt
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="674.9609" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="433.9727" x="612.01" y="678.3076">prependStatus(other: Status,
+        overrideSeverity: Boolean): UInt
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="691.2578" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="146.2207" x="612.01" y="694.6045">getMessage(): String
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="707.5547" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="186.1973" x="612.01" y="710.9014">into(value: T?): Result&lt;T&gt;
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="603.01" cy="723.8516" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="119.4648" x="612.01" y="727.1982">success():
+        Status
+      </text>
+    </g><!--class Type-->
+    <g class="entity" data-qualified-name="responses.Type" data-source-line="87" id="ent0011">
+      <rect fill="#F1F1F1" height="137.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="180.2393" x="591.88" y="879.98"/>
+      <ellipse cx="636.0584" cy="900.1128" fill="#EB937F" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M640.1677,906.1128 L632.449,906.1128 L632.449,893.7222 L640.1677,893.7222 L640.1677,895.8784 L634.9021,895.8784 L634.9021,898.5503 L639.6677,898.5503 L639.6677,900.7066 L634.9021,900.7066 L634.9021,903.9566 L640.1677,903.9566 L640.1677,906.1128 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="49.0957" x="673.6938" y="896.1187">&#171;enum&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="83.3984" x="656.5425" y="911.9439">Status.Type
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="592.88" x2="771.1193" y1="920.2456"
+            y2="920.2456"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="65.3037" x="597.88" y="937.2407">SUCCESS
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="69.0703" x="597.88" y="953.5376">WARNING
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="49.0479" x="597.88" y="969.8345">ERROR
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="592.88" x2="771.1193" y1="977.1363"
+            y2="977.1363"/>
+      <g data-visibility-modifier="PACKAGE_PRIVATE_FIELD">
+        <polygon fill="none" points="602.88,986.7847,598.88,992.7847,606.88,992.7847"
+                 style="stroke:#1963A0;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="154.2393" x="611.88" y="994.1314">representation: String
+      </text>
+      <g data-visibility-modifier="PACKAGE_PRIVATE_FIELD">
+        <polygon fill="none" points="602.88,1003.0816,598.88,1009.0816,606.88,1009.0816"
+                 style="stroke:#1963A0;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="83.8838" x="611.88" y="1010.4282">severity: Int
+      </text>
+    </g><!--class Event-->
+    <g class="entity" data-qualified-name="responses.Event" data-source-line="96" id="ent0012">
+      <rect fill="#F1F1F1" height="308.7188" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="231.5977" x="807.2" y="794.5"/>
+      <ellipse cx="893.6814" cy="814.6328" fill="#A9DCDF" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M893.7908,809.9766 L892.6346,815.0547 L894.9627,815.0547 L893.7908,809.9766 Z M892.3064,807.7422 L895.2908,807.7422 L898.6502,820.1328 L896.1971,820.1328 L895.4314,817.0703 L892.1502,817.0703 L891.4002,820.1328 L888.9627,820.1328 L892.3064,807.7422 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="54.1348" x="912.1814" y="810.6387">&#171;sealed&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="40.1064" x="919.1956" y="826.4639">Event
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="808.2" x2="1037.7977" y1="834.7656"
+            y2="834.7656"/>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="848.4141" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="105.1777" x="827.2" y="851.7607">source: String?
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="864.7109" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="83.8838" x="827.2" y="868.0576">severity: Int
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="881.0078" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="154.2393" x="827.2" y="884.3545">representation: String
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="897.3047" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="205.5977" x="827.2" y="900.6514">hasCustomMessage: Boolean
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="913.6016" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="116.252" x="827.2" y="916.9482">SUCCESS: String
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="929.8984" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="120.0186" x="827.2" y="933.2451">WARNING: String
+      </text>
+      <g data-visibility-modifier="PUBLIC_FIELD">
+        <ellipse cx="818.2" cy="946.1953" fill="none" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            text-decoration="underline" textLength="99.9961" x="827.2" y="949.542">ERROR: String
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="808.2" x2="1037.7977" y1="956.8438"
+            y2="956.8438"/>
+      <g data-visibility-modifier="PROTECTED_METHOD">
+        <polygon fill="#FFFF44" points="818.2,965.4922,822.2,969.4922,818.2,973.4922,814.2,969.4922"
+                 style="stroke:#B38D22;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="113.9756" x="827.2" y="973.8389">&#171;Create&#187; Event(
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="109.6279" x="871.702" y="990.1357">source: String?,
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="88.334" x="871.702" y="1006.4326">severity: Int,
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="154.2393" x="871.702" y="1022.7295">representation: String
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="5.4619" x="827.2" y="1039.0264">)
+      </text>
+      <line style="stroke:#181818;stroke-width:1;" x1="808.2" x2="1037.7977" y1="1046.3281"
+            y2="1046.3281"/>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="818.2" cy="1059.9766" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="153.6514" x="827.2" y="1063.3232">getMessage():
+        String?
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="818.2" cy="1076.2734" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="91.5195" x="827.2" y="1079.6201">into(): Status
+      </text>
+      <g data-visibility-modifier="PUBLIC_METHOD">
+        <ellipse cx="818.2" cy="1092.5703" fill="#84BE84" rx="3" ry="3"
+                 style="stroke:#038048;stroke-width:1;"/>
+      </g>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="186.1973" x="827.2" y="1095.917">into(value: T?): Result&lt;T&gt;
+      </text>
+    </g><!--class Success-->
+    <g class="entity" data-qualified-name="responses.Success" data-source-line="116" id="ent0013">
+      <rect fill="#F1F1F1" height="56.2656" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="132.9121" x="602.54" y="1163.21"/>
+      <ellipse cx="617.54" cy="1183.3428" fill="#ADD1B2" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M620.5088,1188.9834 Q619.9306,1189.2803 619.29,1189.4209 Q618.6494,1189.5772 617.9463,1189.5772 Q615.4463,1189.5772 614.1181,1187.9366 Q612.8056,1186.2803 612.8056,1183.1553 Q612.8056,1180.0303 614.1181,1178.3741 Q615.4463,1176.7178 617.9463,1176.7178 Q618.6494,1176.7178 619.29,1176.8741 Q619.9463,1177.0303 620.5088,1177.3272 L620.5088,1180.0459 Q619.8838,1179.4678 619.29,1179.2022 Q618.6963,1178.9209 618.0713,1178.9209 Q616.7275,1178.9209 616.04,1179.9991 Q615.3525,1181.0616 615.3525,1183.1553 Q615.3525,1185.2491 616.04,1186.3272 Q616.7275,1187.3897 618.0713,1187.3897 Q618.6963,1187.3897 619.29,1187.1241 Q619.8838,1186.8428 620.5088,1186.2647 L620.5088,1188.9834 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="DejaVu Sans" font-size="12" font-style="italic"
+            lengthAdjust="spacing" textLength="44.7598" x="659.6162" y="1179.3487">&#171;open&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" lengthAdjust="spacing"
+            textLength="100.9121" x="631.54" y="1195.1739">Event.Success
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="603.54" x2="734.4521" y1="1203.4756"
+            y2="1203.4756"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="603.54" x2="734.4521" y1="1211.4756"
+            y2="1211.4756"/>
+    </g><!--class Warning-->
+    <g class="entity" data-qualified-name="responses.Warning" data-source-line="119" id="ent0014">
+      <rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="135.2568" x="770.37" y="1167.35"/>
+      <ellipse cx="785.37" cy="1183.35" fill="#A9DCDF" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M785.4794,1178.6938 L784.3231,1183.7719 L786.6513,1183.7719 L785.4794,1178.6938 Z M783.995,1176.4594 L786.9794,1176.4594 L790.3388,1188.85 L787.8856,1188.85 L787.12,1185.7875 L783.8388,1185.7875 L783.0888,1188.85 L780.6513,1188.85 L783.995,1176.4594 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="103.2568" x="799.37" y="1188.1967">Event.Warning
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="771.37" x2="904.6268" y1="1199.35"
+            y2="1199.35"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="771.37" x2="904.6268" y1="1207.35"
+            y2="1207.35"/>
+    </g><!--class Error-->
+    <g class="entity" data-qualified-name="responses.Error" data-source-line="122" id="ent0015">
+      <rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="111.2354" x="940.38" y="1167.35"/>
+      <ellipse cx="955.38" cy="1183.35" fill="#A9DCDF" rx="11" ry="11"
+               style="stroke:#181818;stroke-width:1;"/>
+      <path
+        d="M955.4894,1178.6938 L954.3331,1183.7719 L956.6613,1183.7719 L955.4894,1178.6938 Z M954.005,1176.4594 L956.9894,1176.4594 L960.3488,1188.85 L957.8956,1188.85 L957.13,1185.7875 L953.8488,1185.7875 L953.0988,1188.85 L950.6613,1188.85 L954.005,1176.4594 Z "
+        fill="#000000"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="79.2354" x="969.38" y="1188.1967">Event.Error
+      </text>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="941.38" x2="1050.6154" y1="1199.35"
+            y2="1199.35"/>
+      <line style="stroke:#181818;stroke-width:0.5;" x1="941.38" x2="1050.6154" y1="1207.35"
+            y2="1207.35"/>
+    </g><!--reverse link Event to Success-->
+    <g class="link" data-entity-1="ent0012" data-entity-2="ent0013" data-link-type="extension"
+       data-source-line="125" id="lnk16">
+      <path codeLine="125"
+            d="M788.78,1060.48 C721.9,1060.48 669,1060.48 669,1060.48 C669,1060.48 669,1124.46 669,1162.95"
+            fill="none" id="Event-backto-Success" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="none" points="806.78,1060.48,788.78,1054.48,788.78,1066.48,806.78,1060.48"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    </g><!--reverse link Event to Warning-->
+    <g class="link" data-entity-1="ent0012" data-entity-2="ent0014" data-link-type="extension"
+       data-source-line="126" id="lnk17">
+      <path codeLine="126" d="M856.41,1121.46 C856.41,1146.23 856.41,1150.98 856.41,1167.13"
+            fill="none" id="Event-backto-Warning" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="none" points="856.41,1103.46,850.41,1121.46,862.41,1121.46,856.41,1103.46"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    </g><!--reverse link Event to Error-->
+    <g class="link" data-entity-1="ent0012" data-entity-2="ent0015" data-link-type="extension"
+       data-source-line="127" id="lnk18">
+      <path codeLine="127" d="M989.59,1121.46 C989.59,1146.23 989.59,1150.98 989.59,1167.13"
+            fill="none" id="Event-backto-Error" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="none" points="989.59,1103.46,983.59,1121.46,995.59,1121.46,989.59,1103.46"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+    </g><!--link Result to Status-->
+    <g class="link" data-entity-1="ent0009" data-entity-2="ent0010" data-link-type="dependency"
+       data-source-line="129" id="lnk19">
+      <path codeLine="129" d="M822,358.05 C822,377.66 822,392.71 822,412.32" fill="none"
+            id="Result-to-Status" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="822,417.32,826,408.32,822,412.32,818,408.32,822,417.32"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="22.9785" x="794" y="383.7569">has
+      </text>
+    </g><!--link Status to Event-->
+    <g class="link" data-entity-1="ent0010" data-entity-2="ent0012" data-link-type="dependency"
+       data-source-line="130" id="lnk20">
+      <path codeLine="130" d="M923,734.73 C923,754.45 923,769.59 923,789.24" fill="none"
+            id="Status-to-Event" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818" points="923,794.24,927,785.24,923,789.24,919,785.24,923,794.24"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="55.0278" x="863" y="760.5569">contains
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="23.0356" x="899.4439" y="783.4575">0..*
+      </text>
+    </g><!--link Status to Type-->
+    <g class="link" data-entity-1="ent0010" data-entity-2="ent0011" data-link-type="dependency"
+       data-source-line="131" id="lnk21">
+      <path codeLine="131" d="M682.07,734.73 C682.07,785.46 682.07,833.99 682.07,874.84" fill="none"
+            id="Status-to-Type" style="stroke:#181818;stroke-width:1;"/>
+      <polygon fill="#181818"
+               points="682.07,879.84,686.07,870.84,682.07,874.84,678.07,870.84,682.07,879.84"
+               style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="22.9785" x="654.07" y="803.3569">has
+      </text>
+    </g><!--link ExtensionFunctions to CRC32--><!--link CRC32 to Compression--><?plantuml-src hLRTRzCm47_FNt6K1pfOAmHFL5qHL0KcbGsr6pm0GcvoMyqIExATQTKeVpjdnqcTDjq6OW-hSzyVlplx4HTnMYG8sgnIxET5baQHaJaO2GjfZCmWuGfZmwM8z1KNELCiWvGBDAiSGIgpb56Ki_YANI9q2iDJtG6cmPtWDee0ufHf3MEPvGgr9aim7E9DJbP1BdxIpsX4Wa1_p-1M6sPul8RnwSTFiybyVdnwycCw-JoP3k1O63Y2LqworzjMIF0YPGQx2JDi06zN1hz-FwWEsy9Sj0hFK1Uf6PRV8r9Qs_Y5D5XLGrw4YJYpEv42ry3WWgVOI_4QKoSLIw4D-GtL-rVcq5e7vaGop1Qeh0kpH5-QFd5G92w6e9QpySiN3wbYlCJuIXTPTq4fwI3JSofcbLzfSt9ZKDYetXN2zLkJWqqIRTQjaRxDXmcRpOMIcNMWfzoO52SYuKnKdgTSbuKTRRmtZSsNXAP_C-TKMwCpSjV4GQY-9uo_rhD4qYAVvrJ5Iu69bM_9SxnaYWJF1OzbWZEqO41XcTAvc1l5nMMR-JTAiHMfVi2RKgWXlexMcq4acpbr4BKTnSr7C8uUwcURjbfNXROMxQydNhEqm06SlVRVIwO_bwItKgR8XATpFI_Yc62zo_Z2bA0GTnaJfQHgakkn7Wx72cb22NPbf5t70FXcO2lImu3J31VWe6cL2oExjSncuCz6eS31LWrOdjC8bgHkqxS5d-1LZwcL3vIyHFEHYaMjscfvtN3gHrdGEjwjS8FHBJtuHlQ0nbKOYrIFrudz7dccNTjaZFx_tyuvQ8mBJKlIPtP_PtsXWlwvq0VW8jxJGvOaZjqDPGz1NgDIFC4vaHKtgzfxSzrGuPs2hgSvgCvMgoMjOLMZxA4UcY3uDnjxuN4lX5lm4yBPWGP5aK6dfFKj4jo5RG_sIY5clUldv-CntMpk_ENDxEJuvBqxJsQpqrdObj-qPC95rWZwD-WwtU3QOGjj5AFhozy_jWyKW4QMOX9SDreMAiRAOhM8jarQsXqnt0VFe6u-wNrZwUkmZ-rAqs3w4ZqEaLyYE5nfpIJ3dTR8D6JSaUxErDnMrLwtWklrNVllJiW5QwZZikhxTU90vS-KkgIXy4rjwxxNzHl7wVhpVIfk5pa5Tzg8Uq3zwlMgC9f4Rxz9T3QiTfaZ5R1QKp203c48EiJq5CliFE_tdtQy2HAXTvvXNEp8kV6gJL20J-3ew0W-y2H10LEsaeMnbAZb7TRxkdHYttlbooygttyXENYJ_W40?>
+  </g>
+</svg>

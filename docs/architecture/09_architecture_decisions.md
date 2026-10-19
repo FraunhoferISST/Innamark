@@ -1,6 +1,7 @@
 ---
 title: Architecture Decisions
 sidebar_position: 9
+description: Collection of Architecture Decision Records (ADRs)
 ---
 
 <!--

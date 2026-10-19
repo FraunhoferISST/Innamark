@@ -1,3 +1,87 @@
 <svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css" data-diagram-type="DESCRIPTION"
      height="183px" preserveAspectRatio="none" style="width:528px;height:183px;background:#FFFFFF;"
-     version="1.1" viewBox="0 0 528 183" width="528px" zoomAndPan="magnify"><?plantuml 1.2026.6?><defs/><g><!--cluster system--><g class="cluster" data-qualified-name="system" data-source-line="9" id="ent0001"><rect fill="none" height="129" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="172.56" x="7" y="7"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="95.5049" x="45.5276" y="21.9951">&#171;Application&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="24.4043" x="81.0779" y="38.292">CLI</text></g><!--entity app--><g class="entity" data-qualified-name="system.app" data-source-line="10" id="ent0002"><rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="140.5605" x="23" y="57.71"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="143.5605" y="62.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="141.5605" y="64.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="141.5605" y="68.71"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="98.5605" x="39" y="90.7051">&#171;Component&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="38.1445" x="69.208" y="107.002">Main</text></g><!--entity watermarkerlib--><g class="entity" data-qualified-name="watermarkerlib" data-source-line="13" id="ent0003"><rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="205.6279" x="308.56" y="8.71"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="494.1879" y="13.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="492.1879" y="15.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="492.1879" y="19.71"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="66.2334" x="373.2573" y="41.7051">&#171;Library&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="165.6279" x="323.56" y="58.002">Watermarker Library</text></g><!--entity clilib--><g class="entity" data-qualified-name="clilib" data-source-line="14" id="ent0004"><rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;" width="117.9229" x="352.41" y="106.71"/><rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15" x="450.3329" y="111.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="448.3329" y="113.71"/><rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4" x="448.3329" y="117.71"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic" lengthAdjust="spacing" textLength="66.2334" x="373.2547" y="139.7051">&#171;Library&#187;</text><text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700" lengthAdjust="spacing" textLength="77.9229" x="367.41" y="156.002">kotlinx-cli</text></g><!--link app to watermarkerlib--><g class="link" data-entity-1="ent0002" data-entity-2="ent0003" data-link-type="association" data-source-line="17" id="lnk5"><path d="M164.04,78.19 C206.31,71.64 260.99,63.16 308.09,55.86" fill="none" id="app-watermarkerlib" style="stroke:#181818;stroke-width:1;"/><text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing" textLength="67.8311" x="203.56" y="50.6369">JVM target</text><path d="M226.1828,61.402 A10,10 0 0 0 228.3495 75.3772" fill="none" style="stroke:#181818;stroke-width:1.5;"/><ellipse cx="234.2538" cy="67.3063" fill="#FFFFFF" rx="6" ry="6" style="stroke:#181818;stroke-width:1.5;"/></g><!--link app to clilib--><g class="link" data-entity-1="ent0002" data-entity-2="ent0004" data-link-type="association" data-source-line="18" id="lnk6"><path d="M164.04,99.82 C220.4,108.55 298.82,120.71 351.92,128.94" fill="none" id="app-clilib" style="stroke:#181818;stroke-width:1;"/><path d="M253.2981,106.4967 A10,10 0 0 0 251.1317 120.4719" fill="none" style="stroke:#181818;stroke-width:1.5;"/><ellipse cx="259.2025" cy="114.5675" fill="#FFFFFF" rx="6" ry="6" style="stroke:#181818;stroke-width:1.5;"/></g><?plantuml-src RO_1YW8n38RlVOgi5vU14S_Y2AjuKFGax9vZ3LBCfAMJGGVntUrG5r7CBJ__zv5yER7S7WWQxPX6eQtPc25KLGMxhb6gOUvREM3i-in4iefoP891KImsgw8Om7Jw4m8xY-gyp6Q03JGPlHf8OtqTl91epspHIOOM_t56C0HpC-Qb_8TAiSPueWWRju_fYim-baoUdors-rV3oIixkPIMtGSofJsH_brUaaEGJJe3okzn-MQ52Qn_jw0OZwJFqaDm1m00?></g></svg>
+     version="1.1" viewBox="0 0 528 183" width="528px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
+  <defs/>
+  <g><!--cluster system-->
+    <g class="cluster" data-qualified-name="system" data-source-line="9" id="ent0001">
+      <rect fill="none" height="129" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+            width="172.56" x="7" y="7"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="95.5049" x="45.5276" y="21.9951">&#171;Application&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="24.4043" x="81.0779" y="38.292">CLI
+      </text>
+    </g><!--entity app-->
+    <g class="entity" data-qualified-name="system.app" data-source-line="10" id="ent0002">
+      <rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="140.5605" x="23" y="57.71"/>
+      <rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="143.5605" y="62.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="141.5605" y="64.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="141.5605" y="68.71"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="98.5605" x="39" y="90.7051">&#171;Component&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="38.1445" x="69.208" y="107.002">Main
+      </text>
+    </g><!--entity watermarkerlib-->
+    <g class="entity" data-qualified-name="watermarkerlib" data-source-line="13" id="ent0003">
+      <rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="205.6279" x="308.56" y="8.71"/>
+      <rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="494.1879" y="13.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="492.1879" y="15.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="492.1879" y="19.71"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="66.2334" x="373.2573" y="41.7051">&#171;Library&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="165.6279" x="323.56" y="58.002">Watermarker Library
+      </text>
+    </g><!--entity clilib-->
+    <g class="entity" data-qualified-name="clilib" data-source-line="14" id="ent0004">
+      <rect fill="#F1F1F1" height="62.5938" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
+            width="117.9229" x="352.41" y="106.71"/>
+      <rect fill="#F1F1F1" height="10" style="stroke:#181818;stroke-width:0.5;" width="15"
+            x="450.3329" y="111.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="448.3329" y="113.71"/>
+      <rect fill="#F1F1F1" height="2" style="stroke:#181818;stroke-width:0.5;" width="4"
+            x="448.3329" y="117.71"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-style="italic"
+            lengthAdjust="spacing" textLength="66.2334" x="373.2547" y="139.7051">&#171;Library&#187;
+      </text>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="14" font-weight="700"
+            lengthAdjust="spacing" textLength="77.9229" x="367.41" y="156.002">kotlinx-cli
+      </text>
+    </g><!--link app to watermarkerlib-->
+    <g class="link" data-entity-1="ent0002" data-entity-2="ent0003" data-link-type="association"
+       data-source-line="17" id="lnk5">
+      <path d="M164.04,78.19 C206.31,71.64 260.99,63.16 308.09,55.86" fill="none"
+            id="app-watermarkerlib" style="stroke:#181818;stroke-width:1;"/>
+      <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
+            textLength="67.8311" x="203.56" y="50.6369">JVM target
+      </text>
+      <path d="M226.1828,61.402 A10,10 0 0 0 228.3495 75.3772" fill="none"
+            style="stroke:#181818;stroke-width:1.5;"/>
+      <ellipse cx="234.2538" cy="67.3063" fill="#FFFFFF" rx="6" ry="6"
+               style="stroke:#181818;stroke-width:1.5;"/>
+    </g><!--link app to clilib-->
+    <g class="link" data-entity-1="ent0002" data-entity-2="ent0004" data-link-type="association"
+       data-source-line="18" id="lnk6">
+      <path d="M164.04,99.82 C220.4,108.55 298.82,120.71 351.92,128.94" fill="none" id="app-clilib"
+            style="stroke:#181818;stroke-width:1;"/>
+      <path d="M253.2981,106.4967 A10,10 0 0 0 251.1317 120.4719" fill="none"
+            style="stroke:#181818;stroke-width:1.5;"/>
+      <ellipse cx="259.2025" cy="114.5675" fill="#FFFFFF" rx="6" ry="6"
+               style="stroke:#181818;stroke-width:1.5;"/>
+    </g>
+    <?plantuml-src RO_1YW8n38RlVOgi5vU14S_Y2AjuKFGax9vZ3LBCfAMJGGVntUrG5r7CBJ__zv5yER7S7WWQxPX6eQtPc25KLGMxhb6gOUvREM3i-in4iefoP891KImsgw8Om7Jw4m8xY-gyp6Q03JGPlHf8OtqTl91epspHIOOM_t56C0HpC-Qb_8TAiSPueWWRju_fYim-baoUdors-rV3oIixkPIMtGSofJsH_brUaaEGJJe3okzn-MQ52Qn_jw0OZwJFqaDm1m00?>
+  </g>
+</svg>

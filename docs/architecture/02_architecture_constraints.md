@@ -1,6 +1,7 @@
 ---
 title: Architecture Constraints
 sidebar_position: 2
+description: Technical and organizational constraints
 ---
 
 <!--

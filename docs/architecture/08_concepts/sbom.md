@@ -1,5 +1,6 @@
 ---
 title: SBOM
+description: Generate a Software Bill of Materials (SBOM)
 ---
 
 <!--
@@ -10,10 +11,6 @@ title: SBOM
 -->
 
 <!-- This file was developed with AI assistance. -->
-
-import PatentHint from './../../patent-hint.mdx'
-
-<PatentHint components={props.components}/>
 
 # Software Bill of Materials (SBOM)
 
@@ -38,12 +35,12 @@ uploads the report
 
 To generate the SBOM locally, you can use the following command in the root of the repository. It
 uses the [ORT](https://oss-review-toolkit.org/) Docker image, while the results land in
-`ort-results/`.
+`../../../ort-results`.
 
 :::note Prerequisite: Clean Tree
 
 Run these commands on a clean tree. If you have previously built the library, generated Kotlin/JS
-artifacts under `watermarker/build/`, clean them first:
+artifacts under `../../../watermarker/build`, clean them first:
 
 ```bash
 cd watermarker && ./gradlew clean && cd ..
@@ -75,5 +72,5 @@ docker run --rm -v "$PWD:/project" ghcr.io/oss-review-toolkit/ort:latest \
   -f CycloneDx,WebApp -O CycloneDX=output.file.formats=json
 ```
 
-Output: `ort-results/bom.cyclonedx.json` and `ort-results/scan-report-web-app.html`
+Output: `../../../ort-results/bom.cyclonedx.json` and `ort-results/scan-report-web-app.html`
 (open in a browser to view vulnerabilities).

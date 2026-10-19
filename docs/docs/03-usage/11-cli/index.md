@@ -20,7 +20,7 @@ using the commands listed at [Commands](commands.md).
 ## Limitations
 The CLI tool will currently only insert `RawInnamarkTags`  to avoid overly long and complex 
 commands (more info on InnamarkTags in the corresponding
-[Development Documentation](../../04-development/10-watermarker/InnamarkTag.md)). For full 
+[Architecture Concept Documentation](../../../architecture/concepts/innamarktag)). For full 
 customization check out the other methods of [Usage](../), namely 
 [Watermarker](../watermarker) for direct library usage and 
 [Webinterface](../webinterface) for deploying a watermarking Webinterface.
