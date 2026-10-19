@@ -1,0 +1,139 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+' This file was developed with AI assistance.
+
+@startuml
+!include style.puml
+
+top to bottom direction
+skinparam linetype ortho
+
+package "utils" as utils {
+
+  class Compression <<expect object>> {
+    + {static} COMPRESSION_LEVEL: Int = 9
+    --
+    + {static} deflate(data: Byte[]): Byte[]
+    + {static} inflate(data: Byte[]): Result<Byte[]>
+  }
+
+  note bottom of Compression
+    COMPRESSION_LEVEL is a file-level
+    const in Compression.kt, not a
+    member of the object.
+  end note
+
+  class CRC32 <<expect object>> {
+    + {static} checksum(bytes: Byte[]): UInt
+  }
+
+  class ExtensionFunctions <<file-level>> {
+    + {static} UInt.Companion.fromBytesLittleEndian(bytes: List<Byte>): UInt
+    + {static} UShort.Companion.fromBytesLittleEndian(bytes: List<Byte>): UShort
+    + {static} UInt.toBytesLittleEndian(): List<Byte>
+    + {static} UShort.toBytesLittleEndian(): List<Byte>
+    + {static} Byte.toIntUnsigned(): Int
+    + {static} Char.toUnicodeRepresentation(): String
+    + {static} ByteArray.toHexString(): String
+  }
+}
+
+package responses as responses {
+
+  class Result<T> {
+    + status: Status
+    + value: T?
+    + hasValue: Boolean
+    + isSuccess: Boolean
+    + isWarning: Boolean
+    + isError: Boolean
+    --
+    + <<Create>> Result(
+      \t  status: Status,
+      \t  value: T?
+      )
+    --
+    + into(value: T?): Result<T>
+    + into(): Status
+    + appendStatus(status: Status): Unit
+    + prependStatus(status: Status): Unit
+    + getMessage(): String
+    {static} + success(value: T): Result<T>
+  }
+
+  class Status {
+    - eventList: List<Event>
+    - type: Type
+    + isSuccess: Boolean
+    + isWarning: Boolean
+    + isError: Boolean
+    + hasCustomMessage: Boolean
+    --
+    + <<Create>> Status(
+      \t  event: Event?
+      )
+    --
+    + addEvent(event: Event, overrideSeverity: Boolean): UInt
+    + getEvents(): List<Event>
+    + appendStatus(other: Status, overrideSeverity: Boolean): UInt
+    + prependStatus(other: Status, overrideSeverity: Boolean): UInt
+    + getMessage(): String
+    + into(value: T?): Result<T>
+    {static} + success(): Status
+  }
+
+  enum "Status.Type" as Type <<enum>> {
+    SUCCESS
+    WARNING
+    ERROR
+    --
+    ~ representation: String
+    ~ severity: Int
+  }
+
+  abstract class Event <<sealed>> {
+    + source: String?
+    + severity: Int
+    + representation: String
+    + hasCustomMessage: Boolean
+    {static} + SUCCESS: String
+    {static} + WARNING: String
+    {static} + ERROR: String
+    --
+    # <<Create>> Event(
+      \t  source: String?,
+      \t  severity: Int,
+      \t  representation: String
+      )
+    --
+    + {abstract} getMessage(): String?
+    + into(): Status
+    + into(value: T?): Result<T>
+  }
+
+  class "Event.Success" as Success <<open>> {
+  }
+
+  abstract class "Event.Warning" as Warning {
+  }
+
+  abstract class "Event.Error" as Error {
+  }
+
+  Event <|-- Success
+  Event <|-- Warning
+  Event <|-- Error
+
+  Result --> Status : "has "
+  Status --> "0..*" Event : "contains "
+  Status --> Type : "has "
+}
+
+' === Hidden Layout ===
+ExtensionFunctions -[hidden]- CRC32
+CRC32 -[hidden]- Compression
+
+@enduml

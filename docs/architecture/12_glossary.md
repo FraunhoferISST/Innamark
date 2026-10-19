@@ -12,9 +12,18 @@ sidebar_position: 12
 
 # Glossary
 
-| Term           | Definition                                                                                                                                                             |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Innamark**   | Name of the project as a short form of "Invisible Watermarking".                                                                                                       |
-| **Cover Text** | A text that should be enhanced/secured by a watermark.                                                                                                                 | 
-| **Watermark**  | Will be embedded by Innamark inside the cover text. This can be a text (e.g., "Copyright X"), key, encoded-data (including image), or any other byte-encoded sequence. |
-| **CLI**        | Command-line Interface. A tool that brings watermarking functioanlities in the terminal.                                                                               |
+A collection of different terms used in this project and documentation with their definition, 
+sort by alphabet.
+
+| Term                 | Definition                                                                                                                                                                                                                       |
+|----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Alphabet**         | A list of characters (Kotlin datatype: `List<Char>`), currently invisible Unicode space characters, used to encode a watermark. Thus, a text- or byte-encoded watermark is transformed into a list of those alphabet characters. |
+| **CLI**              | Command-line Interface. A tool that brings watermarking functioanlities in the terminal.                                                                                                                                         |
+| **Cover Text**       | A text that should be enhanced/secured by a watermark.                                                                                                                                                                           |
+| **Innamark**         | Name of the project as a short form of "Invisible Watermarking".                                                                                                                                                                 |
+| **Insert Positions** | The number of positions in the cover text in which a part of a watermark can be embedded. Since Innamark works with spaces, the insert positions of a cover text are the total sum of whitespaces in the cover text.             |
+| **Separator**        | A **Separator Character** is the character used to split multiple watermark occurances in a cover text.                                                                                                                          |
+| **Transcoding**      | The combination of the alphabet and the watermark encoding and decoding functions.                                                                                                                                               |
+| **Unicode**          | A widely used and [published standard](https://home.unicode.org/) for character encoding, published by the [Unicode Consortium](https://www.unicode.org/consortium/).                                                            |
+| **Watermark**        | Will be embedded by Innamark inside the cover text. This can be a text (e.g., "Copyright X"), key, encoded-data (including image), or any other byte-encoded sequence.                                                           |
+

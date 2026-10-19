@@ -7,55 +7,44 @@
 !include style.puml
 
 top to bottom direction
+skinparam linetype ortho
 
 ' === System Boundary ===
 rectangle "**Watermarker Library**" <<Library>> as system {
-    package "**watermarks**" as watermarks {
-        component "**Watermark**" <<Component>> as watermark
-        component "**InnamarkTag**" <<Component>> as innamarkTag
+    component "**Watermarks**" <<Package>> as watermarks {
+        component "**Watermark**" as watermark
+        component "**InnamarkTag**" as innamarkTag
     }
 
-    package "**watermarkers**" as watermarkers {
-        package "**text**" as textWM {
-            component "**PlainTextWatermarker**" <<Component>> as plainTextWM
-        }
-
-        package "**file**\n<<JVM only>>" as fileWM {
-            component "**TextFileWatermarker**" <<Component>> as textFileWM
-            component "**ZipFileWatermarker**" <<Deprecated>> as zipFileWM
-        }
+    component "**Watermarkers**" <<Package>> as watermarkers {
+        component "**Text**" <<Package>> as textWM
+        component "**File**" <<Package>> as fileWM
     }
 
-    package "**utils**" as utils {
-        component "**Compression**" <<Component>> as compression
-        component "**CRC32**" <<Component>> as crc32
-    }
-
-    package "**responses**\n<<cross-cutting>>" as responses {
-        component "**Status**" <<Component>> as status
-        component "**Result**" <<Component>> as result
+    component "**Generic**" <<Cross-cutting>> as generic {
+        component "**Utils**" <<Package>> as utils
+        component "**Responses**" <<Package>> as responses
     }
 }
-
 
 ' === External Libraries (Blackbox) ===
 component "**sha3**" <<Library>> as sha3
 component "**pako**" <<Library>> as pako
 
 ' === Internal Relations ===
-innamarkTag ..> compression
-innamarkTag ..> crc32
+fileWM ..> textWM : "delegates to  "
 
-watermark <|-- innamarkTag
+innamarkTag -|> watermark
 
-watermarkers ..> watermarks: uses
-textFileWM ..> plainTextWM : "  delegates to"
+watermarkers .> watermarks
+watermarkers ..> generic
+watermarks .> generic
 
 ' === External Dependencies ===
-innamarkTag -(0- sha3 : SHA3-256
-compression -(0- pako : deflate\n (JS only)
+system -(0 sha3
+system -(0 pako
 
 ' === Hidden Layout ===
-utils -[hidden]left- responses
+sha3 -[hidden]- pako
 
 @enduml
