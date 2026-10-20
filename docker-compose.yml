@@ -5,8 +5,6 @@
 # that can be found in the LICENSE file.
 #
 
-version: "3"
-
 services:
   webinterface:
     build:
