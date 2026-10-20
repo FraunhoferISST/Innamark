@@ -41,28 +41,32 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
-            dependencies {
-                implementation("org.kotlincrypto.hash:sha3:0.7.1")
+        val commonMain =
+            sourceSets.getByName("commonMain") {
+                dependencies {
+                    implementation("org.kotlincrypto.hash:sha3:0.7.1")
+                }
             }
-        }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
+        val commonTest =
+            sourceSets.getByName("commonTest") {
+                dependencies {
+                    implementation(kotlin("test"))
+                }
             }
-        }
-        val jvmMain by getting
-        val jvmTest by getting {
-            dependencies {
-                implementation(kotlin("reflect"))
+        val jvmMain = sourceSets.getByName("jvmMain")
+        val jvmTest =
+            sourceSets.getByName("jvmTest") {
+                dependencies {
+                    implementation(kotlin("reflect"))
+                }
             }
-        }
-        val jsMain by getting {
-            dependencies {
-                implementation(npm("pako", "2.1.0"))
+        val jsMain =
+            sourceSets.getByName("jsMain") {
+                dependencies {
+                    implementation(npm("pako", "2.1.0"))
+                }
             }
-        }
-        val jsTest by getting
+        val jsTest = sourceSets.getByName("jsTest")
     }
 }
 
