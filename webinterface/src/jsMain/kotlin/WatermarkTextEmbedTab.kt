@@ -114,7 +114,8 @@ class WatermarkTextEmbedTab : SimplePanel() {
                     title =
                         "Uses the Cyclic Redundancy Check (CRC) " +
                             "error-detecting code for additional robustness. " +
-                            "Needs a longer cover text content.",
+                            "Needs a longer cover text content. " +
+                            "Incompatible with SHA3-256.",
                     triggers = listOf(Trigger.HOVER),
                 ),
             )
@@ -129,7 +130,7 @@ class WatermarkTextEmbedTab : SimplePanel() {
                     title =
                         "Include a SHA3-256 hash of the watermark for " +
                             "additional verification. Needs a longer cover text " +
-                            "content.",
+                            "content. Incompatible with CRC32.",
                     triggers = listOf(Trigger.HOVER),
                 ),
             )
@@ -258,8 +259,14 @@ class WatermarkTextEmbedTab : SimplePanel() {
         coverTextInput.onInput { updateCapacity() }
         compressedCheckBox.onInput { updateCapacity() }
         sizedCheckBox.onInput { updateCapacity() }
-        CRC32CheckBox.onInput { updateCapacity() }
-        SHA3256CheckBox.onInput { updateCapacity() }
+        CRC32CheckBox.onInput {
+            updateCapacity()
+            updateExclusions()
+        }
+        SHA3256CheckBox.onInput {
+            updateCapacity()
+            updateExclusions()
+        }
 
         textFormPanel.add(
             HPanel {
@@ -376,6 +383,12 @@ class WatermarkTextEmbedTab : SimplePanel() {
         progressBar.setBounds(min, 0)
         progressBar.getFirstProgressBar()?.value =
             (if (watermarkerInput.value == null) min else capacityObservable.value)
+    }
+
+    /** Disables the CRC32CheckBox when the SHA3256CheckBox is selected and vice versa */
+    private fun updateExclusions() {
+        CRC32CheckBox.disabled = SHA3256CheckBox.value
+        SHA3256CheckBox.disabled = CRC32CheckBox.value
     }
 
     /** Adds a [watermarkString] string to [text] and returns the watermarked text result */
