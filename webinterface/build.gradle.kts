@@ -40,7 +40,7 @@ repositories {
 }
 
 kotlin {
-    js(IR) {
+    js {
         browser {
             useEsModules()
             commonWebpackConfig {
@@ -92,6 +92,7 @@ java {
     }
 }
 
-task("test") {
+tasks.register("test") {
+    description = "run all tests"
     dependsOn("jsTest")
 }
