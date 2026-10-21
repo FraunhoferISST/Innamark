@@ -11,7 +11,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 plugins {
     kotlin("plugin.serialization") version "2.3.21"
     kotlin("multiplatform") version "2.3.21"
-    id("io.kvision") version "9.1.1"
+    id("io.kvision") version "9.7.0"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("com.github.node-gradle.node") version "7.1.0"
 }
@@ -67,18 +67,18 @@ kotlin {
     }
 
     sourceSets["jsMain"].dependencies {
-        implementation("io.kvision:kvision:9.1.1")
-        implementation("io.kvision:kvision-bootstrap:9.1.1")
-        implementation("io.kvision:kvision-bootstrap-upload:9.1.1")
-        implementation("io.kvision:kvision-fontawesome:9.1.1")
-        implementation("io.kvision:kvision-state:9.1.1")
-        implementation("io.kvision:kvision-state-flow:9.1.1")
-        implementation("io.kvision:kvision-toastify:9.1.1")
+        implementation("io.kvision:kvision:9.7.0")
+        implementation("io.kvision:kvision-bootstrap:9.7.0")
+        implementation("io.kvision:kvision-bootstrap-upload:9.7.0")
+        implementation("io.kvision:kvision-fontawesome:9.7.0")
+        implementation("io.kvision:kvision-state:9.7.0")
+        implementation("io.kvision:kvision-state-flow:9.7.0")
+        implementation("io.kvision:kvision-toastify:9.7.0")
         implementation("de.fraunhofer.isst.innamark:watermarker:0.1.0-SNAPSHOT")
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
-        implementation("io.kvision:kvision-testutils:9.1.1")
+        implementation("io.kvision:kvision-testutils:9.7.0")
     }
 }
 
