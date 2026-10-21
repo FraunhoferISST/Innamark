@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -7,15 +7,11 @@
 
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
-// Versions
-val kvisionVersion: String by System.getProperties()
 
 plugins {
-    val kotlinVersion: String by System.getProperties()
-    val kvisionVersion: String by System.getProperties()
-    kotlin("plugin.serialization") version kotlinVersion
-    kotlin("multiplatform") version kotlinVersion
-    id("io.kvision") version kvisionVersion
+    kotlin("plugin.serialization") version "2.3.21"
+    kotlin("multiplatform") version "2.3.21"
+    id("io.kvision") version "9.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("com.github.node-gradle.node") version "7.1.0"
 }
@@ -71,18 +67,18 @@ kotlin {
     }
 
     sourceSets["jsMain"].dependencies {
-        implementation("io.kvision:kvision:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap:$kvisionVersion")
-        implementation("io.kvision:kvision-bootstrap-upload:$kvisionVersion")
-        implementation("io.kvision:kvision-fontawesome:$kvisionVersion")
-        implementation("io.kvision:kvision-state:$kvisionVersion")
-        implementation("io.kvision:kvision-state-flow:$kvisionVersion")
-        implementation("io.kvision:kvision-toastify:$kvisionVersion")
+        implementation("io.kvision:kvision:9.1.1")
+        implementation("io.kvision:kvision-bootstrap:9.1.1")
+        implementation("io.kvision:kvision-bootstrap-upload:9.1.1")
+        implementation("io.kvision:kvision-fontawesome:9.1.1")
+        implementation("io.kvision:kvision-state:9.1.1")
+        implementation("io.kvision:kvision-state-flow:9.1.1")
+        implementation("io.kvision:kvision-toastify:9.1.1")
         implementation("de.fraunhofer.isst.innamark:watermarker:0.1.0-SNAPSHOT")
     }
     sourceSets["jsTest"].dependencies {
         implementation(kotlin("test-js"))
-        implementation("io.kvision:kvision-testutils:$kvisionVersion")
+        implementation("io.kvision:kvision-testutils:9.1.1")
     }
 }
 
