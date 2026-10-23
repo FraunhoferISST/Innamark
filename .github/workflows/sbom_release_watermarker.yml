@@ -44,6 +44,6 @@ jobs:
 
       # Attach the ORT-generated bom.cyclonedx.json to the published release
       - name: Attach SBOM to GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           files: ${{ steps.ort.outputs.results-sbom-cyclonedx-json-path }}
