@@ -4,7 +4,7 @@
      width="981px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
   <defs/>
   <g><!--cluster watermarkers-->
-    <g class="cluster" data-qualified-name="watermarkers" data-source-line="13" id="ent0001">
+    <g class="cluster" data-qualified-name="watermarkers" data-source-line="12" id="ent0001">
       <path
         d="M11,6 L117.4551,6 A7.5,7.5 0 0 1 122.4551,11 L129.4551,28.2969 L961,28.2969 A5,5 0 0 1 966,33.2969 L966,1541.92 A5,5 0 0 1 961,1546.92 L11,1546.92 A5,5 0 0 1 6,1541.92 L6,11 A5,5 0 0 1 11,6"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -14,7 +14,7 @@
             lengthAdjust="spacing" textLength="110.4551" x="10" y="20.9951">watermarkers
       </text>
     </g><!--cluster text-->
-    <g class="cluster" data-qualified-name="watermarkers.text" data-source-line="14" id="ent0002">
+    <g class="cluster" data-qualified-name="watermarkers.text" data-source-line="13" id="ent0002">
       <path
         d="M35,659.94 L62.9102,659.94 A7.5,7.5 0 0 1 67.9102,664.94 L74.9102,682.2369 L815,682.2369 A5,5 0 0 1 820,687.2369 L820,1517.92 A5,5 0 0 1 815,1522.92 L35,1522.92 A5,5 0 0 1 30,1517.92 L30,664.94 A5,5 0 0 1 35,659.94"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -24,7 +24,7 @@
             lengthAdjust="spacing" textLength="31.9102" x="34" y="674.9351">text
       </text>
     </g><!--cluster file-->
-    <g class="cluster" data-qualified-name="watermarkers.file" data-source-line="73" id="ent0015">
+    <g class="cluster" data-qualified-name="watermarkers.file" data-source-line="72" id="ent0015">
       <path
         d="M35,49 L56.1836,49 A7.5,7.5 0 0 1 61.1836,54 L68.1836,71.2969 L937,71.2969 A5,5 0 0 1 942,76.2969 L942,584.94 A5,5 0 0 1 937,589.94 L35,589.94 A5,5 0 0 1 30,584.94 L30,54 A5,5 0 0 1 35,49"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -34,7 +34,7 @@
             lengthAdjust="spacing" textLength="25.1836" x="34" y="63.9951">file
       </text>
     </g><!--class TextWatermarker-->
-    <g class="entity" data-qualified-name="watermarkers.text.TextWatermarker" data-source-line="16"
+    <g class="entity" data-qualified-name="watermarkers.text.TextWatermarker" data-source-line="15"
        id="ent0003">
       <rect fill="#F1F1F1" height="178.375" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="757.3633" x="46.32" y="694.94"/>
@@ -113,7 +113,7 @@
       </text>
     </g><!--class PlainTextWatermarker-->
     <g class="entity" data-qualified-name="watermarkers.text.PlainTextWatermarker"
-       data-source-line="27" id="ent0004">
+       data-source-line="26" id="ent0004">
       <rect fill="#F1F1F1" height="251.5625" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="547.9648" x="203.02" y="933.31"/>
       <ellipse cx="394.081" cy="949.31" fill="#ADD1B2" rx="11" ry="11"
@@ -203,7 +203,7 @@
         Sequence&lt;Char&gt;
       </text>
     </g><!--class Transcoding-->
-    <g class="entity" data-qualified-name="watermarkers.text.Transcoding" data-source-line="44"
+    <g class="entity" data-qualified-name="watermarkers.text.Transcoding" data-source-line="43"
        id="ent0006">
       <rect fill="#F1F1F1" height="96.8906" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="261.0537" x="398.47" y="1244.87"/>
@@ -242,7 +242,7 @@
       </text>
     </g><!--class DefaultTranscoding-->
     <g class="entity" data-qualified-name="watermarkers.text.DefaultTranscoding"
-       data-source-line="51" id="ent0007">
+       data-source-line="50" id="ent0007">
       <rect fill="#F1F1F1" height="105.1563" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="488.0137" x="284.99" y="1401.76"/>
       <ellipse cx="456.2439" cy="1421.8928" fill="#ADD1B2" rx="11" ry="11"
@@ -285,7 +285,7 @@
       </text>
     </g><!--class SeparatorStrategy-->
     <g class="entity" data-qualified-name="watermarkers.text.SeparatorStrategy"
-       data-source-line="58" id="ent0008">
+       data-source-line="57" id="ent0008">
       <rect fill="#F1F1F1" height="56.2656" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="161.0967" x="76.45" y="1265.19"/>
       <ellipse cx="91.45" cy="1285.3228" fill="#ADD1B2" rx="11" ry="11"
@@ -304,7 +304,7 @@
       <line style="stroke:#181818;stroke-width:0.5;" x1="77.45" x2="236.5467" y1="1313.4556"
             y2="1313.4556"/>
     </g>
-    <g class="entity" data-qualified-name="watermarkers.text.GMN9" data-source-line="62"
+    <g class="entity" data-qualified-name="watermarkers.text.GMN9" data-source-line="61"
        id="ent0010">
       <path
         d="M272.35,1270.62 L272.35,1288.92 L237.97,1292.92 L272.35,1296.92 L272.35,1316.0184 A5,5 0 0 0 277.35,1321.0184 L358.6566,1321.0184 A5,5 0 0 0 363.6566,1316.0184 L363.6566,1275.62 L353.6566,1265.62 L277.35,1265.62 A5,5 0 0 0 272.35,1270.62"
@@ -322,7 +322,7 @@
             textLength="35.3057" x="278.35" y="1312.9525">exist.
       </text>
     </g><!--class FileWatermarker-->
-    <g class="entity" data-qualified-name="watermarkers.file.FileWatermarker" data-source-line="74"
+    <g class="entity" data-qualified-name="watermarkers.file.FileWatermarker" data-source-line="73"
        id="ent0016">
       <rect fill="#F1F1F1" height="227.2656" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="880.752" x="45.62" y="84"/>
@@ -424,7 +424,7 @@
       </text>
     </g><!--class TextFileWatermarker-->
     <g class="entity" data-qualified-name="watermarkers.file.TextFileWatermarker"
-       data-source-line="88" id="ent0017">
+       data-source-line="87" id="ent0017">
       <rect fill="#F1F1F1" height="202.6719" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="506.3887" x="212.81" y="371.26"/>
       <ellipse cx="387.6972" cy="387.26" fill="#ADD1B2" rx="11" ry="11"
@@ -491,7 +491,7 @@
       </text>
     </g><!--class ZipFileWatermarker-->
     <g class="entity" data-qualified-name="watermarkers.file.ZipFileWatermarker"
-       data-source-line="102" id="ent0019">
+       data-source-line="101" id="ent0019">
       <rect fill="#FAFAFA" height="56.2656" rx="5" ry="5"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:2,3;" width="171.542" x="754.23"
             y="444.47"/>
@@ -512,7 +512,7 @@
             y1="492.7356" y2="492.7356"/>
     </g><!--reverse link TextWatermarker to PlainTextWatermarker-->
     <g class="link" data-entity-1="ent0003" data-entity-2="ent0004" data-link-type="extension"
-       data-source-line="28" id="lnk5">
+       data-source-line="27" id="lnk5">
       <path d="M477,891.78 C477,910.74 477,913.09 477,933.11" fill="none"
             id="TextWatermarker-backto-PlainTextWatermarker"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
@@ -520,16 +520,16 @@
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--reverse link Transcoding to DefaultTranscoding-->
     <g class="link" data-entity-1="ent0006" data-entity-2="ent0007" data-link-type="extension"
-       data-source-line="67" id="lnk12">
-      <path codeLine="67" d="M529,1360.07 C529,1378.77 529,1382.19 529,1401.27" fill="none"
+       data-source-line="66" id="lnk12">
+      <path codeLine="66" d="M529,1360.07 C529,1378.77 529,1382.19 529,1401.27" fill="none"
             id="Transcoding-backto-DefaultTranscoding"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
       <polygon fill="none" points="529,1342.07,523,1360.07,535,1360.07,529,1342.07"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--link PlainTextWatermarker to Transcoding-->
     <g class="link" data-entity-1="ent0004" data-entity-2="ent0006" data-link-type="dependency"
-       data-source-line="69" id="lnk13">
-      <path codeLine="69" d="M529,1185.12 C529,1206.23 529,1221.96 529,1239.53" fill="none"
+       data-source-line="68" id="lnk13">
+      <path codeLine="68" d="M529,1185.12 C529,1206.23 529,1221.96 529,1239.53" fill="none"
             id="PlainTextWatermarker-to-Transcoding" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="#181818" points="529,1244.53,533,1235.53,529,1239.53,525,1235.53,529,1244.53"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
@@ -538,8 +538,8 @@
       </text>
     </g><!--link PlainTextWatermarker to SeparatorStrategy-->
     <g class="link" data-entity-1="ent0004" data-entity-2="ent0008" data-link-type="dependency"
-       data-source-line="70" id="lnk14">
-      <path codeLine="70" d="M220.28,1185.12 C220.28,1215.22 220.28,1239.53 220.28,1260.04"
+       data-source-line="69" id="lnk14">
+      <path codeLine="69" d="M220.28,1185.12 C220.28,1215.22 220.28,1239.53 220.28,1260.04"
             fill="none" id="PlainTextWatermarker-to-SeparatorStrategy"
             style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="#181818"
@@ -550,7 +550,7 @@
       </text>
     </g><!--reverse link FileWatermarker to TextFileWatermarker-->
     <g class="link" data-entity-1="ent0016" data-entity-2="ent0017" data-link-type="extension"
-       data-source-line="89" id="lnk18">
+       data-source-line="88" id="lnk18">
       <path d="M466,329.46 C466,349.25 466,351.73 466,371.16" fill="none"
             id="FileWatermarker-backto-TextFileWatermarker"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
@@ -566,8 +566,8 @@
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--link TextFileWatermarker to PlainTextWatermarker-->
     <g class="link" data-entity-1="ent0017" data-entity-2="ent0004" data-link-type="dependency"
-       data-source-line="105" id="lnk21">
-      <path codeLine="105"
+       data-source-line="104" id="lnk21">
+      <path codeLine="104"
             d="M719.65,536.92 C798.29,536.92 864.73,536.92 864.73,536.92 C864.73,536.92 864.73,1058.92 864.73,1058.92 C864.73,1058.92 820.06,1058.92 756.28,1058.92"
             fill="none" id="TextFileWatermarker-to-PlainTextWatermarker"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
@@ -578,6 +578,6 @@
             textLength="81.1294" x="869.8623" y="778.1769">delegates to
       </text>
     </g>
-    <?plantuml-src rLTjRzis4FxkNt7pbzbeR1H51wo6Pi1D5ZJ3YWInsm9hXu6MpZ8NYbH9gglRvh_tAClKU-CW7ORvYw7JtNFlB_g1or1a4OAnEu7JD4l4O61L2bR1Mbch4eYunj1o9GVcXikKQPQ0u1BjBaLGscxLO92oy8R52CD_c4MTC7s3sWpXym30lxBuqJeIqG2u9BuD2n5MH7vJIkKoxlS8M1Jv5wDGVK0zWwNLNCOduFKSIECPNAF9X0tsp_FxmZpVMNpx9v4qI-b9AO5CFXZLy_GZXKfQngNfWHjxOxn4Z6N45cRFrXBgqLQNTKulj6QxFl5zLBh5JTDlypvZPklj9GAH1Rwf1BaPrj-viO5dc9UAD2O4tgUhsx_RVMs5WXa3LuA2sYmkdgG24vJMzDRT1AncqeGg8jmPhCe7ps3GTO5LcfGJGhmZiveaxqWggCgToXcC2kDXCeVSyGjf3nvF9buY24ur4iXytkd4g604U6UXrzYJ6jSn5jSbZZGRODnsW8ha9PSyoP8BQL3RAsMu6o1crEetIYIXtK-osbF72NCfcHDOiVXvnaNa2kcYHQl1JHnS4IEij7gN1qjydw4CCJZTCbqhnSgOArDJ7N4YtR8rKf3pm9RojNWIjefmj2PznglrRoFCtuOaQvgsZDjzSOORHerJjIS8rFflcl5KSDys3NwXoM_ivMRqwj6Jnuz_Fid_dkL_Jyxplv_EIyi-6yii3szX-UlLudgnkhp-w_J5ude63eomSkcdJNyd438HPe82VSPZRiqLQkVpw63Had_2F5KTthMgcfmpo0H6thc2NogBe7cyjQ0slVrxnZSRrEZBmcJhN16QWe0VAI3J_05bbAFkyMi1_ZATTWH-pzWvg2RKQrM46GmpKWh3RukqtQyAvfxxVRpX0eT5JCewFUULWTs_ZetAT8ZbwBTCnwvMZbsi9-3Kh-Y4g8pq9PLBPXwiy43wzpHueU-kvBX9TOpQzbdHrDs1STZw-oJrhVsxWBxl9T1vxHplox47q3sYqxY9MgVANKc-EtdKnGQT7jEO-ju8rwSrfvQvqj7u0DgUZMvWDDkxSX3rTVv_TH11vLjYzh-yXAehROlXpNcHzmSMI2sfV_2qcRWWECEKljdSuK9RxyuK5tXTvJ6bN_SLIdk5BW-1CP4CVItw_V9ZlbZT9oIjLUU8em5SIh6ZwGPsY_3RwvUmTfEiSDnn-ELvE_WA?>
+    <?plantuml-src rLTjRzis4FxkNt7pbzbeR1H51wo6Pi1D5ZJ3YWInsm9hXu6MpZ8NYbH9gglRvh_tAClKU-CW7ORvYw7JtNFlB_g1or1a4OAnEu7JD4l4mAeKh8AribOb476DeULA3imDbodJB0719TfTYg2qtQh186NX3OiHXlymYpfX-WQr6SBd0O1_PV6ZTIIY0N19V1iM8go8_AQKocNSxn6mAF8lHg7wW7e6IwkvZ4_0wpcGnZEuHfC96-oVv_U5URwp-FPF8ccMqfDI0fbyCAhdwKSAbRICIzC3D_R6U8aOouWjp9wj9TIZhIxhd5vepNPzulkeT8kRfj_cVSRCrjjB128BV5C9SZEiltDZ0yymBnLfJ0YyJrUtVxVxsWe5CmQk10MrMLmyIGKcAAtfhRi9MCsa2LL4k3DObG-UmQ3h0giqAIU4U4TcDKdUaLHGbJkLCnWLniDa3hdZ5z8UF9vCl4GGd6eaaFcyqubHmGZmpaAliISrhcCihaiSQJR0kEq05SbBBdcI9HVIeBPNod0tGCoerM-KI4AxdsIrfuuJvb8o9x1YyVECYyWLqaMBLeEREBWYHbXfzIuFblW-GnbYSBfbkbQAbJ5NfgOwuaIwPMka8EU1BULhyIHi5U5eJVgCL-lVHfY_3KdMD6qPj_lY33UC6gTgJn2ezTyquwdWlcqQ_4AJtzZBpUZLeoUF7_zyalyzo_-UdET_FvsNbdqsbbaUtiBorwl5zM9rUVtNwOl5zGmS667bqa-R_auWP2BC10NwZCVScYlKpkVHmQ8b_uHvgZgyQrKrEMUG2OoySmM_L1P1ytXhGMrw-_UCRpQeqPU5oTQv8ZG50JzIGARv0yeeHztZrmByPJhj2FoUiNDGJQZNgWWp66Qa58RV5ccxNnNCFVVxUCC53ekOb7LwpYi3ktyT6vNf4ClHRvcENQqSkrXFmAbVqGbH6UbBAfVCF5ZXWVJlQV12trt9SPFg6BNjiwAfkmFZiFNtIUfR-tS1VTzBeFFQETwNOm-WUqIdSHErJfMxadntygYB3JezfZ7rlH6kJsjEBNEbe_41j3qRtS1ejdVb8Ehh_F_g88BAjyJiVta9LLVQ5iERyoBl3ooGMbB_u6apSK5mXYbzixd3XRRUdIakyBhAOqg_xYkKzWfT7W9Z8XdwMlJxvSTyiRfFI5ghpX570xYKOaVJ3UmMuRVNBs7j9bdXkEFmo_Dsy1K0?>
   </g>
 </svg>

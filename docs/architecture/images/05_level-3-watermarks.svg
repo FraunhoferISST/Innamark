@@ -3,7 +3,7 @@
      version="1.1" viewBox="0 0 894 621" width="894px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
   <defs/>
   <g><!--cluster watermarks-->
-    <g class="cluster" data-qualified-name="watermarks" data-source-line="13" id="ent0001">
+    <g class="cluster" data-qualified-name="watermarks" data-source-line="12" id="ent0001">
       <path
         d="M11,6 L101.0557,6 A7.5,7.5 0 0 1 106.0557,11 L113.0557,28.2969 L874,28.2969 A5,5 0 0 1 879,33.2969 L879,601.28 A5,5 0 0 1 874,606.28 L11,606.28 A5,5 0 0 1 6,601.28 L6,11 A5,5 0 0 1 11,6"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -13,7 +13,7 @@
             lengthAdjust="spacing" textLength="94.0557" x="10" y="20.9951">watermarks
       </text>
     </g><!--class Watermark-->
-    <g class="entity" data-qualified-name="watermarks.Watermark" data-source-line="14" id="ent0002">
+    <g class="entity" data-qualified-name="watermarks.Watermark" data-source-line="13" id="ent0002">
       <rect fill="#F1F1F1" height="178.3438" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="556.5986" x="21.7" y="45.15"/>
       <ellipse cx="256.5691" cy="65.2828" fill="#ADD1B2" rx="11" ry="11"
@@ -77,7 +77,7 @@
             textLength="188.3506" x="41.7" y="216.192">getContentAsText(): String
       </text>
     </g><!--class InnamarkTag-->
-    <g class="entity" data-qualified-name="watermarks.InnamarkTag" data-source-line="26"
+    <g class="entity" data-qualified-name="watermarks.InnamarkTag" data-source-line="25"
        id="ent0003">
       <rect fill="#F1F1F1" height="154.0469" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="480.7334" x="317.63" y="295.65"/>
@@ -135,7 +135,7 @@
         extractTag(content: Byte[]): UByte
       </text>
     </g><!--class InnamarkTagInterface-->
-    <g class="entity" data-qualified-name="watermarks.InnamarkTagInterface" data-source-line="36"
+    <g class="entity" data-qualified-name="watermarks.InnamarkTagInterface" data-source-line="35"
        id="ent0004">
       <rect fill="#F1F1F1" height="186.6406" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="249.4395" x="613.28" y="41"/>
@@ -213,7 +213,7 @@
             textLength="120.9141" x="633.28" y="220.3389">validate(): Status
       </text>
     </g><!--class InnamarkTagBuilder-->
-    <g class="entity" data-qualified-name="watermarks.InnamarkTagBuilder" data-source-line="48"
+    <g class="entity" data-qualified-name="watermarks.InnamarkTagBuilder" data-source-line="47"
        id="ent0005">
       <rect fill="#F1F1F1" height="170.0781" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="260.7461" x="21.63" y="287.64"/>
@@ -278,7 +278,7 @@
         readability.
       </text>
     </g><!--class Implementations-->
-    <g class="entity" data-qualified-name="watermarks.Implementations" data-source-line="60"
+    <g class="entity" data-qualified-name="watermarks.Implementations" data-source-line="59"
        id="ent0006">
       <rect fill="#F1F1F1" height="72.5625" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="150.46" x="345.77" y="517.72"/>
@@ -301,7 +301,7 @@
       <line style="stroke:#181818;stroke-width:0.5;" x1="346.77" x2="495.23" y1="582.2825"
             y2="582.2825"/>
     </g>
-    <g class="entity" data-qualified-name="watermarks.GMN7" data-source-line="64" id="ent0008">
+    <g class="entity" data-qualified-name="watermarks.GMN7" data-source-line="63" id="ent0008">
       <path
         d="M531.2,523.73 L531.2,550.28 L496.42,554.28 L531.2,558.28 L531.2,584.2613 A5,5 0 0 0 536.2,589.2613 L857.8035,589.2613 A5,5 0 0 0 862.8035,584.2613 L862.8035,528.73 L852.8035,518.73 L536.2,518.73 A5,5 0 0 0 531.2,523.73"
         fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/>
@@ -322,23 +322,23 @@
       </text>
     </g><!--reverse link Watermark to InnamarkTag-->
     <g class="link" data-entity-1="ent0002" data-entity-2="ent0003" data-link-type="extension"
-       data-source-line="70" id="lnk10">
-      <path codeLine="70" d="M447.97,241.75 C447.97,265.27 447.97,272.43 447.97,295.26" fill="none"
+       data-source-line="69" id="lnk10">
+      <path codeLine="69" d="M447.97,241.75 C447.97,265.27 447.97,272.43 447.97,295.26" fill="none"
             id="Watermark-backto-InnamarkTag" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="none" points="447.97,223.75,441.97,241.75,453.97,241.75,447.97,223.75"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--reverse link InnamarkTagInterface to InnamarkTag-->
     <g class="link" data-entity-1="ent0004" data-entity-2="ent0003" data-link-type="extension"
-       data-source-line="71" id="lnk11">
-      <path codeLine="71" d="M705.82,245.84 C705.82,268.14 705.82,273.7 705.82,295.2" fill="none"
+       data-source-line="70" id="lnk11">
+      <path codeLine="70" d="M705.82,245.84 C705.82,268.14 705.82,273.7 705.82,295.2" fill="none"
             id="InnamarkTagInterface-backto-InnamarkTag"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
       <polygon fill="none" points="705.82,227.84,699.82,245.84,711.82,245.84,705.82,227.84"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--link InnamarkTagBuilder to InnamarkTag-->
     <g class="link" data-entity-1="ent0005" data-entity-2="ent0003" data-link-type="dependency"
-       data-source-line="72" id="lnk12">
-      <path codeLine="72" d="M282.7,372.28 C293.94,372.28 300.52,372.28 312.28,372.28" fill="none"
+       data-source-line="71" id="lnk12">
+      <path codeLine="71" d="M282.7,372.28 C293.94,372.28 300.52,372.28 312.28,372.28" fill="none"
             id="InnamarkTagBuilder-to-InnamarkTag"
             style="stroke:#181818;stroke-width:1;stroke-dasharray:7,7;"/>
       <polygon fill="#181818"
@@ -346,8 +346,8 @@
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--reverse link InnamarkTag to Implementations-->
     <g class="link" data-entity-1="ent0003" data-entity-2="ent0006" data-link-type="extension"
-       data-source-line="73" id="lnk13">
-      <path codeLine="73" d="M421,468.1 C421,491.39 421,497.88 421,517.23" fill="none"
+       data-source-line="72" id="lnk13">
+      <path codeLine="72" d="M421,468.1 C421,491.39 421,497.88 421,517.23" fill="none"
             id="InnamarkTag-backto-Implementations" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="none" points="421,450.1,415,468.1,427,468.1,421,450.1"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
@@ -355,6 +355,6 @@
             textLength="20.8901" x="393.8535" y="506.6992">1:n
       </text>
     </g>
-    <?plantuml-src bPHDRzf048Rl_XLJUd4KR9H4xG5Hf0IbBL9xWRILsbJLnXvWXRthxeuJoCT_xzWOipPGjJUOcNS-dXdlAwcY98yHBAqJ3BCyJJoFT0QauKuJwHHYQJ0YgPLdbr9bmeWK4gcGrXc2DhJGdfU9Q2dc29q7GMXIOPQs0qyUG9G8Q-7RrWg3WSvG3OUb4-0KQi58Aq95VRXQ4_xuMRg3e8eQ34O6EPA5TIw_z07S4lmz2y29c-t9aY0PlN3QcT7fb8nKSvzmnQhDdvF-hafRacfBxmt-phcAlvks3v-afK4j6tAE2TeyeK7BCQn6cYDLpLxQ6oxkdspBSy2BLxCRAoKAuOsOCmQB8i6uvlVQ9UD4kcoY_qB2-xNeyvxpMh4RnQamFCHojvkQZ8FoN_84m2YCYAWOejKvwxyKlxPy97lDJ4JeJZwkZNkmd6PlBZ_ycew_N_TPIl0EpfhdnhifwZi5A-jKvoR2ngeAZzFplgRQihyRVpEESmWJyU14ENiw1TlmjebKGVSYaJ5ZtZGcABT7R-WgbqcCflx-tBlVGE23IJE3rcBCTRHEKAZAO-NZld4q6LsSjutJZvSNvs_Ujin1vJryj5LhVXY6ZUlizJuZlpAn1OEfliSOPjhmRn6BEvb8MeUzNdFUZfFrLetJBC6KiOdY5UE7IJ2HfeqxcXkTPzMjbAcK9WGZvmi2FMiBoiQ-2YDrtln4vO4uNF4JK5HbidTILIKvAIqGPWmYPznbvAX2pm5Tc1Qqknk-NH0gBga6Z3KiWwzNeYZMhrKObv9IuFJ4mSZYOfvYBkSnVWu2Q0OU_fAUm_1utFQYmf9LE3mUkIdOEUihwEm1zLwyFm00?>
+    <?plantuml-src bPHDRzf048Rl_XLJUd4KR9H4xG5Hf0IbBL9xWRILsbJLnXvWXRthxeuJoCT_xzWOipPGjJUOcNS-dXdlAwcY98yHBAqJ3BCyJJpI6P26EqsaKuYbmOYaLfvTIfK98r98f49QPmZQq49xNYQYfPWZT1u4eKc5MTeEF7a0KIAiXMzRAmm6EaCr79PEW5Ee1IEj21NruMfD-EDdwGw2Acem61daI1RMkVpI1t1ByFSi02TkjYTBWcJqmcbdHgTJCbBDVS8LgpP_JlgxAcr9gYszD_Wxvoh-Rje-V9AM1hLio3acQFE41Yt7i1ffZbGrUsblkBX_iYtF0IzUpMwib2Y4DsBE62oA1EEQtskNZ1Ffied-2mdlrwBFUyvhnMuKfyBm4ClTRceo3if_oHC0ep0YecA8LkUi_rByslAHx3Kp4Q4x-RWsxi5ochsv_F1hElv-tMSfmJiuQvuRxwQexnIih5ETcmWRgoeyJi_xcchB_cxypJZE8Kp4WnFbxEaKRCFR9b85tOj4nenvqvYWt1wzeQjS9Z6Q-ljpxtu3WGycpGnQYp7NqJf1eIgFbO_xnj5aT77UDau_NbwSltdRCWULz_3HLgtvOHWshhFN-upyoiGM3ARw7cEOQSE_HIpkP29f7VPwpNaxJjPRDKwp15F69efNZ1ycmKIQDkveRdIULRTIfbAQ48oSBmZqh2qe6_igZDHvynEL1-9mnKz0KPN9tabLbUIaj42OCOYSSPUHemez1tHXMj3kRlXsGQYuf1emrh0Clbw9ebY_Lc5SIag1qnC78ukBUOgvdCVuEGYW6NZuIteEm-DnsuiAIrRXy7Zafc3dhA-WimVKU_7-0000?>
   </g>
 </svg>

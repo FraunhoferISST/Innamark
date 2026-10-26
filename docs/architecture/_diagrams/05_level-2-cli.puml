@@ -5,6 +5,7 @@
 
 @startuml
 !include style.puml
+left to right direction
 
 ' === System Boundary ===
 rectangle "**CLI**" <<Application>> as system {

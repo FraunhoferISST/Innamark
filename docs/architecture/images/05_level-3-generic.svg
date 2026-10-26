@@ -4,7 +4,7 @@
      width="1083px" zoomAndPan="magnify"><?plantuml 1.2026.6?>
   <defs/>
   <g><!--cluster utils-->
-    <g class="cluster" data-qualified-name="utils" data-source-line="13" id="ent0001">
+    <g class="cluster" data-qualified-name="utils" data-source-line="12" id="ent0001">
       <path
         d="M11,79.2 L41.5898,79.2 A7.5,7.5 0 0 1 46.5898,84.2 L53.5898,101.4969 L547,101.4969 A5,5 0 0 1 552,106.4969 L552,1230.05 A5,5 0 0 1 547,1235.05 L11,1235.05 A5,5 0 0 1 6,1230.05 L6,84.2 A5,5 0 0 1 11,79.2"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -14,7 +14,7 @@
             lengthAdjust="spacing" textLength="34.5898" x="10" y="94.1951">utils
       </text>
     </g><!--cluster responses-->
-    <g class="cluster" data-qualified-name="responses" data-source-line="43" id="ent0008">
+    <g class="cluster" data-qualified-name="responses" data-source-line="42" id="ent0008">
       <path
         d="M581,6 L657.5,6 A7.5,7.5 0 0 1 662.5,11 L669.5,28.2969 L1063,28.2969 A5,5 0 0 1 1068,33.2969 L1068,1230.48 A5,5 0 0 1 1063,1235.48 L581,1235.48 A5,5 0 0 1 576,1230.48 L576,11 A5,5 0 0 1 581,6"
         fill="none" style="stroke:#000000;stroke-width:1.5;"/>
@@ -23,7 +23,7 @@
             lengthAdjust="spacing" textLength="80.5" x="580" y="20.9951">responses
       </text>
     </g><!--class Compression-->
-    <g class="entity" data-qualified-name="utils.Compression" data-source-line="15" id="ent0002">
+    <g class="entity" data-qualified-name="utils.Compression" data-source-line="14" id="ent0002">
       <rect fill="#F1F1F1" height="105.1563" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="284.2344" x="136.88" y="896.28"/>
       <ellipse cx="228.5509" cy="916.4128" fill="#ADD1B2" rx="11" ry="11"
@@ -67,7 +67,7 @@
         Byte[]): Result&lt;Byte[]&gt;
       </text>
     </g>
-    <g class="entity" data-qualified-name="utils.GMN3" data-source-line="23" id="ent0004">
+    <g class="entity" data-qualified-name="utils.GMN3" data-source-line="22" id="ent0004">
       <path
         d="M154.32,1168.65 L154.32,1214.0484 A5,5 0 0 0 159.32,1219.0484 L398.6833,1219.0484 A5,5 0 0 0 403.6833,1214.0484 L403.6833,1173.65 L393.6833,1163.65 L283,1163.65 L279,1001.77 L275,1163.65 L159.32,1163.65 A5,5 0 0 0 154.32,1168.65"
         fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"/>
@@ -84,7 +84,7 @@
             textLength="145.374" x="160.32" y="1210.9825">member of the object.
       </text>
     </g><!--class CRC32-->
-    <g class="entity" data-qualified-name="utils.CRC32" data-source-line="28" id="ent0006">
+    <g class="entity" data-qualified-name="utils.CRC32" data-source-line="27" id="ent0006">
       <rect fill="#F1F1F1" height="72.5625" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="236.2734" x="160.86" y="539.84"/>
       <ellipse cx="228.5504" cy="559.9728" fill="#ADD1B2" rx="11" ry="11"
@@ -112,7 +112,7 @@
         checksum(bytes: Byte[]): UInt
       </text>
     </g><!--class ExtensionFunctions-->
-    <g class="entity" data-qualified-name="utils.ExtensionFunctions" data-source-line="32"
+    <g class="entity" data-qualified-name="utils.ExtensionFunctions" data-source-line="31"
        id="ent0007">
       <rect fill="#F1F1F1" height="170.3438" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="513.2246" x="22.39" y="114.2"/>
@@ -188,7 +188,7 @@
         ByteArray.toHexString(): String
       </text>
     </g><!--class Result-->
-    <g class="entity" data-qualified-name="responses.Result" data-source-line="45" id="ent0009">
+    <g class="entity" data-qualified-name="responses.Result" data-source-line="44" id="ent0009">
       <rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="274.5137" x="684.74" y="41"/>
       <ellipse cx="790.1384" cy="57" fill="#ADD1B2" rx="11" ry="11"
@@ -312,7 +312,7 @@
         T): Result&lt;T&gt;
       </text>
     </g><!--class Status-->
-    <g class="entity" data-qualified-name="responses.Status" data-source-line="66" id="ent0010">
+    <g class="entity" data-qualified-name="responses.Status" data-source-line="65" id="ent0010">
       <rect fill="#F1F1F1" height="316.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="459.9727" x="592.01" y="417.75"/>
       <ellipse cx="795.4407" cy="433.75" fill="#ADD1B2" rx="11" ry="11"
@@ -438,7 +438,7 @@
         Status
       </text>
     </g><!--class Type-->
-    <g class="entity" data-qualified-name="responses.Type" data-source-line="87" id="ent0011">
+    <g class="entity" data-qualified-name="responses.Type" data-source-line="86" id="ent0011">
       <rect fill="#F1F1F1" height="137.75" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="180.2393" x="591.88" y="879.98"/>
       <ellipse cx="636.0584" cy="900.1128" fill="#EB937F" rx="11" ry="11"
@@ -480,7 +480,7 @@
             textLength="83.8838" x="611.88" y="1010.4282">severity: Int
       </text>
     </g><!--class Event-->
-    <g class="entity" data-qualified-name="responses.Event" data-source-line="96" id="ent0012">
+    <g class="entity" data-qualified-name="responses.Event" data-source-line="95" id="ent0012">
       <rect fill="#F1F1F1" height="308.7188" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="231.5977" x="807.2" y="794.5"/>
       <ellipse cx="893.6814" cy="814.6328" fill="#A9DCDF" rx="11" ry="11"
@@ -591,7 +591,7 @@
             textLength="186.1973" x="827.2" y="1095.917">into(value: T?): Result&lt;T&gt;
       </text>
     </g><!--class Success-->
-    <g class="entity" data-qualified-name="responses.Success" data-source-line="116" id="ent0013">
+    <g class="entity" data-qualified-name="responses.Success" data-source-line="115" id="ent0013">
       <rect fill="#F1F1F1" height="56.2656" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="132.9121" x="602.54" y="1163.21"/>
       <ellipse cx="617.54" cy="1183.3428" fill="#ADD1B2" rx="11" ry="11"
@@ -610,7 +610,7 @@
       <line style="stroke:#181818;stroke-width:0.5;" x1="603.54" x2="734.4521" y1="1211.4756"
             y2="1211.4756"/>
     </g><!--class Warning-->
-    <g class="entity" data-qualified-name="responses.Warning" data-source-line="119" id="ent0014">
+    <g class="entity" data-qualified-name="responses.Warning" data-source-line="118" id="ent0014">
       <rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="135.2568" x="770.37" y="1167.35"/>
       <ellipse cx="785.37" cy="1183.35" fill="#A9DCDF" rx="11" ry="11"
@@ -626,7 +626,7 @@
       <line style="stroke:#181818;stroke-width:0.5;" x1="771.37" x2="904.6268" y1="1207.35"
             y2="1207.35"/>
     </g><!--class Error-->
-    <g class="entity" data-qualified-name="responses.Error" data-source-line="122" id="ent0015">
+    <g class="entity" data-qualified-name="responses.Error" data-source-line="121" id="ent0015">
       <rect fill="#F1F1F1" height="48" rx="5" ry="5" style="stroke:#181818;stroke-width:0.5;"
             width="111.2354" x="940.38" y="1167.35"/>
       <ellipse cx="955.38" cy="1183.35" fill="#A9DCDF" rx="11" ry="11"
@@ -643,30 +643,30 @@
             y2="1207.35"/>
     </g><!--reverse link Event to Success-->
     <g class="link" data-entity-1="ent0012" data-entity-2="ent0013" data-link-type="extension"
-       data-source-line="125" id="lnk16">
-      <path codeLine="125"
+       data-source-line="124" id="lnk16">
+      <path codeLine="124"
             d="M788.78,1060.48 C721.9,1060.48 669,1060.48 669,1060.48 C669,1060.48 669,1124.46 669,1162.95"
             fill="none" id="Event-backto-Success" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="none" points="806.78,1060.48,788.78,1054.48,788.78,1066.48,806.78,1060.48"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--reverse link Event to Warning-->
     <g class="link" data-entity-1="ent0012" data-entity-2="ent0014" data-link-type="extension"
-       data-source-line="126" id="lnk17">
-      <path codeLine="126" d="M856.41,1121.46 C856.41,1146.23 856.41,1150.98 856.41,1167.13"
+       data-source-line="125" id="lnk17">
+      <path codeLine="125" d="M856.41,1121.46 C856.41,1146.23 856.41,1150.98 856.41,1167.13"
             fill="none" id="Event-backto-Warning" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="none" points="856.41,1103.46,850.41,1121.46,862.41,1121.46,856.41,1103.46"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--reverse link Event to Error-->
     <g class="link" data-entity-1="ent0012" data-entity-2="ent0015" data-link-type="extension"
-       data-source-line="127" id="lnk18">
-      <path codeLine="127" d="M989.59,1121.46 C989.59,1146.23 989.59,1150.98 989.59,1167.13"
+       data-source-line="126" id="lnk18">
+      <path codeLine="126" d="M989.59,1121.46 C989.59,1146.23 989.59,1150.98 989.59,1167.13"
             fill="none" id="Event-backto-Error" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="none" points="989.59,1103.46,983.59,1121.46,995.59,1121.46,989.59,1103.46"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
     </g><!--link Result to Status-->
     <g class="link" data-entity-1="ent0009" data-entity-2="ent0010" data-link-type="dependency"
-       data-source-line="129" id="lnk19">
-      <path codeLine="129" d="M822,358.05 C822,377.66 822,392.71 822,412.32" fill="none"
+       data-source-line="128" id="lnk19">
+      <path codeLine="128" d="M822,358.05 C822,377.66 822,392.71 822,412.32" fill="none"
             id="Result-to-Status" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="#181818" points="822,417.32,826,408.32,822,412.32,818,408.32,822,417.32"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
@@ -675,8 +675,8 @@
       </text>
     </g><!--link Status to Event-->
     <g class="link" data-entity-1="ent0010" data-entity-2="ent0012" data-link-type="dependency"
-       data-source-line="130" id="lnk20">
-      <path codeLine="130" d="M923,734.73 C923,754.45 923,769.59 923,789.24" fill="none"
+       data-source-line="129" id="lnk20">
+      <path codeLine="129" d="M923,734.73 C923,754.45 923,769.59 923,789.24" fill="none"
             id="Status-to-Event" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="#181818" points="923,794.24,927,785.24,923,789.24,919,785.24,923,794.24"
                style="stroke:#181818;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:10;"/>
@@ -688,8 +688,8 @@
       </text>
     </g><!--link Status to Type-->
     <g class="link" data-entity-1="ent0010" data-entity-2="ent0011" data-link-type="dependency"
-       data-source-line="131" id="lnk21">
-      <path codeLine="131" d="M682.07,734.73 C682.07,785.46 682.07,833.99 682.07,874.84" fill="none"
+       data-source-line="130" id="lnk21">
+      <path codeLine="130" d="M682.07,734.73 C682.07,785.46 682.07,833.99 682.07,874.84" fill="none"
             id="Status-to-Type" style="stroke:#181818;stroke-width:1;"/>
       <polygon fill="#181818"
                points="682.07,879.84,686.07,870.84,682.07,874.84,678.07,870.84,682.07,879.84"
@@ -697,6 +697,6 @@
       <text fill="#000000" font-family="'DejaVu Sans'" font-size="13" lengthAdjust="spacing"
             textLength="22.9785" x="654.07" y="803.3569">has
       </text>
-    </g><!--link ExtensionFunctions to CRC32--><!--link CRC32 to Compression--><?plantuml-src hLRTRzCm47_FNt6K1pfOAmHFL5qHL0KcbGsr6pm0GcvoMyqIExATQTKeVpjdnqcTDjq6OW-hSzyVlplx4HTnMYG8sgnIxET5baQHaJaO2GjfZCmWuGfZmwM8z1KNELCiWvGBDAiSGIgpb56Ki_YANI9q2iDJtG6cmPtWDee0ufHf3MEPvGgr9aim7E9DJbP1BdxIpsX4Wa1_p-1M6sPul8RnwSTFiybyVdnwycCw-JoP3k1O63Y2LqworzjMIF0YPGQx2JDi06zN1hz-FwWEsy9Sj0hFK1Uf6PRV8r9Qs_Y5D5XLGrw4YJYpEv42ry3WWgVOI_4QKoSLIw4D-GtL-rVcq5e7vaGop1Qeh0kpH5-QFd5G92w6e9QpySiN3wbYlCJuIXTPTq4fwI3JSofcbLzfSt9ZKDYetXN2zLkJWqqIRTQjaRxDXmcRpOMIcNMWfzoO52SYuKnKdgTSbuKTRRmtZSsNXAP_C-TKMwCpSjV4GQY-9uo_rhD4qYAVvrJ5Iu69bM_9SxnaYWJF1OzbWZEqO41XcTAvc1l5nMMR-JTAiHMfVi2RKgWXlexMcq4acpbr4BKTnSr7C8uUwcURjbfNXROMxQydNhEqm06SlVRVIwO_bwItKgR8XATpFI_Yc62zo_Z2bA0GTnaJfQHgakkn7Wx72cb22NPbf5t70FXcO2lImu3J31VWe6cL2oExjSncuCz6eS31LWrOdjC8bgHkqxS5d-1LZwcL3vIyHFEHYaMjscfvtN3gHrdGEjwjS8FHBJtuHlQ0nbKOYrIFrudz7dccNTjaZFx_tyuvQ8mBJKlIPtP_PtsXWlwvq0VW8jxJGvOaZjqDPGz1NgDIFC4vaHKtgzfxSzrGuPs2hgSvgCvMgoMjOLMZxA4UcY3uDnjxuN4lX5lm4yBPWGP5aK6dfFKj4jo5RG_sIY5clUldv-CntMpk_ENDxEJuvBqxJsQpqrdObj-qPC95rWZwD-WwtU3QOGjj5AFhozy_jWyKW4QMOX9SDreMAiRAOhM8jarQsXqnt0VFe6u-wNrZwUkmZ-rAqs3w4ZqEaLyYE5nfpIJ3dTR8D6JSaUxErDnMrLwtWklrNVllJiW5QwZZikhxTU90vS-KkgIXy4rjwxxNzHl7wVhpVIfk5pa5Tzg8Uq3zwlMgC9f4Rxz9T3QiTfaZ5R1QKp203c48EiJq5CliFE_tdtQy2HAXTvvXNEp8kV6gJL20J-3ew0W-y2H10LEsaeMnbAZb7TRxkdHYttlbooygttyXENYJ_W40?>
+    </g><!--link ExtensionFunctions to CRC32--><!--link CRC32 to Compression--><?plantuml-src hLRTRzCm47_FNt6K1pfOAmHFL5qHL0KcbGsr6pm0GcvoMyqIExATQTKeVpjdnqcTDjq6OW-hSzyVlplx4HTnMYG8sgnIxET5baP6vc0aBAGnCeE4AumDboBILrpaJB4CKYxGh784gSnIHb7EuYjsYT0f34zr1vW6TuBRA0A8KwOrZ6MMAzIQBC5mY3SvMGMv-4a_en490lqzWrjjcE7n6iQd7p_D9lFvyUd9Z-daysGwW6DXu0XUESbURriXmOkK6UmcpB01l5qP_Fhze3fi2tFHAZn3NQHcM7wFI6bjunVIO5KDUH4cuipkH0fS0uCBdc8lnMjCdLGiXJRaDrJlNvb3QnsO4yamMw2oBimIVMdwn46Hk1Y2Mix6Bryyf8hn4kChNMJT1QMaWqpFgPXLVgNDoOr1OQDwLmZNRqqEDacqMRT6-ZOV9cms5qfcre6UScDId8Y4Cr5vdd9T5dQqyTuqDbyIclxDd5DjZSx8NHC7eVgUCFvQpn99YtoUKnKl1IPMlYNFyP8f4ZmNF9O9pj220OLbIkTYRXGNbstctoZ5LgJw0MzAeORuEbfl1f5ivjH1r7OKDn_1E7gedstQQbqLsbgqlvvupT821t3ssdylcVvSajvAcI8Jdixrl8XZWlKkumjJWaBSPKoKagf9hiTwE1mhf0abs9MHTXq3u9k1hKWF0qupN823fbKkZEpMCfk1Fnk50WTRDM1vJYDOahfDtnPyWbSzfbO-KF8IpKSg5hLgg-LrmwaVPK7hUBV23KQtzE0RsGCQLs4iKZrU9_Pxv9bsRPCn-lz_E-UWCIuqBKcVsVsTzOKA-kT27u2BU4yFMP8uTZUKFGHvZKhn1ET4LjoiQk_DTKE5TmgwdkQWEbkjbhI6LOsoXtfeWk3VREo5nxqGRi5F26S76XH51fsIrhT8S1UsFTWhXPZrhf-VZyTqixdpbpUpa-EJz-uycSrEPs5RVjEI2HTP8-ZVeEjqWsk7BRHHZAulV__OFb006bcAIN3TQ5ce62kBrIBQDcbfTyHm7po3klcazusbhyC-jYjDW-bBz3X4VedWSAKramntMYFJa757kZjJSrjLUzqAhjTtxRyx8HUieOxBgk_NYGELFrFgaeR2DxMj-rxNRnodwy_tgRXTv1JSQIFk0VMhrwl2Q1Az_IRHsR3QPOvKm6fDmG0wX27e4DDJBBFplDz_sl4cI8JUUOPniIFdngisGG4-WQEZ8_Z0amG5JDbA5iPIefPtME_hqebzxvKllwXy_uNau4tw1m00?>
   </g>
 </svg>

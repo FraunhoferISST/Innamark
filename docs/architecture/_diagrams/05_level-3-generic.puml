@@ -7,7 +7,6 @@
 
 @startuml
 !include style.puml
-
 top to bottom direction
 skinparam linetype ortho
 
