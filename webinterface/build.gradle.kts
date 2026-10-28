@@ -10,7 +10,7 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     kotlin("plugin.serialization") version "2.3.21"
-    kotlin("multiplatform") version "2.3.21"
+    kotlin("multiplatform") version "2.4.21"
     id("io.kvision") version "9.1.1"
     id("org.jlleitschuh.gradle.ktlint") version "14.2.0"
     id("com.github.node-gradle.node") version "7.1.0"
