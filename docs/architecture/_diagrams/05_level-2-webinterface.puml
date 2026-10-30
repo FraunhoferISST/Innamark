@@ -1,0 +1,24 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+left to right direction
+
+' === System Boundary ===
+rectangle "**Web Interface**" <<Application>> as system {
+    component "**App**" <<Container>> as app {
+        component "**Embed Tab**" <<UI Component>> as embedTab
+        component "**Extract Tab**" <<UI Component>> as extractTab
+    }
+}
+
+component "**Watermarker Library**" <<Library>> as lib
+
+' External
+embedTab -(0- lib : JS target
+extractTab -(0- lib : JS target
+
+@enduml

@@ -29,8 +29,18 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
+            to="./docs/introduction/">
+            Usage Documentation
+          </Link>
+          <Link
+            className="button button--secondary button--lg"
             to="https://github.com/FraunhoferISST/Innamark">
             Source Code
+          </Link>
+          <Link
+            className="button button--secondary button--lg"
+            to="./architecture">
+            Architecture Documentation
           </Link>
         </div>
       </div>
@@ -44,9 +54,9 @@ export default function Home() {
     <Layout
       title={`${siteConfig.title}`}
       description="Documentation of the Invisible Watermarking (Innamark) project.">
-      <HomepageHeader />
+      <HomepageHeader/>
       <main>
-        <HomepageFeatures />
+        <HomepageFeatures/>
       </main>
     </Layout>
   );
