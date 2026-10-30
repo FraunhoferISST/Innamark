@@ -89,7 +89,7 @@ generating watermarks and parsing extracted watermarks:
   watermark (e.g., size, checksums, or hashes) is included in the watermark. The format of the
   content itself is not defined in detail (e.g., text, certificate, image, ...), but general
   information about the content are defined (currently only whether the content is compressed).
-  For more details see the [InnamarkTag](../InnamarkTag) documentation section.
+  For more details see the [InnamarkTag](../Innamarktag) documentation section.
   This implies that a user extracting an `InnamarkTag`  must know the type of content but not the format
   used to store the content.
   - To offer convenient functions to generate, modify, and parse

@@ -28,7 +28,7 @@ rectangle "**Watermarker Library**" <<Library>> as system {
 
 ' === External Libraries (Blackbox) ===
 component "**sha3**" <<Library>> as sha3
-component "**pako**" <<Library>> as pako
+component "**pako**" <<Library (JS)>> as pako
 
 ' === Internal Relations ===
 fileWM ..> textWM : "delegates to  "

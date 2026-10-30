@@ -9,7 +9,7 @@ left to right direction
 hide stereotypes
 
 ' == SYSTEMS ==
-rectangle "Customer Environmnt" as company {
+rectangle "Customer Environment" as company {
     component "Customer Application" as app
 
     component "**Innamark**" as innamark <<Innamark>>
