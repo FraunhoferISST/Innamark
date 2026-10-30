@@ -1,10 +1,14 @@
 # AGENTS.md (cli)
 
+<!-- This file was developed with AI assistance. -->
+
 This file applies to `cli/`. Also read the repository-level `../AGENTS.md` for global rules.
 
 ## Scope
 - Thin Kotlin/JVM CLI wrapper over `watermarker-jvm`.
 - Main entry point: `src/main/kotlin/Main.kt`.
+- Building block description and extension guide:
+  `../docs/architecture/05_building-block-view/cli.md`.
 
 ## Dependency and build flow
 - `cli/` depends on local Maven publication from `watermarker/`.

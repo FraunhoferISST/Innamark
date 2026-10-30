@@ -1,10 +1,13 @@
 # AGENTS.md (webinterface)
 
+<!-- This file was developed with AI assistance. -->
+
 This file applies to `webinterface/`. Also read the repository-level `../AGENTS.md` for global rules.
 
 ## Scope
 - Kotlin/JS KVision frontend consuming multiplatform `watermarker` artifacts.
 - Main UI code lives in `src/jsMain/kotlin/`.
+- Building block description: `../docs/architecture/05_building-block-view/webinterface.md`.
 
 ## Dependency and build flow
 - `webinterface/` depends on local `watermarker` publication.

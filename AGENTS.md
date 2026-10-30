@@ -1,5 +1,7 @@
 # AGENTS.md
 
+<!-- This file was developed with AI assistance. -->
+
 Repository-wide guidance for all coding agents in this monorepo.
 
 ## Read order and precedence
@@ -9,6 +11,8 @@ Repository-wide guidance for all coding agents in this monorepo.
   - `cli/AGENTS.md`
   - `webinterface/AGENTS.md`
   - `docs/AGENTS.md`
+- For architecture, cross-cutting concepts, or component boundaries, read `docs/architecture/`
+  (arc42; see [Architecture documentation](#architecture-documentation-arc42)).
 - For GitHub Copilot-specific behavior, also read `.github/copilot-instructions.md`.
 
 ## Monorepo layout
@@ -17,7 +21,10 @@ Repository-wide guidance for all coding agents in this monorepo.
   - `watermarker/`: Kotlin Multiplatform core library (JVM + JS)
   - `cli/`: Kotlin/JVM CLI app consuming `watermarker-jvm`
   - `webinterface/`: Kotlin/JS KVision UI consuming `watermarker`
-  - `docs/`: Docusaurus 3 documentation site
+  - `docs/`: Docusaurus 3 documentation site (one site, one build) with two content areas:
+    - `docs/docs/`: usage documentation (sidebar `docs/sidebars.js`, route `/docs/`)
+    - `docs/architecture/`: arc42 architecture documentation (sidebar
+      `docs/sidebarsArchitecture.js`, route `/architecture/`)
 - `cli/` and `webinterface/` consume the **locally published** `watermarker` artifact. When touching
   library code, publish first from `watermarker/`:
 
@@ -38,6 +45,30 @@ Repository-wide guidance for all coding agents in this monorepo.
 - Watermark repetition across the cover is intentional for robustness; do not remove it.
 - Prefer `InnamarkTagBuilder` for new watermark creation paths.
 - `ZipFileWatermarker` is deprecated; do not extend it.
+
+## Architecture documentation (arc42)
+- `docs/architecture/` holds the arc42 (v9) architecture documentation. It is part of the same
+  Docusaurus site as the usage docs; only the sidebar and route differ, and `yarn build` builds and
+  deploys both content areas together.
+- Read the matching section before design-level changes:
+  - `05_building-block-view/`: component boundaries and Level 2/3 whiteboxes per building block
+  - `06_runtime_view.md`: end-to-end embed/extract flow
+  - `08_concepts/`: `InnamarkTag` byte format, error handling, watermarker library concepts, SBOM
+  - `09_architecture-decisions/`: ADR index and template
+- The **REST API** and the **license server** are closed-source/external building blocks. There is
+  no code for them in this repository; do not add any.
+- Update the matching architecture section when behavior changes (building blocks, runtime flow,
+  concepts, quality scenarios), in addition to the user-facing docs under `docs/docs/`.
+- ADRs: copy `09_architecture-decisions/adr-0_template.md` to `adr-<n>_<kebab-title>.md`, set the
+  status (`PROPOSED`/`ACCEPTED`/`REJECTED`/`SUPERSEDED BY ADR-XXX`), and register the record in the
+  table in `09_architecture-decisions/index.md`.
+- Diagrams: edit the PlantUML source in `docs/architecture/_diagrams/` (one `.puml` per section,
+  `!include style.puml` inside the `@startuml` block), then render with `cd docs && yarn diagrams`
+  (Docker-based PlantUML). Commit the `.puml` **and** the rendered `docs/architecture/images/*.svg`
+  plus its `.svg.license` sibling; never hand-edit the SVGs. The `_` prefix keeps `_diagrams` out
+  of the Docusaurus build.
+- Verify doc changes with `cd docs && yarn build`: `onBrokenLinks`/`onBrokenMarkdownLinks` are set
+  to `throw`, so moved or renamed pages fail the build instead of degrading silently.
 
 ## Working rules
 - Run commands from the relevant subproject directory.
