@@ -9,7 +9,7 @@ title: JavaScript
  that can be found in the LICENSE file.
 -->
 
-import PatentHint from './../../patent-hint.mdx'
+import PatentHint from './../patent-hint.mdx'
 
 <PatentHint components={props.components} />
 

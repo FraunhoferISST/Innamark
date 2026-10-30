@@ -44,7 +44,9 @@ Use Gradle to manually build and run the webinterface:
 
 ## Containerized Build
 
-Run the `docker-compose.yml` file in the root directory of the project:
+Run 
+the [`docker-compose.yml`](https://github.com/FraunhoferISST/Innamark/blob/main/docker-compose.yml)
+file in the root directory of the project:
 
 ```
 docker-compose up

@@ -9,7 +9,7 @@ title: Java
  that can be found in the LICENSE file.
 -->
 
-import PatentHint from './../../patent-hint.mdx'
+import PatentHint from './../patent-hint.mdx'
 
 <PatentHint components={props.components} />
 
@@ -54,12 +54,10 @@ application {
 ```
 
 ### 2. Use the Library
-*The static functions `handle(...)` and `unwrap(...)` are optional for easy error handling with our
-custom return types (see [Concepts](../../../development/watermarker/concepts/#error-handling-1)
-for more details).*
+*The extension functions `handle()` and `unwrap()` are optional for easy error handling with our
+custom return types (see [Concepts](../../../architecture/concepts) for more details).*
 
-*Watermark extraction can be customized for different use cases using optional Boolean parameters
-(see [Watermarker](index.mdx#extraction-customizations) for more details)*
+*Watermark extraction can be customized for different use cases using optional Boolean parameters.*
 
 ```java title="src/main/java/Main.java" showLineNumbers
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result;

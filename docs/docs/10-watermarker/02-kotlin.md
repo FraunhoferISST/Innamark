@@ -9,7 +9,7 @@ title: Kotlin
  that can be found in the LICENSE file.
 -->
 
-import PatentHint from './../../patent-hint.mdx'
+import PatentHint from './../patent-hint.mdx'
 
 <PatentHint components={props.components} />
 
@@ -50,11 +50,9 @@ application {
 
 ### 2. Use the Library
 *The extension functions `handle()` and `unwrap()` are optional for easy error handling with our
-custom return types (see [Concepts](../../../development/watermarker/concepts/#error-handling-1)
-for more details).*
+custom return types (see [Concepts](../../../architecture/concepts) for more details).*
 
-*Watermark extraction can be customized for different use cases using optional Boolean parameters
-(see [Watermarker](index.mdx#extraction-customizations) for more details)*
+*Watermark extraction can be customized for different use cases using optional Boolean parameters.*
 
 ```kt title="src/main/kotlin/Main.kt" showLineNumbers
 import de.fraunhofer.isst.innamark.watermarker.watermarkers.text.TextWatermarker

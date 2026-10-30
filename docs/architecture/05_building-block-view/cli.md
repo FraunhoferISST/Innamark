@@ -28,6 +28,17 @@ commands and arguments. Under the hood, it uses
 the [Innamark watermark library](#level-2-watermarker-library) with the Java build target as
 Gradle dependency.
 
+#### Expansion
+To expand upon the CLI tool's current functionality you will have to:
+- Create a new `kotlinx.cli.Subcommand` class for argument parsing within the `cli` function.
+- Create a new function for the new actions that can be called by the subcommand class's 
+  `execute` override function.
+- For top-Level commands (like `Add`, `Text`, `Remove`):
+  - Add the new subcommand class to the `parser.subcommands` list within the `cli` function.
+- For lower-Level commands (like `TextAdd`, `TextList`, `TextRemove`):
+  - Register the new subcommand to the parent subcommand class using the `init` block and `this.
+  subcommands`.
+
 ### Contained Blackboxes
 
 | Building Block                                                                               | Description                                                                                                                                                     |

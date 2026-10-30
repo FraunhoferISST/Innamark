@@ -37,14 +37,18 @@
   display: none !important;
 }
 
-/* Full-width PlantUML diagrams in the architecture docs.
+/* Adjust width of PlantUML diagrams in the architecture docs.
    Docusaurus inlines small SVGs as data URIs, so match both the inlined form
    (src starts with "data:image/svg+xml") and the file form (src ends with .svg). */
 .plugin-id-architecture .markdown img[src$=".svg"],
 .plugin-id-architecture .markdown img[src^="data:image/svg+xml"] {
   display: block;
-  width: 100%;
-  max-width: 900px;
+  width: auto;
+  max-width: 100%;
   height: auto;
   margin-inline: auto;
+}
+
+.button.button--secondary {
+  margin-right: 5px;
 }
