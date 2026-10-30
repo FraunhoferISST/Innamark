@@ -88,7 +88,7 @@ application only, which includes the watermarking functionalities.
 The CLI is distributed as a self-contained fat JAR (`cli-<version>-all.jar`) built with the
 Gradle `shadowJar` task. It requires only a Java Runtime Environment and is typically invoked from a
 shell on a workstation, either directly (`java -jar ...`) or via a shell alias (see [CLI 
-Installation](../../docs/usage/cli/installation/)). The user directly interacts with the CLI tool.
+Installation](../../docs/cli/installation/)). The user directly interacts with the CLI tool.
 
 ### Web Interface (Containerized)
 

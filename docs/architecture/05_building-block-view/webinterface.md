@@ -26,9 +26,8 @@ consists of a single-page design with two tabs: One for watermark embedding and 
 watermark extraction. It is only able to embed text-watermarks into existing cover texts and
 offers configuration possibilities for different watermark types (e.g., compress the watermark,
 add a hash to verify the watermark, etc.). Under the hood, it uses the [Innamark watermark
-library](#level-2-watermarker-library) with the JavaScript (JS) build target as
-Gradle dependency and can be seen as a
-frontend for it.
+library](../watermarker-library) with the JavaScript (JS) build target as Gradle dependency and 
+can be seen as a frontend for it.
 
 ### Contained Blackboxes
 
@@ -37,4 +36,4 @@ frontend for it.
 | [**App**](https://github.com/FraunhoferISST/Innamark/blob/main/webinterface/src/jsMain/kotlin/App.kt)                             | The main container component of the UI, creating the overall page with a tab panel, including the two tabs for embedding and extraction.                        |
 | [**Embed Tab**](https://github.com/FraunhoferISST/Innamark/blob/main/webinterface/src/jsMain/kotlin/WatermarkTextEmbedTab.kt)     | The embed tab offers a form for adding watermarks in cover text by using the watermarker library.                                                               |
 | [**Extract Tab**](https://github.com/FraunhoferISST/Innamark/blob/main/webinterface/src/jsMain/kotlin/WatermarkTextExtractTab.kt) | The extract tab offers a form for getting watermarks in a text by using the watermarker library.                                                                |
-| [**Watermarker Library**](#level-2-watermarker-library-whitebox)                                                                  | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities, integrated as external Gradle dependency with the JS build target. |
+| [**Watermarker Library**](../watermarker-library)                                                                                 | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities, integrated as external Gradle dependency with the JS build target. |
