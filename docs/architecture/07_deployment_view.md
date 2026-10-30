@@ -33,10 +33,10 @@ Innamark offers independent delivery forms, each with its own deployment story:
 - The **Web Interface** is a static single-page application (SPA) built with Kotlin/JS. It is
   self-contained and stateless: all watermarking logic runs client-side in the browser, so no
   backend service, database, or server-side processing is required.
-- The **REST API** is a closed-source application, shipped as a pre-build container image to 
+- The **REST API** is a closed-source application, shipped as a pre-built container image to 
   customers.
 
-Currently, no public artifact repository is available. All components need to be build locally.
+Currently, no public artifact repository is available. All components need to be built locally.
 
 ### Quality and Performance Features
 
@@ -60,7 +60,7 @@ artifact which runs in the infrastructure.
 | [**Watermarker Library**](../building-block-view/watermarker-library)  (JS target) | JS Maven artifact from `publishToMavenLocal`  | Embedded in a JavaScript customer application as a dependency and used as an external library directly in the code.                       |
 | [**CLI**](../building-block-view/cli)                                              | Fat JAR artifact from `shadowJar`             | A stand-alone Java project, started manually from the terminal.                                                                           |
 | [**Web Interface**](../building-block-view/webinterface)                           | Static SPA bundle (`*.zip`) for a web server  | A GUI running in the browser and served via a web server, e.g. via nginx as shown in the multi-stage `Dockerfile`.                        |
-| [**REST API**](../building-block-view/rest-api)  (closed-source)                   | Pre-build container image                     | A closed-source stand-alone REST API, directly integrated with the license server to make watermarking operations available via API.      |
+| [**REST API**](../building-block-view/rest-api)  (closed-source)                   | Pre-built container image                     | A closed-source stand-alone REST API, directly integrated with the license server to make watermarking operations available via API.      |
 | **License Server**                                                                 | n/a                                           | A license server handling license and usage limit checks, running inside the Fraunhofer ISST infrastructure.                              |
 
 ## Infrastructure Deployment of Components (Level 2)
@@ -114,8 +114,8 @@ API service can be deployed into the customer infrastructure that uses the water
 inside it and offers watermarking functionalities via API endpoints. It connects to the 
 Fraunhofer ISST license server for license and usage limit checks.
 
-This component is especially useful for enterprise customers and applications in other languages 
-than Kotlin, Java or JavaScript.
+This component is especially useful for enterprise customers and applications in languages other 
+than Kotlin, Java, or JavaScript.
 
 #### License Server
 

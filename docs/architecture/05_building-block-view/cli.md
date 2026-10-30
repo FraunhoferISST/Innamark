@@ -23,7 +23,7 @@ sidebar_position: 3
 The command line interface (CLI) is based on
 the [Kotlin CLI parser kotlinx-cli](https://github.com/Kotlin/kotlinx-cli), aiming to bring
 watermarking functionalities into the terminal. It is able to embed and extract watermarks from
-Strings directly in the terminal and files. The CLI tool is easy to extand with custom
+Strings directly in the terminal and files. The CLI tool is easy to extend with custom
 commands and arguments. Under the hood, it uses
 the [Innamark watermark library](../watermarker-library) with the Java build target as
 Gradle dependency.
@@ -41,8 +41,8 @@ To expand upon the CLI tool's current functionality you will have to:
 
 ### Contained Blackboxes
 
-| Building Block                                                                               | Description                                                                                                                                                     |
-|----------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Main**](https://github.com/FraunhoferISST/Innamark/blob/main/cli/src/main/kotlin/Main.kt) | The Main file contains the full logic of the CLI tool, like parsing CLI arguments and executing them.                                                           |
-| [**Watermarker Library**](../watermarker-library/)                                           | A Kotlin multiplatform libray, offering watermark embedding and extraction functionalities, integrated as external Gradle dependency with the JVM build target. |
-| [**kotlinx-cli**]((https://github.com/Kotlin/kotlinx-cli))                                   | A generic command-line parser for Kotlin, integrated as external Gradle dependency.                                                                             |
+| Building Block                                                                               | Description                                                                                                                                                      |
+|----------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Main**](https://github.com/FraunhoferISST/Innamark/blob/main/cli/src/main/kotlin/Main.kt) | The Main file contains the full logic of the CLI tool, like parsing CLI arguments and executing them.                                                            |
+| [**Watermarker Library**](../watermarker-library/)                                           | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities, integrated as external Gradle dependency with the JVM build target. |
+| [**kotlinx-cli**]((https://github.com/Kotlin/kotlinx-cli))                                   | A generic command-line parser for Kotlin, integrated as external Gradle dependency.                                                                              |

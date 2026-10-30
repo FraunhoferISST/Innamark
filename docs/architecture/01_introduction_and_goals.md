@@ -38,6 +38,6 @@ The key quality goals and characteristics of the Innamark watermarking engine ar
 
 | Quality Goal          | Description                                                                                                                                                  |
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Inivsible**         | A human should not be able to see a difference between the original text without watermark and the watermarked text.                                         |
+| **Invisible**         | A human should not be able to see a difference between the original text without watermark and the watermarked text.                                         |
 | **Robust**            | The watermark should stay intact as long as possible (e.g., when copied between different applications or performing modifications on the watermarked text). |
 | **Length-preserving** | The number of characters should stay the same (no length increase after the watermark operation is performed).                                               |

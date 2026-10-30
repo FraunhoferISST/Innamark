@@ -12,7 +12,7 @@ sidebar_position: 5
 
 # Building Block View
 
-This section decomposes Innmark into its components, modules and classes. Each level shows more 
+This section decomposes Innamark into its components, modules and classes. Each level shows more 
 details.
 
 ## Level 1: Innamark (Whitebox)
@@ -26,7 +26,7 @@ each as its own subproject, offering different functionalities.
 
 | Building Block                                 | Description                                                                                         |
 |------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| [**Watermarker Library**](watermarker-library) | A Kotlin multiplatform libray, offering watermark embedding and extraction functionalities.         |
+| [**Watermarker Library**](watermarker-library) | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities.        |
 | [**Web Interface**](webinterface)              | A graphical user interface (GUI) to embed and extract watermarks.                                   |
 | [**CLI**](cli)                                 | A command line interface (CLI) as a terminal solution for watermark embedding and extraction.       |
 | [**REST API**](rest-api)                       | A closed-source implementation of an API, offering watermarking embedding and extraction endpoints. |

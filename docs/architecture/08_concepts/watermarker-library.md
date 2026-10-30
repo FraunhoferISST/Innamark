@@ -18,8 +18,8 @@ The following page describes cross-cutting concepts regarding the watermarker li
 ### Kotlin Multiplatform
 Our library is developed as
 [Kotlin Multiplatform Library](https://kotlinlang.org/docs/multiplatform.html) with support for
-Kotlin, Java, and JavaScript. This allows the library to be used in any JVM compatible language (
-e.g., Java, Kotlin), Node.js, and in plain JavaScript (e.g., browsers).
+Kotlin, Java, and JavaScript. This allows the library to be used in any JVM compatible language
+(e.g., Java, Kotlin), Node.js, and in plain JavaScript (e.g., browsers).
 
 In some cases, different code is required for different platforms. In such cases the [`expect` and
 `actual`](https://kotlinlang.org/docs/multiplatform-expect-actual.html)
@@ -48,8 +48,8 @@ should not throw any exceptions, instead functions which can fail should return 
 ---
 
 ## Insert and Extract Watermarks
-The code in the package `de.fraunhofer.isst.innamark.watermarker.types.files` is responsible to parse and
-generate supported file types in memory:
+The code in the package `de.fraunhofer.isst.innamark.watermarker.types.files` is responsible for parsing and
+generating supported file types in memory:
 - all classes adding support for a file type must implement the interface
   [`WatermarkableFile`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/jvmMain/kotlin/types/files/WatermarkableFile.kt)
 - the classes should offer functions to modify the contents of the file when possible
@@ -88,9 +88,9 @@ generating watermarks and parsing extracted watermarks:
   tag to identify the format of the watermark. The format defines if additional information about the
   watermark (e.g., size, checksums, or hashes) is included in the watermark. The format of the
   content itself is not defined in detail (e.g., text, certificate, image, ...), but general
-  information about the content are defined (currently only whether the content is compressed).
+  information about the content is defined (currently only whether the content is compressed).
   For more details see the [InnamarkTag](../Innamarktag) documentation section.
-  This implies that a user extracting an `InnamarkTag`  must know the type of content but not the format
+  This implies that a user extracting an `InnamarkTag` must know the type of content but not the format
   used to store the content.
   - To offer convenient functions to generate, modify, and parse
     [`InnamarkTag`](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt)s

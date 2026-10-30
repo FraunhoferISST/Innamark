@@ -43,4 +43,4 @@ title: "ADR-0: ADR Template"
 
 ## Links and Additional Information
 
-<!-- Provide additional information, links to other decision/resources -->
+<!-- Provide additional information, links to other decisions/resources -->

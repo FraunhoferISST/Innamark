@@ -15,7 +15,7 @@ description: Interactions between building blocks
 
 ## Embed and Extract Watermarks
 
-The following sequence diagram described the watermark embedding and extraction process of a 
+The following sequence diagram describes the watermark embedding and extraction process of a 
 text watermark inside a cover text between a possible external customer application (`App`) that 
 uses the Innamark watermarker library.
 Default configurations and the `RawInnamarkTag` as a special watermark type are used.

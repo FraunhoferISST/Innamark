@@ -13,7 +13,7 @@ description: Collection of Architecture Decision Records (ADRs)
 
 # Architecture Decisions
 
-All architecture decisions are document as Architecture Decision Records (ADRs) in the following 
+All architecture decisions are documented as Architecture Decision Records (ADRs) in the following 
 area ([`/docs/architecture/09_architecture-decisions`](https://github.com/FraunhoferISST/Innamark/tree/main/docs/architecture/09_architecture-decisions)).
 They are numbered in ascending order and have different statuses (Proposed, Accepted, Rejected, 
 Superseded by ADR-XXX). We use our own custom ADR template, based on a combination of the 

@@ -21,7 +21,7 @@ specification is documented below.
 
 ## Overview
 InnamarkTag uses the first byte of a watermark as a tag composed of 8 flags to indicate the format. 
-This allows to parse and interpret the content of the watermark correctly as long as the watermark 
+This allows parsing and interpreting the content of the watermark correctly as long as the watermark 
 follows this specification. The table below lists all specified tags sorted by the amount and 
 positions of set flags and explains their purpose. The flags carry the following meanings:  
 
@@ -34,27 +34,27 @@ positions of set flags and explains their purpose. The flags carry the following
 (7) Unused  
 (8) Unused
 
-| Tag (in bin) | Tag (in hex) | Class name                      | Meaning                                       |
-|--------------|--------------|---------------------------------|-----------------------------------------------|
-| 00000000     | 00           | RawInnamarkTag                    | raw bytes without special encoding            |
-| --           | --           | --                              | --                                            |
-| 10000000     | 80           | Custom                          | Reserved for custom InnamarkTag implementations |
-| 01000000     | 40           | CompressedRawInnamarkTag          | compressed bytes                              |
-| 00100000     | 20           | SizedInnamarkTag                  | size + raw bytes                              |
-| 00010000     | 10           | CRC32InnamarkTag                  | CRC32 checksum + raw bytes                    |
-| 00001000     | 08           | SHA3256InnamarkTag                | SHA3-256 hash + raw bytes                     |
-| 00000100     | 04           | ---Unused---                    | flag currently not in use                     |
-| 00000010     | 02           | ---Unused---                    | flag currently not in use                     |
-| 00000001     | 01           | ---Unused---                    | flag currently not in use                     |
-| --           | --           | --                              | --                                            |
-| 01100000     | 60           | CompressedSizedInnamarkTag        | size + compressed bytes                       |
-| 01010000     | 50           | CompressedCRC32InnamarkTag        | CRC32 checksum + compressed bytes             |
-| 01001000     | 48           | CompressedSHA3256InnamarkTag      | SHA3-256 hash + compressed bytes              |
-| 00110000     | 30           | SizedCRC32InnamarkTag             | size + CRC32 checksum + raw bytes             |
-| 00101000     | 28           | SizedSHA3256InnamarkTag           | size + SHA3-256 hash + raw bytes              |
-| --           | --           | --                              | --                                            |
-| 01110000     | 70           | CompressedSizedCRC32InnamarkTag   | size + CRC32 checksum + compressed bytes      |
-| 01101000     | 68           | CompressedSizedSHA3256InnamarkTag | size + SHA3-256 hash + compressed bytes       |
+| Tag (in bin) | Tag (in hex) | Class name                        | Meaning                                         |
+|--------------|--------------|-----------------------------------|-------------------------------------------------|
+| 00000000     | 00           | RawInnamarkTag                    | raw bytes without special encoding              |
+| --           | --           | --                                | --                                              |
+| 10000000     | 80           | Custom                            | Reserved for custom InnamarkTag implementations |
+| 01000000     | 40           | CompressedRawInnamarkTag          | compressed bytes                                |
+| 00100000     | 20           | SizedInnamarkTag                  | size + raw bytes                                |
+| 00010000     | 10           | CRC32InnamarkTag                  | CRC32 checksum + raw bytes                      |
+| 00001000     | 08           | SHA3256InnamarkTag                | SHA3-256 hash + raw bytes                       |
+| 00000100     | 04           | ---Unused---                      | flag currently not in use                       |
+| 00000010     | 02           | ---Unused---                      | flag currently not in use                       |
+| 00000001     | 01           | ---Unused---                      | flag currently not in use                       |
+| --           | --           | --                                | --                                              |
+| 01100000     | 60           | CompressedSizedInnamarkTag        | size + compressed bytes                         |
+| 01010000     | 50           | CompressedCRC32InnamarkTag        | CRC32 checksum + compressed bytes               |
+| 01001000     | 48           | CompressedSHA3256InnamarkTag      | SHA3-256 hash + compressed bytes                |
+| 00110000     | 30           | SizedCRC32InnamarkTag             | size + CRC32 checksum + raw bytes               |
+| 00101000     | 28           | SizedSHA3256InnamarkTag           | size + SHA3-256 hash + raw bytes                |
+| --           | --           | --                                | --                                              |
+| 01110000     | 70           | CompressedSizedCRC32InnamarkTag   | size + CRC32 checksum + compressed bytes        |
+| 01101000     | 68           | CompressedSizedSHA3256InnamarkTag | size + SHA3-256 hash + compressed bytes         |
 
 ## Details
 In the following, each watermark is specified with the text ``Lorem Ipsum`` encoded in UTF-8 bytes
@@ -105,7 +105,7 @@ replacing the bytes containing the hash with null bytes.
 
 ### SizedSHA3256InnamarkTag
 The size and SHA3-256 hash are calculated over the entire watermark, replacing the bytes containing the
-hash are replaced with zero-bytes.
+hash with zero-bytes.
 
 | tag | size in 32 bits little-endian | SHA3-256 hash                                                                                   | raw bytes                        |
 |-----|-------------------------------|-------------------------------------------------------------------------------------------------|----------------------------------|
@@ -164,7 +164,7 @@ InnamarkTag uses DEFLATE as compression algorithm (see RFC 1951).
 
 ### CompressedSizedSHA3256InnamarkTag
 The size and SHA3-256 hash are calculated over the entire watermark, replacing the bytes containing the
-hash are replaced with zero-bytes.
+hash with zero-bytes.
 Only the content is compressed, potentially allowing to use the additional information to increase 
 the watermark robustness.
 InnamarkTag uses DEFLATE as compression algorithm (see RFC 1951).
