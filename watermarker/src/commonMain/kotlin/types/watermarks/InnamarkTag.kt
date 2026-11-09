@@ -600,6 +600,7 @@ sealed class InnamarkTag(
     }
 }
 
+@JsExport
 fun Result<List<Watermark>>.toInnamarkTags(
     source: String = "InnamarkTag",
 ): Result<List<InnamarkTag>> {

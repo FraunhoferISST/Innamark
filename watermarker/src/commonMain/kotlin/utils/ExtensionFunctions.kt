@@ -7,6 +7,8 @@
 
 package de.fraunhofer.isst.innamark.watermarker.utils
 
+import kotlin.js.JsExport
+
 /**
  * Returns a UInt created from 4 bytes in little endian order
  * If less than 4 bytes are supplied they get filled with zeros from MSB to LSB
@@ -50,6 +52,7 @@ fun UShort.toBytesLittleEndian(): List<Byte> =
     )
 
 /** Coverts a Byte into an UByte and returns it as Int */
+@JsExport
 fun Byte.toIntUnsigned(): Int = this.toInt() and 0xff
 
 /** Returns the Unicode representation of the character */
@@ -64,6 +67,7 @@ fun Char.toUnicodeRepresentation(): String =
  * Represents a ByteArray in hex
  * E.g.: [0xde, 0xad, 0xbe, 0xef]
  */
+@JsExport
 fun ByteArray.toHexString(): String =
     "[" +
         joinToString(separator = ", ") { eachByte ->
