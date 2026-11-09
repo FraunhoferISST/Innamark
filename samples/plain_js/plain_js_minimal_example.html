@@ -13,10 +13,14 @@
 
 <body>
 <h1>Innamark JS Example</h1>
+<h2>Watermarked Text</h2>
+<p id="watermarked-text"></p>
+<h2>Extracted Watermark</h2>
+<p id="extracted-watermark"></p>
 <script>
-    watermarker = watermarker.de.fraunhofer.isst.innamark.watermarker;
-    const Watermarker = new watermarker.Watermarker();
-    const TextWatermark = watermarker.watermarks.TextWatermark;
+    const pkg = watermarker.de.fraunhofer.isst.innamark.watermarker;
+    const textWatermarker = new pkg.watermarkers.text.PlainTextWatermarker();
+    const watermark = pkg.types.watermarks.Watermark.Companion.fromString("Hello World!");
 
     let text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod \
 tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam \
@@ -26,14 +30,15 @@ eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptu
 accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est \
 Lorem ipsum.";
 
-    let watermark = TextWatermark.Companion.new("Hello World!");
-
-    let result = Watermarker.textAddInnamarkTagBuilder(text, watermark);
+    const result = textWatermarker.addWatermark(text, watermark);
 
     if (result.isSuccess) {
-        document.write(result.value);
+        document.getElementById("watermarked-text").textContent = result.value;
+        const extracted = textWatermarker.getWatermarkAsString(result.value);
+        document.getElementById("extracted-watermark").textContent =
+            extracted.hasValue ? extracted.value : extracted.toString();
     } else {
-        document.write(result);
+        document.getElementById("watermarked-text").textContent = result.toString();
     }
 </script>
 </body>
