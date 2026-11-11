@@ -7,39 +7,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Innamark JS Example</title>
-    <script src="../../watermarker/build/dist/js/productionExecutable/watermarker.js"></script>
+  <meta charset="UTF-8" />
+  <title>Innamark JS Example</title>
+  <script src="../../watermarker/build/dist/js/productionExecutable/watermarker.js"></script>
 </head>
-
 <body>
-<h1>Innamark JS Example</h1>
-<h2>Watermarked Text</h2>
-<p id="watermarked-text"></p>
-<h2>Extracted Watermark</h2>
-<p id="extracted-watermark"></p>
-<script>
-    const pkg = watermarker.de.fraunhofer.isst.innamark.watermarker;
-    const textWatermarker = new pkg.watermarkers.text.PlainTextWatermarker();
-    const watermark = pkg.types.watermarks.Watermark.Companion.fromString("Hello World!");
+  <h1>Innamark JS Example</h1>
+  <h2>Watermarked Text</h2>
+  <p id="watermarked-text"></p>
+  <h2>Extracted Watermark</h2>
+  <p id="extracted-watermark"></p>
 
-    let text = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod \
-tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam \
-et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem \
-ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy \
-eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et \
-accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est \
-Lorem ipsum.";
+  <script>
+    const { PlainTextWatermarker } = watermarker.de.fraunhofer.isst.innamark.watermarker.watermarkers.text;
+    const { Watermark } = watermarker.de.fraunhofer.isst.innamark.watermarker.types.watermarks;
 
-    const result = textWatermarker.addWatermark(text, watermark);
+    const textWatermarker = new PlainTextWatermarker();
+    const watermark = Watermark.Companion.fromString("Hello World!");
+    const cover = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.";
+
+    const result = textWatermarker.addWatermark(cover, watermark);
 
     if (result.isSuccess) {
-        document.getElementById("watermarked-text").textContent = result.value;
-        const extracted = textWatermarker.getWatermarkAsString(result.value);
-        document.getElementById("extracted-watermark").textContent =
-            extracted.hasValue ? extracted.value : extracted.toString();
+      const extracted = textWatermarker.getWatermarkAsString(result.value);
+      document.getElementById("watermarked-text").textContent = result.value;
+      document.getElementById("extracted-watermark").textContent = extracted.value;
     } else {
-        document.getElementById("watermarked-text").textContent = result.toString();
+      document.getElementById("watermarked-text").textContent = result.toString();
     }
-</script>
+  </script>
 </body>
 </html>
