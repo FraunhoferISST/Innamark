@@ -20,6 +20,6 @@ Superseded by ADR-XXX). We use our own custom ADR template, based on a combinati
 [famous template by Michael Nygard](https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions)
 and the [template of the MADR project](https://github.com/adr/madr/tree/develop/template).
 
-| #                         | Title        | Status |
-|---------------------------|--------------|--------|
-| [ADR-0](./adr-0_template) | ADR Template | -      |
+| #                          | Title        | Status |
+|----------------------------|--------------|--------|
+| [ADR-0](adr-0_template.md) | ADR Template | -      |

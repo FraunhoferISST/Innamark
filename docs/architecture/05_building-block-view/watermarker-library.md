@@ -92,17 +92,17 @@ The `watermarks` package handles everything related to the watermarks itself, so
 embedded into the cover text. The Innamark project uses objects of the `Watermark` class as one 
 uniform data type for these watermarks. One special type of watermarks is InnamarkTags, which 
 can be illustrated as a well-defined 1-Byte-long tag + the watermark itself (see [cross-cutting 
-concepts](../../concepts)).
+concepts](../08_concepts/index.md)).
 
 ### Contained Blackboxes
 
-| Building Block                                                                                                                                            | Description                                                                                                                                                                            |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Watermark**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/Watermark.kt)                     | Our internal data type to transform a sequence of bytes or a String into a `Watermark` object.                                                                                         |
-| [**InnamarkTagInterface**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L27)    | Interface to define an InnamarkTag, described in more detail in the [cross-cutting concepts](../../concepts). Simply explained, it is a well-defined tag placed before each watermark. |
-| [**InnamarkTag**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L101)            | Specific implementation of the `InnamarkTagInterface`, which transforms the content into a `Watermark`.                                                                                |
-| [**InnamarkTagBuilder**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTagBuilder.kt)   | Usage of the [builder design pattern](https://en.wikipedia.org/wiki/Builder_pattern) to create InnamarkTags.                                                                           |
-| [**InnamarkTag Implementations**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt) | Various classes, each for every InnamarkTag.                                                                                                                                           |
+| Building Block                                                                                                                                            | Description                                                                                                                                                                                     |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Watermark**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/Watermark.kt)                     | Our internal data type to transform a sequence of bytes or a String into a `Watermark` object.                                                                                                  |
+| [**InnamarkTagInterface**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L27)    | Interface to define an InnamarkTag, described in more detail in the [cross-cutting concepts](../08_concepts/index.md). Simply explained, it is a well-defined tag placed before each watermark. |
+| [**InnamarkTag**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt#L101)            | Specific implementation of the `InnamarkTagInterface`, which transforms the content into a `Watermark`.                                                                                         |
+| [**InnamarkTagBuilder**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTagBuilder.kt)   | Usage of the [builder design pattern](https://en.wikipedia.org/wiki/Builder_pattern) to create InnamarkTags.                                                                                    |
+| [**InnamarkTag Implementations**](https://github.com/FraunhoferISST/Innamark/blob/main/watermarker/src/commonMain/kotlin/types/watermarks/InnamarkTag.kt) | Various classes, each for every InnamarkTag.                                                                                                                                                    |
 
 ## Level 3: Generic (Whitebox)
 
@@ -118,7 +118,7 @@ and aspects used by the InnamarkTag watermark (like CRC32 or compression).
 
 The `responses` includes the logic of our custom return- and error-handling types, consisting of 
 the three main building blocks for `Result`, `Status`, and `Event`, described in more detail in the 
-[cross-cutting concepts](../../concepts).
+[cross-cutting concepts](../08_concepts/index.md).
 
 ### Contained Blackboxes
 

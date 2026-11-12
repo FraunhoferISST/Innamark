@@ -16,8 +16,8 @@ description: Deployment and infrastructure information
 # Deployment View
 
 Innamark is not a single deployable unit but an ecosystem of independent building blocks that can be
-deployed in very different ways (see [Building Block View](../building-block-view)). This section
-describes the technical infrastructure and how the building blocks are mapped onto it.
+deployed in very different ways (see [Building Block View](05_building-block-view/index.md)). This 
+section describes the technical infrastructure and how the building blocks are mapped onto it.
 
 ## Infrastructure Overview (Level 1)
 
@@ -51,17 +51,17 @@ Currently, no public artifact repository is available. All components need to be
 
 ### Mapping
 
-The following table maps the [building blocks](../building-block-view) to their resulting 
+The following table maps the [building blocks](05_building-block-view/index.md) to their resulting 
 artifact which runs in the infrastructure.
 
-| Building Block                                                                     | Delivered Artifact                            | Notes                                                                                                                                     |
-|------------------------------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
-| [**Watermarker Library**](../building-block-view/watermarker-library) (JVM target) | JVM Maven artifact from `publishToMavenLocal` | Embedded in a Kotlin/Java customer application as a (Maven/Gradle) build dependency and used as an external library directly in the code. |
-| [**Watermarker Library**](../building-block-view/watermarker-library)  (JS target) | JS Maven artifact from `publishToMavenLocal`  | Embedded in a JavaScript customer application as a dependency and used as an external library directly in the code.                       |
-| [**CLI**](../building-block-view/cli)                                              | Fat JAR artifact from `shadowJar`             | A stand-alone Java project, started manually from the terminal.                                                                           |
-| [**Web Interface**](../building-block-view/webinterface)                           | Static SPA bundle (`*.zip`) for a web server  | A GUI running in the browser and served via a web server, e.g. via nginx as shown in the multi-stage `Dockerfile`.                        |
-| [**REST API**](../building-block-view/rest-api)  (closed-source)                   | Pre-built container image                     | A closed-source stand-alone REST API, directly integrated with the license server to make watermarking operations available via API.      |
-| **License Server**                                                                 | n/a                                           | A license server handling license and usage limit checks, running inside the Fraunhofer ISST infrastructure.                              |
+| Building Block                                                                        | Delivered Artifact                            | Notes                                                                                                                                     |
+|---------------------------------------------------------------------------------------|-----------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Watermarker Library**](05_building-block-view/watermarker-library.md) (JVM target) | JVM Maven artifact from `publishToMavenLocal` | Embedded in a Kotlin/Java customer application as a (Maven/Gradle) build dependency and used as an external library directly in the code. |
+| [**Watermarker Library**](05_building-block-view/watermarker-library.md)  (JS target) | JS Maven artifact from `publishToMavenLocal`  | Embedded in a JavaScript customer application as a dependency and used as an external library directly in the code.                       |
+| [**CLI**](05_building-block-view/cli.md)                                              | Fat JAR artifact from `shadowJar`             | A stand-alone Java project, started manually from the terminal.                                                                           |
+| [**Web Interface**](05_building-block-view/webinterface.md)                           | Static SPA bundle (`*.zip`) for a web server  | A GUI running in the browser and served via a web server, e.g. via nginx as shown in the multi-stage `Dockerfile`.                        |
+| [**REST API**](05_building-block-view/rest-api.md)  (closed-source)                   | Pre-built container image                     | A closed-source stand-alone REST API, directly integrated with the license server to make watermarking operations available via API.      |
+| **License Server**                                                                    | n/a                                           | A license server handling license and usage limit checks, running inside the Fraunhofer ISST infrastructure.                              |
 
 ## Infrastructure Deployment of Components (Level 2)
 
@@ -88,7 +88,7 @@ application only, which includes the watermarking functionalities.
 The CLI is distributed as a self-contained fat JAR (`cli-<version>-all.jar`) built with the
 Gradle `shadowJar` task. It requires only a Java Runtime Environment and is typically invoked from a
 shell on a workstation, either directly (`java -jar ...`) or via a shell alias (see [CLI 
-Installation](../../docs/cli/installation/)). The user directly interacts with the CLI tool.
+Installation](/docs/cli/installation)). The user directly interacts with the CLI tool.
 
 ### Web Interface (Containerized)
 

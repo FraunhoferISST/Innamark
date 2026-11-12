@@ -24,9 +24,9 @@ each as its own subproject, offering different functionalities.
 
 ### Contained Blackboxes
 
-| Building Block                                 | Description                                                                                         |
-|------------------------------------------------|-----------------------------------------------------------------------------------------------------|
-| [**Watermarker Library**](watermarker-library) | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities.        |
-| [**Web Interface**](webinterface)              | A graphical user interface (GUI) to embed and extract watermarks.                                   |
-| [**CLI**](cli)                                 | A command line interface (CLI) as a terminal solution for watermark embedding and extraction.       |
-| [**REST API**](rest-api)                       | A closed-source implementation of an API, offering watermarking embedding and extraction endpoints. |
+| Building Block                                    | Description                                                                                         |
+|---------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+| [**Watermarker Library**](watermarker-library.md) | A Kotlin multiplatform library, offering watermark embedding and extraction functionalities.        |
+| [**Web Interface**](webinterface.md)              | A graphical user interface (GUI) to embed and extract watermarks.                                   |
+| [**CLI**](cli.md)                                 | A command line interface (CLI) as a terminal solution for watermark embedding and extraction.       |
+| [**REST API**](rest-api.md)                       | A closed-source implementation of an API, offering watermarking embedding and extraction endpoints. |

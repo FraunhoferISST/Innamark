@@ -43,7 +43,7 @@ parse watermarks* task must be able to generate and parse bytes.
 ### Error Handling
 We handle errors (and warnings) as values, not as exceptions. Our library
 should not throw any exceptions, instead functions which can fail should return a `Status` or a
-`Result` if they return a value. See [Error Handling](../error-handling) for details.
+`Result` if they return a value. See [Error Handling](error-handling.md) for details.
 
 ---
 
@@ -89,7 +89,7 @@ generating watermarks and parsing extracted watermarks:
   watermark (e.g., size, checksums, or hashes) is included in the watermark. The format of the
   content itself is not defined in detail (e.g., text, certificate, image, ...), but general
   information about the content is defined (currently only whether the content is compressed).
-  For more details see the [InnamarkTag](../innamarktag) documentation section.
+  For more details see the [InnamarkTag](innamarktag.md) documentation section.
   This implies that a user extracting an `InnamarkTag` must know the type of content but not the format
   used to store the content.
   - To offer convenient functions to generate, modify, and parse
