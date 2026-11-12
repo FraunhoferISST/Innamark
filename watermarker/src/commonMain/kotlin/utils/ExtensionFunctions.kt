@@ -1,11 +1,13 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
  */
 
 package de.fraunhofer.isst.innamark.watermarker.utils
+
+import kotlin.js.JsExport
 
 /**
  * Returns a UInt created from 4 bytes in little endian order
@@ -50,6 +52,7 @@ fun UShort.toBytesLittleEndian(): List<Byte> =
     )
 
 /** Coverts a Byte into an UByte and returns it as Int */
+@JsExport
 fun Byte.toIntUnsigned(): Int = this.toInt() and 0xff
 
 /** Returns the Unicode representation of the character */
@@ -64,6 +67,7 @@ fun Char.toUnicodeRepresentation(): String =
  * Represents a ByteArray in hex
  * E.g.: [0xde, 0xad, 0xbe, 0xef]
  */
+@JsExport
 fun ByteArray.toHexString(): String =
     "[" +
         joinToString(separator = ", ") { eachByte ->

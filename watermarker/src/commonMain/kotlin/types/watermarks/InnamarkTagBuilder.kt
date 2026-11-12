@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -10,6 +10,7 @@ package de.fraunhofer.isst.innamark.watermarker.types.watermarks
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
@@ -329,6 +330,8 @@ class InnamarkTagBuilder private constructor(
 }
 
 @JvmName("intoInnamarkTagBuilders")
+@JsExport
+@JsName("innamarkTagsToInnamarkTagBuilders")
 fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
     source: String = "toInnamarkTagBuilders",
@@ -366,6 +369,8 @@ fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
     }
 }
 
+@JsExport
+@JsName("watermarksToInnamarkTagBuilders")
 fun Result<List<Watermark>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
     source: String = "toInnamarkTagBuilders",

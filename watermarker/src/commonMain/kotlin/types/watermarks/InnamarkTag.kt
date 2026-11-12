@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -600,6 +600,7 @@ sealed class InnamarkTag(
     }
 }
 
+@JsExport
 fun Result<List<Watermark>>.toInnamarkTags(
     source: String = "InnamarkTag",
 ): Result<List<InnamarkTag>> {
