@@ -1,10 +1,13 @@
 # AGENTS.md (webinterface)
 
+<!-- This file was developed with AI assistance. -->
+
 This file applies to `webinterface/`. Also read the repository-level `../AGENTS.md` for global rules.
 
 ## Scope
 - Kotlin/JS KVision frontend consuming multiplatform `watermarker` artifacts.
 - Main UI code lives in `src/jsMain/kotlin/`.
+- Building block description: `../docs/architecture/05_building-block-view/webinterface.md`.
 
 ## Dependency and build flow
 - `webinterface/` depends on local `watermarker` publication.
@@ -42,4 +45,4 @@ This file applies to `webinterface/`. Also read the repository-level `../AGENTS.
 - Webinterface testing is optional today, not mandatory.
 - Add or update JS tests for behavior changes when practical, especially for non-trivial UI logic.
 - At minimum, validate changed flows in the dev server or docker-based fast-start path when feasible.
-- If user-facing UI behavior changes, update docs under `docs/docs/03-usage/12-webinterface/`.
+- If user-facing UI behavior changes, update docs under `../docs/docs/12-webinterface`.

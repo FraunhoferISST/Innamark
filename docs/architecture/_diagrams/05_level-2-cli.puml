@@ -1,0 +1,22 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+left to right direction
+
+' === System Boundary ===
+rectangle "**CLI**" <<Application>> as system {
+    component "**Main**" <<Component>> as app
+}
+
+component "**Watermarker Library**" <<Library>> as watermarkerlib
+component "**kotlinx-cli**" <<Library>> as clilib
+
+' External
+app -(0- watermarkerlib : JVM target
+app -(0- clilib
+
+@enduml

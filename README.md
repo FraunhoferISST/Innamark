@@ -61,8 +61,9 @@ patent](https://patents.google.com/patent/WO2025056772A1/en).
 
 ## 📖 Documentation
 
-All information from usage to development are collected and provided in our
-[documentation](https://fraunhoferisst.github.io/Innamark/).
+All information regarding usage, development and a detailed architecture overview including 
+Architecture Decision Records (ADRs) are collected and provided in 
+our [documentation](https://fraunhoferisst.github.io/Innamark/).
 
 ## 📁 Structure
 

@@ -1,0 +1,31 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+
+actor "End User" as user
+
+rectangle "Customer Environment" as customer {
+
+    node "Customer Application" as customerApp {
+    }
+
+    node "REST API" as api {
+        artifact "Watermarker Library\n(JVM target)" as lib
+        port " " as apiPort
+    }
+}
+
+rectangle "Fraunhofer ISST" as isst {
+    node "License Server" as licenseServer
+}
+
+user -> customerApp : uses
+customerApp <--> apiPort : watermarking
+apiPort <-> lib
+api <-> licenseServer : HTTPS\n license / usage\nlimit checks
+
+@enduml

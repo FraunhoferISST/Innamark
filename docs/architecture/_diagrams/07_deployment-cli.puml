@@ -1,0 +1,23 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+left to right direction
+
+actor "End User" as user
+
+rectangle "Customer Environment" as customer {
+
+    node "Workstation" as workstation {
+        node "Java Runtime Environment (JRE)" as jre {
+            artifact "**CLI**\n(fat JAR)" as cli
+        }
+    }
+}
+
+user --> cli : uses
+
+@enduml
