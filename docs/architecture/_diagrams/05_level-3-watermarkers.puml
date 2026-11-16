@@ -1,0 +1,113 @@
+' Copyright (c) 2026 Malte Hellmeier
+'
+' All rights reserved.
+' The initial version of this diagram was created and published in the dissertation "Strengthening
+' Data Sovereignty Through Digital Text Watermarking"
+' https://doi.org/10.17877/DE290R-26644
+
+@startuml
+!include style.puml
+top to bottom direction
+skinparam linetype ortho
+
+package "watermarkers" {
+  package "text" {
+
+    interface TextWatermarker {
+      + addWatermark(cover: String, watermark: String): Result<String>
+      + addWatermark(cover: String, watermark: Byte[], wrap: Boolean): Result<String>
+      + addWatermark(cover: String, watermark: Watermark): Result<String>
+      + containsWatermark(cover: String): Boolean
+      + getWatermarkAsString(cover: String): Result<String>
+      + getWatermarkAsByteArray(cover: String): Result<Byte[]>
+      + getWatermarks(cover: String, squash: Boolean, singleWatermark: Boolean): Result<List<Watermark>>
+      + removeWatermarks(cover: String): Result<String>
+    }
+
+    class PlainTextWatermarker implements TextWatermarker {
+      - transcoding: Transcoding
+      - separatorStrategy: SeparatorStrategy
+      + placement: (String) -> List<Int>
+      --
+      + <<Create>> PlainTextWatermarker(
+        \t  transcoding: Transcoding,
+        \t  separatorStrategy: SeparatorStrategy,
+        \t  placement: (String) -> List<Int>
+        )
+      --
+      + getMinimumInsertPositions(watermark: Byte[]): Int
+      + getMinimumInsertPositions(watermark: Watermark): Int
+      + getMinimumInsertPositions(innamarkTagBuilder: InnamarkTagBuilder): Int
+      - getSeparatedWatermark(watermark: Byte[]): Sequence<Char>
+    }
+
+    interface Transcoding {
+      + alphabet: List<Char>
+      --
+      + encode(bytes: Byte[])
+      + decode(chars: Sequence<Char>)
+    }
+
+    class DefaultTranscoding <<object>> {
+      + alphabet: List<Char> = listOf(U+2008,U+2009,U+202F,U+205F)
+      + {static} SEPARATOR_CHAR: Char = U+2004
+      --
+      - calculateDigitsPerByte(alphabetSize: Int)
+    }
+
+    class SeparatorStrategy <<sealed>> {
+    }
+
+    note right of SeparatorStrategy
+      Different
+      subclasses
+      exist.
+    end note
+
+    Transcoding <|.. DefaultTranscoding
+
+    PlainTextWatermarker --> Transcoding : "uses "
+    PlainTextWatermarker --> SeparatorStrategy : "uses "
+  }
+
+  package "file" {
+    interface FileWatermarker {
+      + addWatermark(source: String, target: String, watermark: Byte[], wrap: Boolean, fileType: String): Status
+      + addWatermark(source: String, target: String, watermark: String, fileType: String): Status
+      + addWatermark(source: String, target: String, watermark: Watermark, fileType: String): Status
+      + addWatermark(source: String, target: String, innamarkTagBuilder: InnamarkTagBuilder, fileType: String): Status
+      + containsWatermark(source: String, fileType: String): Result<Boolean>
+      + getWatermarks(source: String, fileType: String, squash: Boolean, singleWatermark: Boolean): Result<List<Watermark>>
+      + getWatermarkAsString(source: String, fileType: String): Result<String>
+      + getWatermarkAsByteArray(source: String, fileType: String): Result<Byte[]>
+      + removeWatermarks(source: String, target: String, fileType: String): Status
+      + parseBytes(bytes: Byte[]): Result<File>
+      + getSource(): String
+    }
+
+    class TextFileWatermarker implements FileWatermarker {
+      - transcoding: Transcoding
+      - separatorStrategy: SeparatorStrategy
+      + placement: (String) -> List<Int>
+      - watermarker: PlainTextWatermarker(
+        \t  transcoding: Transcoding,
+        \t  separatorStrategy: SeparatorStrategy,
+        \t  placement: (String) -> List<Int>
+        )
+      --
+      --
+      - checkFileType(source: String, target: String, fileType: String): Status
+    }
+
+    class ZipFileWatermarker <<Deprecated>> implements FileWatermarker {
+    }
+
+    TextFileWatermarker ....> PlainTextWatermarker: " delegates to"
+  }
+
+  'note top of file
+  '  Only in the JVM build target
+  'end note
+}
+
+@enduml

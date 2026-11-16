@@ -1,10 +1,14 @@
 # AGENTS.md (cli)
 
+<!-- This file was developed with AI assistance. -->
+
 This file applies to `cli/`. Also read the repository-level `../AGENTS.md` for global rules.
 
 ## Scope
 - Thin Kotlin/JVM CLI wrapper over `watermarker-jvm`.
 - Main entry point: `src/main/kotlin/Main.kt`.
+- Building block description and extension guide:
+  `../docs/architecture/05_building-block-view/cli.md`.
 
 ## Dependency and build flow
 - `cli/` depends on local Maven publication from `watermarker/`.
@@ -31,4 +35,4 @@ This file applies to `cli/`. Also read the repository-level `../AGENTS.md` for g
 - Add or adjust tests for changed CLI behavior when practical, especially for larger behavior changes.
 - At minimum, validate the affected CLI flow manually or with the existing Gradle test/run commands.
 - Keep diffs focused and avoid unrelated formatting churn.
-- If user-facing CLI behavior changes, update docs under `docs/docs/03-usage/11-cli/`.
+- If user-facing CLI behavior changes, update docs under `../docs/docs/11-cli`.

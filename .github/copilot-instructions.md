@@ -1,5 +1,7 @@
 # GitHub Copilot Instructions — Innamark
 
+<!-- This file was developed with AI assistance. -->
+
 Primary audience: GitHub Copilot. Other agents should follow `AGENTS.md` and the closest
 subproject `AGENTS.md`; reading this file is optional and only adds Copilot-tuned completion hints.
 
@@ -27,7 +29,8 @@ Concrete file paths that improve completion quality:
 - `watermarker/src/commonMain/kotlin/types/responses/` (`Status`, `Result<T>`)
 - `cli/src/main/kotlin/Main.kt`
 - `webinterface/src/jsMain/kotlin/`
-- `docs/docs/03-usage/` and `docs/docs/04-development/`
+- `docs/docs/` (usage docs: `10-watermarker/`, `11-cli/`, `12-webinterface/`)
+- `docs/architecture/` (arc42 architecture docs: building blocks, runtime view, concepts, ADRs)
 
 ## 3. Copilot-specific reminders
 - When generating or significantly modifying any file, add the AI-assistance
@@ -42,6 +45,8 @@ Concrete file paths that improve completion quality:
 
 ## 4. Documentation and PR rules (Copilot)
 - Update docs when user-facing behavior changes (numbered kebab-case files; add sequentially).
+- Architecture-level changes also belong in `docs/architecture/` (arc42 sections and ADRs); see the
+  root `AGENTS.md` → "Architecture documentation (arc42)" for the workflow.
 - PR titles: conventional commits with component scope (full format in `CONTRIBUTING.md`).
 
 ## 5. Maintainer note — keeping this file effective
