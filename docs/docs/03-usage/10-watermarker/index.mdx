@@ -73,6 +73,17 @@ InnamarkTag validate() function, which will check for valid characteristics depe
 InnamarkTag type. See the [InnamarkTag Development](../../development/watermarker/InnamarkTag) section for more
 details.
 
+### Shared API Types
+
+`Status.getEvents()` returns an array, and `Watermark.mostFrequent()` accepts an array and
+returns its results as an array. Kotlin callers can use `toTypedArray()` and `toList()` when
+converting existing lists.
+
+Innamark tag identifiers use `Int` values from 0 to 255. The size, checksum, and hash range
+methods return inclusive Kotlin `IntRange` values and are not exported to JavaScript. Sizes and
+CRC32 checksums use `Long` values, represented as `BigInt` in JavaScript, and cover the full
+unsigned 32-bit range.
+
 ## Kotlin Library: Special Characteristics
 Kotlin uses so-called
 [companion objects](https://kotlinlang.org/docs/object-declarations.html#companion-objects) to

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -31,17 +31,17 @@ sealed interface InnamarkTagInterface {
     }
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    fun getTag(): UByte
+    fun getTag(): Int
 
     /** Constant function that returns the name of the specific InnamarkTag */
     fun getSource(): String
 
     /** Extracts the encoded tag from the bytes of the InnamarkTag */
-    fun extractTag(): UByte {
+    fun extractTag(): Int {
         check(TAG_SIZE == 1)
         val content = getRawContent()
         require(content.size >= TAG_SIZE)
-        return content.first().toUByte()
+        return content.first().toInt() and 0xff
     }
 
     /** Returns the decoded information stored in the InnamarkTag */
@@ -155,10 +155,10 @@ sealed class InnamarkTag(
             parse(watermark.watermarkContent)
 
         @JvmStatic
-        private fun extractTag(content: ByteArray): UByte {
+        private fun extractTag(content: ByteArray): Int {
             check(TAG_SIZE == 1)
             require(content.isNotEmpty()) { "Cannot extract tag from empty watermark." }
-            return content[0].toUByte()
+            return content[0].toInt() and 0xff
         }
 
         @OptIn(ExperimentalStdlibApi::class)
@@ -171,7 +171,7 @@ sealed class InnamarkTag(
     }
 
     /** Returns the tag byte from the watermark content */
-    override fun extractTag(): UByte = extractTag(watermarkContent)
+    override fun extractTag(): Int = extractTag(watermarkContent)
 
     /** Returns the all bytes of the watermark */
     override fun getRawContent(): ByteArray = watermarkContent
@@ -216,15 +216,16 @@ sealed class InnamarkTag(
          * If the size is stored in the first four bytes after the tag byte of the watermark, this
          * function returns `1..4`.
          */
+        @JsExport.Ignore
         fun getSizeRange(): IntRange
 
         /**
-         * Extracts the size bytes from the watermark content and parses them as UInt.
+         * Extracts the size as an unsigned 32-bit value represented by a Long.
          *
          * Returns an error if the watermark content does not contain enough bytes (according to
          * the `getSizeRange()` function).
          */
-        fun extractSize(): Result<UInt> {
+        fun extractSize(): Result<Long> {
             val content = getRawContent()
             val sizeRange = getSizeRange()
             if (content.size <= sizeRange.last) {
@@ -232,9 +233,10 @@ sealed class InnamarkTag(
             }
 
             return Result.success(
-                UInt.fromBytesLittleEndian(
-                    content.slice(sizeRange.first until sizeRange.last + 1),
-                ),
+                UInt
+                    .fromBytesLittleEndian(
+                        content.slice(sizeRange.first until sizeRange.last + 1),
+                    ).toLong(),
             )
         }
 
@@ -251,8 +253,8 @@ sealed class InnamarkTag(
                 with(extractSize()) {
                     if (!isSuccess) return status
                     value!!
-                }.toInt()
-            val actualSize = getRawContent().size
+                }
+            val actualSize = getRawContent().size.toLong()
 
             return if (extractedSize != actualSize) {
                 MismatchedSizeWarning(getSource(), extractedSize, actualSize).into()
@@ -275,15 +277,16 @@ sealed class InnamarkTag(
          * If the checksum is stored in the first four bytes after the tag byte of the watermark,
          * this function returns `1..4`.
          */
+        @JsExport.Ignore
         fun getChecksumRange(): IntRange
 
         /**
-         * Extracts the checksum bytes from the watermark content and parses them as UInt.
+         * Extracts the checksum as an unsigned 32-bit value represented by a Long.
          *
          * Returns an error if the watermark content does not contain enough bytes (according to
          * the `getChecksumRange()` function).
          */
-        fun extractChecksum(): Result<UInt> {
+        fun extractChecksum(): Result<Long> {
             val checksumRange = getChecksumRange()
             val checksumSize = checksumRange.last - checksumRange.first + 1
             // Ensure checksum fits into an Int, otherwise impl must be changed
@@ -301,7 +304,7 @@ sealed class InnamarkTag(
                 )
             val checksum = UInt.fromBytesLittleEndian(checksumBytes)
 
-            return Result.success(checksum)
+            return Result.success(checksum.toLong())
         }
 
         /**
@@ -343,7 +346,7 @@ sealed class InnamarkTag(
          * The bytes of `getChecksumPlaceholder()` replace the actual checksum in the watermark
          * content.
          */
-        fun calculateChecksum(): Result<UInt>
+        fun calculateChecksum(): Result<Long>
 
         /**
          * Uses the `calculateChecksum()` function to update the checksum store in the watermark
@@ -358,7 +361,7 @@ sealed class InnamarkTag(
                 with(calculateChecksum()) {
                     if (!isSuccess) return status
                     value!!
-                }.toBytesLittleEndian().iterator()
+                }.toUInt().toBytesLittleEndian().iterator()
             val checksumRange = getChecksumRange()
 
             val content = getRawContent().toMutableList()
@@ -366,7 +369,7 @@ sealed class InnamarkTag(
                 return NotEnoughDataError(SOURCE, checksumRange.last + 1).into()
             }
 
-            for (i in checksumRange) {
+            for (i in checksumRange.first..checksumRange.last) {
                 content[i] = checksum.next()
             }
             check(!checksum.hasNext())
@@ -416,6 +419,7 @@ sealed class InnamarkTag(
          * If the hash is stored in the first 32 bytes after the tag byte of the watermark, this
          * function returns `1..32`.
          */
+        @JsExport.Ignore
         fun getHashRange(): IntRange
 
         /**
@@ -490,7 +494,8 @@ sealed class InnamarkTag(
                     value!!
                 }.iterator()
             val content = getRawContent().toMutableList()
-            for (i in getHashRange()) {
+            val hashRange = getHashRange()
+            for (i in hashRange.first..hashRange.last) {
                 content[i] = hash.next()
             }
             check(!hash.hasNext())
@@ -545,23 +550,23 @@ sealed class InnamarkTag(
     }
 
     class UnknownTagError(
-        val tag: UByte,
+        val tag: Int,
     ) : Event.Error(SOURCE) {
         override fun getMessage(): String = "Unknown watermark tag: $tag."
     }
 
     class InvalidTagError(
         source: String,
-        val expectedTag: UByte,
-        val actualTag: UByte,
+        val expectedTag: Int,
+        val actualTag: Int,
     ) : Event.Error(source) {
         override fun getMessage(): String = "Expected tag: $expectedTag, but was: $actualTag."
     }
 
     class MismatchedSizeWarning(
         source: String,
-        val expectedSize: Int,
-        val actualSize: Int,
+        val expectedSize: Long,
+        val actualSize: Long,
     ) : Event.Warning(source) {
         override fun getMessage(): String =
             "Expected $expectedSize bytes, but extracted $actualSize bytes."
@@ -569,13 +574,13 @@ sealed class InnamarkTag(
 
     class InvalidChecksumWarning(
         source: String,
-        val expectedChecksum: UInt,
-        val actualChecksum: UInt,
+        val expectedChecksum: Long,
+        val actualChecksum: Long,
     ) : Event.Warning(source) {
         @OptIn(ExperimentalStdlibApi::class)
         override fun getMessage(): String {
-            val expectedHex = expectedChecksum.toHexString(hexFormat)
-            val actualHex = actualChecksum.toHexString(hexFormat)
+            val expectedHex = expectedChecksum.toUInt().toHexString(hexFormat)
+            val actualHex = actualChecksum.toUInt().toHexString(hexFormat)
             return "Expected checksum: $expectedHex, but was: $actualHex."
         }
     }
@@ -651,7 +656,7 @@ class RawInnamarkTag(
 ) : InnamarkTag(content) {
     companion object {
         const val SOURCE = "InnamarkTag.RawInnamarkTag"
-        const val TYPE_TAG: UByte = 0u // "00000000"
+        const val TYPE_TAG: Int = 0 // "00000000"
 
         /** Creates a new `RawInnamarkTag` with containing [content] */
         @JvmStatic
@@ -662,7 +667,7 @@ class RawInnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray = byteArrayOf(tag.toByte()) + content
     }
@@ -671,7 +676,7 @@ class RawInnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() = Result.success(watermarkContent.drop(TAG_SIZE).toByteArray())
@@ -697,7 +702,7 @@ class SizedInnamarkTag(
     InnamarkTag.Sized {
     companion object {
         const val SOURCE = "InnamarkTag.SizedInnamarkTag"
-        const val TYPE_TAG: UByte = 32u // "00100000"
+        const val TYPE_TAG: Int = 32 // "00100000"
 
         /**
          *  Number of bytes used to specify the length of the watermark. The decision to use 4 bytes
@@ -718,7 +723,7 @@ class SizedInnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray {
             val size = TAG_SIZE + SIZE_SIZE + content.size
@@ -737,7 +742,7 @@ class SizedInnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() =
@@ -746,6 +751,7 @@ class SizedInnamarkTag(
         )
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the size */
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange = SIZE_START_INDEX..SIZE_END_INDEX
 }
 
@@ -769,7 +775,7 @@ class CRC32InnamarkTag(
     InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.CRC32InnamarkTag"
-        const val TYPE_TAG: UByte = 16u // "00010000"
+        const val TYPE_TAG: Int = 16 // "00010000"
         const val CHECKSUM_SIZE = 4
         const val CHECKSUM_START_INDEX = TAG_SIZE
         const val CHECKSUM_END_INDEX = CHECKSUM_START_INDEX + CHECKSUM_SIZE - 1
@@ -787,7 +793,7 @@ class CRC32InnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray {
             val watermark = ArrayList<Byte>(TAG_SIZE + CHECKSUM_SIZE + content.size)
@@ -803,14 +809,14 @@ class CRC32InnamarkTag(
 
         /** Calculates the CRC32 checksum of [input] */
         @JvmStatic
-        fun calculateChecksum(input: ByteArray): UInt = CRC32.checksum(input)
+        fun calculateChecksum(input: ByteArray): Long = CRC32.checksum(input).toLong()
     }
 
     /** Constant function that returns the name of the specific InnamarkTag */
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() =
@@ -821,6 +827,7 @@ class CRC32InnamarkTag(
     /**
      * Returns the range of bytes (inclusive) within the watermark bytes that represent the checksum
      */
+    @JsExport.Ignore
     override fun getChecksumRange(): IntRange = CHECKSUM_START_INDEX..CHECKSUM_END_INDEX
 
     /**
@@ -828,7 +835,7 @@ class CRC32InnamarkTag(
      *
      * The bytes of `getChecksumPlaceholder()` replace the actual checksum in the watermark content.
      */
-    override fun calculateChecksum(): Result<UInt> {
+    override fun calculateChecksum(): Result<Long> {
         val checksumContent =
             with(getChecksumInput()) {
                 if (!isSuccess) return status.into<_>()
@@ -861,7 +868,7 @@ class SizedCRC32InnamarkTag(
     InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.SizedCRC32InnamarkTag"
-        const val TYPE_TAG: UByte = 48u // "00110000"
+        const val TYPE_TAG: Int = 48 // "00110000"
         const val SIZE_SIZE: Int = 4
         const val SIZE_START_INDEX = TAG_SIZE
         const val SIZE_END_INDEX = SIZE_START_INDEX + SIZE_SIZE - 1
@@ -882,7 +889,7 @@ class SizedCRC32InnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray {
             val size = TAG_SIZE + SIZE_SIZE + CHECKSUM_SIZE + content.size
@@ -904,17 +911,19 @@ class SizedCRC32InnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() =
         Result.success(watermarkContent.drop(TAG_SIZE + SIZE_SIZE + CHECKSUM_SIZE).toByteArray())
 
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange = SIZE_START_INDEX..SIZE_END_INDEX
 
     /**
      * Returns the range of bytes (inclusive) within the watermark bytes that represent the checksum
      */
+    @JsExport.Ignore
     override fun getChecksumRange(): IntRange = CHECKSUM_START_INDEX..CHECKSUM_END_INDEX
 
     /**
@@ -922,7 +931,7 @@ class SizedCRC32InnamarkTag(
      *
      * The bytes of `getChecksumPlaceholder()` replace the actual checksum in the watermark content.
      */
-    override fun calculateChecksum(): Result<UInt> {
+    override fun calculateChecksum(): Result<Long> {
         val checksumContent =
             with(getChecksumInput()) {
                 if (!isSuccess) return status.into<_>()
@@ -953,7 +962,7 @@ class SHA3256InnamarkTag(
     InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.SHA3256InnamarkTag"
-        const val TYPE_TAG: UByte = 8u // "00001000"
+        const val TYPE_TAG: Int = 8 // "00001000"
         const val HASH_SIZE = 32
         const val HASH_START_INDEX = TAG_SIZE
         const val HASH_END_INDEX = HASH_START_INDEX + HASH_SIZE - 1
@@ -971,7 +980,7 @@ class SHA3256InnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray {
             val size = TAG_SIZE + HASH_SIZE + content.size
@@ -999,7 +1008,7 @@ class SHA3256InnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() =
@@ -1008,6 +1017,7 @@ class SHA3256InnamarkTag(
         )
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the hash */
+    @JsExport.Ignore
     override fun getHashRange(): IntRange = HASH_START_INDEX..HASH_END_INDEX
 
     /**
@@ -1048,7 +1058,7 @@ class SizedSHA3256InnamarkTag(
     InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.SizedSHA3256InnamarkTag"
-        const val TYPE_TAG: UByte = 40u // "00101000"
+        const val TYPE_TAG: Int = 40 // "00101000"
         const val SIZE_SIZE = 4
         const val SIZE_START_INDEX = TAG_SIZE
         const val SIZE_END_INDEX = SIZE_START_INDEX + SIZE_SIZE - 1
@@ -1069,7 +1079,7 @@ class SizedSHA3256InnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray {
             val size = TAG_SIZE + SIZE_SIZE + HASH_SIZE + content.size
@@ -1091,7 +1101,7 @@ class SizedSHA3256InnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() =
@@ -1100,9 +1110,11 @@ class SizedSHA3256InnamarkTag(
         )
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the size */
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange = SIZE_START_INDEX..SIZE_END_INDEX
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the hash */
+    @JsExport.Ignore
     override fun getHashRange(): IntRange = HASH_START_INDEX..HASH_END_INDEX
 
     /**
@@ -1142,7 +1154,7 @@ class CompressedRawInnamarkTag(
     InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedRawInnamarkTag"
-        const val TYPE_TAG: UByte = 64u // "01000000"
+        const val TYPE_TAG: Int = 64 // "01000000"
 
         /** Creates a new `CompressedRawInnamarkTag` containing [content] */
         @JvmStatic
@@ -1160,7 +1172,7 @@ class CompressedRawInnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent(): Result<ByteArray> {
@@ -1191,7 +1203,7 @@ class CompressedSizedInnamarkTag(
     InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedInnamarkTag"
-        const val TYPE_TAG: UByte = 96u // 01100000
+        const val TYPE_TAG: Int = 96 // 01100000
 
         /** Creates a new `CompressedSizedInnamarkTag` containing [content] */
         @JvmStatic
@@ -1214,7 +1226,7 @@ class CompressedSizedInnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent(): Result<ByteArray> {
@@ -1227,6 +1239,7 @@ class CompressedSizedInnamarkTag(
     }
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the size */
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange =
         SizedInnamarkTag.SIZE_START_INDEX..SizedInnamarkTag.SIZE_END_INDEX
 }
@@ -1253,7 +1266,7 @@ class CompressedCRC32InnamarkTag(
     InnamarkTag.Checksum {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedCRC32InnamarkTag"
-        const val TYPE_TAG: UByte = 80u // "01010000"
+        const val TYPE_TAG: Int = 80 // "01010000"
 
         /** Creates a new `CompressedCRC32InnamarkTag` containing [content] */
         @JvmStatic
@@ -1274,11 +1287,12 @@ class CompressedCRC32InnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /**
      * Returns the range of bytes (inclusive) within the watermark bytes that represent the checksum
      */
+    @JsExport.Ignore
     override fun getChecksumRange(): IntRange =
         CRC32InnamarkTag.CHECKSUM_START_INDEX..CRC32InnamarkTag.CHECKSUM_END_INDEX
 
@@ -1295,7 +1309,7 @@ class CompressedCRC32InnamarkTag(
     /**
      * Returns the range of bytes (inclusive) within the watermark bytes that represent the checksum
      */
-    override fun calculateChecksum(): Result<UInt> {
+    override fun calculateChecksum(): Result<Long> {
         val checksumContent =
             with(getChecksumInput()) {
                 if (!isSuccess) return status.into<_>()
@@ -1330,7 +1344,7 @@ class CompressedSizedCRC32InnamarkTag(
     InnamarkTag.Compressed {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedCRC32InnamarkTag"
-        const val TYPE_TAG: UByte = 112u // "01110000"
+        const val TYPE_TAG: Int = 112 // "01110000"
 
         /** Creates a new `CompressedSizedCRC32InnamarkTag` containing [content] */
         @JvmStatic
@@ -1353,15 +1367,17 @@ class CompressedSizedCRC32InnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the size */
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange =
         SizedCRC32InnamarkTag.SIZE_START_INDEX..SizedCRC32InnamarkTag.SIZE_END_INDEX
 
     /**
      * Returns the range of bytes (inclusive) within the watermark bytes that represent the checksum
      */
+    @JsExport.Ignore
     override fun getChecksumRange(): IntRange =
         SizedCRC32InnamarkTag.CHECKSUM_START_INDEX..SizedCRC32InnamarkTag.CHECKSUM_END_INDEX
 
@@ -1378,7 +1394,7 @@ class CompressedSizedCRC32InnamarkTag(
      *
      * The bytes of `getChecksumPlaceholder()` replace the actual checksum in the watermark content.
      */
-    override fun calculateChecksum(): Result<UInt> {
+    override fun calculateChecksum(): Result<Long> {
         val checksumContent =
             with(getChecksumInput()) {
                 if (!isSuccess) return status.into<_>()
@@ -1411,7 +1427,7 @@ class CompressedSHA3256InnamarkTag(
     InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSHA3256InnamarkTag"
-        const val TYPE_TAG: UByte = 72u // "01001000"
+        const val TYPE_TAG: Int = 72 // "01001000"
 
         /** Creates a new `CompressedSHA3256InnamarkTag` containing [content] */
         @JvmStatic
@@ -1431,12 +1447,13 @@ class CompressedSHA3256InnamarkTag(
     }
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Constant function that returns the name of the specific InnamarkTag */
     override fun getSource(): String = SOURCE
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the hash */
+    @JsExport.Ignore
     override fun getHashRange(): IntRange =
         SHA3256InnamarkTag.HASH_START_INDEX..SHA3256InnamarkTag.HASH_END_INDEX
 
@@ -1487,7 +1504,7 @@ class CompressedSizedSHA3256InnamarkTag(
     InnamarkTag.Hash {
     companion object {
         const val SOURCE = "InnamarkTag.CompressedSizedSHA3256InnamarkTag"
-        const val TYPE_TAG: UByte = 104u // "01101000"
+        const val TYPE_TAG: Int = 104 // "01101000"
 
         /** Creates a new `CompressedSizedSHA3256InnamarkTag` containing [content] */
         @JvmStatic
@@ -1507,16 +1524,18 @@ class CompressedSizedSHA3256InnamarkTag(
     }
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
     override fun getSource(): String = SOURCE
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the size */
+    @JsExport.Ignore
     override fun getSizeRange(): IntRange =
         SizedSHA3256InnamarkTag.SIZE_START_INDEX..SizedSHA3256InnamarkTag.SIZE_END_INDEX
 
     /** Returns the range of bytes (inclusive) within the watermark bytes that represent the hash */
+    @JsExport.Ignore
     override fun getHashRange(): IntRange =
         SizedSHA3256InnamarkTag.HASH_START_INDEX..SizedSHA3256InnamarkTag.HASH_END_INDEX
 
@@ -1563,7 +1582,7 @@ class CustomInnamarkTag(
 ) : InnamarkTag(content) {
     companion object {
         const val SOURCE = "InnamarkTag.CustomInnamarkTag"
-        const val TYPE_TAG: UByte = 128u // "10000000"
+        const val TYPE_TAG: Int = 128 // "10000000"
 
         /** Creates a new `RawInnamarkTag` with containing [content] */
         @JvmStatic
@@ -1575,7 +1594,7 @@ class CustomInnamarkTag(
         fun fromString(text: String) = new(text.encodeToByteArray())
 
         internal fun createRaw(
-            tag: UByte,
+            tag: Int,
             content: ByteArray,
         ): ByteArray = byteArrayOf(tag.toByte()) + content
     }
@@ -1584,7 +1603,7 @@ class CustomInnamarkTag(
     override fun getSource(): String = SOURCE
 
     /** Constant function that returns the tag used to encode this InnamarkTag class */
-    override fun getTag(): UByte = TYPE_TAG
+    override fun getTag(): Int = TYPE_TAG
 
     /** Returns the decoded information stored in the InnamarkTag */
     override fun getContent() = Result.success(watermarkContent.drop(TAG_SIZE).toByteArray())

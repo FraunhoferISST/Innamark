@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -103,6 +103,7 @@ class Status(
      * Represents the severity of the Status. Used to be able to override the severity given by
      * the events.
      */
+    @JsExport.Ignore
     internal enum class Type(
         val representation: String,
         val severity: Int,
@@ -163,8 +164,8 @@ class Status(
         }
     }
 
-    /** Returns a list containing all Events */
-    fun getEvents(): List<Event> = eventList.toList()
+    /** Returns an array containing all Events */
+    fun getEvents(): Array<Event> = eventList.toTypedArray()
 
     /**
      * Combines [this] with [other] by appending all events from [other] to [this]. By default, the

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2025-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -30,11 +30,11 @@ class WatermarkTest {
         val expectedResult = listOf(firstWatermark, firstWatermark)
 
         // Act
-        val result = Watermark.mostFrequent(watermarks)
+        val result = Watermark.mostFrequent(watermarks.toTypedArray())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertEquals(expectedResult, result.value?.toList())
     }
 
     @Test
@@ -53,11 +53,11 @@ class WatermarkTest {
         val expectedResult = listOf(firstWatermark, firstWatermark)
 
         // Act
-        val result = Watermark.mostFrequent(watermarks)
+        val result = Watermark.mostFrequent(watermarks.toTypedArray())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertEquals(expectedResult, result.value?.toList())
     }
 
     @Test
@@ -67,11 +67,11 @@ class WatermarkTest {
         val expectedResult = listOf<Watermark>()
 
         // Act
-        val result = Watermark.mostFrequent(watermarks)
+        val result = Watermark.mostFrequent(watermarks.toTypedArray())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertEquals(expectedResult, result.value?.toList())
     }
 
     @Test
@@ -90,11 +90,11 @@ class WatermarkTest {
         val expectedResult = listOf(firstInnamarkTag, firstInnamarkTag)
 
         // Act
-        val result = Watermark.mostFrequent(watermarks)
+        val result = Watermark.mostFrequent(watermarks.toTypedArray())
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertEquals(expectedResult, result.value?.toList())
     }
 
     @Test
@@ -120,11 +120,11 @@ class WatermarkTest {
             )
 
         // Act
-        val result = Watermark.mostFrequent(watermarks)
+        val result = Watermark.mostFrequent(watermarks.toTypedArray())
 
         // Assert
         assertTrue(result.isWarning)
-        assertEquals(expectedResult, result.value)
+        assertEquals(expectedResult, result.value?.toList())
     }
 
     @Test

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -33,11 +33,12 @@ open class Watermark(
          *  Returns an Error if an Exception is thrown.
          *  */
         @JvmStatic
-        fun mostFrequent(watermarks: List<Watermark>): Result<List<Watermark>> {
-            var result: Result<List<Watermark>> = Result.success(watermarks)
+        fun mostFrequent(watermarks: Array<out Watermark>): Result<Array<Watermark>> {
             if (watermarks.isEmpty()) {
-                return result
+                return Result.success(emptyArray())
             }
+            var result: Result<Array<Watermark>> =
+                Result.success(Array(watermarks.size) { watermarks[it] })
             val frequencyMap: Map<Watermark, Int>
             val maxFrequency: Int
             val mostFrequent = mutableListOf<Watermark>()
@@ -54,15 +55,17 @@ open class Watermark(
                 }
                 result =
                     if (mostFrequent.size > 1) {
-                        MultipleMostFrequentWarning(mostFrequent.size).into(filteredList)
+                        MultipleMostFrequentWarning(
+                            mostFrequent.size,
+                        ).into(filteredList.toTypedArray())
                     } else {
-                        Result.success(filteredList)
+                        Result.success(filteredList.toTypedArray())
                     }
             } catch (e: Exception) {
                 result =
                     FrequencyAnalysisError(
                         e::class.simpleName ?: "Unknown Exception",
-                    ).into(emptyList())
+                    ).into(emptyArray())
             } finally {
                 return result
             }

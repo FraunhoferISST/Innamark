@@ -69,3 +69,20 @@ In order to use this library in JavaScript modules, follow these steps:
 [in the repositories' examples](https://github.com/FraunhoferISST/Innamark/blob/main/samples/js_modules/js_modules_minimal_example.js).
 
 Run it using `node npm_minimal_example.js`.
+
+## Working With Collections
+
+`Status.getEvents()` returns a JavaScript array of events. The returned array is a snapshot;
+modifying it does not change the status.
+
+`Watermark.Companion.mostFrequent(watermarks)` accepts a JavaScript array of watermarks and
+returns a `Result` whose `value` is an array of the most frequent watermarks. An empty input
+produces an empty array, and ties produce a warning.
+
+## Tag Metadata
+
+Tag identifiers are numbers from 0 to 255. Sizes and CRC32 checksums are `BigInt` values from
+`0n` to `4294967295n`, including values returned by extraction and calculation methods. The
+JavaScript build requires ES2020 `BigInt` support. Convert these values before using
+`JSON.stringify()`, which does not serialize `BigInt` directly. Size, checksum, and hash range
+methods are not exported to JavaScript; use the extraction and validation methods instead.

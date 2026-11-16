@@ -36,6 +36,9 @@ kotlin {
     }
 
     js(IR) {
+        compilerOptions {
+            freeCompilerArgs.add("-Xes-long-as-bigint")
+        }
         browser { }
         binaries.executable()
     }

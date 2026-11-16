@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -113,7 +113,7 @@ class StatusTest {
 
         // Assert
         assertTrue(status.isWarning)
-        assertEquals(expected, status.getEvents())
+        assertEquals(expected, status.getEvents().toList())
     }
 
     @Test
@@ -127,7 +127,7 @@ class StatusTest {
 
         // Assert
         assertTrue(status.isError)
-        assertEquals(expected, status.getEvents())
+        assertEquals(expected, status.getEvents().toList())
     }
 
     @Test
@@ -141,7 +141,7 @@ class StatusTest {
 
         // Assert
         assertTrue(status.isWarning)
-        assertEquals(expected, status.getEvents())
+        assertEquals(expected, status.getEvents().toList())
     }
 
     @Test
@@ -156,8 +156,8 @@ class StatusTest {
         status1.appendStatus(status2)
 
         // Assert
-        assertEquals(expected1, status1.getEvents())
-        assertEquals(expected2, status2.getEvents())
+        assertEquals(expected1, status1.getEvents().toList())
+        assertEquals(expected2, status2.getEvents().toList())
     }
 
     @Test
@@ -172,8 +172,8 @@ class StatusTest {
         status1.prependStatus(status2)
 
         // Assert
-        assertEquals(expected1, status1.getEvents())
-        assertEquals(expected2, status2.getEvents())
+        assertEquals(expected1, status1.getEvents().toList())
+        assertEquals(expected2, status2.getEvents().toList())
     }
 
     @Test
