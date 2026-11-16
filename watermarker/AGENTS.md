@@ -1,10 +1,15 @@
 # AGENTS.md (watermarker)
 
+<!-- This file was developed with AI assistance. -->
+
 This file applies to `watermarker/`. Also read the repository-level `../AGENTS.md` for global rules.
 
 ## Scope
 - Core Kotlin Multiplatform watermarking library (`commonMain`, `jvmMain`, `jsMain`).
 - This is the canonical implementation used by both `cli/` and `webinterface/`.
+- Design rationale and byte formats are documented in `../docs/architecture/`
+  (`08_concepts/watermarker-library.md`, `08_concepts/error-handling.md`,
+  `08_concepts/innamarktag.md`); read them before changing the algorithm or watermark formats.
 
 ## Dev environment and commands
 - Use JDK 21 and the local wrapper from this folder.
