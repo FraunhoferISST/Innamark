@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -459,9 +459,9 @@ class PlainTextWatermarker(
             status.addEvent(IncompleteWatermarkWarning())
         }
         if (singleWatermark && watermarks.isNotEmpty()) {
-            with(Watermark.mostFrequent(watermarks)) {
+            with(Watermark.mostFrequent(watermarks.toTypedArray())) {
                 status.appendStatus(this.status)
-                watermarks = this.value as ArrayList<Watermark>
+                watermarks = ArrayList(this.value!!.asList())
             }
         }
         if (squash && watermarks.isNotEmpty()) {

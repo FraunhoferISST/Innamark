@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2023-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -11,6 +11,7 @@ import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -106,42 +107,42 @@ class StatusTest {
     fun addEvent_warning_success() {
         // Arrange
         val status = Status.success()
-        val expected = listOf(TestWarning)
+        val expected = arrayOf<Event>(TestWarning)
 
         // Act
         status.addEvent(TestWarning)
 
         // Assert
         assertTrue(status.isWarning)
-        assertEquals(expected, status.getEvents())
+        assertContentEquals(expected, status.getEvents())
     }
 
     @Test
     fun addEvent_error_success() {
         // Arrange
         val status = Status.success()
-        val expected = listOf(TestError)
+        val expected = arrayOf<Event>(TestError)
 
         // Act
         status.addEvent(TestError)
 
         // Assert
         assertTrue(status.isError)
-        assertEquals(expected, status.getEvents())
+        assertContentEquals(expected, status.getEvents())
     }
 
     @Test
     fun addEvent_override_success() {
         // Arrange
         val status = TestError.into()
-        val expected = listOf(TestError, TestWarning)
+        val expected = arrayOf<Event>(TestError, TestWarning)
 
         // Act
         status.addEvent(TestWarning, true)
 
         // Assert
         assertTrue(status.isWarning)
-        assertEquals(expected, status.getEvents())
+        assertContentEquals(expected, status.getEvents())
     }
 
     @Test
@@ -149,15 +150,15 @@ class StatusTest {
         // Arrange
         val status1 = TestWarning.into()
         val status2 = TestError.into()
-        val expected1 = listOf(TestWarning, TestError)
-        val expected2 = listOf(TestError)
+        val expected1 = arrayOf<Event>(TestWarning, TestError)
+        val expected2 = arrayOf<Event>(TestError)
 
         // Act
         status1.appendStatus(status2)
 
         // Assert
-        assertEquals(expected1, status1.getEvents())
-        assertEquals(expected2, status2.getEvents())
+        assertContentEquals(expected1, status1.getEvents())
+        assertContentEquals(expected2, status2.getEvents())
     }
 
     @Test
@@ -165,15 +166,15 @@ class StatusTest {
         // Arrange
         val status1 = TestWarning.into()
         val status2 = TestError.into()
-        val expected1 = listOf(TestError, TestWarning)
-        val expected2 = listOf(TestError)
+        val expected1 = arrayOf<Event>(TestError, TestWarning)
+        val expected2 = arrayOf<Event>(TestError)
 
         // Act
         status1.prependStatus(status2)
 
         // Assert
-        assertEquals(expected1, status1.getEvents())
-        assertEquals(expected2, status2.getEvents())
+        assertContentEquals(expected1, status1.getEvents())
+        assertContentEquals(expected2, status2.getEvents())
     }
 
     @Test
