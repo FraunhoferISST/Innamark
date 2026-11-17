@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2024-2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -46,7 +46,7 @@ class InnamarkIntegrationTestJvm {
                 "The companion object of the InnamarkTag class \"${c.simpleName}\" must" +
                     "contain a \"const val TAG\".",
             )
-            val tag = tagProperty.first().call(companionObjectInstance) as Int
+            val tag = (tagProperty.first().call(companionObjectInstance) as UByte).toInt()
 
             // check if the tag was used before
             assertFalse(usedTags[tag], "The tag $tag was used multiple times.")

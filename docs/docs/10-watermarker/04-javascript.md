@@ -9,6 +9,8 @@ title: JavaScript
  that can be found in the LICENSE file.
 -->
 
+<!-- This file was developed with AI assistance. -->
+
 import PatentHint from './../patent-hint.mdx'
 
 <PatentHint components={props.components} />
@@ -79,10 +81,27 @@ modifying it does not change the status.
 returns a `Result` whose `value` is an array of the most frequent watermarks. An empty input
 produces an empty array, and ties produce a warning.
 
+## Unsigned Size And Checksum Values
+
+The Kotlin API retains `UByte` tag identifiers and unsigned 32-bit `UInt` size/checksum values.
+Since unsigned integer types are not directly exportable with the project's Kotlin compiler, use
+the JavaScript-only `InnamarkTagJs` facade for numeric access:
+
+```js
+const tagApi = watermarker.types.watermarks.InnamarkTagJs;
+const tagId = tagApi.getTag(tag);
+const sizeResult = tagApi.extractSize(tag);
+const builderResult = watermarker.types.watermarks.InnamarkTagBuilder.Companion.fromInnamarkTag(tag);
+```
+
+The facade accepts and leaves the original tag instance unchanged. Tag IDs are returned as `Int`
+values in the range 0–255. Size and checksum results are JavaScript `number` values, which exactly
+represent the full unsigned 32-bit range. Use `expectedTag`, `actualTag`, `unknownTag`,
+`expectedSize`, `actualSize`, `expectedChecksum`, and `actualChecksum` with warning/error events to
+read their numeric values. The underlying unsigned methods and event fields are not exported.
+
 ## Tag Metadata
 
-Tag identifiers are numbers from 0 to 255. Sizes and CRC32 checksums are `BigInt` values from
-`0n` to `4294967295n`, including values returned by extraction and calculation methods. The
-JavaScript build requires ES2020 `BigInt` support. Convert these values before using
-`JSON.stringify()`, which does not serialize `BigInt` directly. Size, checksum, and hash range
-methods are not exported to JavaScript; use the extraction and validation methods instead.
+Tag identifiers are numbers from 0 to 255. Size and CRC32 values returned by the JavaScript facade
+are numbers from `0` to `4294967295`. Size, checksum, and hash range methods are not exported to
+JavaScript; use the facade's extraction methods and the validation methods instead.

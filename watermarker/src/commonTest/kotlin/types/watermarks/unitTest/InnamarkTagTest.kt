@@ -58,8 +58,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.RawInnamarkTag",
-                    0,
-                    255,
+                    0u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -102,8 +102,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedRawInnamarkTag",
-                    64,
-                    255,
+                    64u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -141,7 +141,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -159,8 +159,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.SizedInnamarkTag",
-                    32,
-                    255,
+                    32u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -174,7 +174,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -193,8 +193,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .MismatchedSizeWarning(
                     "InnamarkTag.SizedInnamarkTag",
-                    invalidSize.toLong(),
-                    invalidSize.toLong() - 1,
+                    invalidSize,
+                    invalidSize - 1u,
                 ).into()
                 .toString()
 
@@ -208,7 +208,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(invalidSize.toLong(), extractedSize.value)
+        assertEquals(invalidSize, extractedSize.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus, status.toString())
@@ -237,7 +237,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -259,8 +259,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedSizedInnamarkTag",
-                    96,
-                    255,
+                    96u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -274,7 +274,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -298,8 +298,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .MismatchedSizeWarning(
                     "InnamarkTag.CompressedSizedInnamarkTag",
-                    invalidSize.toLong(),
-                    invalidSize.toLong() - 1,
+                    invalidSize,
+                    invalidSize - 1u,
                 ).into()
                 .toString()
 
@@ -313,7 +313,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(invalidSize.toLong(), extractedSize.value)
+        assertEquals(invalidSize, extractedSize.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus, status.toString())
@@ -336,7 +336,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -351,8 +351,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CRC32InnamarkTag",
-                    16,
-                    255,
+                    16u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -366,7 +366,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -385,8 +385,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidChecksumWarning(
                     "InnamarkTag.CRC32InnamarkTag",
-                    invalidCrc32.toLong(),
-                    expectedCrc32.toLong(),
+                    invalidCrc32,
+                    expectedCrc32,
                 ).into()
 
         // Act
@@ -399,7 +399,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(invalidCrc32.toLong(), extractedChecksum.value)
+        assertEquals(invalidCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus.toString(), status.toString())
@@ -423,7 +423,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -438,8 +438,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedCRC32InnamarkTag",
-                    80,
-                    255,
+                    80u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -453,7 +453,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -472,8 +472,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidChecksumWarning(
                     "InnamarkTag.CompressedCRC32InnamarkTag",
-                    invalidCrc32.toLong(),
-                    expectedCrc32.toLong(),
+                    invalidCrc32,
+                    expectedCrc32,
                 ).into()
 
         // Act
@@ -486,7 +486,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(invalidCrc32.toLong(), extractedChecksum.value)
+        assertEquals(invalidCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus.toString(), status.toString())
@@ -519,9 +519,9 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -546,8 +546,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.SizedCRC32InnamarkTag",
-                    48,
-                    255,
+                    48u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -561,7 +561,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -589,15 +589,15 @@ class InnamarkTagTest {
         expectedStatus.addEvent(
             InnamarkTag.MismatchedSizeWarning(
                 "InnamarkTag.SizedCRC32InnamarkTag",
-                invalidSize.toLong(),
-                invalidSize.toLong() - 1,
+                invalidSize,
+                invalidSize - 1u,
             ),
         )
         expectedStatus.addEvent(
             InnamarkTag.InvalidChecksumWarning(
                 "InnamarkTag.SizedCRC32InnamarkTag",
-                invalidCrc32.toLong(),
-                expectedCrc32.toLong(),
+                invalidCrc32,
+                expectedCrc32,
             ),
         )
 
@@ -611,7 +611,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(invalidCrc32.toLong(), extractedChecksum.value)
+        assertEquals(invalidCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus.toString(), status.toString())
@@ -644,9 +644,9 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(expected, watermark.watermarkContent)
         assertTrue(watermark.validate().isSuccess)
     }
@@ -671,8 +671,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedSizedCRC32InnamarkTag",
-                    112,
-                    255,
+                    112u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -686,7 +686,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(expectedCrc32.toLong(), extractedChecksum.value)
+        assertEquals(expectedCrc32, extractedChecksum.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isError)
         assertEquals(expectedStatus, status.toString())
@@ -714,15 +714,15 @@ class InnamarkTagTest {
         expectedStatus.addEvent(
             InnamarkTag.MismatchedSizeWarning(
                 "InnamarkTag.CompressedSizedCRC32InnamarkTag",
-                invalidSize.toLong(),
-                invalidSize.toLong() - 1,
+                invalidSize,
+                invalidSize - 1u,
             ),
         )
         expectedStatus.addEvent(
             InnamarkTag.InvalidChecksumWarning(
                 "InnamarkTag.CompressedSizedCRC32InnamarkTag",
-                invalidCrc32.toLong(),
-                expectedCrc32.toLong(),
+                invalidCrc32,
+                expectedCrc32,
             ),
         )
 
@@ -736,7 +736,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedChecksum.isSuccess)
-        assertEquals(invalidCrc32.toLong(), extractedChecksum.value)
+        assertEquals(invalidCrc32, extractedChecksum.value)
         assertEquals(watermarkContent, watermark.watermarkContent)
         assertTrue(status.isWarning)
         assertEquals(expectedStatus.toString(), status.toString())
@@ -839,8 +839,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.SHA3256InnamarkTag",
-                    8,
-                    255,
+                    8u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -1028,8 +1028,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedSHA3256InnamarkTag",
-                    72,
-                    255,
+                    72u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -1180,7 +1180,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(expectedHash, extractedHash.value)
         assertContentEquals(expectedContent, watermark.watermarkContent)
@@ -1236,8 +1236,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.SizedSHA3256InnamarkTag",
-                    40,
-                    255,
+                    40u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -1258,7 +1258,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(expectedHash, extractedHash.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
@@ -1317,8 +1317,8 @@ class InnamarkTagTest {
         expectedStatus.addEvent(
             InnamarkTag.MismatchedSizeWarning(
                 "InnamarkTag.SizedSHA3256InnamarkTag",
-                invalidSize.toLong(),
-                invalidSize.toLong() - 1,
+                invalidSize,
+                invalidSize - 1u,
             ),
         )
         expectedStatus.addEvent(
@@ -1346,7 +1346,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(invalidSize.toLong(), extractedSize.value)
+        assertEquals(invalidSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(invalidHash, extractedHash.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
@@ -1415,7 +1415,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(expectedHash, extractedHash.value)
         assertContentEquals(expectedContent, watermark.watermarkContent)
@@ -1471,8 +1471,8 @@ class InnamarkTagTest {
             InnamarkTag
                 .InvalidTagError(
                     "InnamarkTag.CompressedSizedSHA3256InnamarkTag",
-                    104,
-                    255,
+                    104u,
+                    255u,
                 ).into()
                 .toString()
 
@@ -1493,7 +1493,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(expectedSize.toLong(), extractedSize.value)
+        assertEquals(expectedSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(expectedHash, extractedHash.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
@@ -1552,8 +1552,8 @@ class InnamarkTagTest {
         expectedStatus.addEvent(
             InnamarkTag.MismatchedSizeWarning(
                 "InnamarkTag.CompressedSizedSHA3256InnamarkTag",
-                invalidSize.toLong(),
-                invalidSize.toLong() - 1,
+                invalidSize,
+                invalidSize - 1u,
             ),
         )
         expectedStatus.addEvent(
@@ -1581,7 +1581,7 @@ class InnamarkTagTest {
         assertTrue(extractedContent.isSuccess)
         assertContentEquals(content, extractedContent.value)
         assertTrue(extractedSize.isSuccess)
-        assertEquals(invalidSize.toLong(), extractedSize.value)
+        assertEquals(invalidSize, extractedSize.value)
         assertTrue(extractedHash.isSuccess)
         assertContentEquals(invalidHash, extractedHash.value)
         assertContentEquals(watermarkContent, watermark.watermarkContent)
@@ -1859,7 +1859,7 @@ class InnamarkTagTest {
     @Test
     fun unknownTagError_defaultInput_correctWarningMessage() {
         // Arrange
-        val error = InnamarkTag.UnknownTagError(42)
+        val error = InnamarkTag.UnknownTagError(42u)
         val expected = "Error (InnamarkTag): Unknown watermark tag: 42."
 
         // Act
@@ -1872,7 +1872,7 @@ class InnamarkTagTest {
     @Test
     fun invalidTagError_defaultInput_correctWarningMessage() {
         // Arrange
-        val error = InnamarkTag.InvalidTagError("Unittest", 42, 43)
+        val error = InnamarkTag.InvalidTagError("Unittest", 42u, 43u)
         val expected = "Error (Unittest): Expected tag: 42, but was: 43."
 
         // Act
@@ -1885,7 +1885,7 @@ class InnamarkTagTest {
     @Test
     fun mismatchedSizeWarning_defaultInput_correctWarningMessage() {
         // Arrange
-        val error = InnamarkTag.MismatchedSizeWarning("Unittest", 42, 43)
+        val error = InnamarkTag.MismatchedSizeWarning("Unittest", 42u, 43u)
         val expected = "Warning (Unittest): Expected 42 bytes, but extracted 43 bytes."
 
         // Act
@@ -1901,8 +1901,8 @@ class InnamarkTagTest {
         val error =
             InnamarkTag.InvalidChecksumWarning(
                 "Unittest",
-                0xdeadbeefu.toLong(),
-                0xcafebabeu.toLong(),
+                0xdeadbeefu,
+                0xcafebabeu,
             )
         val expected = "Warning (Unittest): Expected checksum: 0xdeadbeef, but was: 0xcafebabe."
 

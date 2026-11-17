@@ -12,6 +12,8 @@ package de.fraunhofer.isst.innamark.watermarker.types
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Status
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.CRC32InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.CustomInnamarkTag
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagBuilder
+import de.fraunhofer.isst.innamark.watermarker.types.watermarks.InnamarkTagJs
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.SizedCRC32InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.SizedSHA3256InnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
@@ -61,10 +63,19 @@ class JsCollectionExportsTest {
 
 class JsTagExportsTest {
     @Test
-    fun tag_metadata_uses_bigints_and_hides_internal_ranges() {
+    fun tag_metadata_uses_numbers_and_hides_internal_ranges() {
         val custom = CustomInnamarkTag.fromString("test").asDynamic()
-        assertEquals(128, custom.getTag() as Int)
-        assertEquals(128, custom.extractTag() as Int)
+        val tagJs = InnamarkTagJs.asDynamic()
+        assertTrue(js("typeof custom.getTag === 'undefined'") as Boolean)
+        assertTrue(js("typeof custom.extractTag === 'undefined'") as Boolean)
+        assertEquals(128, tagJs.getTag(custom) as Int)
+        assertEquals(128, tagJs.extractTag(custom) as Int)
+
+        val invalidTagInstance = CustomInnamarkTag(byteArrayOf(0, 1)).asDynamic()
+        val invalidTagEvent = invalidTagInstance.validate().getEvents()[0]
+        assertTrue(js("typeof invalidTagEvent.expectedTag === 'undefined'") as Boolean)
+        assertEquals(128, tagJs.expectedTag(invalidTagEvent) as Int)
+        assertEquals(0, tagJs.actualTag(invalidTagEvent) as Int)
 
         val tag =
             SizedCRC32InnamarkTag(
@@ -79,31 +90,43 @@ class JsTagExportsTest {
                     -1,
                     -1,
                 ),
-            ).asDynamic()
-        assertTrue(js("typeof tag.getSizeRange === 'undefined'") as Boolean)
-        assertTrue(js("typeof tag.getChecksumRange === 'undefined'") as Boolean)
+            )
+        val dynamicTag = tag.asDynamic()
+        assertTrue(js("typeof dynamicTag.getSizeRange === 'undefined'") as Boolean)
+        assertTrue(js("typeof dynamicTag.getChecksumRange === 'undefined'") as Boolean)
         val hashTag = SizedSHA3256InnamarkTag.fromString("test").asDynamic()
         assertTrue(js("typeof hashTag.getHashRange === 'undefined'") as Boolean)
         assertTrue(hashTag.validateHash().isSuccess as Boolean)
-        val sizeValue = tag.extractSize().value
-        assertTrue(js("typeof sizeValue === 'bigint'") as Boolean)
-        assertEquals(4294967295.0, js("Number(sizeValue)") as Double)
-        val sizeStatus = tag.validateSize()
+        assertTrue(js("typeof dynamicTag.extractSize === 'undefined'") as Boolean)
+        val sizeValue = tagJs.extractSize(dynamicTag).value
+        assertTrue(js("typeof sizeValue === 'number'") as Boolean)
+        assertEquals(4294967295.0, sizeValue as Double)
+        val sizeStatus = dynamicTag.validateSize()
         assertTrue(sizeStatus.isWarning as Boolean)
         val sizeWarning = sizeStatus.getEvents()[0]
-        assertTrue(js("typeof sizeWarning.expectedSize === 'bigint'") as Boolean)
-        assertEquals(4294967295.0, js("Number(sizeWarning.expectedSize)") as Double)
-        val checksumValue = tag.extractChecksum().value
-        assertTrue(js("typeof checksumValue === 'bigint'") as Boolean)
-        assertEquals(4294967295.0, js("Number(checksumValue)") as Double)
-        val checksumCompanion = CRC32InnamarkTag.Companion.asDynamic()
-        val jsChecksum = checksumCompanion.calculateChecksum("123456789".encodeToByteArray())
-        assertTrue(js("typeof jsChecksum === 'bigint'") as Boolean)
-        assertEquals(3421780262.0, js("Number(jsChecksum)") as Double)
+        assertTrue(js("typeof sizeWarning.expectedSize === 'undefined'") as Boolean)
+        val expectedSize = tagJs.expectedSize(sizeWarning)
+        assertTrue(js("typeof expectedSize === 'number'") as Boolean)
+        assertEquals(4294967295.0, expectedSize as Double)
+        val checksumValue = tagJs.extractChecksum(dynamicTag).value
+        assertTrue(js("typeof checksumValue === 'number'") as Boolean)
+        assertEquals(4294967295.0, checksumValue as Double)
+        val jsChecksum = tagJs.calculateCRC32("123456789".encodeToByteArray())
+        assertTrue(js("typeof jsChecksum === 'number'") as Boolean)
+        assertEquals(3421780262.0, jsChecksum as Double)
         val checksum = CRC32InnamarkTag.calculateChecksum("123456789".encodeToByteArray())
-        assertEquals(0xcbf43926u.toLong(), checksum)
+        assertEquals(0xcbf43926u, checksum)
 
         val validTag = CRC32InnamarkTag.fromString("test")
+        val calculatedChecksum = tagJs.calculateChecksum(validTag.asDynamic()).value
+        assertTrue(js("typeof calculatedChecksum === 'number'") as Boolean)
+        val builderResult =
+            InnamarkTagBuilder
+                .Companion
+                .asDynamic()
+                .fromInnamarkTag(validTag.asDynamic())
+        assertTrue(builderResult.isSuccess as Boolean)
+        assertEquals("test", builderResult.value.text as String)
         assertTrue(validTag.asDynamic().validateChecksum().isSuccess as Boolean)
         val invalidBytes = validTag.watermarkContent.copyOf()
         invalidBytes[1] = (invalidBytes[1].toInt() xor 1).toByte()
@@ -111,7 +134,8 @@ class JsTagExportsTest {
         val invalidStatus = invalidTag.validateChecksum()
         assertTrue(invalidStatus.isWarning as Boolean)
         val warning = invalidStatus.getEvents()[0]
-        assertTrue(js("typeof warning.expectedChecksum === 'bigint'") as Boolean)
-        assertTrue(js("typeof warning.actualChecksum === 'bigint'") as Boolean)
+        assertTrue(js("typeof warning.expectedChecksum === 'undefined'") as Boolean)
+        assertTrue(js("typeof tagJs.expectedChecksum(warning) === 'number'") as Boolean)
+        assertTrue(js("typeof tagJs.actualChecksum(warning) === 'number'") as Boolean)
     }
 }
