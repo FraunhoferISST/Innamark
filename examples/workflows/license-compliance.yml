@@ -4,7 +4,7 @@
 #
 # This file was developed with AI assistance.
 
-name: REUSE License Compliance
+name: License Compliance (REUSE + Copyright Year)
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ permissions:
   contents: read
 
 jobs:
-  reuse:
+  license-compliance:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
