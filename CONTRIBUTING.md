@@ -92,14 +92,14 @@ _Verfied_ flag on [GitHub](https://docs.github.com/en/authentication/managing-co
 
 ### License Header
 
-Every source code file in this project must contain a license header. Example:
+New source code files must include SPDX copyright and license metadata in the native comment syntax.
+For example:
 
 ```
 /*
- * Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
  *
- * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
- * that can be found in the LICENSE file.
+ * SPDX-License-Identifier: LicenseRef-Fraunhofer-License
  */
 ```
 
@@ -114,9 +114,8 @@ Please always adjust and update the documentation! Extend the existing markdown 
 front of the file- and folder-names for sorting. Please use kebab case in the file names for a
 consistent URL-slug.
 
-In case you add a new file (like an image), remember to declare its license according to
-[REUSE](https://reuse.software/) by adding an additional `.license` file (like
-`my-figure.jpg.license` for the `my-figure.jpg` image).
+In case you add a new file (like an image), remember to declare its license according to REUSE,
+either in the file itself or by adding an additional `.license` file (like `my-figure.jpg.license`).
 
 ## IntelliJ
 

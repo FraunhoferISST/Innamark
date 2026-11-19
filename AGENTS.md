@@ -73,8 +73,8 @@ Repository-wide guidance for all coding agents in this monorepo.
 ## Working rules
 - Run commands from the relevant subproject directory.
 - Keep diffs focused; avoid drive-by reformatting.
-- Keep Fraunhofer license headers intact in source files (see `CONTRIBUTING.md` → License Header
-  for the exact block).
+- Keep existing license headers intact; use accurate SPDX copyright/license metadata for new files
+  and update `REUSE.toml` when file-level annotations are needed. See `CONTRIBUTING.md` for details.
 - Add tests for behavioral changes and keep docs in `docs/` in sync for user-facing changes.
 - Do not commit, push, merge, release, or deploy unless explicitly requested by the user.
 - Do not install dependencies, fetch from the network, delete files, or change public APIs without

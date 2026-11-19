@@ -122,8 +122,10 @@ Corporate Contributor License Agreement, located in the `CLA.md` file. For more 
 
 ## ⚖️ License
 
-This work is licensed under the Fraunhofer License (on the basis of the MIT license). See
-`LICENSE` file for more information.
+This work is licensed under the Fraunhofer License (on the basis of the MIT license). See the
+[`LICENSE`](LICENSE) file for the terms and
+[`LICENSES/LicenseRef-Fraunhofer-License.txt`](LICENSES/LicenseRef-Fraunhofer-License.txt) for the
+REUSE license text.
 
 > [!CAUTION]
 > There are pending German and international (PCT) patent applications with the publication numbers
