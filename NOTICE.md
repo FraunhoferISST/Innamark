@@ -8,7 +8,7 @@ Hansastrasse 27 c, 80686 Munich, Germany, and as such has no separate legal stat
 ## Licenses
 
 This work is licensed under the Fraunhofer License (on the basis of the MIT license). See
-`LICENSE` file for more information.
+`LICENSE` for the terms and `LICENSES/LicenseRef-Fraunhofer-License.txt` for the REUSE license text.
 
 ### Patent
 
