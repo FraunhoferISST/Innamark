@@ -1,0 +1,49 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+@startuml
+!include style.puml
+top to bottom direction
+skinparam linetype ortho
+
+' === System Boundary ===
+rectangle "**Watermarker Library**" <<Library>> as system {
+    component "**Watermarks**" <<Package>> as watermarks {
+        component "**Watermark**" as watermark
+        component "**InnamarkTag**" as innamarkTag
+    }
+
+    component "**Watermarkers**" <<Package>> as watermarkers {
+        component "**Text**" <<Package>> as textWM
+        component "**File**" <<Package>> as fileWM
+    }
+
+    component "**Generic**" <<Cross-cutting>> as generic {
+        component "**Utils**" <<Package>> as utils
+        component "**Responses**" <<Package>> as responses
+    }
+}
+
+' === External Libraries (Blackbox) ===
+component "**sha3**" <<Library>> as sha3
+component "**pako**" <<Library (JS)>> as pako
+
+' === Internal Relations ===
+fileWM ..> textWM : "delegates to  "
+
+innamarkTag -|> watermark
+
+watermarkers .> watermarks
+watermarkers ..> generic
+watermarks .> generic
+
+' === External Dependencies ===
+system -(0 sha3
+system -(0 pako
+
+' === Hidden Layout ===
+sha3 -[hidden]- pako
+
+@enduml

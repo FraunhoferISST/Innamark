@@ -1,0 +1,33 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+' This file was developed with AI assistance.
+
+@startuml
+!include style.puml
+
+actor "End User" as user
+
+rectangle "Customer Environment" as customer {
+    node "Docker Host" as host {
+
+        node "Build Stage\n(eclipse-temurin:21-jdk)" as build {
+            artifact "**watermarker library**\n(publishToMavenLocal)" as lib
+            artifact "**webinterface**\n(gradle zip)" as webinterface
+        }
+
+        node "Runtime Stage\n(nginx-unprivileged:alpine)" as runtime {
+            port "8080/tcp" as port8080
+            artifact "Static Web Interface Files" as static
+        }
+    }
+}
+
+webinterface --> lib : uses
+build --> static : COPY *.zip
+static --> port8080
+user --> port8080 : uses
+
+@enduml

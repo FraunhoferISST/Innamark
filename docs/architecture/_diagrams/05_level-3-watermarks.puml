@@ -1,0 +1,77 @@
+' Copyright (c) 2026 Malte Hellmeier
+'
+' All rights reserved.
+' The initial version of this diagram was created and published in the dissertation "Strengthening
+' Data Sovereignty Through Digital Text Watermarking"
+' https://doi.org/10.17877/DE290R-26644
+
+@startuml
+!include style.puml
+top to bottom direction
+skinparam linetype ortho
+
+package "watermarks" {
+  class Watermark <<open>> {
+    + watermarkContent: Byte[]
+    --
+    + <<Create>> Watermark(
+      \t  watermarkContent: Byte[]
+      )
+    --
+    {static} + fromString(text: String): Watermark
+    {static} + mostFrequent(watermarks: List<Watermark>): Result<List<Watermark>>
+    + getContentAsText(): String
+  }
+
+  class InnamarkTag <<sealed>> {
+    # <<Create>> InnamarkTag(
+      \t  content: Byte[]
+      )
+    --
+    {static} + parse(input: Byte[]): Result<InnamarkTag>
+    {static} + fromWatermark(watermark: Watermark): Result<InnamarkTag>
+    {static} - extractTag(content: Byte[]): UByte
+  }
+
+  interface InnamarkTagInterface <<sealed>> {
+    {static} + TAG_SIZE: Int = 1
+    --
+    + getTag(): UByte
+    + getSource(): String
+    + extractTag(): UByte
+    + getContent(): Result<Byte[]>
+    + getRawContent(): Byte[]
+    + setRawContent(content: Byte[])
+    + validate(): Status
+  }
+
+  class InnamarkTagBuilder {
+    + text: String
+    - compressed: Boolean
+    - sized: Boolean
+    - CRC32: Boolean
+    - SHA3256: Boolean
+    --
+    - <<Create>> InnamarkTagBuilder(...)
+    --
+    //Methods removed for readability.//
+  }
+
+  class "InnamarkTag\nImplementations" as Implementations <<group>> {
+  }
+
+  note right of Implementations
+    Various InnamarkTag implementations
+    exist as combinations of the features
+    Compression, Sized, CRC32, and SHA3-256.
+    Example: CompressedSizedCRC32InnamarkTag
+  end note
+
+  Watermark <|-- InnamarkTag
+  InnamarkTagInterface <|.. InnamarkTag
+  InnamarkTagBuilder .right.> InnamarkTag
+  InnamarkTag <|-- "1:n " Implementations
+
+}
+
+@enduml

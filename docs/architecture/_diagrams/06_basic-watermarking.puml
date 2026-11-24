@@ -1,0 +1,62 @@
+' Copyright (c) 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+'
+' This work is licensed under the Fraunhofer License (on the basis of the MIT license)
+' that can be found in the LICENSE file.
+
+' This file was developed with AI assistance.
+
+@startuml
+!include style.puml
+autonumber
+'skinparam Padding 2
+skinparam BoxPadding 10
+skinparam maxMessageSize 200
+
+box "Customer Application"
+  participant "App" as app
+end box
+
+box "Watermarker Library"
+  participant "PlainTextWatermarker" as ptw << (C,#ADD1B2) class>>
+  participant "DefaultTranscoding" as trans << (C,#ADD1B2) object>>
+  participant "InnamarkTag" as tag << (C,#ADD1B2) sealed>>
+end box
+
+app -> ptw: PlainTextWatermarker()
+
+== Embed Watermark ==
+app -> ptw : addWatermark(coverText, watermark)
+ptw -> ptw : Transform watermark to watermarkBytes
+
+ptw -> tag : RawInnamarkTag.new(watermarkBytes)
+tag -> tag: Add tag before watermark
+tag --> ptw : taggedBytes
+
+ptw -> trans : encode(taggedBytes)
+trans -> trans: Transform into invisible whitespaces
+trans --> ptw : invisibleChars
+
+ptw -> ptw : add separator\n(SeparatorStrategy)
+loop for each chunk of insert positions
+  ptw -> ptw : Replace spaces with watermark space chars
+end
+
+ptw --> app : watermarkedText
+
+== Extract Watermark ==
+app -> ptw : getWatermarkAsString\n(watermarkedText)
+
+ptw -> ptw : Find watermarks\n(SeparatorStrategy)
+loop for each found watermark
+  ptw -> trans : decode(invisibleChars)
+  trans --> ptw : taggedBytes
+end
+ptw -> ptw : Select most frequent watermark
+ptw -> tag : parse(taggedBytes)
+tag -> tag : Validate InnamarkTag
+tag --> ptw : InnamarkTag
+ptw -> ptw: Extract watermark from InnamarkTag
+
+ptw --> app : watermark
+
+@enduml
