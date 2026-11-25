@@ -463,9 +463,9 @@ class PlainTextWatermarker(
             status.addEvent(IncompleteWatermarkWarning())
         }
         if (singleWatermark && watermarks.isNotEmpty()) {
-            with(Watermark.mostFrequent(watermarks)) {
+            with(Watermark.mostFrequent(watermarks.toTypedArray())) {
                 status.appendStatus(this.status)
-                watermarks = this.value as ArrayList<Watermark>
+                watermarks = ArrayList(this.value!!.asList())
             }
         }
         if (squash && watermarks.isNotEmpty()) {

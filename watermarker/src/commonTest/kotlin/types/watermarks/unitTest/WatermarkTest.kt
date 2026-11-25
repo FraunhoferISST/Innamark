@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2025-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -10,6 +10,7 @@ package de.fraunhofer.isst.innamark.watermarker.types.watermarks.unitTest
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.RawInnamarkTag
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import kotlin.test.Test
+import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -21,20 +22,20 @@ class WatermarkTest {
         val secondWatermark = Watermark.fromString("okay")
         val thirdWatermark = Watermark.fromString("yeah")
         val watermarks =
-            listOf(
+            arrayOf<Watermark>(
                 firstWatermark,
                 firstWatermark,
                 secondWatermark,
                 thirdWatermark,
             )
-        val expectedResult = listOf(firstWatermark, firstWatermark)
+        val expectedResult = arrayOf(firstWatermark, firstWatermark)
 
         // Act
         val result = Watermark.mostFrequent(watermarks)
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertContentEquals(expectedResult, result.value)
     }
 
     @Test
@@ -44,34 +45,34 @@ class WatermarkTest {
         val secondWatermark = Watermark(byteArrayOf(0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18))
         val thirdWatermark = Watermark(byteArrayOf(0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28))
         val watermarks =
-            listOf(
+            arrayOf<Watermark>(
                 firstWatermark,
                 firstWatermark,
                 secondWatermark,
                 thirdWatermark,
             )
-        val expectedResult = listOf(firstWatermark, firstWatermark)
+        val expectedResult = arrayOf(firstWatermark, firstWatermark)
 
         // Act
         val result = Watermark.mostFrequent(watermarks)
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertContentEquals(expectedResult, result.value)
     }
 
     @Test
     fun mostFrequent_empty_success() {
         // Arrange
-        val watermarks = listOf<Watermark>()
-        val expectedResult = listOf<Watermark>()
+        val watermarks = emptyArray<Watermark>()
+        val expectedResult = emptyArray<Watermark>()
 
         // Act
         val result = Watermark.mostFrequent(watermarks)
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertContentEquals(expectedResult, result.value)
     }
 
     @Test
@@ -81,20 +82,20 @@ class WatermarkTest {
         val secondInnamarkTag = RawInnamarkTag.fromString("okay")
         val thirdInnamarkTag = RawInnamarkTag.fromString("yeah")
         val watermarks =
-            listOf(
+            arrayOf<Watermark>(
                 firstInnamarkTag,
                 firstInnamarkTag,
                 secondInnamarkTag,
                 thirdInnamarkTag,
             )
-        val expectedResult = listOf(firstInnamarkTag, firstInnamarkTag)
+        val expectedResult = arrayOf<Watermark>(firstInnamarkTag, firstInnamarkTag)
 
         // Act
         val result = Watermark.mostFrequent(watermarks)
 
         // Assert
         assertTrue(result.isSuccess)
-        assertEquals(expectedResult, result.value)
+        assertContentEquals(expectedResult, result.value)
     }
 
     @Test
@@ -104,7 +105,7 @@ class WatermarkTest {
         val secondWatermark = Watermark.fromString("okay")
         val thirdWatermark = Watermark.fromString("yeah")
         val watermarks =
-            listOf(
+            arrayOf<Watermark>(
                 firstWatermark,
                 firstWatermark,
                 secondWatermark,
@@ -112,7 +113,7 @@ class WatermarkTest {
                 thirdWatermark,
             )
         val expectedResult =
-            listOf(
+            arrayOf<Watermark>(
                 firstWatermark,
                 firstWatermark,
                 secondWatermark,
@@ -124,7 +125,7 @@ class WatermarkTest {
 
         // Assert
         assertTrue(result.isWarning)
-        assertEquals(expectedResult, result.value)
+        assertContentEquals(expectedResult, result.value)
     }
 
     @Test
