@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * Copyright (c) 2025-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
  *
  * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
  * that can be found in the LICENSE file.
@@ -11,18 +11,23 @@ import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.MultipleMostFrequentWarning
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
+import kotlin.js.JsExport
+import kotlin.js.JsName
 
 /**
  * Interface for implementations facilitating watermarking of [String] covers
  */
+@JsExport
 interface TextWatermarker {
     /** Adds a watermark created from [watermark] String to [cover] */
+    @JsName("addWatermarkString")
     fun addWatermark(
         cover: String,
         watermark: String,
     ): Result<String>
 
     /** Adds a watermark created from [watermark] ByteArray to [cover] */
+    @JsName("addWatermarkBytes")
     fun addWatermark(
         cover: String,
         watermark: ByteArray,
