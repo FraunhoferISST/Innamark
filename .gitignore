@@ -122,3 +122,5 @@ ort-results/
 !/.idea/.name
 !/.idea/vcs.xml
 !/.idea/codeStyles/
+!/.idea/copyright/
+!/.idea/copyright/**
