@@ -5,6 +5,12 @@ labels: bug
 type: Bug
 ---
 
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 # 🐞 Bug Report
 
 ## Describe the Bug

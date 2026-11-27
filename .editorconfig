@@ -1,6 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+#
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+
 # This file was developed with AI assistance.
+
 # EditorConfig is the single source of truth for editor + ktlint formatting.
 # Docs: https://editorconfig.org
+
 root = true
 
 # Sensible defaults for all text files (YAML, JSON, JS, CSS, ... use 2 spaces).

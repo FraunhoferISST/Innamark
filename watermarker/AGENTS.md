@@ -1,6 +1,12 @@
-# AGENTS.md (watermarker)
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
 
 <!-- This file was developed with AI assistance. -->
+
+# AGENTS.md (watermarker)
 
 This file applies to `watermarker/`. Also read the repository-level `../AGENTS.md` for global rules.
 

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+#
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
 #
 # This workflow is based on the example workflow from the docusaurus documentation:
 # https://docusaurus.io/docs/deployment#triggering-deployment-with-github-actions

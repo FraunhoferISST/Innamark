@@ -1,6 +1,6 @@
 # SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
 #
-# SPDX-License-Identifier: LicenseRef-Fraunhofer-License
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
 
 # This file was developed with AI assistance.
 
@@ -28,4 +28,4 @@ jobs:
           base-sha: ${{ github.event.pull_request.base.sha }}
           check-license-text: 'true'
           license-file: LICENSE
-          reference-license-file: LICENSES/LicenseRef-Fraunhofer-License.txt
+          reference-license-file: LICENSES/Fraunhofer.txt

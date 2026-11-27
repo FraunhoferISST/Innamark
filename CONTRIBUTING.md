@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 # Contributing to the Project
 
 Thank you for your interest in contributing to the Innamark project!
@@ -99,7 +105,7 @@ For example:
 /*
  * SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
  *
- * SPDX-License-Identifier: LicenseRef-Fraunhofer-License
+ * SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
  */
 ```
 

@@ -1,7 +1,6 @@
 /*
- * Copyright (c) 2024 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e.V.
+ * SPDX-FileCopyrightText: 2024-2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
  *
- * This work is licensed under the Fraunhofer License (on the basis of the MIT license)
- * that can be found in the LICENSE file.
+ * SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
  */
 actual val platform = Platform.Js

@@ -1,6 +1,12 @@
-# GitHub Copilot Instructions — Innamark
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
 
 <!-- This file was developed with AI assistance. -->
+
+# GitHub Copilot Instructions — Innamark
 
 Primary audience: GitHub Copilot. Other agents should follow `AGENTS.md` and the closest
 subproject `AGENTS.md`; reading this file is optional and only adds Copilot-tuned completion hints.

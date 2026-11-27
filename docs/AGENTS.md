@@ -1,6 +1,12 @@
-# AGENTS.md (docs)
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
 
 <!-- This file was developed with AI assistance. -->
+
+# AGENTS.md (docs)
 
 This file applies to `docs/`. Also read the repository-level `../AGENTS.md` for global rules.
 

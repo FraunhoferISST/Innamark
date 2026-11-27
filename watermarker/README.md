@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 # Innamark: Watermarker Library
 
 The watermarker library is the hearth of the project because it is the foundation for different

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+#
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+
 cff-version: 1.2.0
 message: "If you use this software, please cite our journal article as suggested below."
 authors:
