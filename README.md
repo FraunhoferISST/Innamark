@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 <div align="center">
   <picture>
     <source width="340" media="(prefers-color-scheme: dark)" srcset="docs/static/img/branding/logo-sub/white/innamark_logo-sub_w.svg">
@@ -122,8 +128,10 @@ Corporate Contributor License Agreement, located in the `CLA.md` file. For more 
 
 ## ⚖️ License
 
-This work is licensed under the Fraunhofer License (on the basis of the MIT license). See
-`LICENSE` file for more information.
+This work is licensed under the Fraunhofer License (on the basis of the MIT license). See the
+[`LICENSE`](LICENSE) file for the terms and
+[`LICENSES/Fraunhofer.txt`](LICENSES/Fraunhofer.txt) for the
+REUSE license text.
 
 > [!CAUTION]
 > There are pending German and international (PCT) patent applications with the publication numbers

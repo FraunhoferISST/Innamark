@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+#
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+
+# This file was developed with AI assistance.
+
+name: License Compliance (REUSE + Copyright Year)
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  license-compliance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - uses: FraunhoferISST/.github/.github/actions/license-and-copyright-compliance@ci/license-and-copyright-compliance-action
+        with:
+          check-copyright-years: 'true'
+          base-sha: ${{ github.event.pull_request.base.sha }}
+          check-license-text: 'true'
+          license-file: LICENSE
+          reference-license-file: LICENSES/LicenseRef-Fraunhofer-Gesellschaft.txt

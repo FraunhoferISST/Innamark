@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 # Innamark // Corporate Contributor License Agreement (“CLA”) // Version 1.0, February 2024
 
 The Invisible Watermarking (Innamark) project aims to address some of the current challenges in implementing data sovereignty solutions on a broader scale. The objective is to use state-of-the-art digital watermarking techniques to embed metadata securely in the data being exchanged, along with dedicated protocol-level checks for validation and enforcement. This enables system-independent sovereignty checks to secure the data assets of the data owner without privacy sacrifices.

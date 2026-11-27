@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
+
 # Notices for the Innamark Project
 
 This project is created and maintained by the Fraunhofer Institute for Software and Systems
@@ -8,7 +14,7 @@ Hansastrasse 27 c, 80686 Munich, Germany, and as such has no separate legal stat
 ## Licenses
 
 This work is licensed under the Fraunhofer License (on the basis of the MIT license). See
-`LICENSE` file for more information.
+`LICENSE` for the terms and `LICENSES/Fraunhofer.txt` for the REUSE license text.
 
 ### Patent
 

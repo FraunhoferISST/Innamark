@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+#
+# SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+
+# This file was developed with AI assistance.
+
+version = 1
+
+[[annotations]]
+path = [
+  ".idea/.name",
+  "docs/static/img/branding/**",
+  "webinterface/src/jsMain/resources/modules/img**",
+  "docs/static/img/webinterface-demo.gif",
+  "watermarker/src/jvmTest/resources/**",
+  "samples/*.zip",
+  "samples/*.txt",
+  "samples/js_modules/package.json",
+  "docs/package.json",
+  "webinterface/.gettext.json",
+  "docs/yarn.lock",
+  "watermarker/kotlin-js-store/yarn.lock",
+  "webinterface/.kotlin-js-store/yarn.lock",
+]
+SPDX-FileCopyrightText = "2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V."
+SPDX-License-Identifier = "LicenseRef-Fraunhofer-Gesellschaft"
+
+[[annotations]]
+path = [
+  "**/gradlew",
+  "**/gradlew.bat",
+  "**/gradle-wrapper.jar",
+]
+SPDX-FileCopyrightText = "Copyright © 2015 the original authors."
+SPDX-License-Identifier = "Apache-2.0"

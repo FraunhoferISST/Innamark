@@ -1,6 +1,12 @@
-# AGENTS.md (cli)
+<!--
+SPDX-FileCopyrightText: 2026 Fraunhofer-Gesellschaft zur Förderung der angewandten Forschung e. V.
+
+SPDX-License-Identifier: LicenseRef-Fraunhofer-Gesellschaft
+-->
 
 <!-- This file was developed with AI assistance. -->
+
+# AGENTS.md (cli)
 
 This file applies to `cli/`. Also read the repository-level `../AGENTS.md` for global rules.
 
