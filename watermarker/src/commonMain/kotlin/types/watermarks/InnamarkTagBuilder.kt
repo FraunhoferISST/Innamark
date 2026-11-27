@@ -9,6 +9,7 @@ package de.fraunhofer.isst.innamark.watermarker.types.watermarks
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Event
 import de.fraunhofer.isst.innamark.watermarker.types.responses.Result
 import kotlin.js.JsExport
+import kotlin.js.JsName
 import kotlin.jvm.JvmName
 import kotlin.jvm.JvmStatic
 
@@ -328,6 +329,8 @@ class InnamarkTagBuilder private constructor(
 }
 
 @JvmName("intoInnamarkTagBuilders")
+@JsExport
+@JsName("innamarkTagsToInnamarkTagBuilders")
 fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
     source: String = "toInnamarkTagBuilders",
@@ -365,6 +368,8 @@ fun Result<List<InnamarkTag>>.toInnamarkTagBuilders(
     }
 }
 
+@JsExport
+@JsName("watermarksToInnamarkTagBuilders")
 fun Result<List<Watermark>>.toInnamarkTagBuilders(
     errorOnInvalidUTF8: Boolean = false,
     source: String = "toInnamarkTagBuilders",

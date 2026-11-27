@@ -17,6 +17,7 @@ import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.Multip
 import de.fraunhofer.isst.innamark.watermarker.types.watermarks.Watermark.StringDecodeWarning
 import de.fraunhofer.isst.innamark.watermarker.utils.toIntUnsigned
 import de.fraunhofer.isst.innamark.watermarker.utils.toUnicodeRepresentation
+import kotlin.js.JsExport
 import kotlin.js.JsName
 import kotlin.math.ceil
 import kotlin.math.log
@@ -39,6 +40,7 @@ sealed class SeparatorStrategy {
     ) : SeparatorStrategy()
 }
 
+@JsExport
 interface Transcoding {
     val alphabet: List<Char>
 
@@ -49,6 +51,7 @@ interface Transcoding {
     fun decode(chars: Sequence<Char>): Result<ByteArray>
 }
 
+@JsExport
 object DefaultTranscoding : Transcoding {
     override val alphabet =
         listOf(
@@ -132,6 +135,7 @@ object DefaultTranscoding : Transcoding {
  * - [separatorStrategy]: for defining how multiple watermarks are separated.
  * - [placement]: function for finding positions where transcoding alphabet characters are inserted.
  */
+@JsExport
 class PlainTextWatermarker(
     private val transcoding: Transcoding = DefaultTranscoding,
     private val separatorStrategy: SeparatorStrategy =
@@ -607,4 +611,5 @@ class PlainTextWatermarker(
 }
 
 /** Returns [watermarks] without duplicates */
+@JsExport
 fun <T : Watermark> squashWatermarks(watermarks: List<T>): List<T> = watermarks.toSet().toList()
